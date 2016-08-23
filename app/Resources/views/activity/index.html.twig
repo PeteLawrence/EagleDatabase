@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Activity list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Activitystart</th>
+                <th>Activityend</th>
+                <th>Spaces</th>
+                <th>Signupstart</th>
+                <th>Signupend</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activity in activities %}
+            <tr>
+                <td><a href="{{ path('activity_show', { 'id': activity.id }) }}">{{ activity.id }}</a></td>
+                <td>{% if activity.activityStart %}{{ activity.activityStart|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if activity.activityEnd %}{{ activity.activityEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ activity.spaces }}</td>
+                <td>{% if activity.signupStart %}{{ activity.signupStart|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if activity.signupEnd %}{{ activity.signupEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('activity_show', { 'id': activity.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('activity_edit', { 'id': activity.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('activity_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

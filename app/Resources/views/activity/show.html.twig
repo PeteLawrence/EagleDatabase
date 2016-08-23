@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Activity</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ activity.id }}</td>
+            </tr>
+            <tr>
+                <th>Activitystart</th>
+                <td>{% if activity.activityStart %}{{ activity.activityStart|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Activityend</th>
+                <td>{% if activity.activityEnd %}{{ activity.activityEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Spaces</th>
+                <td>{{ activity.spaces }}</td>
+            </tr>
+            <tr>
+                <th>Signupstart</th>
+                <td>{% if activity.signupStart %}{{ activity.signupStart|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Signupend</th>
+                <td>{% if activity.signupEnd %}{{ activity.signupEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('activity_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
