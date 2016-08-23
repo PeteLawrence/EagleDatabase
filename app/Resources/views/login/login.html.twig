@@ -5,6 +5,8 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
+    <p>Enter your EagleDB username and password below to login</p>
+
     <form action="{{ path('login') }}" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="_username" value="{{ last_username }}" />
@@ -20,5 +22,5 @@
 
         <button type="submit">login</button>
     </form>
-    
+
 {% endblock %}
