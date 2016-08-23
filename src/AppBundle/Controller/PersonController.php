@@ -137,4 +137,33 @@ class PersonController extends Controller
             ->getForm()
         ;
     }
+
+
+    /**
+     * Deletes a Person entity.
+     *
+     * @Route("/{id}/resetPassword", name="person_resetPassword")
+     * @Method("GET")
+     */
+    public function resetPasswordAction(Request $request, Person $person)
+    {
+        $password = 'foo';
+        $message = \Swift_Message::newInstance()
+            ->setSubject('EagleDB Password Reset')
+            ->setFrom('pete@tabs2.co.uk')
+            ->setTo($person->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'emails/resetPassword.html.twig',
+                    array('person' => $person, 'password' => $password)
+                ),
+                'text/html'
+            );
+
+        $this->get('mailer')->send($message);
+
+        return $this->render('person/resetPassword.html.twig', array(
+            'person' => $person
+        ));
+    }
 }
