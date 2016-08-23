@@ -31,4 +31,141 @@ class Member extends \AppBundle\Entity\Person
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberQualification", mappedBy="member")
      */
     private $qualification;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->qualification = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set emergencyContactName
+     *
+     * @param string $emergencyContactName
+     *
+     * @return Member
+     */
+    public function setEmergencyContactName($emergencyContactName)
+    {
+        $this->emergencyContactName = $emergencyContactName;
+
+        return $this;
+    }
+
+    /**
+     * Get emergencyContactName
+     *
+     * @return string
+     */
+    public function getEmergencyContactName()
+    {
+        return $this->emergencyContactName;
+    }
+
+    /**
+     * Set emergencyContactNumber
+     *
+     * @param string $emergencyContactNumber
+     *
+     * @return Member
+     */
+    public function setEmergencyContactNumber($emergencyContactNumber)
+    {
+        $this->emergencyContactNumber = $emergencyContactNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get emergencyContactNumber
+     *
+     * @return string
+     */
+    public function getEmergencyContactNumber()
+    {
+        return $this->emergencyContactNumber;
+    }
+
+    /**
+     * Set emergencyContactRelationship
+     *
+     * @param string $emergencyContactRelationship
+     *
+     * @return Member
+     */
+    public function setEmergencyContactRelationship($emergencyContactRelationship)
+    {
+        $this->emergencyContactRelationship = $emergencyContactRelationship;
+
+        return $this;
+    }
+
+    /**
+     * Get emergencyContactRelationship
+     *
+     * @return string
+     */
+    public function getEmergencyContactRelationship()
+    {
+        return $this->emergencyContactRelationship;
+    }
+
+    /**
+     * Set bcuMembershipNumber
+     *
+     * @param integer $bcuMembershipNumber
+     *
+     * @return Member
+     */
+    public function setBcuMembershipNumber($bcuMembershipNumber)
+    {
+        $this->bcuMembershipNumber = $bcuMembershipNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get bcuMembershipNumber
+     *
+     * @return integer
+     */
+    public function getBcuMembershipNumber()
+    {
+        return $this->bcuMembershipNumber;
+    }
+
+    /**
+     * Add qualification
+     *
+     * @param \AppBundle\Entity\MemberQualification $qualification
+     *
+     * @return Member
+     */
+    public function addQualification(\AppBundle\Entity\MemberQualification $qualification)
+    {
+        $this->qualification[] = $qualification;
+
+        return $this;
+    }
+
+    /**
+     * Remove qualification
+     *
+     * @param \AppBundle\Entity\MemberQualification $qualification
+     */
+    public function removeQualification(\AppBundle\Entity\MemberQualification $qualification)
+    {
+        $this->qualification->removeElement($qualification);
+    }
+
+    /**
+     * Get qualification
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQualification()
+    {
+        return $this->qualification;
+    }
 }

@@ -24,4 +24,62 @@ class MemberRegistration
      * @ORM\JoinColumn(name="membership_type_id", referencedColumnName="id")
      */
     private $membershipType;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set year
+     *
+     * @param integer $year
+     *
+     * @return MemberRegistration
+     */
+    public function setYear($year)
+    {
+        $this->year = $year;
+
+        return $this;
+    }
+
+    /**
+     * Get year
+     *
+     * @return integer
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
+    /**
+     * Set membershipType
+     *
+     * @param \AppBundle\Entity\MembershipType $membershipType
+     *
+     * @return MemberRegistration
+     */
+    public function setMembershipType(\AppBundle\Entity\MembershipType $membershipType = null)
+    {
+        $this->membershipType = $membershipType;
+
+        return $this;
+    }
+
+    /**
+     * Get membershipType
+     *
+     * @return \AppBundle\Entity\MembershipType
+     */
+    public function getMembershipType()
+    {
+        return $this->membershipType;
+    }
 }
