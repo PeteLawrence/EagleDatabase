@@ -26,6 +26,12 @@ class MemberRegistration
     private $membershipType;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Member", inversedBy="memberRegistration")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     */
+    private $member;
+
+    /**
      * Get id
      *
      * @return integer
@@ -81,5 +87,29 @@ class MemberRegistration
     public function getMembershipType()
     {
         return $this->membershipType;
+    }
+
+    /**
+     * Set member
+     *
+     * @param \AppBundle\Entity\Member $member
+     *
+     * @return MemberRegistration
+     */
+    public function setMember(\AppBundle\Entity\Member $member = null)
+    {
+        $this->member = $member;
+
+        return $this;
+    }
+
+    /**
+     * Get member
+     *
+     * @return \AppBundle\Entity\Member
+     */
+    public function getMember()
+    {
+        return $this->member;
     }
 }
