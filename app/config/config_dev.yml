@@ -32,3 +32,9 @@ monolog:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        path:     '%kernel.root_dir%/data.sqlite'
+        charset:  UTF8
