@@ -31,6 +31,11 @@ class Member extends \AppBundle\Entity\Person
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberQualification", mappedBy="member")
      */
     private $qualification;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistration", mappedBy="member")
+     */
+    private $memberRegistration;
     /**
      * Constructor
      */
@@ -167,5 +172,39 @@ class Member extends \AppBundle\Entity\Person
     public function getQualification()
     {
         return $this->qualification;
+    }
+
+    /**
+     * Add memberRegistration
+     *
+     * @param \AppBundle\Entity\MemberRegistration $memberRegistration
+     *
+     * @return Member
+     */
+    public function addMemberRegistration(\AppBundle\Entity\MemberRegistration $memberRegistration)
+    {
+        $this->memberRegistration[] = $memberRegistration;
+
+        return $this;
+    }
+
+    /**
+     * Remove memberRegistration
+     *
+     * @param \AppBundle\Entity\MemberRegistration $memberRegistration
+     */
+    public function removeMemberRegistration(\AppBundle\Entity\MemberRegistration $memberRegistration)
+    {
+        $this->memberRegistration->removeElement($memberRegistration);
+    }
+
+    /**
+     * Get memberRegistration
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMemberRegistration()
+    {
+        return $this->memberRegistration;
     }
 }
