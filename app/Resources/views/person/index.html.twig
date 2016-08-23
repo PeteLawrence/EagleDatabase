@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Person list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Forename</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Admin</th>
+                <th>Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for person in people %}
+            <tr>
+                <td>{{ person.forename }}</td>
+                <td>{{ person.surname }}</td>
+                <td>{{ person.email }}</td>
+                <td>{% if person.admin %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-close"></i>{% endif %}</td>
+                <td><i class="fa fa-close"></i></td>
+                <td>
+                    <a href="{{ path('person_show', { 'id': person.id }) }}" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
+                    <a href="{{ path('person_edit', { 'id': person.id }) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('person_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

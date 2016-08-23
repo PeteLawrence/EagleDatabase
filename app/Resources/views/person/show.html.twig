@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Person</h1>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">{{ person.id }}</dd>
+
+        <dt class="col-sm-3">Forename</dt>
+        <dd class="col-sm-9">{{ person.forename }}</dd>
+
+        <dt class="col-sm-3">Surname</dt>
+        <dd class="col-sm-9">{{ person.surname }}</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">{{ person.email }}</dd>
+
+        <dt class="col-sm-3">Admin</dt>
+        <dd class="col-sm-9">{% if person.admin %}Yes{% else %}No{% endif %}</dd>
+
+        <dt class="col-sm-3">Gender</dt>
+        <dd class="col-sm-9">{{ person.gender }}</dd>
+
+        <dt class="col-sm-3">Dob</dt>
+        <dd class="col-sm-9">{% if person.dob %}{{ person.dob|date('Y-m-d') }}{% endif %}</dd>
+
+        <dt class="col-sm-3">Addr1</dt>
+        <dd class="col-sm-9">{{ person.addr1 }}</dd>
+
+        <dt class="col-sm-3">Addr2</dt>
+        <dd class="col-sm-9">{{ person.addr2 }}</dd>
+
+        <dt class="col-sm-3">Town</dt>
+        <dd class="col-sm-9">{{ person.town }}</dd>
+
+        <dt class="col-sm-3">County</dt>
+        <dd class="col-sm-9">{{ person.county }}</dd>
+
+        <dt class="col-sm-3">Postcode</dt>
+        <dd class="col-sm-9">{{ person.postcode }}</dd>
+
+        <dt class="col-sm-3">Telephone</dt>
+        <dd class="col-sm-9">{{ person.telephone }}</dd>
+
+        <dt class="col-sm-3">Mobile</dt>
+        <dd class="col-sm-9">{{ person.mobile }}</dd>
+
+        <dt class="col-sm-3">Disability</dt>
+        <dd class="col-sm-9">{% if person.disability %}Yes{% else %}No{% endif %}</dd>
+    </dl>
+
+    <ul>
+        <li>
+            <a href="{{ path('person_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('person_edit', { 'id': person.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
