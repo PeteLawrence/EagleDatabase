@@ -1,12 +1,14 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  */
-class Person
+class Person implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -544,5 +546,71 @@ class Person
     public function getParticipant()
     {
         return $this->participant;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        if ($this->admin) {
+            return array('ROLE_ADMIN', 'ROLE_USER');
+        } else {
+            return array('ROLE_USER');
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
+    
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
     }
 }
