@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Person;
 use AppBundle\Form\PersonType;
+use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 
 /**
  * Person controller.
@@ -147,7 +148,15 @@ class PersonController extends Controller
      */
     public function resetPasswordAction(Request $request, Person $person)
     {
-        $password = 'foo';
+        //Generate a new password
+        $generator = new ComputerPasswordGenerator();
+        $password = $generator->generatePassword();
+
+        //Update the Person
+        $person->setPassword(password_hash($password, PASSWORD_BCRYPT));
+        $this->getDoctrine()->getManager()->flush();
+
+        //Send the email
         $message = \Swift_Message::newInstance()
             ->setSubject('EagleDB Password Reset')
             ->setFrom('pete@tabs2.co.uk')
