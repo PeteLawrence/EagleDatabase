@@ -3,25 +3,23 @@
 {% block body %}
     <h1>Person list</h1>
 
-    <table class="table">
+    <table class="table" data-toggle="table" data-search="true" data-filter-control="true">
         <thead>
             <tr>
-                <th>Forename</th>
-                <th>Surname</th>
-                <th>Email</th>
-                <th>Admin</th>
-                <th>Active</th>
-                <th>Actions</th>
+                <th data-sortable="true" data-filter-control="input" data-field="name">Name</th>
+                <th data-filter-control="input" data-field="email">Email</th>
+                <th data-filter-control="select" data-field="admin">Admin</th>
+                <th data-filter-control="select" data-field="active">Active</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for person in people %}
             <tr>
-                <td>{{ person.forename }}</td>
-                <td>{{ person.surname }}</td>
+                <td>{{ person.forename }} {{ person.surname }}</td>
                 <td>{{ person.email }}</td>
-                <td>{% if person.admin %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-close"></i>{% endif %}</td>
-                <td><i class="fa fa-close"></i></td>
+                <td>{% if person.admin %}Yes{% else %}No{% endif %}</td>
+                <td>No</td>
                 <td>
                     <a href="{{ path('person_show', { 'id': person.id }) }}" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
                     <a href="{{ path('person_edit', { 'id': person.id }) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
@@ -31,9 +29,5 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('person_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+    <a href="{{ path('person_new') }}" class="btn btn-primary">Create a new entry</a>
 {% endblock %}
