@@ -5,7 +5,9 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class PersonType extends AbstractType
 {
@@ -18,10 +20,10 @@ class PersonType extends AbstractType
         $builder
             ->add('forename')
             ->add('surname')
-            ->add('email')
+            ->add('email', EmailType::class)
             //->add('password')
             ->add('admin')
-            ->add('gender')
+            ->add('gender', ChoiceType::class, [ 'choices' => [ 'Female' => 'F', 'Male' => 'M'] ])
             ->add('dob', DateType::class, [ 'html5' => true, 'widget' => 'single_text', 'label' => 'Date of Birth' ])
             ->add('addr1')
             ->add('addr2')

@@ -29,7 +29,7 @@ class PersonController extends Controller
 
         $people = $em->getRepository('AppBundle:Person')->findAll();
 
-        return $this->render('person/index.html.twig', array(
+        return $this->render('admin/person/index.html.twig', array(
             'people' => $people,
         ));
     }
@@ -54,7 +54,7 @@ class PersonController extends Controller
             return $this->redirectToRoute('person_show', array('id' => $person->getId()));
         }
 
-        return $this->render('person/new.html.twig', array(
+        return $this->render('admin/person/new.html.twig', array(
             'person' => $person,
             'form' => $form->createView(),
         ));
@@ -70,7 +70,7 @@ class PersonController extends Controller
     {
         $deleteForm = $this->createDeleteForm($person);
 
-        return $this->render('person/show.html.twig', array(
+        return $this->render('admin/person/show.html.twig', array(
             'person' => $person,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -96,7 +96,7 @@ class PersonController extends Controller
             return $this->redirectToRoute('person_index');
         }
 
-        return $this->render('person/edit.html.twig', array(
+        return $this->render('admin/person/edit.html.twig', array(
             'person' => $person,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -171,7 +171,7 @@ class PersonController extends Controller
 
         $this->get('mailer')->send($message);
 
-        return $this->render('person/resetPassword.html.twig', array(
+        return $this->render('admin/person/resetPassword.html.twig', array(
             'person' => $person
         ));
     }

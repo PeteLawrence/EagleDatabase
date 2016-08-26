@@ -28,7 +28,7 @@ class ActivityController extends Controller
 
         $activities = $em->getRepository('AppBundle:Activity')->findAll();
 
-        return $this->render('activity/index.html.twig', array(
+        return $this->render('admin/activity/index.html.twig', array(
             'activities' => $activities,
         ));
     }
@@ -53,7 +53,7 @@ class ActivityController extends Controller
             return $this->redirectToRoute('activity_show', array('id' => $activity->getId()));
         }
 
-        return $this->render('activity/new.html.twig', array(
+        return $this->render('admin/activity/new.html.twig', array(
             'activity' => $activity,
             'form' => $form->createView(),
         ));
@@ -69,7 +69,7 @@ class ActivityController extends Controller
     {
         $deleteForm = $this->createDeleteForm($activity);
 
-        return $this->render('activity/show.html.twig', array(
+        return $this->render('admin/activity/show.html.twig', array(
             'activity' => $activity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -95,7 +95,7 @@ class ActivityController extends Controller
             return $this->redirectToRoute('activity_edit', array('id' => $activity->getId()));
         }
 
-        return $this->render('activity/edit.html.twig', array(
+        return $this->render('admin/activity/edit.html.twig', array(
             'activity' => $activity,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
