@@ -28,7 +28,7 @@ class MembershipTypeController extends Controller
 
         $membershipTypes = $em->getRepository('AppBundle:MembershipType')->findAll();
 
-        return $this->render('membershiptype/index.html.twig', array(
+        return $this->render('admin/membershiptype/index.html.twig', array(
             'membershipTypes' => $membershipTypes,
         ));
     }
@@ -53,7 +53,7 @@ class MembershipTypeController extends Controller
             return $this->redirectToRoute('membershiptype_show', array('id' => $membershipType->getId()));
         }
 
-        return $this->render('membershiptype/new.html.twig', array(
+        return $this->render('admin/membershiptype/new.html.twig', array(
             'membershipType' => $membershipType,
             'form' => $form->createView(),
         ));
@@ -69,7 +69,7 @@ class MembershipTypeController extends Controller
     {
         $deleteForm = $this->createDeleteForm($membershipType);
 
-        return $this->render('membershiptype/show.html.twig', array(
+        return $this->render('admin/membershiptype/show.html.twig', array(
             'membershipType' => $membershipType,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -95,7 +95,7 @@ class MembershipTypeController extends Controller
             return $this->redirectToRoute('membershiptype_edit', array('id' => $membershipType->getId()));
         }
 
-        return $this->render('membershiptype/edit.html.twig', array(
+        return $this->render('admin/membershiptype/edit.html.twig', array(
             'membershipType' => $membershipType,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

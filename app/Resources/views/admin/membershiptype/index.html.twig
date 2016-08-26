@@ -3,10 +3,9 @@
 {% block body %}
     <h1>MembershipType list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Type</th>
                 <th>Price</th>
                 <th>Actions</th>
@@ -15,18 +14,11 @@
         <tbody>
         {% for membershipType in membershipTypes %}
             <tr>
-                <td><a href="{{ path('membershiptype_show', { 'id': membershipType.id }) }}">{{ membershipType.id }}</a></td>
                 <td>{{ membershipType.type }}</td>
                 <td>{{ membershipType.price }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('membershiptype_show', { 'id': membershipType.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('membershiptype_edit', { 'id': membershipType.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('membershiptype_show', { 'id': membershipType.id }) }}" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
+                    <a href="{{ path('membershiptype_edit', { 'id': membershipType.id }) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
                 </td>
             </tr>
         {% endfor %}
