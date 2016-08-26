@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>MembershipType list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for membershipType in membershipTypes %}
+            <tr>
+                <td><a href="{{ path('membershiptype_show', { 'id': membershipType.id }) }}">{{ membershipType.id }}</a></td>
+                <td>{{ membershipType.type }}</td>
+                <td>{{ membershipType.price }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('membershiptype_show', { 'id': membershipType.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('membershiptype_edit', { 'id': membershipType.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('membershiptype_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
