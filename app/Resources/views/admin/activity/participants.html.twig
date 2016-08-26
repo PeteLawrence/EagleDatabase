@@ -1,0 +1,28 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <h1>Participants list</h1>
+    <h2>{{ activity.name }}</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for participant in activity.participant %}
+            <tr>
+                <td>{{ participant.person.forename }} {{ participant.person.surname }}</td>
+                <td>
+                    <a href="{{ path('person_show', { 'id': participant.person.id }) }}" class="btn btn-sm"><i class="fa fa-user"></i></a>
+                    <a href="{{ path('activity_participant_delete', { 'id': activity.id, 'pid': participant.id }) }}" class="btn btn-sm btn-warning"><i class="fa fa-remove"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('activity_participant_new', { 'id': activity.id } ) }}" class="btn btn-primary">Add</a>
+{% endblock %}
