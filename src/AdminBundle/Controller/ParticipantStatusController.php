@@ -50,7 +50,7 @@ class ParticipantStatusController extends Controller
             $em->persist($participantStatus);
             $em->flush();
 
-            return $this->redirectToRoute('admin_participantstatus_show', array('id' => $participantStatus->getId()));
+            return $this->redirectToRoute('admin_participantstatus_index', array('id' => $participantStatus->getId()));
         }
 
         return $this->render('admin/participantstatus/new.html.twig', array(
