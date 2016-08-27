@@ -3,10 +3,9 @@
 {% block body %}
     <h1>ParticipantRole list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Role</th>
                 <th>Actions</th>
             </tr>
@@ -14,26 +13,15 @@
         <tbody>
         {% for participantRole in participantRoles %}
             <tr>
-                <td><a href="{{ path('participantrole_show', { 'id': participantRole.id }) }}">{{ participantRole.id }}</a></td>
                 <td>{{ participantRole.role }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('participantrole_show', { 'id': participantRole.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('participantrole_edit', { 'id': participantRole.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('participantrole_show', { 'id': participantRole.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
+                    <a href="{{ path('participantrole_edit', { 'id': participantRole.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('participantrole_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+    <a href="{{ path('participantrole_new') }}" class="btn btn-primary">Create</a>
 {% endblock %}
