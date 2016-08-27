@@ -3,11 +3,10 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MembershipTypeType extends AbstractType
+class ParticipantStatusType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,18 +15,17 @@ class MembershipTypeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type')
-            ->add('price', MoneyType::class)
+            ->add('status')
         ;
     }
-
+    
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\MembershipType'
+            'data_class' => 'AppBundle\Entity\ParticipantStatus'
         ));
     }
 }
