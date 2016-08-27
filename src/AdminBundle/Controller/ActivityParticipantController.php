@@ -40,16 +40,17 @@ class ActivityParticipantController extends Controller
     public function newAction(Request $request, Activity $activity)
     {
         $participant = new Participant();
+        $participant->setActivity($activity);
 
         $form = $this->createForm('AppBundle\Form\ParticipantType', $participant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($activity);
+            $em->persist($participant);
             $em->flush();
 
-            return $this->redirectToRoute('activity_show', array('id' => $activity->getId()));
+            return $this->redirectToRoute('activity_participant_list', array('id' => $activity->getId()));
         }
 
         return $this->render('admin/activity/participant_new.html.twig', array(
@@ -60,16 +61,73 @@ class ActivityParticipantController extends Controller
 
 
     /**
+     * Finds and displays a Activity entity.
+     *
+     * @Route("/{pid}", name="activity_partcipant_show")
+     * @Method("GET")
+     */
+    public function showAction(Request $request, $pid)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $participant = $em->getRepository('AppBundle:Participant')->findOneById($pid);
+
+        $deleteForm = $this->createDeleteForm($participant);
+
+        return $this->render('admin/participant/show.html.twig', array(
+            'activity' => $participant,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing Activity entity.
+     *
+     * @Route("/{pid}/edit", name="activity_participant_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, $pid)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $participant = $em->getRepository('AppBundle:Participant')->findOneById($pid);
+
+        $deleteForm = $this->createDeleteForm($participant);
+        $editForm = $this->createForm('AppBundle\Form\Participant', $participant);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($participant);
+            $em->flush();
+
+            return $this->redirectToRoute('activity_participant_list', array('id' => $participant->getActivity()->getId(), $participant->getId()));
+        }
+
+        return $this->render('admin/participant/edit.html.twig', array(
+            'participant' => $participant,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+
+    /**
      * Gets a list of Activity participants.
      *
      * @Route("/{pid}/delete", name="activity_participant_delete")
      * @Method({"GET", "DELETE"})
      */
-    public function deleteAction(Request $request, Participant $participant)
+    public function deleteAction(Request $request, $pid)
     {
+        $em = $this->getDoctrine()->getManager();
+        $participant = $em->getRepository('AppBundle:Participant')->findOneById($pid);
+
+
         $deleteForm = $this->createDeleteForm($participant);
 
         if ($request->getMethod() == 'DELETE') {
+            $em->remove($participant);
+            $em->flush();
+
             return $this->redirectToRoute('activity_participant_list', [ 'id' => $participant->getActivity()->getId() ]);
         }
 
