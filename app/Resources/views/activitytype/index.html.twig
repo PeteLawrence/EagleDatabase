@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ActivityType list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activityType in activityTypes %}
+            <tr>
+                <td>{{ activityType.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_activitytype_show', { 'id': activityType.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_activitytype_edit', { 'id': activityType.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_activitytype_new') }}" class="btn btn-primary">Create</a>
+{% endblock %}
