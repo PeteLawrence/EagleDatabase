@@ -50,7 +50,7 @@ class ParticipantRoleController extends Controller
             $em->persist($participantRole);
             $em->flush();
 
-            return $this->redirectToRoute('admin_participantrole_show', array('id' => $participantRole->getId()));
+            return $this->redirectToRoute('admin_participantrole_index');
         }
 
         return $this->render('admin/participantrole/new.html.twig', array(
@@ -92,7 +92,7 @@ class ParticipantRoleController extends Controller
             $em->persist($participantRole);
             $em->flush();
 
-            return $this->redirectToRoute('admin_participantrole_edit', array('id' => $participantRole->getId()));
+            return $this->redirectToRoute('admin_participantrole_index');
         }
 
         return $this->render('admin/participantrole/edit.html.twig', array(

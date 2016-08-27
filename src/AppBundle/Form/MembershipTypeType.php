@@ -17,7 +17,7 @@ class MembershipTypeType extends AbstractType
     {
         $builder
             ->add('type')
-            ->add('price', MoneyType::class)
+            ->add('price', MoneyType::class, [ 'currency' => 'GBP' ])
         ;
     }
 

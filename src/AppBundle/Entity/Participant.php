@@ -148,4 +148,28 @@ class Participant
     {
         return $this->activity;
     }
+
+    /**
+     * Set participantStatus
+     *
+     * @param \AppBundle\Entity\ParticipantStatus $participantStatus
+     *
+     * @return Participant
+     */
+    public function setParticipantStatus(\AppBundle\Entity\ParticipantStatus $participantStatus = null)
+    {
+        $this->participantStatus = $participantStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get participantStatus
+     *
+     * @return \AppBundle\Entity\ParticipantStatus
+     */
+    public function getParticipantStatus()
+    {
+        return $this->participantStatus;
+    }
 }
