@@ -19,7 +19,7 @@ class MembershipTypeController extends Controller
     /**
      * Lists all MembershipType entities.
      *
-     * @Route("/", name="membershiptype_index")
+     * @Route("/", name="admin_membershiptype_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -36,7 +36,7 @@ class MembershipTypeController extends Controller
     /**
      * Creates a new MembershipType entity.
      *
-     * @Route("/new", name="membershiptype_new")
+     * @Route("/new", name="admin_membershiptype_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -50,7 +50,7 @@ class MembershipTypeController extends Controller
             $em->persist($membershipType);
             $em->flush();
 
-            return $this->redirectToRoute('membershiptype_show', array('id' => $membershipType->getId()));
+            return $this->redirectToRoute('admin_membershiptype_show', array('id' => $membershipType->getId()));
         }
 
         return $this->render('admin/membershiptype/new.html.twig', array(
@@ -62,7 +62,7 @@ class MembershipTypeController extends Controller
     /**
      * Finds and displays a MembershipType entity.
      *
-     * @Route("/{id}", name="membershiptype_show")
+     * @Route("/{id}", name="admin_membershiptype_show")
      * @Method("GET")
      */
     public function showAction(MembershipType $membershipType)
@@ -78,7 +78,7 @@ class MembershipTypeController extends Controller
     /**
      * Displays a form to edit an existing MembershipType entity.
      *
-     * @Route("/{id}/edit", name="membershiptype_edit")
+     * @Route("/{id}/edit", name="admin_membershiptype_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, MembershipType $membershipType)
@@ -92,7 +92,7 @@ class MembershipTypeController extends Controller
             $em->persist($membershipType);
             $em->flush();
 
-            return $this->redirectToRoute('membershiptype_edit', array('id' => $membershipType->getId()));
+            return $this->redirectToRoute('admin_membershiptype_edit', array('id' => $membershipType->getId()));
         }
 
         return $this->render('admin/membershiptype/edit.html.twig', array(
@@ -105,7 +105,7 @@ class MembershipTypeController extends Controller
     /**
      * Deletes a MembershipType entity.
      *
-     * @Route("/{id}", name="membershiptype_delete")
+     * @Route("/{id}", name="admin_membershiptype_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, MembershipType $membershipType)
@@ -119,7 +119,7 @@ class MembershipTypeController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('membershiptype_index');
+        return $this->redirectToRoute('admin_membershiptype_index');
     }
 
     /**
@@ -132,7 +132,7 @@ class MembershipTypeController extends Controller
     private function createDeleteForm(MembershipType $membershipType)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('membershiptype_delete', array('id' => $membershipType->getId())))
+            ->setAction($this->generateUrl('admin_membershiptype_delete', array('id' => $membershipType->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

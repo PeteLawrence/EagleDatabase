@@ -19,7 +19,7 @@ class ParticipantRoleController extends Controller
     /**
      * Lists all ParticipantRole entities.
      *
-     * @Route("/", name="participantrole_index")
+     * @Route("/", name="admin_participantrole_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -28,7 +28,7 @@ class ParticipantRoleController extends Controller
 
         $participantRoles = $em->getRepository('AppBundle:ParticipantRole')->findAll();
 
-        return $this->render('participantrole/index.html.twig', array(
+        return $this->render('admin/participantrole/index.html.twig', array(
             'participantRoles' => $participantRoles,
         ));
     }
@@ -36,7 +36,7 @@ class ParticipantRoleController extends Controller
     /**
      * Creates a new ParticipantRole entity.
      *
-     * @Route("/new", name="participantrole_new")
+     * @Route("/new", name="admin_participantrole_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -50,10 +50,10 @@ class ParticipantRoleController extends Controller
             $em->persist($participantRole);
             $em->flush();
 
-            return $this->redirectToRoute('participantrole_show', array('id' => $participantRole->getId()));
+            return $this->redirectToRoute('admin_participantrole_show', array('id' => $participantRole->getId()));
         }
 
-        return $this->render('participantrole/new.html.twig', array(
+        return $this->render('admin/participantrole/new.html.twig', array(
             'participantRole' => $participantRole,
             'form' => $form->createView(),
         ));
@@ -62,14 +62,14 @@ class ParticipantRoleController extends Controller
     /**
      * Finds and displays a ParticipantRole entity.
      *
-     * @Route("/{id}", name="participantrole_show")
+     * @Route("/{id}", name="admin_participantrole_show")
      * @Method("GET")
      */
     public function showAction(ParticipantRole $participantRole)
     {
         $deleteForm = $this->createDeleteForm($participantRole);
 
-        return $this->render('participantrole/show.html.twig', array(
+        return $this->render('admin/participantrole/show.html.twig', array(
             'participantRole' => $participantRole,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -78,7 +78,7 @@ class ParticipantRoleController extends Controller
     /**
      * Displays a form to edit an existing ParticipantRole entity.
      *
-     * @Route("/{id}/edit", name="participantrole_edit")
+     * @Route("/{id}/edit", name="admin_participantrole_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, ParticipantRole $participantRole)
@@ -92,10 +92,10 @@ class ParticipantRoleController extends Controller
             $em->persist($participantRole);
             $em->flush();
 
-            return $this->redirectToRoute('participantrole_edit', array('id' => $participantRole->getId()));
+            return $this->redirectToRoute('admin_participantrole_edit', array('id' => $participantRole->getId()));
         }
 
-        return $this->render('participantrole/edit.html.twig', array(
+        return $this->render('admin/participantrole/edit.html.twig', array(
             'participantRole' => $participantRole,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -105,7 +105,7 @@ class ParticipantRoleController extends Controller
     /**
      * Deletes a ParticipantRole entity.
      *
-     * @Route("/{id}", name="participantrole_delete")
+     * @Route("/{id}", name="admin_participantrole_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, ParticipantRole $participantRole)
@@ -119,7 +119,7 @@ class ParticipantRoleController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('participantrole_index');
+        return $this->redirectToRoute('admin_participantrole_index');
     }
 
     /**
@@ -132,7 +132,7 @@ class ParticipantRoleController extends Controller
     private function createDeleteForm(ParticipantRole $participantRole)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('participantrole_delete', array('id' => $participantRole->getId())))
+            ->setAction($this->generateUrl('admin_participantrole_delete', array('id' => $participantRole->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

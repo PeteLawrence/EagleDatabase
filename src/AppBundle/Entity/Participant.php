@@ -38,6 +38,12 @@ class Participant
     private $activity;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ParticipantStatus", inversedBy="participant")
+     * @ORM\JoinColumn(name="participant_status_id", referencedColumnName="id")
+     */
+    private $participantStatus;
+
+    /**
      * Get id
      *
      * @return integer

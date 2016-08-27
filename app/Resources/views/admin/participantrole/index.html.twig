@@ -15,13 +15,13 @@
             <tr>
                 <td>{{ participantRole.role }}</td>
                 <td>
-                    <a href="{{ path('participantrole_show', { 'id': participantRole.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
-                    <a href="{{ path('participantrole_edit', { 'id': participantRole.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i>
+                    <a href="{{ path('admin_participantrole_show', { 'id': participantRole.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
+                    <a href="{{ path('admin_participantrole_edit', { 'id': participantRole.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('participantrole_new') }}" class="btn btn-primary">Create</a>
+    <a href="{{ path('admin_participantrole_new') }}" class="btn btn-primary">Create</a>
 {% endblock %}

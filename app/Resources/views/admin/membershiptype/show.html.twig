@@ -22,10 +22,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('membershiptype_index') }}">Back to the list</a>
+            <a href="{{ path('admin_membershiptype_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('membershiptype_edit', { 'id': membershipType.id }) }}">Edit</a>
+            <a href="{{ path('admin_membershiptype_edit', { 'id': membershipType.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
