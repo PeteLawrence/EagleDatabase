@@ -1,0 +1,24 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <h1>ActivityType</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ activityType.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ activityType.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_activitytype_edit', { 'id': activityType.id }) }}" class="btn btn-warning">Edit</a>
+
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Delete" class="btn btn-danger">
+    {{ form_end(delete_form) }}
+{% endblock %}
