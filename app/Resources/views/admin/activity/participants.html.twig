@@ -8,6 +8,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -15,9 +16,10 @@
         {% for participant in activity.participant %}
             <tr>
                 <td>{{ participant.person.forename }} {{ participant.person.surname }}</td>
+                <td>{{ participant.participantRole.role }}</td>
                 <td>
                     <a href="{{ path('person_show', { 'id': participant.person.id }) }}" class="btn btn-sm"><i class="fa fa-user"></i></a>
-                    <a href="{{ path('activity_participant_delete', { 'id': activity.id, 'pid': participant.id }) }}" class="btn btn-sm btn-warning"><i class="fa fa-remove"></i></a>
+                    <a href="{{ path('activity_participant_delete', { 'id': activity.id, 'pid': participant.id }) }}" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>
                 </td>
             </tr>
         {% endfor %}
