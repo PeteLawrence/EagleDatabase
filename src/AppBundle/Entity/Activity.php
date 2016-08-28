@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -334,10 +335,10 @@ class Activity
      *
      * @return string
      */
-    public function getName()
-    {
-        return $this->name;
-    }
+public function getName()
+{
+    return $this->name;
+}
 
     /**
      * Set description
@@ -361,5 +362,19 @@ class Activity
     public function getDescription()
     {
         return $this->description;
+    }
+
+
+
+    public function getNumberOfPeople($type = '')
+    {
+        $people = 0;
+        foreach ($this->getParticipant() as $participant) {
+            if ($participant->getParticipantStatus()->getCountsTowardsSize()) {
+                $people++;
+            }
+        }
+
+        return $people;
     }
 }
