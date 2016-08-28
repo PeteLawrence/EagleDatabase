@@ -28,7 +28,7 @@ class ActivityTypeController extends Controller
 
         $activityTypes = $em->getRepository('AppBundle:ActivityType')->findAll();
 
-        return $this->render('activitytype/index.html.twig', array(
+        return $this->render('admin/activitytype/index.html.twig', array(
             'activityTypes' => $activityTypes,
         ));
     }
@@ -53,7 +53,7 @@ class ActivityTypeController extends Controller
             return $this->redirectToRoute('admin_activitytype_show', array('id' => $activityType->getId()));
         }
 
-        return $this->render('activitytype/new.html.twig', array(
+        return $this->render('admin/activitytype/new.html.twig', array(
             'activityType' => $activityType,
             'form' => $form->createView(),
         ));
@@ -69,7 +69,7 @@ class ActivityTypeController extends Controller
     {
         $deleteForm = $this->createDeleteForm($activityType);
 
-        return $this->render('activitytype/show.html.twig', array(
+        return $this->render('admin/activitytype/show.html.twig', array(
             'activityType' => $activityType,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -95,7 +95,7 @@ class ActivityTypeController extends Controller
             return $this->redirectToRoute('admin_activitytype_edit', array('id' => $activityType->getId()));
         }
 
-        return $this->render('activitytype/edit.html.twig', array(
+        return $this->render('admin/activitytype/edit.html.twig', array(
             'activityType' => $activityType,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

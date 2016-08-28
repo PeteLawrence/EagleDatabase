@@ -20,6 +20,11 @@ class ParticipantStatus
     private $status;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default":0})
+     */
+    private $countsTowardsSize;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Participant", mappedBy="participantStatus")
      */
     private $participant;
@@ -97,5 +102,29 @@ class ParticipantStatus
     public function getParticipant()
     {
         return $this->participant;
+    }
+
+    /**
+     * Set countsTowardsSize
+     *
+     * @param boolean $countsTowardsSize
+     *
+     * @return ParticipantStatus
+     */
+    public function setCountsTowardsSize($countsTowardsSize)
+    {
+        $this->countsTowardsSize = $countsTowardsSize;
+
+        return $this;
+    }
+
+    /**
+     * Get countsTowardsSize
+     *
+     * @return boolean
+     */
+    public function getCountsTowardsSize()
+    {
+        return $this->countsTowardsSize;
     }
 }

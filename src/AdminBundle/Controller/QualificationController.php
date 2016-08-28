@@ -28,7 +28,7 @@ class QualificationController extends Controller
 
         $qualifications = $em->getRepository('AppBundle:Qualification')->findAll();
 
-        return $this->render('qualification/index.html.twig', array(
+        return $this->render('admin/qualification/index.html.twig', array(
             'qualifications' => $qualifications,
         ));
     }
@@ -53,7 +53,7 @@ class QualificationController extends Controller
             return $this->redirectToRoute('admin_qualification_show', array('id' => $qualification->getId()));
         }
 
-        return $this->render('qualification/new.html.twig', array(
+        return $this->render('admin/qualification/new.html.twig', array(
             'qualification' => $qualification,
             'form' => $form->createView(),
         ));
@@ -69,7 +69,7 @@ class QualificationController extends Controller
     {
         $deleteForm = $this->createDeleteForm($qualification);
 
-        return $this->render('qualification/show.html.twig', array(
+        return $this->render('admin/qualification/show.html.twig', array(
             'qualification' => $qualification,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -95,7 +95,7 @@ class QualificationController extends Controller
             return $this->redirectToRoute('admin_qualification_edit', array('id' => $qualification->getId()));
         }
 
-        return $this->render('qualification/edit.html.twig', array(
+        return $this->render('admin/qualification/edit.html.twig', array(
             'qualification' => $qualification,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
