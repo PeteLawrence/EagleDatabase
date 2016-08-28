@@ -21,6 +21,7 @@
                 <td>{{ participant.participantRole.role }}</td>
                 <td>
                     <a href="{{ path('person_show', { 'id': participant.person.id }) }}" class="btn btn-sm"><i class="fa fa-user"></i></a>
+                    <a href="{{ path('admin_participant_edit', { 'id': participant.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
                     <a href="{{ path('activity_participant_delete', { 'id': activity.id, 'pid': participant.id }) }}" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></a>
                 </td>
             </tr>

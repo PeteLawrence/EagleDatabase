@@ -22,8 +22,8 @@
                 <td>{{ activity.numberOfPeople }}/{{ activity.spaces }}</td>
                 <td>
                     <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
-                    <a href="{{ path('activity_edit', { 'id': activity.id }) }}" class="btn-secondary btn-sm"><i class="fa fa-pencil"></i></a>
-                    <a href="{{ path('activity_participant_list', { 'id': activity.id }) }}" class="btn btn-secondary btn-sm"><i class="fa fa-users"></i></a>
+                    <a href="{{ path('activity_edit', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
+                    <a href="{{ path('activity_participant_list', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-users"></i></a>
                 </td>
             </tr>
         {% endfor %}
