@@ -15,14 +15,8 @@
             <tr>
                 <td>{{ activityType.type }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_activitytype_show', { 'id': activityType.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_activitytype_edit', { 'id': activityType.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('admin_activitytype_show', { 'id': activityType.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
+                    <a href="{{ path('admin_activitytype_edit', { 'id': activityType.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
                 </td>
             </tr>
         {% endfor %}

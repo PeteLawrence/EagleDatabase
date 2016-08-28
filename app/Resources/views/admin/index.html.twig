@@ -3,6 +3,45 @@
 {% block body %}
     <h1>Admin</h1>
 
+    <div class="row text-sm-center">
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header"><i class="fa fa-users"></i> Members</div>
+                <div class="card-block">
+                    <p class="card-text"><a href="{{ path('person_new')}}">Add new</a> members or <a href="{{ path('person_index')}}">manage existing</a> ones.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header"><i class="fa fa-map-o"></i> Activities</div>
+                <div class="card-block">
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header"><i class="fa fa-map-o"></i> Reports</div>
+                <div class="card-block">
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header"><i class="fa fa-map-o"></i> Configuration</div>
+                <div class="card-block">
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <ul>
         <li><a href="{{ path('admin_activitytype_index') }}">Activity Types</a></li>
         <li><a href="{{ path('admin_membershiptype_index') }}">Membership Types</a></li>

@@ -50,7 +50,7 @@ class ActivityTypeController extends Controller
             $em->persist($activityType);
             $em->flush();
 
-            return $this->redirectToRoute('admin_activitytype_show', array('id' => $activityType->getId()));
+            return $this->redirectToRoute('admin_activitytype_index');
         }
 
         return $this->render('admin/activitytype/new.html.twig', array(
