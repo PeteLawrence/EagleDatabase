@@ -22,14 +22,17 @@
             <div class="col-sm-6 offset-sm-3">
                 <h1>Sign In</h1>
                 <h2>{{ activity.name}} - {{ activity.activityStart|date("d/m/Y") }}</h2>
+                {% for flash_message in app.session.flashBag.get('notice') %}
+                    <div class="alert alert-success" role="alert">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
                 {{ form_start(signin_form) }}
                     {{ form_widget(signin_form) }}
                     <input type="submit" value="Sign In" class="btn btn-primary" />
                 {{ form_end(signin_form) }}
             </div>
         </div>
-
-        <a href="{{ path('activity_show', { id: activity.id}) }}" class="btn btn-secondary">Back To Activity</a>
     </div>
 
 
