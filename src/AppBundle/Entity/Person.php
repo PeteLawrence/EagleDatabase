@@ -623,4 +623,72 @@ class Person implements UserInterface, \Serializable
             // $this->salt
         ) = unserialize($serialized);
     }
+
+    /**
+     * Add memberQualification
+     *
+     * @param \AppBundle\Entity\MemberQualification $memberQualification
+     *
+     * @return Person
+     */
+    public function addMemberQualification(\AppBundle\Entity\MemberQualification $memberQualification)
+    {
+        $this->memberQualification[] = $memberQualification;
+
+        return $this;
+    }
+
+    /**
+     * Remove memberQualification
+     *
+     * @param \AppBundle\Entity\MemberQualification $memberQualification
+     */
+    public function removeMemberQualification(\AppBundle\Entity\MemberQualification $memberQualification)
+    {
+        $this->memberQualification->removeElement($memberQualification);
+    }
+
+    /**
+     * Get memberQualification
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMemberQualification()
+    {
+        return $this->memberQualification;
+    }
+
+    /**
+     * Add memberRegistration
+     *
+     * @param \AppBundle\Entity\MemberRegistration $memberRegistration
+     *
+     * @return Person
+     */
+    public function addMemberRegistration(\AppBundle\Entity\MemberRegistration $memberRegistration)
+    {
+        $this->memberRegistration[] = $memberRegistration;
+
+        return $this;
+    }
+
+    /**
+     * Remove memberRegistration
+     *
+     * @param \AppBundle\Entity\MemberRegistration $memberRegistration
+     */
+    public function removeMemberRegistration(\AppBundle\Entity\MemberRegistration $memberRegistration)
+    {
+        $this->memberRegistration->removeElement($memberRegistration);
+    }
+
+    /**
+     * Get memberRegistration
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMemberRegistration()
+    {
+        return $this->memberRegistration;
+    }
 }

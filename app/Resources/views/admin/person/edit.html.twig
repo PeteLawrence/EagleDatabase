@@ -3,19 +3,119 @@
 {% block body %}
     <h1>Person edit</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Save" class="btn btn-primary" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('person_index') }}">Back to the list</a>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" href="#details" data-toggle="tab" role="tab">Details</a>
         </li>
-        <li>
+        <li class="nav-item">
+            <a class="nav-link" href="#history" data-toggle="tab" role="tab">Member History</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#qualifications" data-toggle="tab" role="tab">Qualifications</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="details" role="tabpanel">
+            <h2>Details</h2>
+            {{ form_start(edit_form) }}
+                <div class="row">
+                    <div class="col-md-1 text-md-right"><strong>{{ form_label(edit_form.forename) }}</strong></div>
+                    <div class="col-md-2">{{ form_widget(edit_form.forename) }}</div>
+
+                    <div class="col-md-1 text-md-right"><strong>{{ form_label(edit_form.surname) }}</strong></div>
+                    <div class="col-md-2">{{ form_widget(edit_form.surname) }}</div>
+
+                    <div class="col-md-1 text-md-right"><strong>{{ form_label(edit_form.gender) }}</strong></div>
+                    <div class="col-md-2">{{ form_widget(edit_form.gender) }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-1 text-md-right"><strong>Address</strong></div>
+                    <div class="col-md-3">{{ form_widget(edit_form.addr1) }}</div>
+                    <div class="col-md-1 offset-md-2"><strong>{{ form_label(edit_form.dob) }}</strong></div>
+                    <div class="col-md-3">{{  form_widget(edit_form.dob) }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 offset-md-1">{{ form_widget(edit_form.addr2) }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 offset-md-1">{{ form_widget(edit_form.town) }}</div>
+                    <div class="col-md-1 offset-md-2"><strong>{{ form_label(edit_form.email) }}</strong></div>
+                    <div class="col-md-3">{{  form_widget(edit_form.email) }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 offset-md-1">{{ form_widget(edit_form.county) }}</div>
+                    <div class="col-md-1 offset-md-2"><strong>{{ form_label(edit_form.telephone) }}</strong></div>
+                    <div class="col-md-3">{{  form_widget(edit_form.telephone) }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-1"><strong>{{ form_label(edit_form.postcode) }}</strong></div>
+                    <div class="col-md-3">{{ form_widget(edit_form.postcode) }}</div>
+                    <div class="col-md-1 offset-md-2"><strong>{{ form_label(edit_form.mobile) }}</strong></div>
+                    <div class="col-md-3">{{  form_widget(edit_form.mobile) }}</div>
+                </div>
+
+                {{ form_widget(edit_form) }}
+                <input type="submit" value="Save" class="btn btn-primary" />
+            {{ form_end(edit_form) }}
+
             {{ form_start(delete_form) }}
                 <input type="submit" value="Delete" class="btn btn-danger">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+
+        <div class="tab-pane" id="history" role="tabpanel">
+            <h2>Membership History</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                {% for registration in person.memberRegistration %}
+                    <tr>
+                        <td>{{ registration.year }}</td>
+                        <td>{{ registration.membershipType.type }}</td>
+                        <td>
+                            <a href="{{ path('admin_memberregistration_edit', { id: registration.id, next: path('person_edit', {id: person.id})})}}"><i class="fa fa-pencil"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <a href="{{ path('admin_memberregistration_new') }}" class="btn btn-primary">Add Member Registration</a>
+        </div>
+
+        <div class="tab-pane" id="qualifications" role="tabpanel">
+            <h2>Qualifications</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Expires</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                {% for qualification in person.memberQualification %}
+                    <tr>
+                        <td>{{ qualification.qualification.name }}</td>
+                        <td>{{ qualification.expiration|date('d/m/Y') }}</td>
+                        <td>
+                            <a href="{{ path('admin_memberqualification_edit', { id: qualification.id})}}"><i class="fa fa-pencil"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <a href="{{ path('admin_memberqualification_new') }}" class="btn btn-primary">Add Qualification</a>
+        </div>
+    </div>
+
 {% endblock %}

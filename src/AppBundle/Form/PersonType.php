@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PersonType extends AbstractType
 {
@@ -18,18 +19,18 @@ class PersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('forename')
-            ->add('surname')
-            ->add('email', EmailType::class)
+            ->add('forename', TextType::class, [ 'attr' => ['placeholder' => 'Forename(s)'] ])
+            ->add('surname', TextType::class, [ 'attr' => ['placeholder' => 'Surname'] ])
+            ->add('email', EmailType::class, [ 'attr' => ['placeholder' => 'Email Address'] ])
             //->add('password')
             ->add('admin')
             ->add('gender', ChoiceType::class, [ 'choices' => [ 'Female' => 'F', 'Male' => 'M'] ])
             ->add('dob', BirthdayType::class, [ 'html5' => true, 'widget' => 'single_text', 'label' => 'Date of Birth' ])
-            ->add('addr1')
-            ->add('addr2')
-            ->add('town')
-            ->add('county')
-            ->add('postcode')
+            ->add('addr1', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 1'] ])
+            ->add('addr2', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 2'] ])
+            ->add('town', TextType::class, [ 'attr' => ['placeholder' => 'Town'] ])
+            ->add('county', TextType::class, [ 'attr' => ['placeholder' => 'County'] ])
+            ->add('postcode', TextType::class, [ 'attr' => ['placeholder' => 'Postcode'] ])
             ->add('telephone')
             ->add('mobile')
             ->add('disability')
