@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>MemberRegistration list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for memberRegistration in memberRegistrations %}
+            <tr>
+                <td>{{ memberRegistration.person.forename }} {{ memberRegistration.person.surname }}</td>
+                <td>{{ memberRegistration.year }}</td>
+                <td>{{ memberRegistration.membershipType.type }}</td>
+                <td>
+                    <a href="{{ path('admin_memberregistration_show', { 'id': memberRegistration.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
+                    <a href="{{ path('admin_memberregistration_edit', { 'id': memberRegistration.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_memberregistration_new') }}" class="btn btn-primary">Create</a>
+{% endblock %}
