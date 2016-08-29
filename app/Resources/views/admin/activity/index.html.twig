@@ -24,12 +24,22 @@
                     <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
                     <a href="{{ path('activity_edit', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
                     <a href="{{ path('activity_participant_list', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-users"></i></a>
-                    <a href="{{ path('signin_show', { 'id': activity.id, 'key': activity.signinKey }) }}" class="btn btn-sm"><i class="fa fa-check-square-o"></i></a>
+                    {% if activity.signinKey is defined %}
+                        <a href="{{ path('signin_show', { 'id': activity.id, 'key': activity.signinKey }) }}" target="_blank" class="btn btn-sm"><i class="fa fa-check-square-o"></i></a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('activity_new') }}" class="btn btn-primary">Create</a>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</button>
+        <div class="dropdown-menu">
+            <a href="{{ path('activity_new') }}" class="dropdown-item">Managed Activity</a>
+            <a href="{{ path('activity_new', { 'type': 'unmanaged' }) }}" class="dropdown-item">Unmanaged Activity</a>
+        </div>
+    </div>
+
+
 {% endblock %}

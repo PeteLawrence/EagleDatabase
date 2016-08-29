@@ -4,12 +4,13 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ActivityType extends AbstractType
+class UnmanagedActivityType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,11 +23,9 @@ class ActivityType extends AbstractType
             ->add('description')
             ->add('activityStart', DateTimeType::class, [ 'html5' => true, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
             ->add('activityEnd', DateTimeType::class, [ 'html5' => true, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
-            ->add('spaces')
-            ->add('signupStart', DateTimeType::class, [ 'html5' => true, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
-            ->add('signupEnd', DateTimeType::class, [ 'html5' => true, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
+            ->add('people', NumberType::class)
+            ->add('disabled', NumberType::class)
             ->add('activityType', EntityType::class, ['class' => 'AppBundle:ActivityType', 'choice_label' => 'type' ])
-            ->add('organiser', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function ($a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
             //->add('location')
         ;
     }

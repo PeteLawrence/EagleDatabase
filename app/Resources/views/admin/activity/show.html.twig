@@ -21,14 +21,18 @@
                 <th>Spaces</th>
                 <td>{{ activity.spaces }}</td>
             </tr>
-            <tr>
-                <th>Signupstart</th>
-                <td>{% if activity.signupStart %}{{ activity.signupStart|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Signupend</th>
-                <td>{% if activity.signupEnd %}{{ activity.signupEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
+            {% if activity.signupStart is defined %}
+                <tr>
+                    <th>Signupstart</th>
+                    <td>{% if activity.signupStart %}{{ activity.signupStart|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+            {% endif %}
+            {% if activity.signupStart is defined %}
+                <tr>
+                    <th>Signupend</th>
+                    <td>{% if activity.signupEnd %}{{ activity.signupEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 
