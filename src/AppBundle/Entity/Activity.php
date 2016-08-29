@@ -51,6 +51,11 @@ class Activity
     private $description;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $signinKey;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Participant", mappedBy="activity")
      */
     private $participant;
@@ -376,5 +381,29 @@ public function getName()
         }
 
         return $people;
+    }
+
+    /**
+     * Set signinKey
+     *
+     * @param string $signinKey
+     *
+     * @return Activity
+     */
+    public function setSigninKey($signinKey)
+    {
+        $this->signinKey = $signinKey;
+
+        return $this;
+    }
+
+    /**
+     * Get signinKey
+     *
+     * @return string
+     */
+    public function getSigninKey()
+    {
+        return $this->signinKey;
     }
 }

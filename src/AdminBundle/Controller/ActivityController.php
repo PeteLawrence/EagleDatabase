@@ -48,6 +48,12 @@ class ActivityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //Generate a signin key
+            $generator = new \Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator();
+            $generator->setLength(16);
+            $signInKey = $generator->generatePassword();
+            $activity->setSigninKey($signInKey);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($activity);
             $em->flush();
@@ -136,50 +142,6 @@ class ActivityController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('activity_delete', array('id' => $activity->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
-
-
-
-    /**
-     * Displays a sign-in page
-     *
-     * @Route("/{id}/signin", name="activity_signin")
-     * @Method({"GET", "POST"})
-     */
-    public function signinAction(Request $request, Activity $activity)
-    {
-        $form = $this->createSigninForm($activity);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            $participant = new Participant();
-            $participant->setActivity($activity);
-            $participant->setParticipantRole($data['participantRole']);
-            $participant->setPerson($data['person']);
-
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('activity_signin', [ 'id' => $activity->getId()]);
-        }
-
-        return $this->render('admin/activity/signin.html.twig', array(
-            'activity' => $activity,
-            'signin_form' => $form->createView(),
-        ));
-    }
-
-
-    private function createSigninForm(Activity $activity)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('activity_signin', array('id' => $activity->getId())))
-            ->setMethod('POST')
-            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function ($a) { return $a->getForename() . ' ' . $a->getSurname(); }, 'placeholder' => '' ])
-            ->add('participantRole', EntityType::class, ['class' => 'AppBundle:ParticipantRole', 'choice_label' => 'role', 'label' => 'Role'])
             ->getForm()
         ;
     }
