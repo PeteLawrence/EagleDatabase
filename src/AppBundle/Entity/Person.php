@@ -93,6 +93,11 @@ class Person implements UserInterface, \Serializable
     private $disability;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $notes;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activity", mappedBy="organiser")
      */
     private $activity2;
@@ -690,5 +695,29 @@ class Person implements UserInterface, \Serializable
     public function getMemberRegistration()
     {
         return $this->memberRegistration;
+    }
+
+    /**
+     * Set notes
+     *
+     * @param string $notes
+     *
+     * @return Person
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get notes
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }
