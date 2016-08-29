@@ -101,6 +101,16 @@ class Person implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Participant", mappedBy="person")
      */
     private $participant;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberQualification", mappedBy="person")
+     */
+    private $memberQualification;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistration", mappedBy="person")
+     */
+    private $memberRegistration;
     /**
      * Constructor
      */

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>MemberQualification</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ memberQualification.person.forename }} {{ memberQualification.person.surname }}</td>
+            </tr>
+            <tr>
+                <th>Qualification</th>
+                <td>{{ memberQualification.qualification.name }}</td>
+            </tr>
+            <tr>
+                <th>Expiration</th>
+                <td>{% if memberQualification.expiration %}{{ memberQualification.expiration|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_memberqualification_edit', { 'id': memberQualification.id }) }}" class="btn btn-warning">Edit</a>
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Delete" class="btn btn-danger">
+    {{ form_end(delete_form) }}
+{% endblock %}
