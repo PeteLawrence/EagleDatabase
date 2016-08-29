@@ -7,9 +7,11 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Entity\Activity;
 use AppBundle\Entity\ManagedActivity;
+use AppBundle\Entity\UnmanagedActivity;
 use AppBundle\Entity\Participant;
-use AppBundle\Form\ActivityType;
+use AppBundle\Form\ManagedActivityType;
 
 /**
  * Activity controller.
@@ -43,16 +45,22 @@ class ActivityController extends Controller
      */
     public function newAction(Request $request)
     {
-        $activity = new ManagedActivity();
-        $form = $this->createForm('AppBundle\Form\ActivityType', $activity);
+        if ($request->get('type') == 'unmanaged') {
+            $activity = new UnmanagedActivity();
+            $form = $this->createForm('AppBundle\Form\UnmanagedActivityType', $activity);
+        } else {
+            $activity = new ManagedActivity();
+            $form = $this->createForm('AppBundle\Form\ManagedActivityType', $activity);
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Generate a signin key
-            $generator = new \Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator();
+            /*$generator = new \Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator();
             $generator->setLength(16);
             $signInKey = $generator->generatePassword();
-            $activity->setSigninKey($signInKey);
+            $activity->setSigninKey($signInKey);*/
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($activity);
@@ -73,7 +81,7 @@ class ActivityController extends Controller
      * @Route("/{id}", name="activity_show")
      * @Method("GET")
      */
-    public function showAction(ManagedActivity $activity)
+    public function showAction(Activity $activity)
     {
         $deleteForm = $this->createDeleteForm($activity);
 
@@ -92,7 +100,7 @@ class ActivityController extends Controller
     public function editAction(Request $request, ManagedActivity $activity)
     {
         $deleteForm = $this->createDeleteForm($activity);
-        $editForm = $this->createForm('AppBundle\Form\ActivityType', $activity);
+        $editForm = $this->createForm('AppBundle\Form\ManagedActivityType', $activity);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -116,7 +124,7 @@ class ActivityController extends Controller
      * @Route("/{id}", name="activity_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, ManagedActivity $activity)
+    public function deleteAction(Request $request, Activity $activity)
     {
         $form = $this->createDeleteForm($activity);
         $form->handleRequest($request);
@@ -137,7 +145,7 @@ class ActivityController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(ManagedActivity $activity)
+    private function createDeleteForm(Activity $activity)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('activity_delete', array('id' => $activity->getId())))
