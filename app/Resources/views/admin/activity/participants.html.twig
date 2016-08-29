@@ -17,7 +17,7 @@
         {% for participant in activity.participant %}
             <tr>
                 <td>{{ participant.person.forename }} {{ participant.person.surname }}</td>
-                <td>{{ participant.participantStatus.status }}</td>
+                <td></td>
                 <td>{{ participant.participantRole.role }}</td>
                 <td>
                     <a href="{{ path('person_show', { 'id': participant.person.id }) }}" class="btn btn-sm"><i class="fa fa-user"></i></a>
