@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -20,21 +21,16 @@ class MemberQualification
     private $expiration;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $member_id;
-
-    /**
-     * 
-     * 
-     */
-    private $member;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Qualification", inversedBy="memberQualification")
      * @ORM\JoinColumn(name="qualification_id", referencedColumnName="id")
      */
     private $qualification;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person", inversedBy="memberQualification")
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+     */
+    private $person;
 
     /**
      * Get id
@@ -71,30 +67,6 @@ class MemberQualification
     }
 
     /**
-     * Set member
-     *
-     * @param \AppBundle\Entity\Member $member
-     *
-     * @return MemberQualification
-     */
-    public function setMember(\AppBundle\Entity\Member $member = null)
-    {
-        $this->member = $member;
-
-        return $this;
-    }
-
-    /**
-     * Get member
-     *
-     * @return \AppBundle\Entity\Member
-     */
-    public function getMember()
-    {
-        return $this->member;
-    }
-
-    /**
      * Set qualification
      *
      * @param \AppBundle\Entity\Qualification $qualification
@@ -119,26 +91,26 @@ class MemberQualification
     }
 
     /**
-     * Set memberId
+     * Set person
      *
-     * @param integer $memberId
+     * @param \AppBundle\Entity\Person $person
      *
      * @return MemberQualification
      */
-    public function setMemberId($memberId)
+    public function setPerson(\AppBundle\Entity\Person $person = null)
     {
-        $this->member_id = $memberId;
+        $this->person = $person;
 
         return $this;
     }
 
     /**
-     * Get memberId
+     * Get person
      *
-     * @return integer
+     * @return \AppBundle\Entity\Person
      */
-    public function getMemberId()
+    public function getPerson()
     {
-        return $this->member_id;
+        return $this->person;
     }
 }
