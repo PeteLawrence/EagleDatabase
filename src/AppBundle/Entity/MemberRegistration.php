@@ -21,6 +21,11 @@ class MemberRegistration
     private $year;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $paid;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MembershipType", inversedBy="memberRegistration")
      * @ORM\JoinColumn(name="membership_type_id", referencedColumnName="id")
      */

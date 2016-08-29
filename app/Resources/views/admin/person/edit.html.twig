@@ -60,6 +60,11 @@
                     <div class="col-md-3">{{  form_widget(edit_form.mobile) }}</div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-1"><strong>{{ form_label(edit_form.notes) }}</strong></div>
+                    <div class="col-md-9">{{ form_widget(edit_form.notes) }}</div>
+                </div>
+
                 {{ form_widget(edit_form) }}
                 <input type="submit" value="Save" class="btn btn-primary" />
             {{ form_end(edit_form) }}
