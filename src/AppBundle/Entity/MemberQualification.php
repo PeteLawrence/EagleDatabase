@@ -20,8 +20,13 @@ class MemberQualification
     private $expiration;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Member", inversedBy="qualification")
-     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $member_id;
+
+    /**
+     * 
+     * 
      */
     private $member;
 
@@ -111,5 +116,29 @@ class MemberQualification
     public function getQualification()
     {
         return $this->qualification;
+    }
+
+    /**
+     * Set memberId
+     *
+     * @param integer $memberId
+     *
+     * @return MemberQualification
+     */
+    public function setMemberId($memberId)
+    {
+        $this->member_id = $memberId;
+
+        return $this;
+    }
+
+    /**
+     * Get memberId
+     *
+     * @return integer
+     */
+    public function getMemberId()
+    {
+        return $this->member_id;
     }
 }

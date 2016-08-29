@@ -32,8 +32,8 @@ class Participant
     private $person;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Activity", inversedBy="participant")
-     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id")
+     * 
+     * 
      */
     private $activity;
 
@@ -42,6 +42,12 @@ class Participant
      * @ORM\JoinColumn(name="participant_status_id", referencedColumnName="id")
      */
     private $participantStatus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ManagedActivity", inversedBy="participant")
+     * @ORM\JoinColumn(name="managed_activity_id", referencedColumnName="id")
+     */
+    private $managedActivity;
 
     /**
      * Get id
@@ -171,5 +177,29 @@ class Participant
     public function getParticipantStatus()
     {
         return $this->participantStatus;
+    }
+
+    /**
+     * Set managedActivity
+     *
+     * @param \AppBundle\Entity\ManagedActivity $managedActivity
+     *
+     * @return Participant
+     */
+    public function setManagedActivity(\AppBundle\Entity\ManagedActivity $managedActivity = null)
+    {
+        $this->managedActivity = $managedActivity;
+
+        return $this;
+    }
+
+    /**
+     * Get managedActivity
+     *
+     * @return \AppBundle\Entity\ManagedActivity
+     */
+    public function getManagedActivity()
+    {
+        return $this->managedActivity;
     }
 }

@@ -7,7 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use AppBundle\Entity\Activity;
+use AppBundle\Entity\ManagedActivity;
 use AppBundle\Entity\Participant;
 use AppBundle\Form\ActivityType;
 
@@ -43,7 +43,7 @@ class ActivityController extends Controller
      */
     public function newAction(Request $request)
     {
-        $activity = new Activity();
+        $activity = new ManagedActivity();
         $form = $this->createForm('AppBundle\Form\ActivityType', $activity);
         $form->handleRequest($request);
 
@@ -73,7 +73,7 @@ class ActivityController extends Controller
      * @Route("/{id}", name="activity_show")
      * @Method("GET")
      */
-    public function showAction(Activity $activity)
+    public function showAction(ManagedActivity $activity)
     {
         $deleteForm = $this->createDeleteForm($activity);
 
@@ -89,7 +89,7 @@ class ActivityController extends Controller
      * @Route("/{id}/edit", name="activity_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Activity $activity)
+    public function editAction(Request $request, ManagedActivity $activity)
     {
         $deleteForm = $this->createDeleteForm($activity);
         $editForm = $this->createForm('AppBundle\Form\ActivityType', $activity);
@@ -116,7 +116,7 @@ class ActivityController extends Controller
      * @Route("/{id}", name="activity_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Activity $activity)
+    public function deleteAction(Request $request, ManagedActivity $activity)
     {
         $form = $this->createDeleteForm($activity);
         $form->handleRequest($request);
@@ -137,7 +137,7 @@ class ActivityController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Activity $activity)
+    private function createDeleteForm(ManagedActivity $activity)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('activity_delete', array('id' => $activity->getId())))

@@ -5,8 +5,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type2", type="string")
+ * @ORM\DiscriminatorMap({"managed"="AppBundle\Entity\ManagedActivity","unmanaged"="AppBundle\Entity\UnmanagedActivity"})
  */
-class Activity
+abstract class Activity
 {
     /**
      * @ORM\Id
@@ -31,16 +34,6 @@ class Activity
     private $spaces;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $signupStart;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $signupEnd;
-
-    /**
      * @ORM\Column(type="string", nullable=false)
      */
     private $name;
@@ -49,16 +42,6 @@ class Activity
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $signinKey;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Participant", mappedBy="activity")
-     */
-    private $participant;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ActivityType", inversedBy="activity")
@@ -82,7 +65,6 @@ class Activity
      */
     public function __construct()
     {
-        $this->participant = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -165,88 +147,6 @@ class Activity
     public function getSpaces()
     {
         return $this->spaces;
-    }
-
-    /**
-     * Set signupStart
-     *
-     * @param \DateTime $signupStart
-     *
-     * @return Activity
-     */
-    public function setSignupStart($signupStart)
-    {
-        $this->signupStart = $signupStart;
-
-        return $this;
-    }
-
-    /**
-     * Get signupStart
-     *
-     * @return \DateTime
-     */
-    public function getSignupStart()
-    {
-        return $this->signupStart;
-    }
-
-    /**
-     * Set signupEnd
-     *
-     * @param \DateTime $signupEnd
-     *
-     * @return Activity
-     */
-    public function setSignupEnd($signupEnd)
-    {
-        $this->signupEnd = $signupEnd;
-
-        return $this;
-    }
-
-    /**
-     * Get signupEnd
-     *
-     * @return \DateTime
-     */
-    public function getSignupEnd()
-    {
-        return $this->signupEnd;
-    }
-
-    /**
-     * Add participant
-     *
-     * @param \AppBundle\Entity\Participant $participant
-     *
-     * @return Activity
-     */
-    public function addParticipant(\AppBundle\Entity\Participant $participant)
-    {
-        $this->participant[] = $participant;
-
-        return $this;
-    }
-
-    /**
-     * Remove participant
-     *
-     * @param \AppBundle\Entity\Participant $participant
-     */
-    public function removeParticipant(\AppBundle\Entity\Participant $participant)
-    {
-        $this->participant->removeElement($participant);
-    }
-
-    /**
-     * Get participant
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getParticipant()
-    {
-        return $this->participant;
     }
 
     /**
@@ -340,10 +240,10 @@ class Activity
      *
      * @return string
      */
-public function getName()
-{
-    return $this->name;
-}
+    public function getName()
+    {
+        return $this->name;
+    }
 
     /**
      * Set description
@@ -381,29 +281,5 @@ public function getName()
         }
 
         return $people;
-    }
-
-    /**
-     * Set signinKey
-     *
-     * @param string $signinKey
-     *
-     * @return Activity
-     */
-    public function setSigninKey($signinKey)
-    {
-        $this->signinKey = $signinKey;
-
-        return $this;
-    }
-
-    /**
-     * Get signinKey
-     *
-     * @return string
-     */
-    public function getSigninKey()
-    {
-        return $this->signinKey;
     }
 }
