@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>MemberRegistration</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Person</th>
+                <td>
+                    {{ memberRegistration.person.forename }} {{ memberRegistration.person.surname }}
+                    <a href="{{ path('person_show', { id: memberRegistration.person.id }) }}"><i class="fa fa-user"></i>
+                </td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ memberRegistration.year }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ memberRegistration.membershipType.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_memberregistration_edit', { 'id': memberRegistration.id }) }}" class="btn btn-warning">Edit</a>
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Delete" class="btn btn-danger">
+    {{ form_end(delete_form) }}
+{% endblock %}

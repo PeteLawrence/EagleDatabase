@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -37,10 +38,17 @@ class MemberRegistration
     private $person;
 
     /**
-     * 
-     * 
+     *
+     *
      */
     private $member;
+
+
+    public function __construct()
+    {
+        $now = new \DateTime();
+        $this->year = $now->format('Y');
+    }
 
     /**
      * Get id
