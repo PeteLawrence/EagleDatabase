@@ -97,10 +97,15 @@ class ActivityController extends Controller
      * @Route("/{id}/edit", name="activity_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, ManagedActivity $activity)
+    public function editAction(Request $request, Activity $activity)
     {
         $deleteForm = $this->createDeleteForm($activity);
-        $editForm = $this->createForm('AppBundle\Form\ManagedActivityType', $activity);
+
+        if ($activity instanceof UnmanagedActivity) {
+            $editForm = $this->createForm('AppBundle\Form\UnmanagedActivityType', $activity);
+        } else {
+            $editForm = $this->createForm('AppBundle\Form\ManagedActivityType', $activity);
+        }
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
