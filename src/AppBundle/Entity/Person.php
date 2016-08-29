@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
- * @ORM\InheritanceType("SINGLE_TABLE")
+ * 
  */
 class Person implements UserInterface, \Serializable
 {

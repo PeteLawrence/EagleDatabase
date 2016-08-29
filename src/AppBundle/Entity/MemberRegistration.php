@@ -20,14 +20,19 @@ class MemberRegistration
     private $year;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $member_id;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MembershipType", inversedBy="memberRegistration")
      * @ORM\JoinColumn(name="membership_type_id", referencedColumnName="id")
      */
     private $membershipType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Member", inversedBy="memberRegistration")
-     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     * 
+     * 
      */
     private $member;
 
@@ -111,5 +116,29 @@ class MemberRegistration
     public function getMember()
     {
         return $this->member;
+    }
+
+    /**
+     * Set memberId
+     *
+     * @param integer $memberId
+     *
+     * @return MemberRegistration
+     */
+    public function setMemberId($memberId)
+    {
+        $this->member_id = $memberId;
+
+        return $this;
+    }
+
+    /**
+     * Get memberId
+     *
+     * @return integer
+     */
+    public function getMemberId()
+    {
+        return $this->member_id;
     }
 }
