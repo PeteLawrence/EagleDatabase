@@ -56,11 +56,13 @@ class ActivityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //Generate a signin key
-            /*$generator = new \Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator();
-            $generator->setLength(16);
-            $signInKey = $generator->generatePassword();
-            $activity->setSigninKey($signInKey);*/
+            if ($activity instanceof ManagedActivity) {
+                //Generate a signin key
+                $generator = new \Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator();
+                $generator->setLength(16);
+                $signInKey = $generator->generatePassword();
+                $activity->setSigninKey($signInKey);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($activity);
