@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <h1>Attendance</h1>
+
+    <div id="chart" style="width: 800px;"></div>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        {{ gc_draw(chart, 'chart') }}
+    </script>
+{% endblock %}

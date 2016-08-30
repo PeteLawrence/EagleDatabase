@@ -133,4 +133,10 @@ class ManagedActivity extends \AppBundle\Entity\Activity
     {
         return $this->participant;
     }
+
+
+    public function getPeople()
+    {
+        return sizeof($this->participant);
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -30,12 +31,6 @@ class Participant
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
     private $person;
-
-    /**
-     * 
-     * 
-     */
-    private $activity;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ParticipantStatus", inversedBy="participant")
@@ -129,30 +124,6 @@ class Participant
     public function getPerson()
     {
         return $this->person;
-    }
-
-    /**
-     * Set activity
-     *
-     * @param \AppBundle\Entity\Activity $activity
-     *
-     * @return Participant
-     */
-    public function setActivity(\AppBundle\Entity\Activity $activity = null)
-    {
-        $this->activity = $activity;
-
-        return $this;
-    }
-
-    /**
-     * Get activity
-     *
-     * @return \AppBundle\Entity\Activity
-     */
-    public function getActivity()
-    {
-        return $this->activity;
     }
 
     /**

@@ -35,7 +35,7 @@ class SignInController extends Controller
             $data = $form->getData();
 
             $participant = new Participant();
-            $participant->setActivity($activity);
+            $participant->setManagedActivity($activity);
             $participant->setParticipantRole($data['participantRole']);
             $participant->setPerson($data['person']);
 
