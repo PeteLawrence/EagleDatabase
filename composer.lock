@@ -4,8 +4,49 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fb0de2be188fc6e652abae411d383345",
+    "hash": "072cc615e6abd56d6670bf6babd5cdf8",
+    "content-hash": "86f907de18d21ad92a33792f0b833184",
     "packages": [
+        {
+            "name": "cmen/google-charts-bundle",
+            "version": "1.1.0",
+            "target-dir": "CMEN/GoogleChartsBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cmen/CMENGoogleChartsBundle.git",
+                "reference": "6472ae80a3b70f6d453e3bb45b61615e089129b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cmen/CMENGoogleChartsBundle/zipball/6472ae80a3b70f6d453e3bb45b61615e089129b8",
+                "reference": "6472ae80a3b70f6d453e3bb45b61615e089129b8",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": "~2.3|~3.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "CMEN\\GoogleChartsBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Meneses"
+                }
+            ],
+            "description": "Symfony bundle that ease the use of Google Charts.",
+            "keywords": [
+                "charts",
+                "google"
+            ],
+            "time": "2016-04-26 11:36:16"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",
