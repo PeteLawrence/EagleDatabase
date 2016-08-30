@@ -33,13 +33,12 @@ class ReportController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $data[] = ['Date', 'Members'];
+        $data[] = ['Date', 'People'];
 
         $activities = $em->getRepository('AppBundle:Activity')->findAll();
         foreach ($activities as $activity) {
             $data[] = [ $activity->getActivityStart(), $activity->getPeople() ];
         }
-
 
         $chart = new ColumnChart();
         $chart->getData()->setArrayToDataTable($data);
