@@ -1,0 +1,14 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <h1>Reports</h1>
+
+    <ul>
+        <li>
+            <a href="{{ path('report_attendance') }}">Attendance</a>
+        </li>
+        <li>
+            <a href="{{ path('report_emaillist') }}">Email List</a>
+        </li>
+    </ul>
+{% endblock %}
