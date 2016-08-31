@@ -26,6 +26,41 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
+     * @Route("/", name="report_index")
+     * @Method("GET")
+     */
+    public function indexAction()
+    {
+        return $this->render('admin/report/index.html.twig');
+    }
+
+    /**
+     * Lists all Activity entities.
+     *
+     * @Route("/emaillist", name="report_emaillist")
+     * @Method("GET")
+     */
+    public function emaillistAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $people = $em->getRepository('AppBundle:Person')->findAll();
+        $emails = [];
+        foreach ($people as $person) {
+            if ($person->getEmail() != '') {
+                $emails[] = $person->getEmail();
+            }
+        }
+        $emailsString = implode(',', $emails);
+
+        return $this->render('admin/report/emaillist.html.twig', [
+            'emailsString' => $emailsString
+        ]);
+    }
+
+    /**
+     * Lists all Activity entities.
+     *
      * @Route("/attendance", name="report_attendance")
      * @Method("GET")
      */
