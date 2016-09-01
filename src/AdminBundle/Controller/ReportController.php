@@ -51,7 +51,7 @@ class ReportController extends Controller
                 $emails[] = $person->getEmail();
             }
         }
-        $emailsString = implode(',', $emails);
+        $emailsString = implode('; ', $emails);
 
         return $this->render('admin/report/emaillist.html.twig', [
             'emailsString' => $emailsString
