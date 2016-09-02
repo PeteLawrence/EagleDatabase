@@ -116,6 +116,11 @@ class Person implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistration", mappedBy="person")
      */
     private $memberRegistration;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PersonAttribute", mappedBy="person")
+     */
+    private $personAttribute;
     /**
      * Constructor
      */
@@ -719,5 +724,39 @@ class Person implements UserInterface, \Serializable
     public function getNotes()
     {
         return $this->notes;
+    }
+
+    /**
+     * Add personAttribute
+     *
+     * @param \AppBundle\Entity\PersonAttribute $personAttribute
+     *
+     * @return Person
+     */
+    public function addPersonAttribute(\AppBundle\Entity\PersonAttribute $personAttribute)
+    {
+        $this->personAttribute[] = $personAttribute;
+
+        return $this;
+    }
+
+    /**
+     * Remove personAttribute
+     *
+     * @param \AppBundle\Entity\PersonAttribute $personAttribute
+     */
+    public function removePersonAttribute(\AppBundle\Entity\PersonAttribute $personAttribute)
+    {
+        $this->personAttribute->removeElement($personAttribute);
+    }
+
+    /**
+     * Get personAttribute
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPersonAttribute()
+    {
+        return $this->personAttribute;
     }
 }
