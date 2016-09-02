@@ -3,14 +3,29 @@
 {% block body %}
     <h1>Overview</h1>
 
-    <h2>Members - {{ members}}</h2>
+    <h2>Membership</h2>
+    <div class="row">
+        <div class="col-lg-4">
+            <div id="genderChart"></div>
+        </div>
+        <div class="col-lg-8">
+            <div id="ageChart"></div>
+        </div>
+    </div>
 
-    <h2>Coaches - {{ coaches }}</h2>
-
-    <div id="genderChart"></div>
-    <div id="ageChart"></div>
     <div id="lengthChart"></div>
-    <div id="visitsChart"></div>
+
+    <h2>Visits</h2>
+    <div class="row">
+        <div class="col-xs-4">
+            <div id="visitsChart"></div>
+        </div>
+        <div class="col-xs-8">
+            <div id="visitsByGenderChart"></div>
+        </div>
+    </div>
+
+    <h2>Qualifications</h2>
     <div id="qualificationChart"></div>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -19,6 +34,7 @@
         {{ gc_draw(ageChart, 'ageChart') }}
         {{ gc_draw(lengthChart, 'lengthChart') }}
         {{ gc_draw(visitsChart, 'visitsChart') }}
+        {{ gc_draw(visitsByGenderChart, 'visitsByGenderChart') }}
         {{ gc_draw(qualificationChart, 'qualificationChart') }}
     </script>
 {% endblock %}

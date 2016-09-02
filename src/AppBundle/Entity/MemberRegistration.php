@@ -16,12 +16,22 @@ class MemberRegistration
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $start;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $end;
+
+    /**
+     * 
      */
     private $year;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * 
      */
     private $paid;
 
@@ -130,5 +140,53 @@ class MemberRegistration
     public function getPerson()
     {
         return $this->person;
+    }
+
+    /**
+     * Set start
+     *
+     * @param \DateTime $start
+     *
+     * @return MemberRegistration
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+
+        return $this;
+    }
+
+    /**
+     * Get start
+     *
+     * @return \DateTime
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * Set end
+     *
+     * @param \DateTime $end
+     *
+     * @return MemberRegistration
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
+
+        return $this;
+    }
+
+    /**
+     * Get end
+     *
+     * @return \DateTime
+     */
+    public function getEnd()
+    {
+        return $this->end;
     }
 }

@@ -44,6 +44,11 @@ abstract class Activity
     private $description;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $allowOnlineSignup;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ActivityType", inversedBy="activity")
      * @ORM\JoinColumn(name="activity_type_id", referencedColumnName="id")
      */
@@ -281,5 +286,29 @@ abstract class Activity
         }
 
         return $people;
+    }
+
+    /**
+     * Set allowOnlineSignup
+     *
+     * @param boolean $allowOnlineSignup
+     *
+     * @return Activity
+     */
+    public function setAllowOnlineSignup($allowOnlineSignup)
+    {
+        $this->allowOnlineSignup = $allowOnlineSignup;
+
+        return $this;
+    }
+
+    /**
+     * Get allowOnlineSignup
+     *
+     * @return boolean
+     */
+    public function getAllowOnlineSignup()
+    {
+        return $this->allowOnlineSignup;
     }
 }

@@ -102,6 +102,7 @@ class ReportController extends Controller
             'ageChart' => $this->buildAgeChart(),
             'lengthChart' => $this->buildLengthChart(),
             'visitsChart' => $this->buildVisitsChart(),
+            'visitsByGenderChart' => $this->buildVisitsByGenderChart(),
             'qualificationChart' => $this->buildQualificationChart()
         ));
     }
@@ -125,9 +126,9 @@ class ReportController extends Controller
 
     private function buildAgeChart()
     {
-        $chart = new ColumnChart();
+        $chart = new Histogram();
         $chart->getOptions()->setTitle('Membership by age');
-        $chart->getData()->setArrayToDataTable(
+        /*$chart->getData()->setArrayToDataTable(
             [
                 ['Age Group', 'Count'],
                 ['0-11',  4],
@@ -141,7 +142,31 @@ class ReportController extends Controller
         );
 
         return $chart;
+    }*/
+        $chart->getData()->setArrayToDataTable(
+            [
+                ['Age Group', 'Count'],
+                ['Dan',  14],
+                ['Jane',  28],
+                ['Jo',  41],
+                ['Pete',  30],
+                ['Stuart',  52],
+                ['Kate', 45],
+                ['Richard',  16],
+                ['Leanne',  26],
+                ['Rosie',  16],
+                ['Tim',  12],
+                ['Dave',  63],
+                ['Clare',  32],
+                ['Anne',  34],
+                ['Otto',  14],
+                ['Si',  40],
+            ]
+        );
+
+        return $chart;
     }
+
 
 
     private function buildLengthChart()
@@ -157,9 +182,11 @@ class ReportController extends Controller
                 ['3-4',  16],
                 ['4-5',  15],
                 ['5-6', 12],
-                ['6-7',  6],
-                ['7-8',  0],
-                ['8-9',  2],
+                ['6-7',  11],
+                ['7-8',  8],
+                ['8-9',  5],
+                ['9-10',  1],
+                ['10+',  2],
             ]
         );
 
@@ -178,7 +205,10 @@ class ReportController extends Controller
                 ['Friday Night', 78],
                 ['Whitewater Weekend', 98],
                 ['Touring Weekend', 87],
-                ['Pool Session', 124]
+                ['Pool Session', 124],
+                ['Sea Trip', 31],
+                ['Lee Valley', 20],
+                ['Horstead', 42],
             ]
         );
         /*$chart->getData()->setArrayToDataTable(
@@ -189,6 +219,40 @@ class ReportController extends Controller
                 ['2016', 1098, 120, 143, 98]
             ]
         );*/
+        $chart->getOptions()->setWidth(350);
+
+        return $chart;
+    }
+
+
+
+    private function buildVisitsByGenderChart()
+    {
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Visits by gender');
+        $chart->getOptions()->setIsStacked('relative');
+        $chart->getData()->setArrayToDataTable(
+                [
+                    ['Type', 'Male', 'Female'],
+                    ['Wednesday Night', 600, 389],
+                    ['Friday Night', 40, 38],
+                    ['Whitewater Weekend', 70, 28],
+                    ['Touring Weekend', 50, 46],
+                    ['Pool Session', 64, 61],
+                    ['Sea Trip', 8, 9],
+                    ['Lee Valley', 18, 2],
+                    ['Horstead', 26, 14],
+                ]
+            );
+            /*$chart->getData()->setArrayToDataTable(
+                [
+                    ['Year', 'Wednesday Night', 'Friday Night Paddle', 'Whitewater weekend', 'Touring weekend'],
+                    ['2014', 1002, 129, 42, 45],
+                    ['2015', 1043, 132, 89, 75],
+                    ['2016', 1098, 120, 143, 98]
+                ]
+            );*/
+        $chart->getOptions()->setWidth(730);
 
         return $chart;
     }
