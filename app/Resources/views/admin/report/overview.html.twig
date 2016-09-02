@@ -1,0 +1,24 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <h1>Overview</h1>
+
+    <h2>Members - {{ members}}</h2>
+
+    <h2>Coaches - {{ coaches }}</h2>
+
+    <div id="genderChart"></div>
+    <div id="ageChart"></div>
+    <div id="lengthChart"></div>
+    <div id="visitsChart"></div>
+    <div id="qualificationChart"></div>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        {{ gc_draw(genderChart, 'genderChart') }}
+        {{ gc_draw(ageChart, 'ageChart') }}
+        {{ gc_draw(lengthChart, 'lengthChart') }}
+        {{ gc_draw(visitsChart, 'visitsChart') }}
+        {{ gc_draw(qualificationChart, 'qualificationChart') }}
+    </script>
+{% endblock %}
