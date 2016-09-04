@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
- * 
+ *
  */
 class Person implements UserInterface, \Serializable
 {
@@ -121,6 +121,7 @@ class Person implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\PersonAttribute", mappedBy="person")
      */
     private $personAttribute;
+
     /**
      * Constructor
      */
@@ -606,7 +607,7 @@ class Person implements UserInterface, \Serializable
     public function eraseCredentials()
     {
     }
-    
+
     /**
      * @see \Serializable::serialize()
      */
@@ -759,4 +760,37 @@ class Person implements UserInterface, \Serializable
     {
         return $this->personAttribute;
     }
+
+
+
+    public function __get($name)
+    {
+        dump($this->getPersonAttribute());
+        if (is_array($this->personAttribute)) {
+            dump('a');
+            foreach ($this->personAttribute as $personAttribute) {
+                if ($personAttribute->getAttribute()->getCode() == $name) {
+                    return $personAttribute->getAttributeValue()->getValue();
+                }
+            }
+        }
+        //die();
+
+        return 'DEFAULT';
+    }
+
+
+    /*public function __set($name, $value)
+    {
+        if (isset($name)) {
+            foreach ($this->getPersonAttribute() as $personAttribute) {
+
+            }
+
+            //Look up atribute type
+            $
+        }
+        dump($name, $value);
+        die();
+    }*/
 }

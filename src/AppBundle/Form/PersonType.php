@@ -13,6 +13,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PersonType extends AbstractType
 {
+    private $em;
+
+    public function __construct($em)
+    {
+        $this->em = $em;
+    }
+
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -37,6 +45,16 @@ class PersonType extends AbstractType
             ->add('disability')
             ->add('notes', TextareaType::class)
         ;
+
+        $attributes = $this->em->getRepository('AppBundle:Attribute')->findAll();
+        foreach ($attributes as $attribute) {
+            $builder->add($attribute->getCode(), TextareaType::class);
+        }
+        /*if (is_array($options['data']->getPersonAttribute())) {
+            foreach ($options['data']->getPersonAttribute() as $personAttribute) {
+                $builder->add($personAttribute->getAttribute()->getCode(), TextareaType::class);
+            }
+        }*/
     }
 
     /**

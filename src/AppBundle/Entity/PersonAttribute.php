@@ -1,9 +1,13 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ *
+ *
+ *
  */
 class PersonAttribute
 {
@@ -25,6 +29,12 @@ class PersonAttribute
      * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id")
      */
     private $attribute;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AttributeValue", inversedBy="personAttribute")
+     * @ORM\JoinColumn(name="attribute_value_id", referencedColumnName="id")
+     */
+    private $attributeValue;
 
     /**
      * Get id
@@ -82,5 +92,29 @@ class PersonAttribute
     public function getAttribute()
     {
         return $this->attribute;
+    }
+
+    /**
+     * Set attributeValue
+     *
+     * @param \AppBundle\Entity\AttributeValue $attributeValue
+     *
+     * @return PersonAttribute
+     */
+    public function setAttributeValue(\AppBundle\Entity\AttributeValue $attributeValue = null)
+    {
+        $this->attributeValue = $attributeValue;
+
+        return $this;
+    }
+
+    /**
+     * Get attributeValue
+     *
+     * @return \AppBundle\Entity\AttributeValue
+     */
+    public function getAttributeValue()
+    {
+        return $this->attributeValue;
     }
 }
