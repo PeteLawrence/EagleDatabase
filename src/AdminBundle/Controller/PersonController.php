@@ -43,7 +43,7 @@ class PersonController extends Controller
     public function newAction(Request $request)
     {
         $person = new Person();
-        $form = $this->createForm('AppBundle\Form\PersonType', $person);
+        $form = $this->createForm(PersonType::class, $person);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
