@@ -36,8 +36,8 @@ class MemberRegistration
     private $paid;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MembershipType", inversedBy="memberRegistration")
-     * @ORM\JoinColumn(name="membership_type_id", referencedColumnName="id")
+     * 
+     * 
      */
     private $membershipType;
 
@@ -46,6 +46,12 @@ class MemberRegistration
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
     private $person;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MembershipTypePeriod", inversedBy="memberRegistration")
+     * @ORM\JoinColumn(name="membership_type_period_id", referencedColumnName="id")
+     */
+    private $membershipTypePeriod;
 
     /**
      *
@@ -188,5 +194,29 @@ class MemberRegistration
     public function getEnd()
     {
         return $this->end;
+    }
+
+    /**
+     * Set membershipTypePeriod
+     *
+     * @param \AppBundle\Entity\MembershipTypePeriod $membershipTypePeriod
+     *
+     * @return MemberRegistration
+     */
+    public function setMembershipTypePeriod(\AppBundle\Entity\MembershipTypePeriod $membershipTypePeriod = null)
+    {
+        $this->membershipTypePeriod = $membershipTypePeriod;
+
+        return $this;
+    }
+
+    /**
+     * Get membershipTypePeriod
+     *
+     * @return \AppBundle\Entity\MembershipTypePeriod
+     */
+    public function getMembershipTypePeriod()
+    {
+        return $this->membershipTypePeriod;
     }
 }

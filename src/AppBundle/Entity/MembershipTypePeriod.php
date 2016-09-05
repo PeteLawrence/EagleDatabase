@@ -1,11 +1,12 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  */
-class MembershipType
+class MembershipTypePeriod
 {
     /**
      * @ORM\Id
@@ -15,24 +16,30 @@ class MembershipType
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      */
-    private $type;
+    private $fromDate;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MembershipTypePeriod", mappedBy="membershipType")
+     * @ORM\Column(type="date", nullable=true)
      */
-    private $membershipTypePeriod;
+    private $toDate;
 
     /**
-     * 
+     * @ORM\Column(type="decimal", nullable=true)
      */
     private $price;
 
     /**
-     * 
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistration", mappedBy="membershipTypePeriod")
      */
     private $memberRegistration;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MembershipType", inversedBy="membershipTypePeriod")
+     * @ORM\JoinColumn(name="membership_type_id", referencedColumnName="id")
+     */
+    private $membershipType;
     /**
      * Constructor
      */
@@ -52,35 +59,11 @@ class MembershipType
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return MembershipType
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * Set price
      *
      * @param string $price
      *
-     * @return MembershipType
+     * @return MembershipTypePeriod
      */
     public function setPrice($price)
     {
@@ -104,7 +87,7 @@ class MembershipType
      *
      * @param \AppBundle\Entity\MemberRegistration $memberRegistration
      *
-     * @return MembershipType
+     * @return MembershipTypePeriod
      */
     public function addMemberRegistration(\AppBundle\Entity\MemberRegistration $memberRegistration)
     {
@@ -134,36 +117,74 @@ class MembershipType
     }
 
     /**
-     * Add membershipTypePeriod
+     * Set membershipType
      *
-     * @param \AppBundle\Entity\MembershipTypePeriod $membershipTypePeriod
+     * @param \AppBundle\Entity\MembershipType $membershipType
      *
-     * @return MembershipType
+     * @return MembershipTypePeriod
      */
-    public function addMembershipTypePeriod(\AppBundle\Entity\MembershipTypePeriod $membershipTypePeriod)
+    public function setMembershipType(\AppBundle\Entity\MembershipType $membershipType = null)
     {
-        $this->membershipTypePeriod[] = $membershipTypePeriod;
+        $this->membershipType = $membershipType;
 
         return $this;
     }
 
     /**
-     * Remove membershipTypePeriod
+     * Get membershipType
      *
-     * @param \AppBundle\Entity\MembershipTypePeriod $membershipTypePeriod
+     * @return \AppBundle\Entity\MembershipType
      */
-    public function removeMembershipTypePeriod(\AppBundle\Entity\MembershipTypePeriod $membershipTypePeriod)
+    public function getMembershipType()
     {
-        $this->membershipTypePeriod->removeElement($membershipTypePeriod);
+        return $this->membershipType;
     }
 
     /**
-     * Get membershipTypePeriod
+     * Set fromDate
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @param \DateTime $fromDate
+     *
+     * @return MembershipTypePeriod
      */
-    public function getMembershipTypePeriod()
+    public function setFromDate($fromDate)
     {
-        return $this->membershipTypePeriod;
+        $this->fromDate = $fromDate;
+
+        return $this;
+    }
+
+    /**
+     * Get fromDate
+     *
+     * @return \DateTime
+     */
+    public function getFromDate()
+    {
+        return $this->fromDate;
+    }
+
+    /**
+     * Set toDate
+     *
+     * @param \DateTime $toDate
+     *
+     * @return MembershipTypePeriod
+     */
+    public function setToDate($toDate)
+    {
+        $this->toDate = $toDate;
+
+        return $this;
+    }
+
+    /**
+     * Get toDate
+     *
+     * @return \DateTime
+     */
+    public function getToDate()
+    {
+        return $this->toDate;
     }
 }

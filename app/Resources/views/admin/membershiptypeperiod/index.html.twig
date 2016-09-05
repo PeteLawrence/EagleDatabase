@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>MembershipTypePeriod list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for membershipTypePeriod in membershipTypePeriods %}
+            <tr>
+                <td>{% if membershipTypePeriod.from %}{{ membershipTypePeriod.from|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if membershipTypePeriod.to %}{{ membershipTypePeriod.to|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ membershipTypePeriod.price }}</td>
+                <td>
+                    <a href="{{ path('admin_membershiptypeperiod_edit', { 'id': membershipTypePeriod.id }) }}" class="btn"><i class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_membershiptypeperiod_new') }}" class="btn btn-primary">Create</a>
+{% endblock %}

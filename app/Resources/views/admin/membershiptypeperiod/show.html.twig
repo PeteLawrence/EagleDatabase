@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>MembershipTypePeriod</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ membershipTypePeriod.id }}</td>
+            </tr>
+            <tr>
+                <th>From</th>
+                <td>{% if membershipTypePeriod.fromDate %}{{ membershipTypePeriod.fromDate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>To</th>
+                <td>{% if membershipTypePeriod.toDate %}{{ membershipTypePeriod.toDate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ membershipTypePeriod.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_membershiptypeperiod_edit', { 'id': membershipTypePeriod.id }) }}">Edit</a>
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+{% endblock %}
