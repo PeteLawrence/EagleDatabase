@@ -16,12 +16,12 @@ class MembershipTypePeriod
     private $id;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * 
      */
     private $fromDate;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * 
      */
     private $toDate;
 
@@ -40,6 +40,12 @@ class MembershipTypePeriod
      * @ORM\JoinColumn(name="membership_type_id", referencedColumnName="id")
      */
     private $membershipType;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MembershipPeriod", inversedBy="membershipTypePeriod")
+     * @ORM\JoinColumn(name="membership_period_id", referencedColumnName="id")
+     */
+    private $membershipPeriod;
     /**
      * Constructor
      */
@@ -186,5 +192,29 @@ class MembershipTypePeriod
     public function getToDate()
     {
         return $this->toDate;
+    }
+
+    /**
+     * Set membershipPeriod
+     *
+     * @param \AppBundle\Entity\MembershipPeriod $membershipPeriod
+     *
+     * @return MembershipTypePeriod
+     */
+    public function setMembershipPeriod(\AppBundle\Entity\MembershipPeriod $membershipPeriod = null)
+    {
+        $this->membershipPeriod = $membershipPeriod;
+
+        return $this;
+    }
+
+    /**
+     * Get membershipPeriod
+     *
+     * @return \AppBundle\Entity\MembershipPeriod
+     */
+    public function getMembershipPeriod()
+    {
+        return $this->membershipPeriod;
     }
 }

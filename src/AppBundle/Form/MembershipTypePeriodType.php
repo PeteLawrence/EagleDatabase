@@ -18,10 +18,11 @@ class MembershipTypePeriodType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fromDate', DateType::class, [ 'required' => true, 'widget' => 'single_text'])
-            ->add('toDate', DateType::class, [ 'required' => true, 'widget' => 'single_text'])
-            ->add('price', MoneyType::class, [ 'currency' => 'GBP' ])
             ->add('membershipType', EntityType::class, ['class' => 'AppBundle:MembershipType', 'choice_label' => 'type'])
+            ->add('membershipPeriod', EntityType::class, ['class' => 'AppBundle:MembershipPeriod', 'choice_label' => function ($a) {
+                return sprintf('%s → %s', $a->getFromDate()->format('d/m/Y'), $a->getToDate()->format('d/m/Y'));
+            }])
+            ->add('price', MoneyType::class, [ 'currency' => 'GBP' ])
         ;
     }
 

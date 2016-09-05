@@ -13,12 +13,16 @@
                 </td>
             </tr>
             <tr>
-                <th>Year</th>
-                <td>{{ memberRegistration.year }}</td>
+                <th>From</th>
+                <td>{{ memberRegistration.membershipTypePeriod.fromDate|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th>To</th>
+                <td>{{ memberRegistration.membershipTypePeriod.toDate|date('d-m-Y') }}</td>
             </tr>
             <tr>
                 <th>Type</th>
-                <td>{{ memberRegistration.membershipType.type }}</td>
+                <td>{{ memberRegistration.membershipTypePeriod.membershipType.type }}</td>
             </tr>
         </tbody>
     </table>
