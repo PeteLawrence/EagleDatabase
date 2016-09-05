@@ -28,6 +28,16 @@
     <h2>Qualifications</h2>
     <div id="qualificationChart"></div>
 
+    <h2>White Water Weekends</h2>
+    <div class="row">
+        <div class="col-xs-6">
+            <div id="whiteWaterGender"></div>
+        </div>
+        <div class="col-xs-6">
+            <div id="whiteWaterAge"></div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
         {{ gc_draw(genderChart, 'genderChart') }}
@@ -36,5 +46,7 @@
         {{ gc_draw(visitsChart, 'visitsChart') }}
         {{ gc_draw(visitsByGenderChart, 'visitsByGenderChart') }}
         {{ gc_draw(qualificationChart, 'qualificationChart') }}
+        {{ gc_draw(whiteWaterGenderChart, 'whiteWaterGender') }}
+        {{ gc_draw(whiteWaterAgeChart, 'whiteWaterAge') }}
     </script>
 {% endblock %}

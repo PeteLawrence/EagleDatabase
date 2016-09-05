@@ -103,7 +103,9 @@ class ReportController extends Controller
             'lengthChart' => $this->buildLengthChart(),
             'visitsChart' => $this->buildVisitsChart(),
             'visitsByGenderChart' => $this->buildVisitsByGenderChart(),
-            'qualificationChart' => $this->buildQualificationChart()
+            'qualificationChart' => $this->buildQualificationChart(),
+            'whiteWaterGenderChart' => $this->buildWhiteWaterGenderChart(),
+            'whiteWaterAgeChart' => $this->buildWhiteWaterAgeChart()
         ));
     }
 
@@ -273,6 +275,44 @@ class ReportController extends Controller
                 ['WWSRT', 17],
                 ['First Aid (1 day)', 42],
                 ['First Aid (2 day)', 20],
+            ]
+        );
+
+        return $chart;
+    }
+
+
+    private function buildWhiteWaterGenderChart()
+    {
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Attendance');
+        $chart->getOptions()->setIsStacked(true);
+        $chart->getData()->setArrayToDataTable(
+            [
+                ['Date', 'Female', 'Male', [ 'role' =>  'annotation' ] ],
+                [new \DateTime('2016-05-28'), 12, 23, 'Symmonds Yat'],
+                [new \DateTime('2016-07-12'), 7, 17, 'Dee'],
+                [new \DateTime('2016-08-16'), 6, 12, 'Tryweryn'],
+                [new \DateTime('2016-11-28'), 5, 11, 'Dart Loop'],
+            ]
+        );
+
+        return $chart;
+    }
+
+
+    private function buildWhiteWaterAgeChart()
+    {
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Attendance');
+        $chart->getOptions()->setIsStacked(true);
+        $chart->getData()->setArrayToDataTable(
+            [
+                ['Date', '10-18', '18-25', '25-35', '35-45', '45-55', '55-65', '65+', [ 'role' =>  'annotation' ] ],
+                [new \DateTime('2016-05-28'), 3, 7, 6, 4, 6, 2, 1, 'Symmonds Yat'],
+                [new \DateTime('2016-07-12'), 2, 9, 3, 2, 3, 0, 0, 'Dee'],
+                [new \DateTime('2016-08-16'), 1, 5, 4, 2, 2, 1, 0, 'Tryweryn'],
+                [new \DateTime('2016-11-28'), 0, 3, 3, 2, 1, 0, 0, 'Dart Loop'],
             ]
         );
 
