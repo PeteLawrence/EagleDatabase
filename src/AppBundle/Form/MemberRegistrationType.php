@@ -18,7 +18,7 @@ class MemberRegistrationType extends AbstractType
     {
         $builder
             ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function ($a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
-            ->add('membershipTypePeriod', EntityType::class, ['class' => 'AppBundle:MembershipTypePeriod', 'choice_label' => function ($a) { return sprintf('%s %s → %s £%s', $a->getMembershipType()->getType(), $a->getFromDate()->format('d-m-Y'), $a->getToDate()->format('d-m-Y'), $a->getPrice()); } ])
+            ->add('membershipTypePeriod', EntityType::class, ['class' => 'AppBundle:MembershipTypePeriod', 'choice_label' => function ($a) { return sprintf('%s %s → %s £%s', $a->getMembershipType()->getType(), $a->getMembershipPeriod()->getFromDate()->format('d-m-Y'), $a->getMembershipPeriod()->getToDate()->format('d-m-Y'), $a->getPrice()); } ])
 
         ;
     }
