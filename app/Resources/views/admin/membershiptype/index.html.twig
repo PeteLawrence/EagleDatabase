@@ -7,7 +7,6 @@
         <thead>
             <tr>
                 <th>Type</th>
-                <th>Price</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -15,7 +14,6 @@
         {% for membershipType in membershipTypes %}
             <tr>
                 <td>{{ membershipType.type }}</td>
-                <td>{{ membershipType.price }}</td>
                 <td>
                     <a href="{{ path('admin_membershiptype_show', { 'id': membershipType.id }) }}" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
                     <a href="{{ path('admin_membershiptype_edit', { 'id': membershipType.id }) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
