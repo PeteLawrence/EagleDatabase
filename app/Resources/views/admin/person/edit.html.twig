@@ -79,15 +79,17 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Year</th>
+                        <th>From</th>
+                        <th>To</th>
                         <th>Type</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 {% for registration in person.memberRegistration %}
                     <tr>
-                        <td>{{ registration.year }}</td>
-                        <td>{{ registration.membershipType.type }}</td>
+                        <td>{{ registration.start|date('d m Y') }}</td>
+                        <td>{{ registration.end|date('d m Y') }}</td>
+                        <td>{{ registration.membershipTypePeriod.membershipType.type }}</td>
                         <td>
                             <a href="{{ path('admin_memberregistration_edit', { id: registration.id, next: path('person_edit', {id: person.id})})}}"><i class="fa fa-pencil"></i></a>
                         </td>

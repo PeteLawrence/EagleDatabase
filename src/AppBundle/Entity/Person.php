@@ -693,6 +693,17 @@ class Person implements UserInterface, \Serializable
         $this->memberRegistration->removeElement($memberRegistration);
     }
 
+    public function getCurrentMemberRegistration()
+    {
+        $now = new \DateTime();
+
+        foreach ($this->memberRegistration as $memberRegistration) {
+            if ($memberRegistration->fromDate < $now && $memberRegistration->toDate > $now) {
+                return $memberRegistration;
+            }
+        }
+    }
+
     /**
      * Get memberRegistration
      *
@@ -765,7 +776,6 @@ class Person implements UserInterface, \Serializable
 
     public function __get($name)
     {
-        dump($this->getPersonAttribute());
         if (is_array($this->personAttribute)) {
             dump('a');
             foreach ($this->personAttribute as $personAttribute) {

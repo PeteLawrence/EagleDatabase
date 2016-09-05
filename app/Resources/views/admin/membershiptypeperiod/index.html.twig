@@ -7,8 +7,7 @@
         <thead>
             <tr>
                 <th>Type</th>
-                <th>From</th>
-                <th>To</th>
+                <th>Period</th>
                 <th>Price</th>
                 <th>Actions</th>
             </tr>
@@ -17,8 +16,8 @@
         {% for membershipTypePeriod in membershipTypePeriods %}
             <tr>
                 <td>{{ membershipTypePeriod.membershipType.type }}</td>
-                <td>{% if membershipTypePeriod.fromDate %}{{ membershipTypePeriod.fromDate|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if membershipTypePeriod.toDate %}{{ membershipTypePeriod.toDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ membershipTypePeriod.fromDate|date('d/m/Y') }} → {{ membershipTypePeriod.toDate|date('d/m/Y') }}</td>
+
                 <td>{{ membershipTypePeriod.price }}</td>
                 <td>
                     <a href="{{ path('admin_membershiptypeperiod_edit', { 'id': membershipTypePeriod.id }) }}" class="btn"><i class="fa fa-pencil"></i></a>
