@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -25,12 +26,7 @@ class MembershipType
     private $membershipTypePeriod;
 
     /**
-     * 
-     */
-    private $price;
-
-    /**
-     * 
+     *
      */
     private $memberRegistration;
     /**
@@ -73,30 +69,6 @@ class MembershipType
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set price
-     *
-     * @param string $price
-     *
-     * @return MembershipType
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**
