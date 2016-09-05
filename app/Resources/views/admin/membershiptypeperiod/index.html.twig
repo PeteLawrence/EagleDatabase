@@ -16,7 +16,7 @@
         {% for membershipTypePeriod in membershipTypePeriods %}
             <tr>
                 <td>{{ membershipTypePeriod.membershipType.type }}</td>
-                <td>{{ membershipTypePeriod.fromDate|date('d/m/Y') }} → {{ membershipTypePeriod.toDate|date('d/m/Y') }}</td>
+                <td>{{ membershipTypePeriod.membershipPeriod.fromDate|date('d/m/Y') }} → {{ membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</td>
 
                 <td>{{ membershipTypePeriod.price }}</td>
                 <td>
