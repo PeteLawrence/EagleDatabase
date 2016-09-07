@@ -13,7 +13,14 @@
         </div>
     </div>
 
-    <div id="lengthChart"></div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div id="lengthChart"></div>
+        </div>
+        <div class="col-lg-4">
+            <div id="returningChart"></div>
+        </div>
+    </div>
 
     <h2>Visits</h2>
     <div class="row">
@@ -43,6 +50,7 @@
         {{ gc_draw(genderChart, 'genderChart') }}
         {{ gc_draw(ageChart, 'ageChart') }}
         {{ gc_draw(lengthChart, 'lengthChart') }}
+        {{ gc_draw(returningChart, 'returningChart') }}
         {{ gc_draw(visitsChart, 'visitsChart') }}
         {{ gc_draw(visitsByGenderChart, 'visitsByGenderChart') }}
         {{ gc_draw(qualificationChart, 'qualificationChart') }}

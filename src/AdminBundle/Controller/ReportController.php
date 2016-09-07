@@ -101,6 +101,7 @@ class ReportController extends Controller
             'genderChart' => $this->buildGenderChart(),
             'ageChart' => $this->buildAgeChart(),
             'lengthChart' => $this->buildLengthChart(),
+            'returningChart' => $this->buildReturningChart(),
             'visitsChart' => $this->buildVisitsChart(),
             'visitsByGenderChart' => $this->buildVisitsByGenderChart(),
             'qualificationChart' => $this->buildQualificationChart(),
@@ -189,6 +190,22 @@ class ReportController extends Controller
                 ['8-9',  5],
                 ['9-10',  1],
                 ['10+',  2],
+            ]
+        );
+
+        return $chart;
+    }
+
+
+    private function buildReturningChart()
+    {
+        $chart = new PieChart();
+        $chart->getOptions()->setTitle('New vs Returning');
+        $chart->getData()->setArrayToDataTable(
+            [
+                ['Returning', 'Count'],
+                ['Yes', 125],
+                ['No', 25]
             ]
         );
 
