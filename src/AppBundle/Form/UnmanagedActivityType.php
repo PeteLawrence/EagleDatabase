@@ -23,6 +23,7 @@ class UnmanagedActivityType extends AbstractType
             ->add('description')
             ->add('activityStart', DateTimeType::class, [ 'html5' => true, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
             ->add('activityEnd', DateTimeType::class, [ 'html5' => true, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
+            ->add('spaces', NumberType::class)
             ->add('people', NumberType::class)
             ->add('disabled', NumberType::class)
             ->add('activityType', EntityType::class, ['class' => 'AppBundle:ActivityType', 'choice_label' => 'type' ])
