@@ -88,6 +88,22 @@ class ReportController extends Controller
 
 
     /**
+     * Displays a membership overview page
+     *
+     * @Route("/membership", name="report_membership")
+     * @Method("GET")
+     */
+    public function membershipAction()
+    {
+        return $this->render('admin/report/membership.html.twig', array(
+            'genderChart' => $this->buildGenderChart(),
+            'ageChart' => $this->buildAgeChart(),
+            'returningChart' => $this->buildReturningChart(),
+        ));
+    }
+
+
+    /**
      * Lists all Activity entities.
      *
      * @Route("/overview", name="report_overview")
@@ -113,13 +129,28 @@ class ReportController extends Controller
 
     private function buildGenderChart()
     {
+        //Fetch data
+        $em = $this->getDoctrine()->getManager();
+        $members = $em->getRepository('AppBundle:Person')->findAll();
+
+        $females = 0;
+        $males = 0;
+        foreach ($members as $member) {
+            if ($member->getGender() == 'F') {
+                $females++;
+            } elseif ($member->getGender() == 'M') {
+                $males ++;
+            }
+        }
+
+        //Build the chart object
         $chart = new PieChart();
         $chart->getOptions()->setTitle('Membership by gender');
         $chart->getData()->setArrayToDataTable(
             [
                 ['Gender', 'Count'],
-                ['Male', 75],
-                ['Female', 45]
+                ['Male', $males],
+                ['Female', $females]
             ]
         );
 
@@ -129,41 +160,61 @@ class ReportController extends Controller
 
     private function buildAgeChart()
     {
-        $chart = new Histogram();
-        $chart->getOptions()->setTitle('Membership by age');
-        /*$chart->getData()->setArrayToDataTable(
-            [
-                ['Age Group', 'Count'],
-                ['0-11',  4],
-                ['11-18',  8],
-                ['18-25',  16],
-                ['25-35',  14],
-                ['35-45',  22],
-                ['45-55', 20],
-                ['55+',  12],
-            ]
-        );
+        //Fetch data
+        $em = $this->getDoctrine()->getManager();
+        $members = $em->getRepository('AppBundle:Person')->findAll();
 
-        return $chart;
-    }*/
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Membership by age');
+
+        $bucket1 = 0;
+        $bucket2 = 0;
+        $bucket3 = 0;
+        $bucket4 = 0;
+        $bucket5 = 0;
+        $bucket6 = 0;
+        $bucket7 = 0;
+        $bucket8 = 0;
+
+        foreach ($members as $member) {
+            $now = new \DateTime();
+            $dob = $member->getDob();
+
+            if ($dob != null) {
+                $age = $dob->diff($now)->y;
+
+                if ($age < 10) {
+                    $bucket1++;
+                } elseif ($age < 18) {
+                    $bucket2++;
+                } elseif ($age < 25) {
+                    $bucket3++;
+                } elseif ($age < 35) {
+                    $bucket4++;
+                } elseif ($age < 45) {
+                    $bucket5++;
+                } elseif ($age < 55) {
+                    $bucket6++;
+                } elseif ($age < 65) {
+                    $bucket7++;
+                } else {
+                    $bucket8++;
+                }
+            }
+        }
+
         $chart->getData()->setArrayToDataTable(
             [
                 ['Age Group', 'Count'],
-                ['Dan',  14],
-                ['Jane',  28],
-                ['Jo',  41],
-                ['Pete',  30],
-                ['Stuart',  52],
-                ['Kate', 45],
-                ['Richard',  16],
-                ['Leanne',  26],
-                ['Rosie',  16],
-                ['Tim',  12],
-                ['Dave',  63],
-                ['Clare',  32],
-                ['Anne',  34],
-                ['Otto',  14],
-                ['Si',  40],
+                ['0-10',  $bucket1],
+                ['10-18',  $bucket2],
+                ['18-25',  $bucket3],
+                ['25-35',  $bucket4],
+                ['35-45',  $bucket5],
+                ['45-55',  $bucket6],
+                ['55-65',  $bucket7],
+                ['65+',  $bucket8]
             ]
         );
 
@@ -199,13 +250,30 @@ class ReportController extends Controller
 
     private function buildReturningChart()
     {
+        //Fetch data
+        $em = $this->getDoctrine()->getManager();
+        $members = $em->getRepository('AppBundle:Person')->findAll();
+
+        $new = 0;
+        $returning = 0;
+
+        foreach ($members as $member) {
+            if (sizeof($member->getMemberRegistration()) > 1) {
+                $returning++;
+            } else {
+                $new++;
+            }
+        }
+
+
+
         $chart = new PieChart();
         $chart->getOptions()->setTitle('New vs Returning');
         $chart->getData()->setArrayToDataTable(
             [
                 ['Returning', 'Count'],
-                ['Yes', 125],
-                ['No', 25]
+                ['Yes', $returning],
+                ['No', $new]
             ]
         );
 

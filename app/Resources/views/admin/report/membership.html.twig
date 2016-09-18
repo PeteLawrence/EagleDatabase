@@ -1,0 +1,31 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <h1>Membership Overview</h1>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div id="genderChart"></div>
+        </div>
+        <div class="col-lg-8">
+            <div id="ageChart"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div id="lengthChart"></div>
+        </div>
+        <div class="col-lg-4">
+            <div id="returningChart"></div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        {{ gc_draw(genderChart, 'genderChart') }}
+        {{ gc_draw(ageChart, 'ageChart') }}
+        {{ gc_draw(returningChart, 'returningChart') }}
+    </script>
+{% endblock %}

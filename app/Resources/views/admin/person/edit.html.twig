@@ -87,8 +87,8 @@
                 </thead>
                 {% for registration in person.memberRegistration %}
                     <tr>
-                        <td>{{ registration.start|date('d/m/Y') }}</td>
-                        <td>{{ registration.end|date('d/m/Y') }}</td>
+                        <td>{{ registration.membershipTypePeriod.membershipPeriod.fromDate|date('d/m/Y') }}</td>
+                        <td>{{ registration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</td>
                         <td>{{ registration.membershipTypePeriod.membershipType.type }}</td>
                         <td>
                             <a href="{{ path('admin_memberregistration_edit', { id: registration.id, next: path('person_edit', {id: person.id})})}}"><i class="fa fa-pencil"></i></a>
