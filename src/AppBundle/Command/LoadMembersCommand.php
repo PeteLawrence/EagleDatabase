@@ -25,7 +25,9 @@ class LoadMembersCommand extends ContainerAwareCommand
         //Read in the first line of headers
         $headers = fgetcsv($fh);
 
+        $i = 0;
         while (($data = fgetcsv($fh, 1000, ",")) !== false) {
+            printf('%s %s', $data[1], $data[2]);
             $person = new \AppBundle\Entity\Person;
             $person->setForename($data[1]);
             $person->setSurname($data[2]);
@@ -45,6 +47,8 @@ class LoadMembersCommand extends ContainerAwareCommand
             $person->setMobile($data[10]);
             $person->setDisability(false);
             $person->setNotes($data[16]);
+
+            $person->setGender($data[48]);
 
             $em->persist($person);
         }

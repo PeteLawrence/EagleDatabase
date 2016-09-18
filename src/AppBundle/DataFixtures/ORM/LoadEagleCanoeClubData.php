@@ -53,9 +53,13 @@ class LoadEagleCanoeClubData extends \AppBundle\DataFixtures\EagleFixture implem
     private function loadMembershipPeriods()
     {
         $fixtures = [
+            'membershipPeriod-2015' => [
+                'fromDate' => new \DateTime('2015-04-01'),
+                'toDate' => new \DateTime('2016-03-31')
+            ],
             'membershipPeriod-2016' => [
                 'fromDate' => new \DateTime('2016-04-01'),
-                'toDate' => new \DateTime('2016-03-31')
+                'toDate' => new \DateTime('2017-03-31')
             ],
             'membershipPeriod-2017' => [
                 'fromDate' => new \DateTime('2017-04-01'),
@@ -88,6 +92,21 @@ class LoadEagleCanoeClubData extends \AppBundle\DataFixtures\EagleFixture implem
     private function loadMembershipTypePeriods()
     {
         $fixtures = [
+            'membershipTypePeriod-adult2015' => [
+                'membershipType' => $this->getReference('membershipType-adult'),
+                'membershipPeriod' => $this->getReference('membershipPeriod-2015'),
+                'price' => 75.00
+            ],
+            'membershipTypePeriod-youth2015' => [
+                'membershipType' => $this->getReference('membershipType-youth'),
+                'membershipPeriod' => $this->getReference('membershipPeriod-2015'),
+                'price' => 25.00
+            ],
+            'membershipTypePeriod-coach2015' => [
+                'membershipType' => $this->getReference('membershipType-coach'),
+                'membershipPeriod' => $this->getReference('membershipPeriod-2016'),
+                'price' => 15.00
+            ],
             'membershipTypePeriod-adult2016' => [
                 'membershipType' => $this->getReference('membershipType-adult'),
                 'membershipPeriod' => $this->getReference('membershipPeriod-2016'),
