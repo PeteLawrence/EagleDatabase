@@ -43,6 +43,11 @@
                 </ul>
             {% endif %}
         </nav>
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="flash-notice">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
         {% block body %}{% endblock %}
     </div>
 

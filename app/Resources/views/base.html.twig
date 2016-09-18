@@ -42,6 +42,24 @@
                 {% endif %}
             </ul>
         </nav>
+        
+        {# Flash Messages #}
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="alert alert-success" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashBag.get('warning') %}
+            <div class="alert alert-warning" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="alert alert-danger" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+
         {% block body %}{% endblock %}
     </div>
 
