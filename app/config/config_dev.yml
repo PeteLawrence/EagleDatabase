@@ -30,8 +30,9 @@ monolog:
         #    type:   chromephp
         #    level:  info
 
-#swiftmailer:
-#    delivery_address: me@example.com
+swiftmailer:
+    delivery_address: me@example.com
+    disable_delivery: true
 
 doctrine:
     dbal:

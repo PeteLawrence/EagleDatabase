@@ -38,6 +38,11 @@ class Person implements UserInterface, \Serializable
     private $password;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $passwordResetToken;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $admin;
@@ -803,4 +808,28 @@ class Person implements UserInterface, \Serializable
         dump($name, $value);
         die();
     }*/
+
+    /**
+     * Set passwordResetToken
+     *
+     * @param string $passwordResetToken
+     *
+     * @return Person
+     */
+    public function setPasswordResetToken($passwordResetToken)
+    {
+        $this->passwordResetToken = $passwordResetToken;
+
+        return $this;
+    }
+
+    /**
+     * Get passwordResetToken
+     *
+     * @return string
+     */
+    public function getPasswordResetToken()
+    {
+        return $this->passwordResetToken;
+    }
 }
