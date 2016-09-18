@@ -56,10 +56,13 @@ class LoginController extends Controller
                 $generator = new ComputerPasswordGenerator();
                 $generator->setUppercase()->setLowercase()->setNumbers()->setSymbols(false)->setLength(32);
                 $resetToken = $generator->generatePassword();
+                $now = new \DateTime();
+                $resetTokenExpiry = $now->add(new \DateInterval('PT20M'));
 
                 //Blank the old password, and populate the reset token
                 $person->setPassword(null);
                 $person->setPasswordResetToken($resetToken);
+                $person->setPasswordResetTokenExpiry($resetTokenExpiry);
 
                 $em->flush();
 
@@ -101,9 +104,14 @@ class LoginController extends Controller
 
         // Check that this supplied token matches a user
         $person = $em->getRepository('AppBundle:Person')->findOneByPasswordResetToken($token);
-
         if (!$person) {
             throw $this->createNotFoundException('Token was invalid');
+        }
+
+        //Check that the expiration time hasn't passed
+        $now = new \DateTime();
+        if ($now > $person->getPasswordResetTokenExpiry()) {
+            throw $this->createNotFoundException('Token was out of date');
         }
 
         $form = $this->createNewPasswordForm($token);
@@ -116,6 +124,8 @@ class LoginController extends Controller
             $encodedPassword = $encoder->encodePassword($person, $data['password']);
 
             $person->setPassword($encodedPassword);
+            $person->setPasswordResetToken(null);
+            $person->setPasswordResetTokenExpiry(null);
 
             $em->flush();
 

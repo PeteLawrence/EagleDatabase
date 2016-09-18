@@ -43,6 +43,11 @@ class Person implements UserInterface, \Serializable
     private $passwordResetToken;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $passwordResetTokenExpiry;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $admin;
@@ -831,5 +836,29 @@ class Person implements UserInterface, \Serializable
     public function getPasswordResetToken()
     {
         return $this->passwordResetToken;
+    }
+
+    /**
+     * Set passwordResetTokenExpiry
+     *
+     * @param \DateTime $passwordResetTokenExpiry
+     *
+     * @return Person
+     */
+    public function setPasswordResetTokenExpiry($passwordResetTokenExpiry)
+    {
+        $this->passwordResetTokenExpiry = $passwordResetTokenExpiry;
+
+        return $this;
+    }
+
+    /**
+     * Get passwordResetTokenExpiry
+     *
+     * @return \DateTime
+     */
+    public function getPasswordResetTokenExpiry()
+    {
+        return $this->passwordResetTokenExpiry;
     }
 }
