@@ -164,19 +164,18 @@ class ReportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $members = $em->getRepository('AppBundle:Person')->findAll();
 
+        //Define bins
+        $bins = [
+            [ 'max' => 10, 'count' => 0 ],
+            [ 'max' => 18, 'count' => 0 ],
+            [ 'max' => 25, 'count' => 0 ],
+            [ 'max' => 35, 'count' => 0 ],
+            [ 'max' => 45, 'count' => 0 ],
+            [ 'max' => 55, 'count' => 0 ],
+            [ 'max' => 65, 'count' => 0 ]
+        ];
 
-        $chart = new ColumnChart();
-        $chart->getOptions()->setTitle('Membership by age');
-
-        $bucket1 = 0;
-        $bucket2 = 0;
-        $bucket3 = 0;
-        $bucket4 = 0;
-        $bucket5 = 0;
-        $bucket6 = 0;
-        $bucket7 = 0;
-        $bucket8 = 0;
-
+        //Assign each member to a bin based on their DOB
         foreach ($members as $member) {
             $now = new \DateTime();
             $dob = $member->getDob();
@@ -184,39 +183,23 @@ class ReportController extends Controller
             if ($dob != null) {
                 $age = $dob->diff($now)->y;
 
-                if ($age < 10) {
-                    $bucket1++;
-                } elseif ($age < 18) {
-                    $bucket2++;
-                } elseif ($age < 25) {
-                    $bucket3++;
-                } elseif ($age < 35) {
-                    $bucket4++;
-                } elseif ($age < 45) {
-                    $bucket5++;
-                } elseif ($age < 55) {
-                    $bucket6++;
-                } elseif ($age < 65) {
-                    $bucket7++;
-                } else {
-                    $bucket8++;
+                foreach ($bins as &$bin) {
+                    if ($age < $bin['max']) {
+                        $bin['count']++;
+                        continue 2;
+                    }
                 }
             }
         }
 
-        $chart->getData()->setArrayToDataTable(
-            [
-                ['Age Group', 'Count'],
-                ['0-10',  $bucket1],
-                ['10-18',  $bucket2],
-                ['18-25',  $bucket3],
-                ['25-35',  $bucket4],
-                ['35-45',  $bucket5],
-                ['45-55',  $bucket6],
-                ['55-65',  $bucket7],
-                ['65+',  $bucket8]
-            ]
-        );
+        $data = [['Age Group', 'Count']];
+        foreach ($bins as $bin) {
+            $data[] = [ '<' . $bin['max'], $bin['count']];
+        }
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Membership by age');
+        $chart->getData()->setArrayToDataTable($data);
 
         return $chart;
     }
