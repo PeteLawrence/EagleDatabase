@@ -24,13 +24,14 @@ class CreateAdminCommand extends ContainerAwareCommand
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
 
+        $admin = new \AppBundle\Entity\Person;
 
         //Create a hash of the password
-        $passwordHash = password_hash($input->getArgument('password'), PASSWORD_BCRYPT);
+        $encoder = $this->getContainer()->get('security.password_encoder');
+        $encodedPassword = $encoder->encodePassword($admin, $input->getArgument('password'));
 
-        $admin = new \AppBundle\Entity\Person;
         $admin->setEmail($input->getArgument('email'));
-        $admin->setPassword($passwordHash);
+        $admin->setPassword($encodedPassword);
         $admin->setAdmin(true);
 
         //Persist and flush to DB
