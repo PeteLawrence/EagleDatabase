@@ -16,13 +16,13 @@ class MembershipTypePeriod
     private $id;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * 
      * 
      */
     private $fromDate;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * 
      * 
      */
     private $toDate;
@@ -44,6 +44,8 @@ class MembershipTypePeriod
     private $membershipType;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MembershipPeriod", inversedBy="membershipTypePeriod")
+     * @ORM\JoinColumn(name="membership_period_id", referencedColumnName="id")
      * 
      * 
      */
