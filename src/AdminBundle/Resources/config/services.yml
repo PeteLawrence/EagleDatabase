@@ -2,3 +2,7 @@ services:
 #    admin.example:
 #        class: AdminBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
+
+    eagle_report:
+        class: AdminBundle\Services\ReportService
+        arguments: [ "@doctrine" ]
