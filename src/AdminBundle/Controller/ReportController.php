@@ -95,8 +95,10 @@ class ReportController extends Controller
      */
     public function membershipAction()
     {
+        $reportService = $this->get('eagle_report');
+
         return $this->render('admin/report/membership.html.twig', array(
-            'genderChart' => $this->buildGenderChart(),
+            'genderChart' => $reportService->buildGenderChart(),
             'ageChart' => $this->buildAgeChart(),
             'returningChart' => $this->buildReturningChart(),
         ));
@@ -127,37 +129,6 @@ class ReportController extends Controller
     }
 
 
-    private function buildGenderChart()
-    {
-        //Fetch data
-        $em = $this->getDoctrine()->getManager();
-        $members = $em->getRepository('AppBundle:Person')->findAll();
-
-        $females = 0;
-        $males = 0;
-        foreach ($members as $member) {
-            if ($member->getGender() == 'F') {
-                $females++;
-            } elseif ($member->getGender() == 'M') {
-                $males ++;
-            }
-        }
-
-        //Build the chart object
-        $chart = new PieChart();
-        $chart->getOptions()->setTitle('Membership by gender');
-        $chart->getData()->setArrayToDataTable(
-            [
-                ['Gender', 'Count'],
-                ['Male', $males],
-                ['Female', $females]
-            ]
-        );
-
-        return $chart;
-    }
-
-
     private function buildAgeChart()
     {
         //Fetch data
@@ -166,7 +137,7 @@ class ReportController extends Controller
 
         //Define bins
         $bins = [
-            [ 'max' => 10, 'count' => 0 ],
+            [ 'max' => 12, 'count' => 0 ],
             [ 'max' => 18, 'count' => 0 ],
             [ 'max' => 25, 'count' => 0 ],
             [ 'max' => 35, 'count' => 0 ],
@@ -183,9 +154,14 @@ class ReportController extends Controller
             if ($dob != null) {
                 $age = $dob->diff($now)->y;
 
-                foreach ($bins as &$bin) {
-                    if ($age < $bin['max']) {
-                        $bin['count']++;
+                //Skip members with no DOB set
+                if ($age == 0) {
+                    continue;
+                }
+
+                for ($i = 0; $i < sizeof($bins); $i++) {
+                    if ($age < $bins[$i]['max']) {
+                        $bins[$i]['count']++;
                         continue 2;
                     }
                 }
