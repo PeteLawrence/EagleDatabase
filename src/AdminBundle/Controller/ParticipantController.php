@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Participant;
-use AppBundle\Form\ParticipantType;
 
 /**
  * Participant controller.
@@ -42,7 +41,7 @@ class ParticipantController extends Controller
     public function newAction(Request $request)
     {
         $participant = new Participant();
-        $form = $this->createForm('AppBundle\Form\ParticipantType', $participant);
+        $form = $this->createForm('AppBundle\Form\Type\ParticipantType', $participant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +83,7 @@ class ParticipantController extends Controller
     public function editAction(Request $request, Participant $participant)
     {
         $deleteForm = $this->createDeleteForm($participant);
-        $editForm = $this->createForm('AppBundle\Form\ParticipantType', $participant);
+        $editForm = $this->createForm('AppBundle\Form\Type\ParticipantType', $participant);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

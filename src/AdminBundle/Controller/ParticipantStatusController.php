@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\ParticipantStatus;
-use AppBundle\Form\ParticipantStatusType;
 
 /**
  * ParticipantStatus controller.
@@ -42,7 +41,7 @@ class ParticipantStatusController extends Controller
     public function newAction(Request $request)
     {
         $participantStatus = new ParticipantStatus();
-        $form = $this->createForm('AppBundle\Form\ParticipantStatusType', $participantStatus);
+        $form = $this->createForm('AppBundle\Form\Type\ParticipantStatusType', $participantStatus);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +83,7 @@ class ParticipantStatusController extends Controller
     public function editAction(Request $request, ParticipantStatus $participantStatus)
     {
         $deleteForm = $this->createDeleteForm($participantStatus);
-        $editForm = $this->createForm('AppBundle\Form\ParticipantStatusType', $participantStatus);
+        $editForm = $this->createForm('AppBundle\Form\Type\ParticipantStatusType', $participantStatus);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

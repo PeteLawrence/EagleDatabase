@@ -3,15 +3,12 @@
 namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Activity;
 use AppBundle\Entity\ManagedActivity;
 use AppBundle\Entity\UnmanagedActivity;
-use AppBundle\Entity\Participant;
-use AppBundle\Form\ManagedActivityType;
 
 /**
  * Activity controller.
@@ -47,10 +44,10 @@ class ActivityController extends Controller
     {
         if ($request->get('type') == 'unmanaged') {
             $activity = new UnmanagedActivity();
-            $form = $this->createForm('AppBundle\Form\UnmanagedActivityType', $activity);
+            $form = $this->createForm('AppBundle\Form\Type\UnmanagedActivityType', $activity);
         } else {
             $activity = new ManagedActivity();
-            $form = $this->createForm('AppBundle\Form\ManagedActivityType', $activity);
+            $form = $this->createForm('AppBundle\Form\Type\ManagedActivityType', $activity);
         }
 
         $form->handleRequest($request);
@@ -104,9 +101,9 @@ class ActivityController extends Controller
         $deleteForm = $this->createDeleteForm($activity);
 
         if ($activity instanceof UnmanagedActivity) {
-            $editForm = $this->createForm('AppBundle\Form\UnmanagedActivityType', $activity);
+            $editForm = $this->createForm('AppBundle\Form\Type\UnmanagedActivityType', $activity);
         } else {
-            $editForm = $this->createForm('AppBundle\Form\ManagedActivityType', $activity);
+            $editForm = $this->createForm('AppBundle\Form\Type\ManagedActivityType', $activity);
         }
         $editForm->handleRequest($request);
 

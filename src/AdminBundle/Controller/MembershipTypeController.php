@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\MembershipType;
-use AppBundle\Form\MembershipTypeType;
 
 /**
  * MembershipType controller.
@@ -42,7 +41,7 @@ class MembershipTypeController extends Controller
     public function newAction(Request $request)
     {
         $membershipType = new MembershipType();
-        $form = $this->createForm('AppBundle\Form\MembershipTypeType', $membershipType);
+        $form = $this->createForm('AppBundle\Form\Type\MembershipTypeType', $membershipType);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +83,7 @@ class MembershipTypeController extends Controller
     public function editAction(Request $request, MembershipType $membershipType)
     {
         $deleteForm = $this->createDeleteForm($membershipType);
-        $editForm = $this->createForm('AppBundle\Form\MembershipTypeType', $membershipType);
+        $editForm = $this->createForm('AppBundle\Form\Type\MembershipTypeType', $membershipType);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

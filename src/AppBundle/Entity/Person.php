@@ -794,25 +794,10 @@ class Person implements UserInterface, \Serializable
                 }
             }
         }
-        //die();
 
         return 'DEFAULT';
     }
 
-
-    /*public function __set($name, $value)
-    {
-        if (isset($name)) {
-            foreach ($this->getPersonAttribute() as $personAttribute) {
-
-            }
-
-            //Look up atribute type
-            $
-        }
-        dump($name, $value);
-        die();
-    }*/
 
     /**
      * Set passwordResetToken

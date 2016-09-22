@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Qualification;
-use AppBundle\Form\QualificationType;
 
 /**
  * Qualification controller.
@@ -42,7 +41,7 @@ class QualificationController extends Controller
     public function newAction(Request $request)
     {
         $qualification = new Qualification();
-        $form = $this->createForm('AppBundle\Form\QualificationType', $qualification);
+        $form = $this->createForm('AppBundle\Form\Type\QualificationType', $qualification);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +83,7 @@ class QualificationController extends Controller
     public function editAction(Request $request, Qualification $qualification)
     {
         $deleteForm = $this->createDeleteForm($qualification);
-        $editForm = $this->createForm('AppBundle\Form\QualificationType', $qualification);
+        $editForm = $this->createForm('AppBundle\Form\Type\QualificationType', $qualification);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
