@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Entity\Activity;
 use AppBundle\Entity\Participant;
+use AppBundle\Entity\Person;
 
 class SignInController extends Controller
 {
@@ -22,7 +23,7 @@ class SignInController extends Controller
     {
         //Check to see if the signin key is valid
         $signInKey = $request->get('key');
-        if ($signInKey == null or $signInKey != $activity->getSigninKey()) {
+        if ($signInKey === null || $signInKey != $activity->getSigninKey()) {
             throw $this->createAccessDeniedException('Sign In Key was invalid');
         }
 
@@ -59,7 +60,7 @@ class SignInController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('signin_show', array('id' => $activity->getId(), 'key' => $activity->getSigninKey())))
             ->setMethod('POST')
-            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function ($a) { return $a->getForename() . ' ' . $a->getSurname(); }, 'placeholder' => '' ])
+            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); }, 'placeholder' => '' ])
             ->add('participantRole', EntityType::class, ['class' => 'AppBundle:ParticipantRole', 'choice_label' => 'role', 'label' => 'Role'])
             ->getForm()
         ;

@@ -16,3 +16,4 @@
 /web/bundles/
 .DS_Store
 app/data.sqlite
+/web/config.php
