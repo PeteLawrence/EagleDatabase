@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome {{ app.user.forename }}!</h1>
+
+
+    </div>
+
+
+    <div class="card-deck-wrapper">
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Your Membership</strong>
+                </div>
+                <div class="card-block">
+                    <p class="card-text">
+                        {% if app.user.currentMemberRegistration %}
+                            You are currently registered with Eagle Canoe Club as a <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }}</strong> until <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</strong>.
+                        {% endif %}
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <strong>Your Next Trip</strong>
+                </div>
+                <div class="card-block">
+                    <p class="card-text"><em>You're not signed up to any upcoming trips :(</em></p>
+                    <a href="#" class="btn btn-primary">View upcoming trips</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

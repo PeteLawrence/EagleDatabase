@@ -708,7 +708,7 @@ class Person implements UserInterface, \Serializable
         $now = new \DateTime();
 
         foreach ($this->memberRegistration as $memberRegistration) {
-            if ($memberRegistration->fromDate < $now && $memberRegistration->toDate > $now) {
+            if ($memberRegistration->getMembershipTypePeriod()->getMembershipPeriod()->getFromDate() < $now && $memberRegistration->getMembershipTypePeriod()->getMembershipPeriod()->getToDate() > $now) {
                 return $memberRegistration;
             }
         }
