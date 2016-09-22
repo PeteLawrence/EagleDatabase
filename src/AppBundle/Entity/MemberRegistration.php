@@ -26,12 +26,6 @@ class MemberRegistration
     private $end;
 
     /**
-     *
-     *
-     */
-    private $membershipType;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person", inversedBy="memberRegistration")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
