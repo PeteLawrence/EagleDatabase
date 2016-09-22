@@ -15,14 +15,8 @@
             <tr>
                 <td>{{ location.name }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_location_show', { 'id': location.id }) }}" class="btn">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_location_edit', { 'id': location.id }) }}" class="btn">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('admin_location_edit', { 'id': location.id }) }}" class="btn"><i class="fa fa-pencil"></i></a>
+                    <a href="http://maps.google.com/maps?z=12&t=m&q=loc:{{ location.longitude }}+{{ location.latitude}}" target="_blank"><i class="fa fa-map"></i></a>
                 </td>
             </tr>
         {% endfor %}
