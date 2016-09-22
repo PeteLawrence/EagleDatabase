@@ -7,6 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use AppBundle\Entity\Person;
+use AppBundle\Entity\MembershipTypePeriod;
 
 class MemberRegistrationType extends AbstractType
 {
@@ -17,8 +19,8 @@ class MemberRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function ($a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
-            ->add('membershipTypePeriod', EntityType::class, ['class' => 'AppBundle:MembershipTypePeriod', 'choice_label' => function ($a) { return sprintf('%s %s → %s £%s', $a->getMembershipType()->getType(), $a->getMembershipPeriod()->getFromDate()->format('d-m-Y'), $a->getMembershipPeriod()->getToDate()->format('d-m-Y'), $a->getPrice()); } ])
+            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
+            ->add('membershipTypePeriod', EntityType::class, ['class' => 'AppBundle:MembershipTypePeriod', 'choice_label' => function (MembershipTypePeriod $a) { return sprintf('%s %s → %s £%s', $a->getMembershipType()->getType(), $a->getMembershipPeriod()->getFromDate()->format('d-m-Y'), $a->getMembershipPeriod()->getToDate()->format('d-m-Y'), $a->getPrice()); } ])
 
         ;
     }

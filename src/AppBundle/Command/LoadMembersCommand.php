@@ -23,7 +23,7 @@ class LoadMembersCommand extends ContainerAwareCommand
         $fh = fopen($input->getArgument('file'), 'r');
 
         //Read in the first line of headers
-        $headers = fgetcsv($fh);
+        fgetcsv($fh);
 
         $i = 0;
         while (($data = fgetcsv($fh, 1000, ",")) !== false) {

@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use AppBundle\Entity\Person;
 
 class MemberQualificationType extends AbstractType
 {
@@ -19,7 +20,7 @@ class MemberQualificationType extends AbstractType
         $builder
             ->add('expiration', DateType::class, [ 'html5' => true, 'widget' => 'single_text' ])
             ->add('qualification', EntityType::class, ['class' => 'AppBundle:Qualification', 'choice_label' => 'name' ])
-            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function ($a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
+            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
         ;
     }
 

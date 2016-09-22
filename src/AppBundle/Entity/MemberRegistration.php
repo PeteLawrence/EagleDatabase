@@ -26,18 +26,8 @@ class MemberRegistration
     private $end;
 
     /**
-     * 
-     */
-    private $year;
-
-    /**
-     * 
-     */
-    private $paid;
-
-    /**
-     * 
-     * 
+     *
+     *
      */
     private $membershipType;
 
@@ -52,12 +42,6 @@ class MemberRegistration
      * @ORM\JoinColumn(name="membership_type_period_id", referencedColumnName="id")
      */
     private $membershipTypePeriod;
-
-    /**
-     *
-     *
-     */
-    private $member;
 
 
     public function __construct()
