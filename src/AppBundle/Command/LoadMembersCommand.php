@@ -25,7 +25,6 @@ class LoadMembersCommand extends ContainerAwareCommand
         //Read in the first line of headers
         fgetcsv($fh);
 
-        $i = 0;
         while (($data = fgetcsv($fh, 1000, ",")) !== false) {
             printf('%s %s', $data[1], $data[2]);
             $person = new \AppBundle\Entity\Person;

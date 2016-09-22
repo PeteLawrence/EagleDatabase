@@ -150,7 +150,8 @@ class ReportController extends Controller
                     continue;
                 }
 
-                for ($i = 0; $i < sizeof($bins); $i++) {
+                $binCount = sizeof($bins);
+                for ($i = 0; $i < $binCount; $i++) {
                     if ($age < $bins[$i]['max']) {
                         $bins[$i]['count']++;
                         continue 2;
