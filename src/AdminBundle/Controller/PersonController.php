@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Person;
-use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
+use AppBundle\Form\Type\PersonType;
 
 /**
  * Person controller.
