@@ -151,7 +151,7 @@ class ReportController extends Controller
             $now = new \DateTime();
             $dob = $member->getDob();
 
-            if ($dob != null) {
+            if ($dob !== null) {
                 $age = $dob->diff($now)->y;
 
                 //Skip members with no DOB set

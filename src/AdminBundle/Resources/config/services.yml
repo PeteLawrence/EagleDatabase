@@ -5,4 +5,4 @@ services:
 
     eagle_report:
         class: AdminBundle\Services\ReportService
-        arguments: [ "@doctrine" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]

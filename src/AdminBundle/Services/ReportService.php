@@ -6,14 +6,15 @@ use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\Histogram;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use Doctrine\ORM\EntityManager;
 
 class ReportService
 {
     private $em;
 
-    public function __construct($doctrine)
+    public function __construct(EntityManager $em)
     {
-        $this->em = $doctrine->getManager();
+        $this->em = $em;
     }
 
 
