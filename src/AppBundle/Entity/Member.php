@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -28,12 +29,12 @@ class Member extends \AppBundle\Entity\Person
     private $bcuMembershipNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberQualification", mappedBy="member")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberQualification", mappedBy="person")
      */
     private $qualification;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistration", mappedBy="member")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistration", mappedBy="person")
      */
     private $memberRegistration;
     /**
