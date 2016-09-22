@@ -34,7 +34,13 @@ class CalendarController extends Controller
             $event->setDtEnd($activity->getActivityEnd());
             $event->setSummary($activity->getName());
             $event->setDescription($activity->getDescription());
-            //$event->setLocation("Eagle Canoe Club\nHelford Street\nNorwich\nNR2 4LY", 'Eagle Canoe Club', '52.641306,1.278076');
+            if ($activity->getLocation()) {
+                $event->setLocation(
+                    str_replace(',', "\n", $activity->getLocation()->getAddress() . ', ' . $activity->getLocation()->getPostcode()),
+                    $activity->getLocation()->getName(),
+                    sprintf('%s,%s', $activity->getLocation()->getLongitude(), $activity->getLocation()->getLatitude())
+                );
+            }
 
             //Add the event to the calendar
             $cal->addComponent($event);
