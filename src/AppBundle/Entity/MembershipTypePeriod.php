@@ -16,18 +16,6 @@ class MembershipTypePeriod
     private $id;
 
     /**
-     * 
-     * 
-     */
-    private $fromDate;
-
-    /**
-     * 
-     * 
-     */
-    private $toDate;
-
-    /**
      * @ORM\Column(type="decimal", nullable=true)
      */
     private $price;
@@ -46,8 +34,8 @@ class MembershipTypePeriod
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MembershipPeriod", inversedBy="membershipTypePeriod")
      * @ORM\JoinColumn(name="membership_period_id", referencedColumnName="id")
-     * 
-     * 
+     *
+     *
      */
     private $membershipPeriod;
     /**
@@ -150,53 +138,6 @@ class MembershipTypePeriod
         return $this->membershipType;
     }
 
-    /**
-     * Set fromDate
-     *
-     * @param \DateTime $fromDate
-     *
-     * @return MembershipTypePeriod
-     */
-    public function setFromDate($fromDate)
-    {
-        $this->fromDate = $fromDate;
-
-        return $this;
-    }
-
-    /**
-     * Get fromDate
-     *
-     * @return \DateTime
-     */
-    public function getFromDate()
-    {
-        return $this->fromDate;
-    }
-
-    /**
-     * Set toDate
-     *
-     * @param \DateTime $toDate
-     *
-     * @return MembershipTypePeriod
-     */
-    public function setToDate($toDate)
-    {
-        $this->toDate = $toDate;
-
-        return $this;
-    }
-
-    /**
-     * Get toDate
-     *
-     * @return \DateTime
-     */
-    public function getToDate()
-    {
-        return $this->toDate;
-    }
 
     /**
      * Set membershipPeriod
