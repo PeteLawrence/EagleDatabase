@@ -28,7 +28,7 @@ class ManagedActivityType extends AbstractType
             ->add('signupEnd', DateTimeType::class, [ 'required' => false, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
             ->add('activityType', EntityType::class, ['class' => 'AppBundle:ActivityType', 'choice_label' => 'type' ])
             ->add('organiser', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
-            //->add('location')
+            ->add('location', EntityType::class, ['class' => 'AppBundle:Location', 'choice_label' => 'name' ])
         ;
     }
 
