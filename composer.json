@@ -5,10 +5,11 @@
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
         "psr-4": { "": "src/" },
-        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+        "files": ["app/AppKernel.php"]
     },
     "autoload-dev": {
-        "psr-4": { "Tests\\": "tests/" }
+        "psr-4": { "": "src/" },
+        "files": ["app/AppKernel.php"]
     },
     "require": {
         "php": ">=5.5.9",

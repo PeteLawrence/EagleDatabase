@@ -13,14 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PersonType extends AbstractType
 {
-    private $em;
-
-    public function __construct($em)
-    {
-        $this->em = $em;
-    }
-
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
