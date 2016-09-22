@@ -31,7 +31,6 @@ class PersonType extends AbstractType
             ->add('forename', TextType::class, [ 'attr' => ['placeholder' => 'Forename(s)'] ])
             ->add('surname', TextType::class, [ 'attr' => ['placeholder' => 'Surname'] ])
             ->add('email', EmailType::class, [ 'attr' => ['placeholder' => 'Email Address'] ])
-            //->add('password')
             ->add('admin')
             ->add('gender', ChoiceType::class, [ 'choices' => [ 'Female' => 'F', 'Male' => 'M'] ])
             ->add('dob', BirthdayType::class, [ 'html5' => true, 'widget' => 'single_text', 'label' => 'D.o.B' ])
@@ -45,16 +44,6 @@ class PersonType extends AbstractType
             ->add('disability')
             ->add('notes', TextareaType::class)
         ;
-
-        $attributes = $this->em->getRepository('AppBundle:Attribute')->findAll();
-        foreach ($attributes as $attribute) {
-            $builder->add($attribute->getCode(), TextareaType::class);
-        }
-        /*if (is_array($options['data']->getPersonAttribute())) {
-            foreach ($options['data']->getPersonAttribute() as $personAttribute) {
-                $builder->add($personAttribute->getAttribute()->getCode(), TextareaType::class);
-            }
-        }*/
     }
 
     /**

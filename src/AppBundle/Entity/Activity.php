@@ -276,7 +276,7 @@ abstract class Activity
 
 
 
-    public function getNumberOfPeople($type = '')
+    public function getNumberOfPeople()
     {
         $people = 0;
         foreach ($this->getParticipant() as $participant) {
