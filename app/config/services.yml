@@ -3,7 +3,7 @@ parameters:
 
 services:
     app.form.person:
-        class: AppBundle\Form\PersonType
+        class: AppBundle\Form\Type\PersonType
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: app.form.person }

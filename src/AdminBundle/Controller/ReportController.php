@@ -2,19 +2,10 @@
 
 namespace AdminBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use AppBundle\Entity\Activity;
-use AppBundle\Entity\ManagedActivity;
-use AppBundle\Entity\UnmanagedActivity;
-use AppBundle\Entity\Participant;
-use AppBundle\Form\ManagedActivityType;
-use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
-use CMEN\GoogleChartsBundle\GoogleCharts\Charts\Histogram;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 
 /**
@@ -243,7 +234,6 @@ class ReportController extends Controller
     {
         $chart = new PieChart();
         $chart->getOptions()->setTitle('Visits');
-        //$chart->getOptions()->setIsStacked(true);
         $chart->getData()->setArrayToDataTable(
             [
                 ['Type', 'Visits'],
@@ -257,14 +247,6 @@ class ReportController extends Controller
                 ['Horstead', 42],
             ]
         );
-        /*$chart->getData()->setArrayToDataTable(
-            [
-                ['Year', 'Wednesday Night', 'Friday Night Paddle', 'Whitewater weekend', 'Touring weekend'],
-                ['2014', 1002, 129, 42, 45],
-                ['2015', 1043, 132, 89, 75],
-                ['2016', 1098, 120, 143, 98]
-            ]
-        );*/
         $chart->getOptions()->setWidth(350);
 
         return $chart;
@@ -290,14 +272,7 @@ class ReportController extends Controller
                     ['Horstead', 26, 14],
                 ]
             );
-            /*$chart->getData()->setArrayToDataTable(
-                [
-                    ['Year', 'Wednesday Night', 'Friday Night Paddle', 'Whitewater weekend', 'Touring weekend'],
-                    ['2014', 1002, 129, 42, 45],
-                    ['2015', 1043, 132, 89, 75],
-                    ['2016', 1098, 120, 143, 98]
-                ]
-            );*/
+
         $chart->getOptions()->setWidth(730);
 
         return $chart;
@@ -308,7 +283,6 @@ class ReportController extends Controller
     {
         $chart = new ColumnChart();
         $chart->getOptions()->setTitle('Qualifications');
-        //$chart->getOptions()->setIsStacked(true);
         $chart->getData()->setArrayToDataTable(
             [
                 ['Type', 'Members'],

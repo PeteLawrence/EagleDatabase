@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Activity;
 use AppBundle\Entity\Participant;
-use AppBundle\Form\ActivityType;
 
 /**
  * Activity controller.
@@ -42,7 +41,7 @@ class ActivityParticipantController extends Controller
         $participant = new Participant();
         $participant->setActivity($activity);
 
-        $form = $this->createForm('AppBundle\Form\ParticipantType', $participant);
+        $form = $this->createForm('AppBundle\Form\Type\ParticipantType', $participant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -91,7 +90,7 @@ class ActivityParticipantController extends Controller
         $participant = $em->getRepository('AppBundle:Participant')->findOneById($pid);
 
         $deleteForm = $this->createDeleteForm($participant);
-        $editForm = $this->createForm('AppBundle\Form\Participant', $participant);
+        $editForm = $this->createForm('AppBundle\Form\Type\Participant', $participant);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

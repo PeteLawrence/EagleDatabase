@@ -2,9 +2,6 @@
 
 namespace AdminBundle\Services;
 
-use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
-use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
-use CMEN\GoogleChartsBundle\GoogleCharts\Charts\Histogram;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use Doctrine\ORM\EntityManager;
 

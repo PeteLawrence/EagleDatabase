@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\ActivityType;
-use AppBundle\Form\ActivityTypeType;
 
 /**
  * ActivityType controller.
@@ -42,7 +41,7 @@ class ActivityTypeController extends Controller
     public function newAction(Request $request)
     {
         $activityType = new ActivityType();
-        $form = $this->createForm('AppBundle\Form\ActivityTypeType', $activityType);
+        $form = $this->createForm('AppBundle\Form\Type\ActivityTypeType', $activityType);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +83,7 @@ class ActivityTypeController extends Controller
     public function editAction(Request $request, ActivityType $activityType)
     {
         $deleteForm = $this->createDeleteForm($activityType);
-        $editForm = $this->createForm('AppBundle\Form\ActivityTypeType', $activityType);
+        $editForm = $this->createForm('AppBundle\Form\Type\ActivityTypeType', $activityType);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

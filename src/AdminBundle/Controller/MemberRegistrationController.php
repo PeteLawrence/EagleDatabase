@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\MemberRegistration;
-use AppBundle\Form\MemberRegistrationType;
 
 /**
  * MemberRegistration controller.
@@ -42,7 +41,7 @@ class MemberRegistrationController extends Controller
     public function newAction(Request $request)
     {
         $memberRegistration = new MemberRegistration();
-        $form = $this->createForm('AppBundle\Form\MemberRegistrationType', $memberRegistration);
+        $form = $this->createForm('AppBundle\Form\Type\MemberRegistrationType', $memberRegistration);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +83,7 @@ class MemberRegistrationController extends Controller
     public function editAction(Request $request, MemberRegistration $memberRegistration)
     {
         $deleteForm = $this->createDeleteForm($memberRegistration);
-        $editForm = $this->createForm('AppBundle\Form\MemberRegistrationType', $memberRegistration);
+        $editForm = $this->createForm('AppBundle\Form\Type\MemberRegistrationType', $memberRegistration);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

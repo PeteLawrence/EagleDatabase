@@ -8,9 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Attribute;
 use AppBundle\Entity\AttributeBoolean;
-use AppBundle\Entity\AttributeNumber;
-use AppBundle\Entity\AttributeText;
-use AppBundle\Form\AttributeBooleanType;
 
 /**
  * Attribute controller.
@@ -47,7 +44,7 @@ class AttributeController extends Controller
     {
         $attribute = new Attribute();
 
-        $form = $this->createForm('AppBundle\Form\AttributeType', $attribute);
+        $form = $this->createForm('AppBundle\Form\Type\AttributeType', $attribute);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -73,7 +70,7 @@ class AttributeController extends Controller
      */
     public function editAction(Request $request, Attribute $attribute)
     {
-        $editForm = $this->createForm('AppBundle\Form\AttributeType', $attribute);
+        $editForm = $this->createForm('AppBundle\Form\Type\AttributeType', $attribute);
         $deleteForm = $this->createDeleteForm($attribute);
 
         $editForm->handleRequest($request);

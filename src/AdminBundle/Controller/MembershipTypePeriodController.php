@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\MembershipTypePeriod;
-use AppBundle\Form\MembershipTypePeriodType;
 
 /**
  * MembershipTypePeriod controller.
@@ -42,7 +41,7 @@ class MembershipTypePeriodController extends Controller
     public function newAction(Request $request)
     {
         $membershipTypePeriod = new MembershipTypePeriod();
-        $form = $this->createForm('AppBundle\Form\MembershipTypePeriodType', $membershipTypePeriod);
+        $form = $this->createForm('AppBundle\Form\Type\MembershipTypePeriodType', $membershipTypePeriod);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +83,7 @@ class MembershipTypePeriodController extends Controller
     public function editAction(Request $request, MembershipTypePeriod $membershipTypePeriod)
     {
         $deleteForm = $this->createDeleteForm($membershipTypePeriod);
-        $editForm = $this->createForm('AppBundle\Form\MembershipTypePeriodType', $membershipTypePeriod);
+        $editForm = $this->createForm('AppBundle\Form\Type\MembershipTypePeriodType', $membershipTypePeriod);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

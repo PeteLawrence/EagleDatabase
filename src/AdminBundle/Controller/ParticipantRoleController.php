@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\ParticipantRole;
-use AppBundle\Form\ParticipantRoleType;
 
 /**
  * ParticipantRole controller.
@@ -42,7 +41,7 @@ class ParticipantRoleController extends Controller
     public function newAction(Request $request)
     {
         $participantRole = new ParticipantRole();
-        $form = $this->createForm('AppBundle\Form\ParticipantRoleType', $participantRole);
+        $form = $this->createForm('AppBundle\Form\Type\ParticipantRoleType', $participantRole);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +83,7 @@ class ParticipantRoleController extends Controller
     public function editAction(Request $request, ParticipantRole $participantRole)
     {
         $deleteForm = $this->createDeleteForm($participantRole);
-        $editForm = $this->createForm('AppBundle\Form\ParticipantRoleType', $participantRole);
+        $editForm = $this->createForm('AppBundle\Form\Type\ParticipantRoleType', $participantRole);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
