@@ -30,7 +30,7 @@
                         <p class="card-text">
                             Your membership has expired.
                         </p>
-                        <a href="#" class="btn btn-primary pull-right">Register</a>
+                        <a href="#" class="btn btn-primary">Register</a>
                     </div>
                 </div>
             {% endif %}
@@ -41,7 +41,8 @@
                 </div>
                 <div class="card-block">
                     <p class="card-text"><em>You're not signed up to any upcoming trips :(</em></p>
-                    <a href="#" class="btn btn-primary pull-right">View upcoming trips</a>
+                    <a href="{{ path('account_activities')}}" class="btn btn-primary" role="button">View trip history</a>
+                    <a href="#" class="btn btn-primary" role="button">View upcoming trips</a>
                 </div>
 
             </div>
