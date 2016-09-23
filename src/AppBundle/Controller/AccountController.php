@@ -26,6 +26,16 @@ class AccountController extends Controller
 
 
     /**
+     * @Route("/activities", name="account_activities")
+     */
+    public function activitiesAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('account/activities.html.twig');
+    }
+
+
+    /**
      * @Route("/edit", name="account_edit")
      */
     public function editAction(Request $request)

@@ -39,7 +39,7 @@ class ActivityParticipantController extends Controller
     public function newAction(Request $request, Activity $activity)
     {
         $participant = new Participant();
-        $participant->setActivity($activity);
+        $participant->setManagedActivity($activity);
 
         $form = $this->createForm('AppBundle\Form\Type\ParticipantType', $participant);
         $form->handleRequest($request);
