@@ -26,7 +26,10 @@ security:
             logout:
                 path:   /logout
                 target: /
+            remember_me:
+                secret: '%secret%'
+                lifetime: 31536000
 
     access_control:
-        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/account, roles: IS_AUTHENTICATED_FULLY }
