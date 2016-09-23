@@ -10,6 +10,11 @@ class LoadEagleCanoeClubData extends \AppBundle\DataFixtures\EagleFixture implem
 {
     private $manager;
 
+    public function getOrder()
+    {
+        return 1;
+    }
+
     public function load(ObjectManager $manager)
     {
         $this->manager = $manager;
@@ -21,6 +26,7 @@ class LoadEagleCanoeClubData extends \AppBundle\DataFixtures\EagleFixture implem
         $this->loadParticipantRoles();
         $this->loadParticipantStatuses();
         $this->loadQualifications();
+        $this->loadLocations();
 
         $this->manager->flush();
     }
@@ -182,5 +188,28 @@ class LoadEagleCanoeClubData extends \AppBundle\DataFixtures\EagleFixture implem
         ];
 
         $this->loadFromArray('\AppBundle\Entity\Qualification', $fixtures, $this->manager);
+    }
+
+
+    private function loadLocations()
+    {
+        $locations = [
+            'location-eaglecanoecentre' => [
+                'name' => 'Eagle Canoe Club',
+                'address' => 'Eagle Canoe Club,Helford Street,Norwich',
+                'postcode' => 'NR2 4LY',
+                'longitude' => 52.6407772,
+                'latitude' => 1.2780431
+            ],
+            'location-bartonbroad' => [
+                'name' => 'Barton Broad',
+                'address' => 'Gays Staithe,Irstead',
+                'postcode' => 'NR12 8XP',
+                'longitude' => 52.6407772,
+                'latitude' => 1.2780431
+            ]
+        ];
+
+        $this->loadFromArray('\AppBundle\Entity\Location', $locations, $this->manager);
     }
 }
