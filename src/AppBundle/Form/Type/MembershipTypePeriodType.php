@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use AppBundle\Entity\MembershipTypePeriod;
+use AppBundle\Entity\MembershipPeriod;
 
 class MembershipTypePeriodType extends AbstractType
 {
@@ -19,7 +19,7 @@ class MembershipTypePeriodType extends AbstractType
     {
         $builder
             ->add('membershipType', EntityType::class, ['class' => 'AppBundle:MembershipType', 'choice_label' => 'type'])
-            ->add('membershipPeriod', EntityType::class, ['class' => 'AppBundle:MembershipPeriod', 'choice_label' => function (MembershipTypePeriod $a) {
+            ->add('membershipPeriod', EntityType::class, ['class' => 'AppBundle:MembershipPeriod', 'choice_label' => function (MembershipPeriod $a) {
                 return sprintf('%s → %s', $a->getFromDate()->format('d/m/Y'), $a->getToDate()->format('d/m/Y'));
             }])
             ->add('price', MoneyType::class, [ 'currency' => 'GBP' ])
