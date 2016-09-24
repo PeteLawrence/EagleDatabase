@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="jumbotron">
-        <h1 class="display-4">Welcome {{ app.user.forename }}!</h1>
 
+    <nav class="breadcrumb">
+      <a class="breadcrumb-item" href="/">Home</a>
+      <span class="breadcrumb-item active">Account</span>
+    </nav>
 
-    </div>
-
+    <h1>Welcome {{ app.user.forename }}!</h1>
 
     <div class="card-deck-wrapper">
         <div class="card-deck">
