@@ -16,12 +16,17 @@ class MemberRegistration
     private $id;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $registrationDateTime;
+
+    /**
+     * 
      */
     private $start;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * 
      */
     private $end;
 
@@ -196,5 +201,29 @@ class MemberRegistration
     public function getMembershipTypePeriod()
     {
         return $this->membershipTypePeriod;
+    }
+
+    /**
+     * Set registrationDateTime
+     *
+     * @param \DateTime $registrationDateTime
+     *
+     * @return MemberRegistration
+     */
+    public function setRegistrationDateTime($registrationDateTime)
+    {
+        $this->registrationDateTime = $registrationDateTime;
+
+        return $this;
+    }
+
+    /**
+     * Get registrationDateTime
+     *
+     * @return \DateTime
+     */
+    public function getRegistrationDateTime()
+    {
+        return $this->registrationDateTime;
     }
 }
