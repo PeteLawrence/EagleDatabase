@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <a class="breadcrumb-item" href="{{ path('account_membership') }}">Membership</a>
+        <span class="breadcrumb-item active">Renew</span>
+    </nav>
+
+    <h2>Renew</h2>
+
+    <form action="{{ path('stripe_callback') }}" method="POST">
+    <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_ovdzB6SmvWmscsux2sNGYbkz"
+        data-amount="7500"
+        data-name="Eagle DB"
+        data-description="Membership"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto"
+        data-zip-code="true"
+        data-currency="gbp"
+        data-email="{{ app.user.email }}">
+    </script>
+    </form>
+
+
+{% endblock %}

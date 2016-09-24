@@ -36,6 +36,26 @@ class AccountController extends Controller
 
 
     /**
+     * @Route("/membership", name="account_membership")
+     */
+    public function membershipAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('account/membership.html.twig');
+    }
+
+
+    /**
+     * @Route("/membership/renew", name="account_membership_renew")
+     */
+    public function membershipRenewAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('account/renew.html.twig');
+    }
+
+
+    /**
      * @Route("/edit", name="account_edit")
      */
     public function editAction(Request $request)

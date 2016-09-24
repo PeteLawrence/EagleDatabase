@@ -45,6 +45,8 @@ class MemberRegistrationController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $memberRegistration->setRegistrationDateTime(new \DateTime());
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($memberRegistration);
             $em->flush();

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <span class="breadcrumb-item active">Membership</span>
+    </nav>
+
+    <h2>Membership History</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Registered</th>
+                <th>Dates</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registration in app.user.memberRegistration %}
+                <tr>
+                    <td>{{ registration.registrationDateTime|date('d M Y H:i') }}</td>
+                    <td>{{ registration.membershipTypePeriod.membershipPeriod.fromDate|date('d M Y')}} - {{ registration.membershipTypePeriod.membershipPeriod.toDate|date('d M Y')}}</td>
+                    <td>{{ registration.membershipTypePeriod.membershipType.type }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
