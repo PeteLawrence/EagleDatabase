@@ -11,20 +11,26 @@
 
     <h2>Renew</h2>
 
-    <form action="{{ path('stripe_callback') }}" method="POST">
-    <script
-        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="pk_test_ovdzB6SmvWmscsux2sNGYbkz"
-        data-amount="7500"
-        data-name="Eagle DB"
-        data-description="Membership"
-        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-        data-locale="auto"
-        data-zip-code="true"
-        data-currency="gbp"
-        data-email="{{ app.user.email }}">
-    </script>
-    </form>
+    {{ form_start(renewForm) }}
+        <div class="form-group row">
+            <label for="example-text-input" class="col-xs-2 col-form-label">Membership Type</label>
+            <div class="col-xs-4">
+                {{ form_widget(renewForm.membershipType) }}
+            </div>
+        </div>
 
+        <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_ovdzB6SmvWmscsux2sNGYbkz"
+            data-amount="7500"
+            data-name="Eagle DB"
+            data-description="Membership"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto"
+            data-zip-code="true"
+            data-currency="gbp"
+            data-email="{{ app.user.email }}">
+        </script>
+    {{ form_end(renewForm) }}
 
 {% endblock %}
