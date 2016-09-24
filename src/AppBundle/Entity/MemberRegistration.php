@@ -21,16 +21,6 @@ class MemberRegistration
     private $registrationDateTime;
 
     /**
-     * 
-     */
-    private $start;
-
-    /**
-     * 
-     */
-    private $end;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person", inversedBy="memberRegistration")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
@@ -60,54 +50,6 @@ class MemberRegistration
     }
 
     /**
-     * Set year
-     *
-     * @param integer $year
-     *
-     * @return MemberRegistration
-     */
-    public function setYear($year)
-    {
-        $this->year = $year;
-
-        return $this;
-    }
-
-    /**
-     * Get year
-     *
-     * @return integer
-     */
-    public function getYear()
-    {
-        return $this->year;
-    }
-
-    /**
-     * Set membershipType
-     *
-     * @param \AppBundle\Entity\MembershipType $membershipType
-     *
-     * @return MemberRegistration
-     */
-    public function setMembershipType(\AppBundle\Entity\MembershipType $membershipType = null)
-    {
-        $this->membershipType = $membershipType;
-
-        return $this;
-    }
-
-    /**
-     * Get membershipType
-     *
-     * @return \AppBundle\Entity\MembershipType
-     */
-    public function getMembershipType()
-    {
-        return $this->membershipType;
-    }
-
-    /**
      * Set person
      *
      * @param \AppBundle\Entity\Person $person
@@ -129,54 +71,6 @@ class MemberRegistration
     public function getPerson()
     {
         return $this->person;
-    }
-
-    /**
-     * Set start
-     *
-     * @param \DateTime $start
-     *
-     * @return MemberRegistration
-     */
-    public function setStart($start)
-    {
-        $this->start = $start;
-
-        return $this;
-    }
-
-    /**
-     * Get start
-     *
-     * @return \DateTime
-     */
-    public function getStart()
-    {
-        return $this->start;
-    }
-
-    /**
-     * Set end
-     *
-     * @param \DateTime $end
-     *
-     * @return MemberRegistration
-     */
-    public function setEnd($end)
-    {
-        $this->end = $end;
-
-        return $this;
-    }
-
-    /**
-     * Get end
-     *
-     * @return \DateTime
-     */
-    public function getEnd()
-    {
-        return $this->end;
     }
 
     /**

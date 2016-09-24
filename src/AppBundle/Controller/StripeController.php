@@ -20,10 +20,17 @@ class StripeController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        //Lookup membership type
+        $membershipTypePeriod = $em->getRepository('AppBundle:MembershipTypePeriod')->findOneById($request->request->get('form')['membershipType']);
+
+
         \Stripe\Stripe::setApiKey("sk_test_X2GvJmrdbEAxu0HJjEE2jfqA");
 
         // Get the credit card details submitted by the form
         $token = $_POST['stripeToken'];
+
 
         // Create a charge: this will charge the user's card
         try {
@@ -36,6 +43,18 @@ class StripeController extends Controller
         } catch (\Stripe\Error\Card $e) {
             // The card has been declined
         }
+
+
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $memberRegistration = new \AppBundle\Entity\MemberRegistration();
+        $memberRegistration->setPerson($user);
+        $memberRegistration->setMembershipTypePeriod($membershipTypePeriod);
+        $memberRegistration->setRegistrationDateTime(new \DateTime());
+
+        $em->persist($memberRegistration);
+        $em->flush();
+
 
         $this->addFlash('notice', 'Your renewal has been successful');
 

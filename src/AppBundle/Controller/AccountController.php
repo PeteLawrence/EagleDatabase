@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use AppBundle\Form\StripePaymentForm;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * @Route("/account")
@@ -50,8 +52,57 @@ class AccountController extends Controller
      */
     public function membershipRenewAction(Request $request)
     {
+        //Get available membership options
+        $renewForm = $this->buildStripePaymentForm();
+
         // replace this example code with whatever you need
-        return $this->render('account/renew.html.twig');
+        return $this->render(
+            'account/renew.html.twig',
+            [
+                'renewForm' => $renewForm->createView()
+            ]
+        );
+    }
+
+
+    private function buildStripePaymentForm()
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('stripe_callback'))
+            ->setMethod('POST')
+            ->add('membershipType',
+                EntityType::class,
+                [
+                    'class' => \AppBundle\Entity\MembershipTypePeriod::class,
+                    'choices' => $this->getAvailableMembershipTypes(),
+                    'choice_label' => function ($mtp) {
+                        return sprintf(
+                            '%s: %s - %s £%s',
+                            $mtp->getMembershipType()->getType(),
+                            $mtp->getMembershipPeriod()->getFromDate()->format('j M Y'),
+                            $mtp->getMembershipPeriod()->getToDate()->format('j M Y'),
+                            $mtp->getPrice()
+                        );
+                    }
+                ])
+            ->getForm();
+    }
+
+    private function getAvailableMemberShipTypes()
+    {
+        $em = $this->get('doctrine')->getEntityManager();
+        $membershipTypePeriods = $em->getRepository('AppBundle:MembershipTypePeriod')->findAll();
+        $now = new \DateTime();
+
+        $options = [];
+        foreach ($membershipTypePeriods as $mtp) {
+            $mp = $mtp->getMembershipPeriod();
+            if (($mp->getFromDate() < $now) && ($mp->getToDate() > $now)) {
+                $options[] = $mtp;
+            }
+        }
+
+        return $options;
     }
 
 
