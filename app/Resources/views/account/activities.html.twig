@@ -2,6 +2,12 @@
 
 {% block body %}
 
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <span class="breadcrumb-item active">Activities</span>
+    </nav>
+
     <h2>Activity History</h2>
 
     <table class="table">
