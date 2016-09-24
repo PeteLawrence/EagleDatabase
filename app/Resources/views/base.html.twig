@@ -36,7 +36,8 @@
                     {% endif %}
 
                     <li class="nav-item dropdown">
-                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.forename }} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i> {{ app.user.forename }} <span class="caret"></span></a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                             <a href="{{ path('account_overview') }}" class="dropdown-item"><i class="fa fa-user"></i> Overview</a>
