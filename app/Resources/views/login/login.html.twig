@@ -1,13 +1,19 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Log In{% endblock %}
+
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
     <div class="row">
         <div class="col-md-6 push-md-3">
+            <h2>Login</h2>
             <p>Enter your EagleDB username and password below to login</p>
+
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
 
             <form action="{{ path('login') }}" method="post">
                 <div class="form-group">

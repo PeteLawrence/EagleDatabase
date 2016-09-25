@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block title %}Membership History{% endblock %}
 
+{% block breadcrumbs %}
     <nav class="breadcrumb">
         <a class="breadcrumb-item" href="/">Home</a>
         <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
         <span class="breadcrumb-item active">Membership</span>
     </nav>
+{% endblock %}
 
+{% block body %}
     <h2>Membership History</h2>
 
     <table class="table">
