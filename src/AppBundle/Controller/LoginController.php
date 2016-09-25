@@ -66,8 +66,8 @@ class LoginController extends Controller
                 $em->flush();
 
                 $message = \Swift_Message::newInstance()
-                    ->setSubject('EagleDB Password Reset')
-                    ->setFrom('pete@tabs2.co.uk')
+                    ->setSubject(sprintf('%s Password Reset', $this->getParameter('site.name')))
+                    ->setFrom($this->getParameter('site.email'))
                     ->setTo($person->getEmail())
                     ->setBody(
                         $this->renderView(
