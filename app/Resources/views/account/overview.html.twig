@@ -20,6 +20,9 @@
                         <p class="card-text">
                             You are currently registered with Eagle Canoe Club as a <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }}</strong> until <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</strong>.
                         </p>
+
+                    </div>
+                    <div class="card-footer">
                         <a href="{{ path('account_membership')}}" class="btn btn-primary" role="button">Membership history</a>
                     </div>
                 </div>
@@ -32,6 +35,8 @@
                         <p class="card-text">
                             Your membership has expired.
                         </p>
+                    </div>
+                    <div class="card-footer">
                         <a href="{{ path('account_membership_renew') }}" class="btn btn-primary">Renew</a>
                     </div>
                 </div>
@@ -43,10 +48,11 @@
                 </div>
                 <div class="card-block">
                     <p class="card-text"><em>You're not signed up to any upcoming trips :(</em></p>
+                </div>
+                <div class="card-footer">
                     <a href="{{ path('account_activities')}}" class="btn btn-primary" role="button">Trip history</a>
                     <a href="#" class="btn btn-primary" role="button">Upcoming trips</a>
                 </div>
-
             </div>
         </div>
     </div>
