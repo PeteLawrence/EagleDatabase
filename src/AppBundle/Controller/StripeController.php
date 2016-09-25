@@ -20,10 +20,21 @@ class StripeController extends Controller
      */
     public function indexAction(Request $request)
     {
+        //Get the currently logged in user
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
         $em = $this->getDoctrine()->getEntityManager();
 
         //Lookup membership type
         $membershipTypePeriod = $em->getRepository('AppBundle:MembershipTypePeriod')->findOneById($request->request->get('form')['membershipType']);
+
+
+        //Check that the user hasn't previously paid
+        foreach ($user->getMemberRegistration() as $registration) {
+            if ($registration->getMembershipTypePeriod()->getMembershipPeriod() == $membershipTypePeriod->getMembershipPeriod()) {
+                throw new \Exception('You are already registered.  You will NOT be charged.');
+            }
+        }
 
 
         \Stripe\Stripe::setApiKey("sk_test_X2GvJmrdbEAxu0HJjEE2jfqA");
@@ -42,10 +53,9 @@ class StripeController extends Controller
             ));
         } catch (\Stripe\Error\Card $e) {
             // The card has been declined
+            throw new \Exception('There was an error taking your payment.');
         }
 
-
-        $user = $this->get('security.token_storage')->getToken()->getUser();
 
         $memberRegistration = new \AppBundle\Entity\MemberRegistration();
         $memberRegistration->setPerson($user);
