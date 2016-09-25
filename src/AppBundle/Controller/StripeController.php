@@ -23,7 +23,7 @@ class StripeController extends Controller
         //Get the currently logged in user
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         //Lookup membership type
         $membershipTypePeriod = $em->getRepository('AppBundle:MembershipTypePeriod')->findOneById($request->request->get('form')['membershipType']);
@@ -46,10 +46,10 @@ class StripeController extends Controller
         // Create a charge: this will charge the user's card
         try {
             $charge = \Stripe\Charge::create(array(
-            "amount" => 7500, // Amount in cents
-            "currency" => "gbp",
-            "source" => $token,
-            "description" => "Example charge"
+                "amount" => ($membershipTypePeriod->getPrice() * 100), // Amount in pence
+                "currency" => "gbp",
+                "source" => $token,
+                "description" => "Membership"
             ));
         } catch (\Stripe\Error\Card $e) {
             // The card has been declined
