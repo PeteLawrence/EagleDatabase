@@ -60,7 +60,7 @@ class AccountController extends Controller
             'account/renew.html.twig',
             [
                 'renewForm' => $renewForm->createView(),
-                'stripe_publishable_key' => $this->getParameter('stripe_publishable_key')
+                'stripe_publishable_key' => $this->getParameter('stripe.publishable_key')
             ]
         );
     }

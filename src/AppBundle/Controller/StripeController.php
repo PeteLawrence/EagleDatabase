@@ -37,7 +37,7 @@ class StripeController extends Controller
         }
 
 
-        \Stripe\Stripe::setApiKey($this->getParameter('stripe_secret_key'));
+        \Stripe\Stripe::setApiKey($this->getParameter('stripe.secret_key'));
 
         // Get the credit card details submitted by the form
         $token = $_POST['stripeToken'];

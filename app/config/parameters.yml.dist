@@ -19,5 +19,8 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            dlKfa0afsmasf8yfaa7s5a7aQEdPCi7
 
-    stripe_secret_key: 'sk_live_XXXXX'
-    stripe_publishable_key: 'pk_live_XXXXX'
+    stripe.secret_key: 'sk_live_XXXXX'
+    stripe.publishable_key: 'pk_live_XXXXX'
+
+    site.name: 'EagleDB'
+    site.email: 'eagledb@example.com'

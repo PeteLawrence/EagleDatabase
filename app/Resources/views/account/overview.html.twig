@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-block">
                         <p class="card-text">
-                            You are currently registered with Eagle Canoe Club as a <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }}</strong> until <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</strong>.
+                            You are currently registered with {{ site_name }} as a <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }}</strong> until <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</strong>.
                         </p>
 
                     </div>

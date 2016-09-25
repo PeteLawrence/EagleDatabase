@@ -22,7 +22,7 @@ class CalendarController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         //Create a calendar object
-        $cal = new Calendar('Eagle Canoe Club');
+        $cal = new Calendar($this->getParameter('site.name'));
 
         //Loop over all activities
         $activities = $em->getRepository('AppBundle:Activity')->findAll();
