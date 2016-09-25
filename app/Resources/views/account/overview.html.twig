@@ -1,12 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block title %}Account Overview{% endblock %}
 
+{% block breadcrumbs %}
     <nav class="breadcrumb">
       <a class="breadcrumb-item" href="/">Home</a>
       <span class="breadcrumb-item active">Account</span>
     </nav>
+{% endblock %}
 
+{% block body %}
     <h1>Welcome {{ app.user.forename }}!</h1>
 
     <div class="card-deck-wrapper">

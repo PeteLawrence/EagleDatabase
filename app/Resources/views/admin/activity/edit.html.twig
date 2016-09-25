@@ -1,5 +1,17 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Edit Activity{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index') }}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
+        <a class="breadcrumb-item" href="{{ path('activity_show', { id: activity.id }) }}">{{ activity.name }}</a>
+        <span class="breadcrumb-item active">Edit</span>
+    </nav>
+{% endblock %}
+
 {% block body %}
     <h1>Activity edit</h1>
 
@@ -8,14 +20,7 @@
         <input type="submit" value="Save" class="btn btn-primary" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('activity_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete" class="btn btn-danger">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Delete" class="btn btn-danger">
+    {{ form_end(delete_form) }}
 {% endblock %}
