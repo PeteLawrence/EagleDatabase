@@ -40,7 +40,17 @@ class Location
     private $latitude;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activity", mappedBy="location")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activity", mappedBy="startLocation")
+     */
+    private $activity1;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activity", mappedBy="endLocation")
+     */
+    private $activity2;
+
+    /**
+     * 
      */
     private $activity;
     /**
@@ -213,5 +223,73 @@ class Location
     public function getLatitude()
     {
         return $this->latitude;
+    }
+
+    /**
+     * Add activity1
+     *
+     * @param \AppBundle\Entity\Activity $activity1
+     *
+     * @return Location
+     */
+    public function addActivity1(\AppBundle\Entity\Activity $activity1)
+    {
+        $this->activity1[] = $activity1;
+
+        return $this;
+    }
+
+    /**
+     * Remove activity1
+     *
+     * @param \AppBundle\Entity\Activity $activity1
+     */
+    public function removeActivity1(\AppBundle\Entity\Activity $activity1)
+    {
+        $this->activity1->removeElement($activity1);
+    }
+
+    /**
+     * Get activity1
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActivity1()
+    {
+        return $this->activity1;
+    }
+
+    /**
+     * Add activity2
+     *
+     * @param \AppBundle\Entity\Activity $activity2
+     *
+     * @return Location
+     */
+    public function addActivity2(\AppBundle\Entity\Activity $activity2)
+    {
+        $this->activity2[] = $activity2;
+
+        return $this;
+    }
+
+    /**
+     * Remove activity2
+     *
+     * @param \AppBundle\Entity\Activity $activity2
+     */
+    public function removeActivity2(\AppBundle\Entity\Activity $activity2)
+    {
+        $this->activity2->removeElement($activity2);
+    }
+
+    /**
+     * Get activity2
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActivity2()
+    {
+        return $this->activity2;
     }
 }

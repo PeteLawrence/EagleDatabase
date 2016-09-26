@@ -28,6 +28,7 @@ class PersonType extends AbstractType
             ->add('dob', BirthdayType::class, [ 'html5' => true, 'widget' => 'single_text', 'label' => 'D.o.B' ])
             ->add('addr1', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 1'] ])
             ->add('addr2', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 2'] ])
+            ->add('addr3', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 3'] ])
             ->add('town', TextType::class, [ 'attr' => ['placeholder' => 'Town'] ])
             ->add('county', TextType::class, [ 'attr' => ['placeholder' => 'County'] ])
             ->add('postcode', TextType::class, [ 'attr' => ['placeholder' => 'Postcode'] ])

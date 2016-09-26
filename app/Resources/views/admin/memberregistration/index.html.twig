@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Year</th>
+                <th>Dates</th>
                 <th>Type</th>
                 <th>Actions</th>
             </tr>
@@ -16,8 +16,8 @@
         {% for memberRegistration in memberRegistrations %}
             <tr>
                 <td>{{ memberRegistration.person.forename }} {{ memberRegistration.person.surname }}</td>
-                <td>{{ memberRegistration.year }}</td>
-                <td>{{ memberRegistration.membershipType.type }}</td>
+                <th></td>
+                <td>{{ memberRegistration.membershipTypePeriod.membershipType.type }}</td>
                 <td>
                     <a href="{{ path('admin_memberregistration_show', { 'id': memberRegistration.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
                     <a href="{{ path('admin_memberregistration_edit', { 'id': memberRegistration.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>

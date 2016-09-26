@@ -151,6 +151,7 @@ class AccountController extends Controller
             ->add('dob', BirthdayType::class, [ 'widget' => 'choice', 'label' => 'D.o.B', 'format' => 'd MMM y', 'years' => range(1910, date('Y')) ])
             ->add('addr1', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 1'] ])
             ->add('addr2', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 2'] ])
+            ->add('addr3', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 3'] ])
             ->add('town', TextType::class, [ 'attr' => ['placeholder' => 'Town'] ])
             ->add('county', TextType::class, [ 'attr' => ['placeholder' => 'County'] ])
             ->add('postcode', TextType::class, [ 'attr' => ['placeholder' => 'Postcode'] ])
