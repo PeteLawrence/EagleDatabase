@@ -20,7 +20,7 @@ class ActivityController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/", name="activity_index")
+     * @Route("/", name="admin_activity_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -37,7 +37,7 @@ class ActivityController extends Controller
     /**
      * Creates a new Activity entity.
      *
-     * @Route("/new", name="activity_new")
+     * @Route("/new", name="admin_activity_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -65,7 +65,7 @@ class ActivityController extends Controller
             $em->persist($activity);
             $em->flush();
 
-            return $this->redirectToRoute('activity_show', array('id' => $activity->getId()));
+            return $this->redirectToRoute('admin_activity_show', array('id' => $activity->getId()));
         }
 
         return $this->render('admin/activity/new.html.twig', array(
@@ -77,7 +77,7 @@ class ActivityController extends Controller
     /**
      * Finds and displays a Activity entity.
      *
-     * @Route("/{id}", name="activity_show")
+     * @Route("/{id}", name="admin_activity_show")
      * @Method("GET")
      */
     public function showAction(Activity $activity)
@@ -93,7 +93,7 @@ class ActivityController extends Controller
     /**
      * Displays a form to edit an existing Activity entity.
      *
-     * @Route("/{id}/edit", name="activity_edit")
+     * @Route("/{id}/edit", name="admin_activity_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Activity $activity)
@@ -112,7 +112,7 @@ class ActivityController extends Controller
             $em->persist($activity);
             $em->flush();
 
-            return $this->redirectToRoute('activity_edit', array('id' => $activity->getId()));
+            return $this->redirectToRoute('admin_activity_edit', array('id' => $activity->getId()));
         }
 
         return $this->render('admin/activity/edit.html.twig', array(
@@ -125,7 +125,7 @@ class ActivityController extends Controller
     /**
      * Deletes a Activity entity.
      *
-     * @Route("/{id}", name="activity_delete")
+     * @Route("/{id}", name="admin_activity_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Activity $activity)
@@ -139,7 +139,7 @@ class ActivityController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('activity_index');
+        return $this->redirectToRoute('admin_activity_index');
     }
 
     /**
@@ -152,7 +152,7 @@ class ActivityController extends Controller
     private function createDeleteForm(Activity $activity)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('activity_delete', array('id' => $activity->getId())))
+            ->setAction($this->generateUrl('admin_activity_delete', array('id' => $activity->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

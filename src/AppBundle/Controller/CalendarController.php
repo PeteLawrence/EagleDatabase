@@ -34,11 +34,11 @@ class CalendarController extends Controller
             $event->setDtEnd($activity->getActivityEnd());
             $event->setSummary($activity->getName());
             $event->setDescription($activity->getDescription());
-            if ($activity->getLocation()) {
+            if ($activity->getStartLocation()) {
                 $event->setLocation(
-                    str_replace(',', "\n", $activity->getLocation()->getAddress() . ', ' . $activity->getLocation()->getPostcode()),
-                    $activity->getLocation()->getName(),
-                    sprintf('%s,%s', $activity->getLocation()->getLongitude(), $activity->getLocation()->getLatitude())
+                    str_replace(',', "\n", $activity->getStartLocation()->getAddress() . ', ' . $activity->getStartLocation()->getPostcode()),
+                    $activity->getStartLocation()->getName(),
+                    sprintf('%s,%s', $activity->getStartLocation()->getLongitude(), $activity->getStartLocation()->getLatitude())
                 );
             }
 

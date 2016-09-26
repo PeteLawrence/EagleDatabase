@@ -13,12 +13,17 @@ use AppBundle\Entity\Activity;
 class ActivityController extends Controller
 {
     /**
-     * @Route("/", name="activity_overview")
+     * @Route("/", name="activity_index")
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('account/overview.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $activities = $em->getRepository('AppBundle:Activity')->findAll();
+
+        return $this->render('activity/index.html.twig', array(
+            'activities' => $activities,
+        ));
     }
 
 
