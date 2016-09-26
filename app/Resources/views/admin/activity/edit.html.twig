@@ -6,8 +6,8 @@
     <nav class="breadcrumb">
         <a class="breadcrumb-item" href="/">Home</a>
         <a class="breadcrumb-item" href="{{ path('admin_index') }}">Admin</a>
-        <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
-        <a class="breadcrumb-item" href="{{ path('activity_show', { id: activity.id }) }}">{{ activity.name }}</a>
+        <a class="breadcrumb-item" href="{{ path('admin_activity_index') }}">Activities</a>
+        <a class="breadcrumb-item" href="{{ path('admin_activity_show', { id: activity.id }) }}">{{ activity.name }}</a>
         <span class="breadcrumb-item active">Edit</span>
     </nav>
 {% endblock %}
