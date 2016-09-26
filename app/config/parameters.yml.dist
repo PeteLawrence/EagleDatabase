@@ -24,3 +24,4 @@ parameters:
 
     site.name: 'EagleDB'
     site.email: 'eagledb@example.com'
+    site.google_maps_key: 'AI.........'

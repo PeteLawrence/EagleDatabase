@@ -19,8 +19,8 @@ class LocationType extends AbstractType
             ->add('name')
             ->add('address')
             ->add('postcode')
-            ->add('longitude', NumberType::class)
             ->add('latitude', NumberType::class)
+            ->add('longitude', NumberType::class)
         ;
     }
 

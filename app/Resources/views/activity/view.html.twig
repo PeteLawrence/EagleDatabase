@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ activity.name }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="/">Home</a>
+    <a class="breadcrumb-item" href="{{ path('activity_overview') }}">Activity</a>
+    <span class="breadcrumb-item active">{{ activity.name }}</span>
+</nav>
+{% endblock %}
+
+{% block body %}
+    <h2>{{ activity.name }}</h2>
+
+    <div class="col-xs-8">
+aa
+    </div>
+
+    <div class="col-xs-4">
+        <div class="card text-xs-center">
+            <h4 class="card-header">Map</h4>
+            <div class="card-block">
+                <div id="map" style="width: 100%; height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&callback=initMap" async defer></script>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          //center: {lat: {{activity.startLocation.latitude}}, lng: {{ activity.endLocation.longitude}}},
+          //zoom: 14
+
+        });
+
+        var startPos = {lat: {{activity.startLocation.latitude}}, lng: {{ activity.startLocation.longitude}}};
+        var endPos = {lat: {{activity.endLocation.latitude}}, lng: {{ activity.endLocation.longitude}}};
+
+        var start = new google.maps.Marker({
+          position: startPos,
+          map: map,
+          title: 'Start'
+        });
+
+        var end = new google.maps.Marker({
+          position: endPos,
+          map: map,
+          title: 'End'
+        });
+
+        var bounds = new google.maps.LatLngBounds();
+        bounds.extend(startPos)
+        bounds.extend(endPos);
+        map.fitBounds(bounds);
+
+        google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+          if (map.getZoom() > 15) {
+            map.setZoom(15);
+          }
+        });
+
+      }
+    </script>
+{% endblock %}
