@@ -61,10 +61,18 @@ abstract class Activity
     private $organiser;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="activity")
-     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="activity1")
+     * @ORM\JoinColumn(name="start_location_id", referencedColumnName="id")
      */
-    private $location;
+    private $startLocation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="activity2")
+     * @ORM\JoinColumn(name="end_location_id", referencedColumnName="id")
+     */
+    private $endLocation;
+
+
     /**
      * Constructor
      */
@@ -203,30 +211,6 @@ abstract class Activity
     }
 
     /**
-     * Set location
-     *
-     * @param \AppBundle\Entity\Location $location
-     *
-     * @return Activity
-     */
-    public function setLocation(\AppBundle\Entity\Location $location = null)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
-     * Get location
-     *
-     * @return \AppBundle\Entity\Location
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
      * Set name
      *
      * @param string $name
@@ -310,5 +294,53 @@ abstract class Activity
     public function getAllowOnlineSignup()
     {
         return $this->allowOnlineSignup;
+    }
+
+    /**
+     * Set startLocation
+     *
+     * @param \AppBundle\Entity\Location $startLocation
+     *
+     * @return Activity
+     */
+    public function setStartLocation(\AppBundle\Entity\Location $startLocation = null)
+    {
+        $this->startLocation = $startLocation;
+
+        return $this;
+    }
+
+    /**
+     * Get startLocation
+     *
+     * @return \AppBundle\Entity\Location
+     */
+    public function getStartLocation()
+    {
+        return $this->startLocation;
+    }
+
+    /**
+     * Set endLocation
+     *
+     * @param \AppBundle\Entity\Location $endLocation
+     *
+     * @return Activity
+     */
+    public function setEndLocation(\AppBundle\Entity\Location $endLocation = null)
+    {
+        $this->endLocation = $endLocation;
+
+        return $this;
+    }
+
+    /**
+     * Get endLocation
+     *
+     * @return \AppBundle\Entity\Location
+     */
+    public function getEndLocation()
+    {
+        return $this->endLocation;
     }
 }

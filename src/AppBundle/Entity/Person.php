@@ -75,6 +75,11 @@ class Person implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $addr3;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $town;
 
     /**
@@ -845,5 +850,29 @@ class Person implements UserInterface, \Serializable
     public function getPasswordResetTokenExpiry()
     {
         return $this->passwordResetTokenExpiry;
+    }
+
+    /**
+     * Set addr3
+     *
+     * @param string $addr3
+     *
+     * @return Person
+     */
+    public function setAddr3($addr3)
+    {
+        $this->addr3 = $addr3;
+
+        return $this;
+    }
+
+    /**
+     * Get addr3
+     *
+     * @return string
+     */
+    public function getAddr3()
+    {
+        return $this->addr3;
     }
 }
