@@ -49,6 +49,11 @@ abstract class Activity
     private $allowOnlineSignup;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\WeatherDataPoint", mappedBy="activity")
+     */
+    private $weatherObservation;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ActivityType", inversedBy="activity")
      * @ORM\JoinColumn(name="activity_type_id", referencedColumnName="id")
      */
