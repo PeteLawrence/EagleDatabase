@@ -5,6 +5,7 @@ namespace AppBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,7 @@ class ManagedActivityType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [ 'required' => true ])
-            ->add('description')
+            ->add('description', TextareaType::class, [ 'attr' => [ 'rows' => 8] ])
             ->add('activityStart', DateTimeType::class, [ 'required' => true, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
             ->add('activityEnd', DateTimeType::class, [ 'required' => true, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
             ->add('spaces')
