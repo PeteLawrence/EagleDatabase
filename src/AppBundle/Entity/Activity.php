@@ -51,6 +51,11 @@ abstract class Activity
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\WeatherDataPoint", mappedBy="activity")
      */
+    private $weatherDataPoints;
+
+    /**
+     * 
+     */
     private $weatherObservation;
 
     /**
@@ -347,5 +352,73 @@ abstract class Activity
     public function getEndLocation()
     {
         return $this->endLocation;
+    }
+
+    /**
+     * Add weatherObservation
+     *
+     * @param \AppBundle\Entity\WeatherDataPoint $weatherObservation
+     *
+     * @return Activity
+     */
+    public function addWeatherObservation(\AppBundle\Entity\WeatherDataPoint $weatherObservation)
+    {
+        $this->weatherObservation[] = $weatherObservation;
+
+        return $this;
+    }
+
+    /**
+     * Remove weatherObservation
+     *
+     * @param \AppBundle\Entity\WeatherDataPoint $weatherObservation
+     */
+    public function removeWeatherObservation(\AppBundle\Entity\WeatherDataPoint $weatherObservation)
+    {
+        $this->weatherObservation->removeElement($weatherObservation);
+    }
+
+    /**
+     * Get weatherObservation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWeatherObservation()
+    {
+        return $this->weatherObservation;
+    }
+
+    /**
+     * Add weatherDataPoint
+     *
+     * @param \AppBundle\Entity\WeatherDataPoint $weatherDataPoint
+     *
+     * @return Activity
+     */
+    public function addWeatherDataPoint(\AppBundle\Entity\WeatherDataPoint $weatherDataPoint)
+    {
+        $this->weatherDataPoints[] = $weatherDataPoint;
+
+        return $this;
+    }
+
+    /**
+     * Remove weatherDataPoint
+     *
+     * @param \AppBundle\Entity\WeatherDataPoint $weatherDataPoint
+     */
+    public function removeWeatherDataPoint(\AppBundle\Entity\WeatherDataPoint $weatherDataPoint)
+    {
+        $this->weatherDataPoints->removeElement($weatherDataPoint);
+    }
+
+    /**
+     * Get weatherDataPoints
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWeatherDataPoints()
+    {
+        return $this->weatherDataPoints;
     }
 }

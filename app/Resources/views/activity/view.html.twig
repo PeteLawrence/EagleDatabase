@@ -31,6 +31,36 @@
                 {{ activity.description }}
             </div>
         </div>
+
+        <div class="card">
+            <h4 class="card-header">Weather</h4>
+            <div class="card-block">
+                <table class="table table-sm">
+                    {% for dataPoint in activity.weatherDataPoints %}
+                        <tr>
+                            <td class="h2">{{ dataPoint.time|date('H:i', dataPoint.timeZone) }}</td>
+                            <td>
+                                <i class="wi wi-forecast-io-{{dataPoint.icon}} h2"></i>
+                                {% if dataPoint.precipitationIntensity > 0 %}
+                                    <sub>{{ dataPoint.precipitationIntensity }} mm/h</sub>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <i class="wi wi-thermometer h2"></i>
+                                <span class="h2">{{ dataPoint.temperature|number_format(1) }}</span>
+                                <sup>°C</sup>
+                            </td>
+                            <td>
+                                <i class="wi wi-wind towards-{{dataPoint.windBearing}}-deg h2" title="{{dataPoint.windBearing}}°"></i>
+                                <span class="h2">{{ dataPoint.windSpeed|number_format(1) }}</span>
+                                <sup>km/h</sup>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
     </div>
 
     <div class="col-xs-4">
@@ -42,6 +72,11 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons-wind.min.css" />
 {% endblock %}
 
 
