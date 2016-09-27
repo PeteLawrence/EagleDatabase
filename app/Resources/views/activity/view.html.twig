@@ -20,7 +20,7 @@
                 <ul>
                     <li><strong>Start</strong> {{ activity.activityStart|date('d M Y H:i')}}</li>
                     <li><strong>End</strong> {{ activity.activityEnd|date('d M Y H:i')}}</li>
-                    <li><strong>Places</strong> {{ activity.getSpaces }}</li>
+                    <li><strong>Places</strong> {{ activity.people}} / {{ activity.getSpaces }}</li>
                 </ul>
             </div>
         </div>
@@ -28,14 +28,14 @@
         <div class="card">
             <h4 class="card-header">Description</h4>
             <div class="card-block">
-                {{ activity.description }}
+                {{ activity.description|markdown }}
             </div>
         </div>
 
         <div class="card">
             <h4 class="card-header">Weather</h4>
             <div class="card-block" style="height: 170px; overflow-y: scroll;">
-                <table class="table table-sm">
+                <table class="table">
                     {% for dataPoint in activity.weatherDataPoints %}
                         <tr>
                             <td class="h2">{{ dataPoint.time|date('H:i', dataPoint.timeZone) }}</td>
