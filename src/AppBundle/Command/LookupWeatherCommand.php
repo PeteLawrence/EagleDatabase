@@ -18,43 +18,51 @@ class LookupWeatherCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
-
+        $logger = $this->getContainer()->get('logger');
 
         //Find Activities taking place
-        $activity = $em->getRepository('AppBundle:Activity')->findOneById(1);
+        $activities  = $em->getRepository('AppBundle:Activity')->findAll();
 
-        $forecast = $this->getForecast(
-            $activity->getStartLocation()->getLongitude(),
-            $activity->getStartLocation()->getLatitude()
-        );
+        //
+        $now = new \DateTime(null, new \DateTimeZone('Europe/London'));
+        foreach ($activities as $activity) {
+            if ($activity->getActivityStart() <= $now && $activity->getActivityEnd() >= $now) {
+                $logger->info('Looking up weather for activity ' . $activity->getId());
+                $forecast = $this->getForecast(
+                    $activity->getStartLocation()->getLongitude(),
+                    $activity->getStartLocation()->getLatitude()
+                );
 
-        $weather = new \AppBundle\Entity\WeatherDataPoint;
-        $weather->setTime(new \DateTime('@' . $forecast->time));
-        $weather->setTimeZone($forecast->timezone);
-        $weather->setSummary($forecast->summary);
-        $weather->setIcon($forecast->icon);
-        $weather->setPrecipitationIntensity($forecast->precipIntensity);
-        $weather->setPrecipitationProbability($forecast->precipProbability);
-        $weather->setTemperature($forecast->temperature);
-        $weather->setWindSpeed($forecast->windSpeed);
-        $weather->setWindBearing($forecast->windBearing);
-        $weather->setVisibility($forecast->visibility);
-        $weather->setCloudCover($forecast->cloudCover);
+                $weather = new \AppBundle\Entity\WeatherDataPoint;
+                $weather->setTime(new \DateTime('@' . $forecast->time));
+                $weather->setTimeZone($forecast->timezone);
+                $weather->setSummary($forecast->summary);
+                $weather->setIcon($forecast->icon);
+                $weather->setPrecipitationIntensity($forecast->precipIntensity);
+                $weather->setPrecipitationProbability($forecast->precipProbability);
+                $weather->setTemperature($forecast->temperature);
+                $weather->setWindSpeed($forecast->windSpeed);
+                $weather->setWindBearing($forecast->windBearing);
+                $weather->setVisibility($forecast->visibility);
+                $weather->setCloudCover($forecast->cloudCover);
 
-        //Attach the forecast to the activity
-        $weather->setActivity($activity);
+                //Attach the forecast to the activity
+                $weather->setActivity($activity);
 
-        $em->persist($weather);
+                $em->persist($weather);
+            }
+        }
+
         $em->flush();
     }
 
     private function getForecast($longitude, $latitude)
     {
         $arrContextOptions=array(
-            "ssl"=>array(
-                "verify_peer"=>false,
-                "verify_peer_name"=>false,
-            ),
+            "ssl" => [
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            ]
         );
 
         $forecast = json_decode(file_get_contents(sprintf(
