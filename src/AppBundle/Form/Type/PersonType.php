@@ -5,6 +5,7 @@ namespace AppBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -23,7 +24,6 @@ class PersonType extends AbstractType
             ->add('forename', TextType::class, [ 'attr' => ['placeholder' => 'Forename(s)'] ])
             ->add('surname', TextType::class, [ 'attr' => ['placeholder' => 'Surname'] ])
             ->add('email', EmailType::class, [ 'attr' => ['placeholder' => 'Email Address'] ])
-            ->add('admin')
             ->add('gender', ChoiceType::class, [ 'choices' => [ 'Female' => 'F', 'Male' => 'M'] ])
             ->add('dob', BirthdayType::class, [ 'html5' => true, 'widget' => 'single_text', 'label' => 'D.o.B' ])
             ->add('addr1', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 1'] ])
@@ -36,6 +36,8 @@ class PersonType extends AbstractType
             ->add('mobile')
             ->add('disability')
             ->add('notes', TextareaType::class)
+            ->add('admin', CheckboxType::class)
+            ->add('isactive', CheckboxType::class, [ 'label' => 'Active' ])
         ;
     }
 
