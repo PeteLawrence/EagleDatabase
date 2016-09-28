@@ -2,13 +2,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * @ORM\Entity
  *
  */
-class Person implements UserInterface, \Serializable
+class Person implements AdvancedUserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -111,6 +111,11 @@ class Person implements UserInterface, \Serializable
      * @ORM\Column(type="text", nullable=true)
      */
     private $notes;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isActive;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activity", mappedBy="organiser")
@@ -623,6 +628,26 @@ class Person implements UserInterface, \Serializable
     {
     }
 
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
+
     /**
      * @see \Serializable::serialize()
      */
@@ -632,8 +657,7 @@ class Person implements UserInterface, \Serializable
             $this->id,
             $this->email,
             $this->password,
-            // see section on salt below
-            // $this->salt,
+            $this->isActive
         ));
     }
     /**
@@ -645,8 +669,7 @@ class Person implements UserInterface, \Serializable
             $this->id,
             $this->email,
             $this->password,
-            // see section on salt below
-            // $this->salt
+            $this->isActive
         ) = unserialize($serialized);
     }
 
@@ -874,5 +897,29 @@ class Person implements UserInterface, \Serializable
     public function getAddr3()
     {
         return $this->addr3;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return Person
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }

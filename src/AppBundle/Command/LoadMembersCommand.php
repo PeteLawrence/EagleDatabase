@@ -49,6 +49,8 @@ class LoadMembersCommand extends ContainerAwareCommand
 
             $person->setGender($data[48]);
 
+            $person->setIsActive(true);
+
             $em->persist($person);
         }
 
