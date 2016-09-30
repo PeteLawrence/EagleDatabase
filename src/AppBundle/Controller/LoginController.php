@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class LoginController extends Controller
 {
@@ -118,10 +119,10 @@ class LoginController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            //Lookup the user
-            $encoder = $this->container->get('security.password_encoder');
-            $encodedPassword = $encoder->encodePassword($person, $data['password']);
+            //Encrypt the supplied password
+            $encodedPassword = $this->encodePassword($person, $data['password']);
 
+            //Update the users password, and reset the reset token fields
             $person->setPassword($encodedPassword);
             $person->setPasswordResetToken(null);
             $person->setPasswordResetTokenExpiry(null);
@@ -130,7 +131,11 @@ class LoginController extends Controller
 
             $this->addFlash('notice', 'Your password has been reset');
 
-            return $this->redirectToRoute('login');
+            //Automatically log the user in
+            $token = new UsernamePasswordToken($person, null, 'main', $person->getRoles());
+            $this->get('security.token_storage')->setToken($token);
+
+            return $this->redirectToRoute('account_overview');
         }
 
         return $this->render(
@@ -167,5 +172,14 @@ class LoginController extends Controller
             ))
             ->getForm()
         ;
+    }
+
+
+    private function encodePassword($person, $password)
+    {
+        $encoder = $this->container->get('security.password_encoder');
+        $encodedPassword = $encoder->encodePassword($person, $password);
+
+        return $encodedPassword;
     }
 }
