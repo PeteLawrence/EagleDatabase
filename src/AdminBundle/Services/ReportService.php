@@ -15,10 +15,10 @@ class ReportService
     }
 
 
-    public function buildGenderChart()
+    public function buildGenderChart($date)
     {
         //Fetch data
-        $members = $this->em->getRepository('AppBundle:Person')->findAll();
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
 
         $females = 0;
         $males = 0;

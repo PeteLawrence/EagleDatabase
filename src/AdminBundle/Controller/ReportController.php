@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -82,17 +83,29 @@ class ReportController extends Controller
      * Displays a membership overview page
      *
      * @Route("/membership", name="report_membership")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function membershipAction()
+    public function membershipAction(Request $request)
     {
         $reportService = $this->get('eagle_report');
 
-        return $this->render('admin/report/membership.html.twig', array(
-            'genderChart' => $reportService->buildGenderChart(),
-            'ageChart' => $this->buildAgeChart(),
-            'returningChart' => $this->buildReturningChart(),
-        ));
+        $form = $this->createForm(\AppBundle\Form\Type\MembershipReportFilterType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            return $this->render('admin/report/membership.html.twig', array(
+                'form' => $form->createView(),
+                'genderChart' => $reportService->buildGenderChart($data['date']),
+                'ageChart' => $this->buildAgeChart(),
+                'returningChart' => $this->buildReturningChart(),
+            ));
+        } else {
+            return $this->render('admin/report/membership.html.twig', array(
+                'form' => $form->createView()
+            ));
+        }
     }
 
 
