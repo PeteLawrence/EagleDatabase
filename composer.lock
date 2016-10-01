@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "79e09da5a0932f5d5f05cceba456e1fe",
-    "content-hash": "7a0735b25a11e7ac3b9c49f15c485e23",
+    "hash": "da4aee708d2415fc1eea8f8d161ad6db",
+    "content-hash": "7747c7fd41d3af4c211333ab28fb481b",
     "packages": [
         {
             "name": "cmen/google-charts-bundle",
@@ -867,50 +867,6 @@
                 "php calendar"
             ],
             "time": "2016-06-09 09:08:55"
-        },
-        {
-            "name": "guhelski/forecast-php",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guhelski/forecast-php.git",
-                "reference": "7e2ec92484380be20b8f9a6ec5654b820e1d5d67"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guhelski/forecast-php/zipball/7e2ec92484380be20b8f9a6ec5654b820e1d5d67",
-                "reference": "7e2ec92484380be20b8f9a6ec5654b820e1d5d67",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Guilherme Uhelski",
-                    "email": "guilherme@uhelski.org",
-                    "homepage": "http://uhelski.org"
-                }
-            ],
-            "description": "Drop dead simple DarkSky.net API v2 wrapper in PHP",
-            "keywords": [
-                "darksky",
-                "darksky.net",
-                "forecast",
-                "forecast.io",
-                "weather"
-            ],
-            "time": "2016-09-26 04:35:15"
         },
         {
             "name": "hackzilla/password-generator",
@@ -2479,16 +2435,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd"
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/9270140b940ff02e58ec577c237274e92cd40cdd",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
                 "shasum": ""
             },
             "require": {
@@ -2520,7 +2476,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-06-10 09:48:41"
+            "time": "2016-09-30 07:12:33"
         },
         {
             "name": "phpdocumentor/type-resolver",
