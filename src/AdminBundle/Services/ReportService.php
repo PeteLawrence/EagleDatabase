@@ -83,16 +83,7 @@ class ReportService
         //Fetch data
         $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
 
-        //Define bins
-        $bins = [
-            [ 'max' => 12, 'count' => 0 ],
-            [ 'max' => 18, 'count' => 0 ],
-            [ 'max' => 25, 'count' => 0 ],
-            [ 'max' => 35, 'count' => 0 ],
-            [ 'max' => 45, 'count' => 0 ],
-            [ 'max' => 55, 'count' => 0 ],
-            [ 'max' => 65, 'count' => 0 ]
-        ];
+        $grouper = new \AppBundle\Util\Grouper([18, 25, 35, 45, 55, 65]);
 
         //Assign each member to a bin based on their DOB
         foreach ($members as $member) {
@@ -107,24 +98,48 @@ class ReportService
                     continue;
                 }
 
-                $binCount = sizeof($bins);
-                for ($i = 0; $i < $binCount; $i++) {
-                    if ($age < $bins[$i]['max']) {
-                        $bins[$i]['count']++;
-                        continue 2;
-                    }
-                }
+                $grouper->addItem($age);
             }
         }
 
         $data = [['Age Group', 'Count']];
-        foreach ($bins as $bin) {
-            $data[] = [ '<' . $bin['max'], $bin['count']];
+        foreach ($grouper->getGroups() as $group) {
+            $data[] = [ $group['name'], $group['count']];
         }
 
         $chart = new ColumnChart();
         $chart->getOptions()->setTitle('Membership by age');
         $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+
+    public function buildLengthChart($date)
+    {
+        $grouper = new \AppBundle\Util\Grouper([1, 2, 3, 4, 5, 6]);
+
+        //Fetch data
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
+        foreach ($members as $member) {
+            $now = new \DateTime();
+            $joinedDate = $member->getJoinedDate();
+
+            $length = $joinedDate->diff($now)->y;
+
+            $grouper->addItem($length);
+        }
+
+        $data = [['Age Group', 'Count']];
+        foreach ($grouper->getGroups() as $group) {
+            $data[] = [ $group['name'], $group['count']];
+        }
+
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Membership by length of time');
+        $chart->getData()->setArrayToDataTable($data);
+
 
         return $chart;
     }

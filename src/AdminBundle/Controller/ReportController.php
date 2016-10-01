@@ -100,6 +100,7 @@ class ReportController extends Controller
                 'genderChart' => $reportService->buildGenderChart($data['date']),
                 'ageChart' => $reportService->buildAgeChart($data['date']),
                 'returningChart' => $reportService->buildReturningChart($data['date']),
+                'lengthChart' => $reportService->buildLengthChart($data['date']),
             ));
         } else {
             return $this->render('admin/report/membership.html.twig', array(
@@ -130,33 +131,6 @@ class ReportController extends Controller
             'whiteWaterGenderChart' => $this->buildWhiteWaterGenderChart(),
             'whiteWaterAgeChart' => $this->buildWhiteWaterAgeChart()
         ));
-    }
-
-
-
-
-    private function buildLengthChart()
-    {
-        $chart = new ColumnChart();
-        $chart->getOptions()->setTitle('Membership by length of time');
-        $chart->getData()->setArrayToDataTable(
-            [
-                ['Age Group', 'Count'],
-                ['0-1',  38],
-                ['1-2',  25],
-                ['2-3',  18],
-                ['3-4',  16],
-                ['4-5',  15],
-                ['5-6', 12],
-                ['6-7',  11],
-                ['7-8',  8],
-                ['8-9',  5],
-                ['9-10',  1],
-                ['10+',  2],
-            ]
-        );
-
-        return $chart;
     }
 
 

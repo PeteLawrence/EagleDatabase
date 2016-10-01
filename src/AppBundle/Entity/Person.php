@@ -922,4 +922,17 @@ class Person implements AdvancedUserInterface, \Serializable
     {
         return $this->isActive;
     }
+
+
+    public function getJoinedDate()
+    {
+        $joinedDate = new \DateTime();
+        foreach ($this->memberRegistration as $registration) {
+            if ($registration->getRegistrationDateTime() < $joinedDate) {
+                $joinedDate = $registration->getRegistrationDateTime();
+            }
+        }
+
+        return $joinedDate;
+    }
 }
