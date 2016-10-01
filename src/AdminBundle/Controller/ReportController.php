@@ -98,8 +98,8 @@ class ReportController extends Controller
             return $this->render('admin/report/membership.html.twig', array(
                 'form' => $form->createView(),
                 'genderChart' => $reportService->buildGenderChart($data['date']),
-                'ageChart' => $this->buildAgeChart(),
-                'returningChart' => $this->buildReturningChart(),
+                'ageChart' => $reportService->buildAgeChart($data['date']),
+                'returningChart' => $reportService->buildReturningChart($data['date']),
             ));
         } else {
             return $this->render('admin/report/membership.html.twig', array(
@@ -133,58 +133,6 @@ class ReportController extends Controller
     }
 
 
-    private function buildAgeChart()
-    {
-        //Fetch data
-        $em = $this->getDoctrine()->getManager();
-        $members = $em->getRepository('AppBundle:Person')->findAll();
-
-        //Define bins
-        $bins = [
-            [ 'max' => 12, 'count' => 0 ],
-            [ 'max' => 18, 'count' => 0 ],
-            [ 'max' => 25, 'count' => 0 ],
-            [ 'max' => 35, 'count' => 0 ],
-            [ 'max' => 45, 'count' => 0 ],
-            [ 'max' => 55, 'count' => 0 ],
-            [ 'max' => 65, 'count' => 0 ]
-        ];
-
-        //Assign each member to a bin based on their DOB
-        foreach ($members as $member) {
-            $now = new \DateTime();
-            $dob = $member->getDob();
-
-            if ($dob !== null) {
-                $age = $dob->diff($now)->y;
-
-                //Skip members with no DOB set
-                if ($age == 0) {
-                    continue;
-                }
-
-                $binCount = sizeof($bins);
-                for ($i = 0; $i < $binCount; $i++) {
-                    if ($age < $bins[$i]['max']) {
-                        $bins[$i]['count']++;
-                        continue 2;
-                    }
-                }
-            }
-        }
-
-        $data = [['Age Group', 'Count']];
-        foreach ($bins as $bin) {
-            $data[] = [ '<' . $bin['max'], $bin['count']];
-        }
-
-        $chart = new ColumnChart();
-        $chart->getOptions()->setTitle('Membership by age');
-        $chart->getData()->setArrayToDataTable($data);
-
-        return $chart;
-    }
-
 
 
     private function buildLengthChart()
@@ -211,38 +159,6 @@ class ReportController extends Controller
         return $chart;
     }
 
-
-    private function buildReturningChart()
-    {
-        //Fetch data
-        $em = $this->getDoctrine()->getManager();
-        $members = $em->getRepository('AppBundle:Person')->findAll();
-
-        $new = 0;
-        $returning = 0;
-
-        foreach ($members as $member) {
-            if (sizeof($member->getMemberRegistration()) > 1) {
-                $returning++;
-            } else {
-                $new++;
-            }
-        }
-
-
-
-        $chart = new PieChart();
-        $chart->getOptions()->setTitle('New vs Returning');
-        $chart->getData()->setArrayToDataTable(
-            [
-                ['Returning', 'Count'],
-                ['Yes', $returning],
-                ['No', $new]
-            ]
-        );
-
-        return $chart;
-    }
 
     private function buildVisitsChart()
     {
