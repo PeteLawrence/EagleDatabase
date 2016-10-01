@@ -78,12 +78,12 @@ class ReportService
     }
 
 
-    public function buildAgeChart($date)
+    public function buildAgeChart($date, $groupLimits)
     {
         //Fetch data
         $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
 
-        $grouper = new \AppBundle\Util\Grouper([18, 25, 35, 45, 55, 65]);
+        $grouper = new \AppBundle\Util\Grouper($groupLimits);
 
         //Assign each member to a bin based on their DOB
         foreach ($members as $member) {
@@ -117,7 +117,7 @@ class ReportService
 
     public function buildLengthChart($date)
     {
-        $grouper = new \AppBundle\Util\Grouper([1, 2, 3, 4, 5, 6]);
+        $grouper = new \AppBundle\Util\Grouper([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
         //Fetch data
         $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
