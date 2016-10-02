@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Services;
 
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\CalendarChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use Doctrine\ORM\EntityManager;
@@ -140,6 +141,77 @@ class ReportService
         $chart->getOptions()->setTitle('Membership by length of time');
         $chart->getData()->setArrayToDataTable($data);
 
+
+        return $chart;
+    }
+
+
+    public function buildMembershipTypeChart($date)
+    {
+        $grouper = new \AppBundle\Util\TextGrouper();
+
+        //Fetch data
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
+        foreach ($members as $member) {
+            $membershipType = $member->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
+
+            $grouper->addItem($membershipType);
+        }
+
+        $data = [['Type', 'Count']];
+        foreach ($grouper->getGroups() as $group) {
+            $data[] = [ $group['name'], $group['count']];
+        }
+
+
+        $chart = new PieChart();
+        $chart->getOptions()->setTitle('Membership by type');
+        $chart->getData()->setArrayToDataTable($data);
+
+
+        return $chart;
+    }
+
+
+    public function buildCalendarChart()
+    {
+        $activities = $this->em->getRepository('AppBundle:Activity')->findAll();
+
+
+        $data = [[['label' => 'Date', 'type' => 'date'], ['label' => 'Type', 'type' => 'number'], [ 'role' => 'tooltip' ]]];
+
+        foreach ($activities as $activity) {
+            $data[] = [ $activity->getActivityStart(), $activity->getPeople(), $activity->getName() ];
+        }
+
+
+        $cal = new CalendarChart();
+        $cal->getData()->setArrayToDataTable($data);
+
+        return $cal;
+    }
+
+
+    public function buildActivityTypeChart()
+    {
+        $grouper = new \AppBundle\Util\TextGrouper();
+
+        $activities = $this->em->getRepository('AppBundle:Activity')->findAll();
+
+        $counts = [];
+        foreach ($activities as $activity) {
+            $grouper->addItem($activity->getActivityType()->getType(), $activity->getPeople());
+        }
+
+        $data = [['Activity Type', 'Count']];
+        foreach ($grouper->getGroups() as $group) {
+            $data[] = [ $group['name'], $group['count']];
+        }
+
+        $chart = new PieChart();
+        $chart->getOptions()->setTitle('Visits by type');
+        $chart->getData()->setArrayToDataTable($data);
+        $chart->getOptions()->setWidth(350);
 
         return $chart;
     }
