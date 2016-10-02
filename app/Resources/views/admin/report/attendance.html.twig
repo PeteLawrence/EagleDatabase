@@ -3,10 +3,12 @@
 {% block body %}
     <h1>Attendance</h1>
 
-    <div id="chart" style="width: 800px;"></div>
+    <div id="calendar"></div>
+    <div id="activityTypeChart"></div>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-        {{ gc_draw(chart, 'chart') }}
+        {{ gc_draw(calendarChart, 'calendar') }}
+        {{ gc_draw(activityTypeChart, 'activityTypeChart') }}
     </script>
 {% endblock %}

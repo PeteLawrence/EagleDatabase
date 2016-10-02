@@ -36,6 +36,10 @@
     </div>
 </div>
 
+<div class="col-lg-4">
+    <div id="membershipTypeChart"></div>
+</div>
+
 {% endblock %}
 
 {% block javascripts %}
@@ -45,5 +49,6 @@
 {% if ageChart is defined %}{{ gc_draw(ageChart, 'ageChart') }}{% endif %}
 {% if lengthChart is defined %}{{ gc_draw(lengthChart, 'lengthChart') }}{% endif %}
 {% if returningChart is defined %}{{ gc_draw(returningChart, 'returningChart') }}{% endif %}
+{% if membershipTypeChart is defined %}{{ gc_draw(membershipTypeChart, 'membershipTypeChart') }}{% endif %}
 </script>
 {% endblock %}

@@ -59,22 +59,12 @@ class ReportController extends Controller
      */
     public function attendanceAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $reportService = $this->get('eagle_report');
 
-        $data[] = ['Date', 'People'];
-
-        $activities = $em->getRepository('AppBundle:Activity')->findAll();
-        foreach ($activities as $activity) {
-            $data[] = [ $activity->getActivityStart(), $activity->getPeople() ];
-        }
-
-        $chart = new ColumnChart();
-        $chart->getData()->setArrayToDataTable($data);
-        $chart->getOptions()->setIsStacked(true);
-        $chart->getOptions()->getBar()->setGroupWidth('20%');
 
         return $this->render('admin/report/attendance.html.twig', array(
-            'chart' => $chart,
+            'calendarChart' => $reportService->buildCalendarChart(),
+            'activityTypeChart' => $reportService->buildActivityTypeChart()
         ));
     }
 
@@ -101,6 +91,7 @@ class ReportController extends Controller
                 'ageChart' => $reportService->buildAgeChart($data['date'], str_getcsv($data['ageRanges'])),
                 'returningChart' => $reportService->buildReturningChart($data['date']),
                 'lengthChart' => $reportService->buildLengthChart($data['date']),
+                'membershipTypeChart' => $reportService->buildMembershipTypeChart($data['date'])
             ));
         } else {
             return $this->render('admin/report/membership.html.twig', array(
@@ -131,29 +122,6 @@ class ReportController extends Controller
             'whiteWaterGenderChart' => $this->buildWhiteWaterGenderChart(),
             'whiteWaterAgeChart' => $this->buildWhiteWaterAgeChart()
         ));
-    }
-
-
-    private function buildVisitsChart()
-    {
-        $chart = new PieChart();
-        $chart->getOptions()->setTitle('Visits');
-        $chart->getData()->setArrayToDataTable(
-            [
-                ['Type', 'Visits'],
-                ['Wednesday Night', 1002],
-                ['Friday Night', 78],
-                ['Whitewater Weekend', 98],
-                ['Touring Weekend', 87],
-                ['Pool Session', 124],
-                ['Sea Trip', 31],
-                ['Lee Valley', 20],
-                ['Horstead', 42],
-            ]
-        );
-        $chart->getOptions()->setWidth(350);
-
-        return $chart;
     }
 
 

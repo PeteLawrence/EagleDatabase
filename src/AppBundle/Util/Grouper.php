@@ -19,12 +19,19 @@ class Grouper
         }
     }
 
-    public function addItem($groupingValue)
+    public function addItem($groupingValue, $add = 1)
     {
         for ($i = 0; $i < sizeof($this->groupingLimits); $i++) {
-            if ($this->groupingLimits[$i] > $groupingValue) {
-                $this->groups[$i]['count']++;
-                return;
+            if (is_numeric($groupingValue)) {
+                if ($this->groupingLimits[$i] > $groupingValue) {
+                    $this->groups[$i]['count']+= $add;
+                    return;
+                }
+            } else {
+                if ($this->groupingLimits[$i] == $groupingValue) {
+                    $this->groups[$i]['count']+= $add;
+                    return;
+                }
             }
         }
     }
