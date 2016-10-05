@@ -39,15 +39,16 @@ class LoadMembersCommand extends ContainerAwareCommand
             }
             $person->setAddr1($data[4]);
             $person->setAddr2($data[5]);
-            $person->setTown($data[6]);
-            $person->setCounty($data[7]);
-            $person->setPostcode($data[8]);
-            $person->setTelephone($data[9]);
-            $person->setMobile($data[10]);
+            $person->setAddr2($data[6]);
+            $person->setTown($data[7]);
+            $person->setCounty($data[8]);
+            $person->setPostcode($data[9]);
+            $person->setTelephone($data[10]);
+            $person->setMobile($data[11]);
             $person->setDisability(false);
-            $person->setNotes($data[16]);
+            $person->setNotes($data[17]);
 
-            $person->setGender($data[48]);
+            $person->setGender($data[49]);
 
             $person->setIsActive(true);
 
