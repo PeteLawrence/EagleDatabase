@@ -60,7 +60,14 @@ class SignInController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('signin_show', array('id' => $activity->getId(), 'key' => $activity->getSigninKey())))
             ->setMethod('POST')
-            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); }, 'placeholder' => '' ])
+            ->add('person', EntityType::class, [
+                'class' => 'AppBundle:Person',
+                'query_builder' => function (\Doctrine\ORM\EntityRepository $er) {
+                    return $er->queryMembersAtDate(new \DateTime());
+                },
+                'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); },
+                'placeholder' => ''
+            ])
             ->add('participantRole', EntityType::class, ['class' => 'AppBundle:ParticipantRole', 'choice_label' => 'role', 'label' => 'Role'])
             ->getForm()
         ;
