@@ -31,7 +31,7 @@
                     <td>{{ activity.participantRole.role }}</td>
                     <td>{{ activity.participantStatus.status }}</td>
                     <td>
-                        <a href="{{ path('activity_view', { id: activity.id })}}"><i class="fa fa-eye"></i></a>
+                        <a href="{{ path('activity_view', { id: activity.managedActivity.id })}}"><i class="fa fa-eye"></i></a>
                     </td>
                 </tr>
             {% endfor %}
