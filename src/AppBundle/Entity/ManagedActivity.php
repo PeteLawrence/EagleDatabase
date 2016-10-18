@@ -139,4 +139,11 @@ class ManagedActivity extends \AppBundle\Entity\Activity
     {
         return sizeof($this->participant);
     }
+
+    public function acceptingSignups()
+    {
+        $now = new \DateTime();
+
+        return (($this->signupStart < $now) && ($this->signupEnd > $now));
+    }
 }
