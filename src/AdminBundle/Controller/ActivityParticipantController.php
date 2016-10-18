@@ -127,7 +127,7 @@ class ActivityParticipantController extends Controller
             $em->remove($participant);
             $em->flush();
 
-            return $this->redirectToRoute('activity_participant_list', [ 'id' => $participant->getActivity()->getId() ]);
+            return $this->redirectToRoute('activity_participant_list', [ 'id' => $participant->getManagedActivity()->getId() ]);
         }
 
         return $this->render('admin/activity/participant_delete.html.twig', array(
@@ -140,7 +140,7 @@ class ActivityParticipantController extends Controller
     private function createDeleteForm(Participant $participant)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('activity_participant_delete', array('id' => $participant->getActivity()->getId(), 'pid' => $participant->getId() )))
+            ->setAction($this->generateUrl('activity_participant_delete', array('id' => $participant->getManagedActivity()->getId(), 'pid' => $participant->getId() )))
             ->setMethod('DELETE')
             ->getForm()
         ;

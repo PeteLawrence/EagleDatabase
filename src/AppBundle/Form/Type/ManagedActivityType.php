@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -25,6 +26,7 @@ class ManagedActivityType extends AbstractType
             ->add('activityStart', DateTimeType::class, [ 'required' => true, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
             ->add('activityEnd', DateTimeType::class, [ 'required' => true, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
             ->add('spaces')
+            ->add('allowOnlineSignup', CheckboxType::class)
             ->add('signupStart', DateTimeType::class, [ 'required' => false, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
             ->add('signupEnd', DateTimeType::class, [ 'required' => false, 'date_widget' => 'single_text', 'time_widget' => 'single_text' ])
             ->add('activityType', EntityType::class, ['class' => 'AppBundle:ActivityType', 'choice_label' => 'type' ])

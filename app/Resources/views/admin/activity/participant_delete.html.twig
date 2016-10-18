@@ -9,5 +9,5 @@
         <input type="submit" value="Yes" class="btn btn-danger">
     {{ form_end(delete_form) }}
 
-    <a href="{{ path('activity_participant_list', { 'id': participant.activity.id } ) }}" class="btn btn-primary">No</a>
+    <a href="{{ path('activity_participant_list', { 'id': participant.managedactivity.id } ) }}" class="btn btn-primary">No</a>
 {% endblock %}

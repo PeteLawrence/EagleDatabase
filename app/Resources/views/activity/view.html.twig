@@ -77,10 +77,20 @@
                     <progress class="progress" value="{{ activity.people }}" max="{{ activity.spaces }}"></progress>
                 {% endif %}
 
+
+
                 {% if app.user.attending(activity) %}
                     You are signed up
                 {% else %}
-                    <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary">Sign Up</a>
+                    {% if activity.allowOnlineSignup %}
+                        {% if activity.acceptingSignups %}
+                            <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary">Sign Up</a>
+                        {% else %}
+                            Signup from {{ activity.signupStart|date('jS M Y H:i') }}
+                        {% endif %}
+                    {% else %}
+                        Online sign up is not available
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
