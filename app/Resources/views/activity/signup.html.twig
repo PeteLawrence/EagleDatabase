@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ activity.name }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="/">Home</a>
+    <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
+    <a class="breadcrumb-item" href="{{ path('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+    <span class="breadcrumb-item active">Sign Up</span>
+</nav>
+{% endblock %}
+
+{% block body %}
+    <h2>{{ activity.name }}</h2>
+
+    <p>
+        Click the button below to sign up to the activity.
+    </p>
+
+    {{ form_start(form) }}
+        <input class="btn btn-primary" type="submit" value="Sign Up" />
+    {{ form_end(form) }}
+
+    <a href="{{ path('activity_view', { id: activity.id }) }}" class="btn btn-secondary">Cancel</a>
+
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+
+{% block javascripts %}
+{% endblock %}

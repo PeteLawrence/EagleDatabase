@@ -935,4 +935,16 @@ class Person implements AdvancedUserInterface, \Serializable
 
         return $joinedDate;
     }
+
+
+    public function isAttending($activity)
+    {
+        foreach ($this->participant as $participant) {
+            if ($participant->getManagedActivity() == $activity) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

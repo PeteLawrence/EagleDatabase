@@ -42,4 +42,52 @@ class ActivityController extends Controller
             ]
         );
     }
+
+
+    /**
+     * @Route("/{id}/signup", name="activity_signup")
+     */
+    public function signupAction(Request $request, Activity $activity)
+    {
+        $em = $this->get('doctrine')->getManager();
+
+        $signupForm = $this->buildSignupForm($activity);
+        $signupForm->handleRequest($request);
+
+        if ($signupForm->isSubmitted() && $signupForm->isValid()) {
+            $participantStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Attending');
+
+            $participant = new \AppBundle\Entity\Participant;
+            $participant->setManagedActivity($activity);
+            $participant->setPerson($this->get('security.token_storage')->getToken()->getUser());
+            $participant->setSignupDateTime(new \DateTime());
+            $participant->setParticipantStatus($participantStatus);
+
+            $em->persist($participant);
+            $em->flush();
+            
+            $this->addFlash('notice', 'You have signed up to the activity');
+
+            return $this->redirectToRoute('activity_view', [ 'id' => $activity->getId() ]);
+        }
+
+        // replace this example code with whatever you need
+        return $this->render(
+            'activity/signup.html.twig',
+            [
+                'activity' => $activity,
+                'form' => $signupForm->createView()
+            ]
+        );
+    }
+
+
+    private function buildSignupForm($activity)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('activity_signup', array('id' => $activity->getId())))
+            ->setMethod('POST')
+            ->getForm()
+        ;
+    }
 }

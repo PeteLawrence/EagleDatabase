@@ -77,7 +77,11 @@
                     <progress class="progress" value="{{ activity.people }}" max="{{ activity.spaces }}"></progress>
                 {% endif %}
 
-                <a href="#" class="btn btn-sm btn-primary">Sign Up</a>
+                {% if app.user.attending(activity) %}
+                    You are signed up
+                {% else %}
+                    <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary">Sign Up</a>
+                {% endif %}
             </div>
         </div>
 
