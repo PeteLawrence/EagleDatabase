@@ -56,6 +56,7 @@ class ActivityController extends Controller
 
         if ($signupForm->isSubmitted() && $signupForm->isValid()) {
             $participantStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Attending');
+            $participantRolee = $em->getRepository('AppBundle:ParticipantRole')->findOneByStatus('Participant');
 
             $participant = new \AppBundle\Entity\Participant;
             $participant->setManagedActivity($activity);
@@ -65,7 +66,7 @@ class ActivityController extends Controller
 
             $em->persist($participant);
             $em->flush();
-            
+
             $this->addFlash('notice', 'You have signed up to the activity');
 
             return $this->redirectToRoute('activity_view', [ 'id' => $activity->getId() ]);
