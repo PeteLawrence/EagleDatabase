@@ -947,4 +947,9 @@ class Person implements AdvancedUserInterface, \Serializable
 
         return false;
     }
+
+    public function getName()
+    {
+        return $this->forename . ' ' . $this->surname;
+    }
 }
