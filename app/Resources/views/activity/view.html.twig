@@ -20,6 +20,9 @@
                 <ul>
                     <li><strong>Start</strong> {{ activity.activityStart|date('d M Y H:i')}}</li>
                     <li><strong>End</strong> {{ activity.activityEnd|date('d M Y H:i')}}</li>
+                    {% if activity.organiser %}
+                        <li><strong>Organiser</strong> {{ activity.organiser.getName }}</li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
