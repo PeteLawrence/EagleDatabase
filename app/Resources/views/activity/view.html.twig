@@ -127,14 +127,32 @@
 
             var start = new google.maps.Marker({
               position: startPos,
+              icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
               map: map,
               title: 'Start'
             });
 
             var end = new google.maps.Marker({
               position: endPos,
+              icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
               map: map,
               title: 'End'
+            });
+
+            var startWindow = new google.maps.InfoWindow({
+                content: '<strong>{{ activity.startLocation.name }}</strong><p>{{ activity.startLocation.address }}, {{ activity.startLocation.postcode }}</p>'
+            });
+
+            var endWindow = new google.maps.InfoWindow({
+                content: '<strong>{{ activity.endLocation.name }}</strong><p>{{ activity.endLocation.address }}, {{ activity.endLocation.postcode }}</p>'
+            });
+
+            start.addListener('click', function() {
+                startWindow.open(map, start);
+            });
+
+            end.addListener('click', function() {
+                endWindow.open(map, end);
             });
 
             var bounds = new google.maps.LatLngBounds();
