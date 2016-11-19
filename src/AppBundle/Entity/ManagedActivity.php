@@ -147,6 +147,10 @@ class ManagedActivity extends \AppBundle\Entity\Activity
 
     public function acceptingSignups()
     {
+        if ($this->signupStart == null || $this->signupEnd == null) {
+            return true;
+        }
+        
         $now = new \DateTime();
 
         return (($this->signupStart < $now) && ($this->signupEnd > $now));
