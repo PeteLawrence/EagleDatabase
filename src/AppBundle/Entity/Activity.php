@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type2", type="string")
- * @ORM\DiscriminatorMap({"managed"="AppBundle\Entity\ManagedActivity","unmanaged"="AppBundle\Entity\UnmanagedActivity"})
+ * @ORM\DiscriminatorMap({"managed":"AppBundle\Entity\ManagedActivity","unmanaged":"AppBundle\Entity\UnmanagedActivity"})
  */
 abstract class Activity
 {

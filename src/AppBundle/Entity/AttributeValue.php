@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr")
  * @ORM\DiscriminatorMap({
- *     "Boolean"="AppBundle\Entity\AttributeValueBoolean",
- *     "Number"="AppBundle\Entity\AttributeValueNumber",
- *     "Text"="AppBundle\Entity\AttributeValueText"
+ *     "Boolean":"AppBundle\Entity\AttributeValueBoolean",
+ *     "Number":"AppBundle\Entity\AttributeValueNumber",
+ *     "Text":"AppBundle\Entity\AttributeValueText"
  * })
  */
 abstract class AttributeValue

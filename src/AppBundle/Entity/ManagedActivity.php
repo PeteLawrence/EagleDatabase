@@ -29,6 +29,11 @@ class ManagedActivity extends \AppBundle\Entity\Activity
     private $participant;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ManagedActivityMembershipType", mappedBy="managedActivity")
+     */
+    private $managedActivityMembershipType;
+
+    /**
      * Set signinKey
      *
      * @param \DateTime $signinKey

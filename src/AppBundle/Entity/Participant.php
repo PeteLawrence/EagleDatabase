@@ -21,12 +21,6 @@ class Participant
     private $signupDatetime;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ParticipantRole", inversedBy="participant")
-     * @ORM\JoinColumn(name="participant_role_id", referencedColumnName="id")
-     */
-    private $participantRole;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person", inversedBy="participant")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
@@ -76,30 +70,6 @@ class Participant
     public function getSignupDatetime()
     {
         return $this->signupDatetime;
-    }
-
-    /**
-     * Set participantRole
-     *
-     * @param \AppBundle\Entity\ParticipantRole $participantRole
-     *
-     * @return Participant
-     */
-    public function setParticipantRole(\AppBundle\Entity\ParticipantRole $participantRole = null)
-    {
-        $this->participantRole = $participantRole;
-
-        return $this;
-    }
-
-    /**
-     * Get participantRole
-     *
-     * @return \AppBundle\Entity\ParticipantRole
-     */
-    public function getParticipantRole()
-    {
-        return $this->participantRole;
     }
 
     /**

@@ -18,7 +18,6 @@ class ParticipantType extends AbstractType
     {
         $builder
             ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
-            ->add('participantRole', EntityType::class, ['class' => 'AppBundle:ParticipantRole', 'choice_label' => 'role', 'label' => 'Role'])
             ->add('participantStatus', EntityType::class, ['class' => 'AppBundle:ParticipantStatus', 'choice_label' => 'status', 'label' => 'Status'])
             //->add('activity', EntityType::class, ['class' => 'AppBundle:Activity', 'choice_label' => 'name'])
         ;

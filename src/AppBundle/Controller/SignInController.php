@@ -37,7 +37,6 @@ class SignInController extends Controller
 
             $participant = new Participant();
             $participant->setManagedActivity($activity);
-            $participant->setParticipantRole($data['participantRole']);
             $participant->setPerson($data['person']);
 
             $em->persist($participant);
@@ -68,7 +67,6 @@ class SignInController extends Controller
                 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); },
                 'placeholder' => ''
             ])
-            ->add('participantRole', EntityType::class, ['class' => 'AppBundle:ParticipantRole', 'choice_label' => 'role', 'label' => 'Role'])
             ->getForm()
         ;
     }
