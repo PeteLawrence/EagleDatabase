@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 push-md-3">
+            <h2>Register</h2>
+            <p>Enter your {{ site_name }} username and password below to login</p>
+
+            {{ form_start(form) }}
+            {{ form_row(form.forename) }}
+            {{ form_row(form.surname) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.password) }}
+
+            <input type="submit" class="btn btn-primary" value="Register" />
+
+            {{ form_end(form)}}
+        </div>
+    </div>
+
+{% endblock %}
