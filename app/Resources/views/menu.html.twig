@@ -29,6 +29,9 @@
             </li>
         {% else %}
             <li class="nav-item">
+                <a href="{{ path('register') }}" class="nav-link"><i class="fa fa-user-plus"></i> Regster</a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ path('login') }}" class="nav-link"><i class="fa fa-sign-in"></i> Login</a>
             </li>
         {% endif %}
