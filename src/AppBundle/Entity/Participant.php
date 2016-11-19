@@ -21,6 +21,11 @@ class Participant
     private $signupDatetime;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $notes;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person", inversedBy="participant")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
@@ -142,5 +147,29 @@ class Participant
     public function getManagedActivity()
     {
         return $this->managedActivity;
+    }
+
+    /**
+     * Set notes
+     *
+     * @param string $notes
+     *
+     * @return Participant
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get notes
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }

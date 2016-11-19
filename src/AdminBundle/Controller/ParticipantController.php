@@ -91,7 +91,7 @@ class ParticipantController extends Controller
             $em->persist($participant);
             $em->flush();
 
-            return $this->redirectToRoute('activity_participant_list', [ 'id' => $participant->getActivity()->getId() ]);
+            return $this->redirectToRoute('activity_participant_list', [ 'id' => $participant->getManagedActivity()->getId() ]);
         }
 
         return $this->render('admin/participant/edit.html.twig', array(

@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Activity;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 /**
  * @Route("/activity")
@@ -57,6 +58,7 @@ class ActivityController extends Controller
         $signupForm->handleRequest($request);
 
         if ($signupForm->isSubmitted() && $signupForm->isValid()) {
+            $data = $signupForm->getData();
             $participantStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Attending');
 
             $participant = new \AppBundle\Entity\Participant;
@@ -64,6 +66,7 @@ class ActivityController extends Controller
             $participant->setPerson($this->get('security.token_storage')->getToken()->getUser());
             $participant->setSignupDateTime(new \DateTime());
             $participant->setParticipantStatus($participantStatus);
+            $participant->setNotes($data['notes']);
 
             $em->persist($participant);
             $em->flush();
@@ -87,6 +90,7 @@ class ActivityController extends Controller
     private function buildSignupForm($activity)
     {
         return $this->createFormBuilder()
+            ->add('notes', TextareaType::class, [ 'attr' => ['rows' => '5'] ])
             ->setAction($this->generateUrl('activity_signup', array('id' => $activity->getId())))
             ->setMethod('POST')
             ->getForm()
