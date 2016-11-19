@@ -54,7 +54,7 @@ abstract class Activity
     private $weatherDataPoints;
 
     /**
-     * 
+     *
      */
     private $weatherObservation;
 
@@ -420,5 +420,11 @@ abstract class Activity
     public function getWeatherDataPoints()
     {
         return $this->weatherDataPoints;
+    }
+
+
+    public function getNameAndDate()
+    {
+        return sprintf('%s - %s', $this->name, $this->activityStart->format('d M Y'));
     }
 }
