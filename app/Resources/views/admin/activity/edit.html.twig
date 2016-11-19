@@ -52,7 +52,7 @@
                 {% for type in activity.managedActivityMembershipType %}
                     <tr>
                         <td>{{ type.membershipType.type }}</td>
-                        <td>{{ type.price }}</td>
+                        <td>&pound;{{ type.price|number_format(2) }}</td>
                         <td>
                             <a href="{{ path('admin_managedactivitymembershiptype_edit', { managedActivityId: activity.id, id: type.id }) }}" class="btn"><i class="fa fa-pencil"></i></a>
                         </td>

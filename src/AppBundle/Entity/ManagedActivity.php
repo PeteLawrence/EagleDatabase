@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ManagedActivityRepository")
  */
 class ManagedActivity extends \AppBundle\Entity\Activity
 {

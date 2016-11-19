@@ -18,8 +18,10 @@ class ActivityController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $activities = $em->getRepository('AppBundle:Activity')->findAll();
+        //$activities = $em->getRepository('AppBundle:Activity')->findAll();
+        $activities = $em->getRepository('AppBundle:ManagedActivity')->findActivitiesAvailableToPerson($user);
 
         return $this->render('activity/index.html.twig', array(
             'activities' => $activities,
