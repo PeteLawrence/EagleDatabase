@@ -39,6 +39,7 @@ class Person implements AdvancedUserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      */
     private $password;
 
