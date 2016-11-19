@@ -19,7 +19,7 @@ class PersonController extends Controller
     /**
      * Lists all Person entities.
      *
-     * @Route("/", name="person_index")
+     * @Route("/", name="admin_person_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -36,7 +36,7 @@ class PersonController extends Controller
     /**
      * Creates a new Person entity.
      *
-     * @Route("/new", name="person_new")
+     * @Route("/new", name="admin_person_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -50,7 +50,7 @@ class PersonController extends Controller
             $em->persist($person);
             $em->flush();
 
-            return $this->redirectToRoute('person_show', array('id' => $person->getId()));
+            return $this->redirectToRoute('admin_person_show', array('id' => $person->getId()));
         }
 
         return $this->render('admin/person/new.html.twig', array(
@@ -62,7 +62,7 @@ class PersonController extends Controller
     /**
      * Finds and displays a Person entity.
      *
-     * @Route("/{id}", name="person_show")
+     * @Route("/{id}", name="admin_person_show")
      * @Method("GET")
      */
     public function showAction(Person $person)
@@ -78,7 +78,7 @@ class PersonController extends Controller
     /**
      * Displays a form to edit an existing Person entity.
      *
-     * @Route("/{id}/edit", name="person_edit")
+     * @Route("/{id}/edit", name="admin_person_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Person $person)
@@ -92,7 +92,7 @@ class PersonController extends Controller
             $em->persist($person);
             $em->flush();
 
-            return $this->redirectToRoute('person_index');
+            return $this->redirectToRoute('admin_person_index');
         }
 
         return $this->render('admin/person/edit.html.twig', array(
@@ -105,7 +105,7 @@ class PersonController extends Controller
     /**
      * Deletes a Person entity.
      *
-     * @Route("/{id}", name="person_delete")
+     * @Route("/{id}", name="admin_person_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Person $person)
@@ -119,7 +119,7 @@ class PersonController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('person_index');
+        return $this->redirectToRoute('admin_person_index');
     }
 
     /**
@@ -132,7 +132,7 @@ class PersonController extends Controller
     private function createDeleteForm(Person $person)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('person_delete', array('id' => $person->getId())))
+            ->setAction($this->generateUrl('admin_person_delete', array('id' => $person->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

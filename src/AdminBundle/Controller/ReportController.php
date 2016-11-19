@@ -19,7 +19,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/", name="report_index")
+     * @Route("/", name="admin_report_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -30,7 +30,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/emaillist", name="report_emaillist")
+     * @Route("/emaillist", name="admin_report_emaillist")
      * @Method("GET")
      */
     public function emaillistAction()
@@ -54,7 +54,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/attendance", name="report_attendance")
+     * @Route("/attendance", name="admin_report_attendance")
      * @Method("GET")
      */
     public function attendanceAction()
@@ -72,7 +72,7 @@ class ReportController extends Controller
     /**
      * Displays a membership overview page
      *
-     * @Route("/membership", name="report_membership")
+     * @Route("/membership", name="admin_report_membership")
      * @Method({"GET", "POST"})
      */
     public function membershipAction(Request $request)
@@ -104,7 +104,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/overview", name="report_overview")
+     * @Route("/overview", name="admin_report_overview")
      * @Method("GET")
      */
     public function overviewAction()
