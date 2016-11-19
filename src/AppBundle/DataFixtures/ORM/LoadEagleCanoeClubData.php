@@ -23,7 +23,6 @@ class LoadEagleCanoeClubData extends \AppBundle\DataFixtures\EagleFixture implem
         $this->loadMembershipPeriods();
         $this->loadMembershipTypes();
         $this->loadMembershipTypePeriods();
-        $this->loadParticipantRoles();
         $this->loadParticipantStatuses();
         $this->loadQualifications();
         $this->loadLocations();
@@ -134,24 +133,6 @@ class LoadEagleCanoeClubData extends \AppBundle\DataFixtures\EagleFixture implem
     }
 
 
-    private function loadParticipantRoles()
-    {
-        $fixtures = [
-            'participantRole-organiser' => [
-                'role' => 'Organiser'
-            ],
-            'participantRole-coach' => [
-                'role' => 'Coach'
-            ],
-            'participantRole-participant' => [
-                'role' => 'Participant'
-            ],
-        ];
-
-        $this->loadFromArray('\AppBundle\Entity\ParticipantRole', $fixtures, $this->manager);
-    }
-
-
     private function loadParticipantStatuses()
     {
         $fixtures = [
@@ -159,11 +140,11 @@ class LoadEagleCanoeClubData extends \AppBundle\DataFixtures\EagleFixture implem
                 'status' => 'Attending',
                 'countsTowardsSize' => true
             ],
-            'participantRole-cancelled' => [
+            'participantStatus-cancelled' => [
                 'status' => 'Cancelled',
                 'countsTowardsSize' => false
             ],
-            'participantRole-shortlist' => [
+            'participantStatus-shortlist' => [
                 'status' => 'Shortlist',
                 'countsTowardsSize' => false
             ],

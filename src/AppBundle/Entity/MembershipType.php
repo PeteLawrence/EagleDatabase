@@ -26,6 +26,11 @@ class MembershipType
     private $membershipTypePeriod;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ManagedActivityMembershipType", mappedBy="membershipType")
+     */
+    private $managedActivityMembershipType;
+
+    /**
      *
      */
     private $memberRegistration;

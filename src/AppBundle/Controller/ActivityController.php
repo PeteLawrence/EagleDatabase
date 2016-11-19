@@ -56,7 +56,6 @@ class ActivityController extends Controller
 
         if ($signupForm->isSubmitted() && $signupForm->isValid()) {
             $participantStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Attending');
-            $participantRolee = $em->getRepository('AppBundle:ParticipantRole')->findOneByStatus('Participant');
 
             $participant = new \AppBundle\Entity\Participant;
             $participant->setManagedActivity($activity);

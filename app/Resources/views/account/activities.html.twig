@@ -18,7 +18,6 @@
             <tr>
                 <th>Activity</th>
                 <th>Date</th>
-                <th>Role</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -28,7 +27,6 @@
                 <tr>
                     <td>{{ activity.managedActivity.name}}</td>
                     <td>{{ activity.managedActivity.activityStart|date('d M Y') }}</td>
-                    <td>{{ activity.participantRole.role }}</td>
                     <td>{{ activity.participantStatus.status }}</td>
                     <td>
                         <a href="{{ path('activity_view', { id: activity.managedActivity.id })}}"><i class="fa fa-eye"></i></a>
