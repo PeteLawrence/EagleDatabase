@@ -151,4 +151,38 @@ class ManagedActivity extends \AppBundle\Entity\Activity
 
         return (($this->signupStart < $now) && ($this->signupEnd > $now));
     }
+
+    /**
+     * Add managedActivityMembershipType
+     *
+     * @param \AppBundle\Entity\ManagedActivityMembershipType $managedActivityMembershipType
+     *
+     * @return ManagedActivity
+     */
+    public function addManagedActivityMembershipType(\AppBundle\Entity\ManagedActivityMembershipType $managedActivityMembershipType)
+    {
+        $this->managedActivityMembershipType[] = $managedActivityMembershipType;
+
+        return $this;
+    }
+
+    /**
+     * Remove managedActivityMembershipType
+     *
+     * @param \AppBundle\Entity\ManagedActivityMembershipType $managedActivityMembershipType
+     */
+    public function removeManagedActivityMembershipType(\AppBundle\Entity\ManagedActivityMembershipType $managedActivityMembershipType)
+    {
+        $this->managedActivityMembershipType->removeElement($managedActivityMembershipType);
+    }
+
+    /**
+     * Get managedActivityMembershipType
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getManagedActivityMembershipType()
+    {
+        return $this->managedActivityMembershipType;
+    }
 }

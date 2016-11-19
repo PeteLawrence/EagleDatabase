@@ -13,14 +13,56 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Activity edit</h1>
+    <h1>
+        {{ activity.name }}
+        <small class="text-muted">{{ activity.activityStart|date('d M Y') }}</small>
+    </h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Save" class="btn btn-primary" />
-    {{ form_end(edit_form) }}
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" href="#details" data-toggle="tab" role="tab">Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#membershiptypes" data-toggle="tab" role="tab">Membership Types</a>
+        </li>
+    </ul>
 
-    {{ form_start(delete_form) }}
-        <input type="submit" value="Delete" class="btn btn-danger">
-    {{ form_end(delete_form) }}
+    <div class="tab-content m-t-1">
+        <div class="tab-pane active" id="details" role="tabpanel">
+                {{ form_start(edit_form) }}
+                    {{ form_widget(edit_form) }}
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                {{ form_end(edit_form) }}
+
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                {{ form_end(delete_form) }}
+        </div>
+
+        <div class="tab-pane" id="membershiptypes" role="tabpanel">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Membership Type</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                {% for type in activity.managedActivityMembershipType %}
+                    <tr>
+                        <td>{{ type.membershipType.type }}</td>
+                        <td>{{ type.price }}</td>
+                        <td>
+                            <a href="{{ path('admin_managedactivitymembershiptype_edit', { managedActivityId: activity.id, id: type.id }) }}" class="btn"><i class="fa fa-pencil"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <a href="{{ path('admin_managedactivitymembershiptype_new', { id: activity.id }) }}" class="btn btn-primary">Add</a>
+        </div>
+
+    </div>
+
 {% endblock %}

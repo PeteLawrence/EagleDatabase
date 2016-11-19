@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Managedactivitymembershiptypes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Countstowardssize</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for managedActivityMembershipType in managedActivityMembershipTypes %}
+            <tr>
+                <td><a href="{{ path('admin_managedactivitymembershiptype_show', { 'id': managedActivityMembershipType.id }) }}">{{ managedActivityMembershipType.id }}</a></td>
+                <td>{% if managedActivityMembershipType.countsTowardsSize %}Yes{% else %}No{% endif %}</td>
+                <td>{{ managedActivityMembershipType.price }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_managedactivitymembershiptype_show', { 'id': managedActivityMembershipType.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_managedactivitymembershiptype_edit', { 'id': managedActivityMembershipType.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_managedactivitymembershiptype_new') }}">Create a new managedActivityMembershipType</a>
+        </li>
+    </ul>
+{% endblock %}

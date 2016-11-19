@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Managedactivitymembershiptype</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ managedActivityMembershipType.id }}</td>
+            </tr>
+            <tr>
+                <th>Countstowardssize</th>
+                <td>{% if managedActivityMembershipType.countsTowardsSize %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ managedActivityMembershipType.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_managedactivitymembershiptype_edit', { 'managedActivityId': managedActivityMembershipType.managedActivity.id, 'id': managedActivityMembershipType.id }) }}" class="btn btn-primary">Edit</a>
+
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Delete" class="btn btn-danger">
+    {{ form_end(delete_form) }}
+
+{% endblock %}
