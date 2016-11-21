@@ -139,7 +139,7 @@ class AccountController extends Controller
 
 
 
-    public function buildNameForm($user)
+    private function buildNameForm($user)
     {
         return $this->createFormBuilder($user)
             ->setAction($this->generateUrl('account_edit'))
