@@ -86,7 +86,7 @@ class MemberChargeController extends Controller
             $em->persist($charge);
             $em->flush();
 
-            return $this->redirectToRoute('admin_person_edit', array('id' => $charge()->getPerson()->getId()));
+            return $this->redirectToRoute('admin_person_edit', array('id' => $charge->getPerson()->getId()));
         }
 
         return $this->render('admin/person/chargeapprove.html.twig', array(
