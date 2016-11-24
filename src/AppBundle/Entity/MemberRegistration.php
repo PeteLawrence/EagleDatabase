@@ -21,6 +21,11 @@ class MemberRegistration
     private $registrationDateTime;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistrationCharge", mappedBy="memberRegistration")
+     */
+    private $memberRegistrationCharge;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person", inversedBy="memberRegistration")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
@@ -119,5 +124,39 @@ class MemberRegistration
     public function getRegistrationDateTime()
     {
         return $this->registrationDateTime;
+    }
+
+    /**
+     * Add memberRegistrationCharge
+     *
+     * @param \AppBundle\Entity\MemberRegistrationCharge $memberRegistrationCharge
+     *
+     * @return MemberRegistration
+     */
+    public function addMemberRegistrationCharge(\AppBundle\Entity\MemberRegistrationCharge $memberRegistrationCharge)
+    {
+        $this->memberRegistrationCharge[] = $memberRegistrationCharge;
+
+        return $this;
+    }
+
+    /**
+     * Remove memberRegistrationCharge
+     *
+     * @param \AppBundle\Entity\MemberRegistrationCharge $memberRegistrationCharge
+     */
+    public function removeMemberRegistrationCharge(\AppBundle\Entity\MemberRegistrationCharge $memberRegistrationCharge)
+    {
+        $this->memberRegistrationCharge->removeElement($memberRegistrationCharge);
+    }
+
+    /**
+     * Get memberRegistrationCharge
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMemberRegistrationCharge()
+    {
+        return $this->memberRegistrationCharge;
     }
 }

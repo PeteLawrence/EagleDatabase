@@ -9,7 +9,7 @@
                 <th>Person</th>
                 <td>
                     {{ memberRegistration.person.forename }} {{ memberRegistration.person.surname }}
-                    <a href="{{ path('person_show', { id: memberRegistration.person.id }) }}"><i class="fa fa-user"></i>
+                    <a href="{{ path('admin_person_show', { id: memberRegistration.person.id }) }}"><i class="fa fa-user"></i>
                 </td>
             </tr>
             <tr>

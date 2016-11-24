@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Charge</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_row(edit_form.amount) }}
+        {{ form_row(edit_form.paymentType) }}
+        {{ form_row(edit_form.reference) }}
+
+        <input type="submit" value="Mark as Paid" class="btn btn-primary" />
+
+    {{ form_end(edit_form) }}
+
+{% endblock %}

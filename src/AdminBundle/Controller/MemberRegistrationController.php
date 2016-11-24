@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\MemberRegistration;
+use AppBundle\Entity\MemberRegistrationCharge;
 
 /**
  * MemberRegistration controller.
@@ -45,10 +46,22 @@ class MemberRegistrationController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Populate the MemberRegistration object
             $memberRegistration->setRegistrationDateTime(new \DateTime());
-            
+
+            // Create a MemberRegistrationCharge object
+            $memberRegistrationCharge = new MemberRegistrationCharge;
+            $memberRegistrationCharge->setPerson($memberRegistration->getPerson());
+            $memberRegistrationCharge->setAmount($memberRegistration->getMembershipTypePeriod()->getPrice());
+            $memberRegistrationCharge->setPaid(false);
+            $memberRegistrationCharge->setCreateddatetime(new \DateTime());
+            $memberRegistrationCharge->setDuedatetime(new \DateTime());
+            $memberRegistrationCharge->setMemberRegistration($memberRegistration);
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($memberRegistration);
+            $em->persist($memberRegistrationCharge);
             $em->flush();
 
             return $this->redirectToRoute('admin_memberregistration_show', array('id' => $memberRegistration->getId()));
