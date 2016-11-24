@@ -129,6 +129,11 @@ class Person implements AdvancedUserInterface, \Serializable
     private $activity2;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Charge", mappedBy="person")
+     */
+    private $charge;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Participant", mappedBy="person")
      */
     private $participant;
@@ -957,5 +962,39 @@ class Person implements AdvancedUserInterface, \Serializable
     public function getName()
     {
         return $this->forename . ' ' . $this->surname;
+    }
+
+    /**
+     * Add charge
+     *
+     * @param \AppBundle\Entity\Charge $charge
+     *
+     * @return Person
+     */
+    public function addCharge(\AppBundle\Entity\Charge $charge)
+    {
+        $this->charge[] = $charge;
+
+        return $this;
+    }
+
+    /**
+     * Remove charge
+     *
+     * @param \AppBundle\Entity\Charge $charge
+     */
+    public function removeCharge(\AppBundle\Entity\Charge $charge)
+    {
+        $this->charge->removeElement($charge);
+    }
+
+    /**
+     * Get charge
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCharge()
+    {
+        return $this->charge;
     }
 }

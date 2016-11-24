@@ -11,6 +11,9 @@
             <a class="nav-link" href="#history" data-toggle="tab" role="tab">Member History</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#charges" data-toggle="tab" role="tab">Charges</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#qualifications" data-toggle="tab" role="tab">Qualifications</a>
         </li>
     </ul>
@@ -94,7 +97,41 @@
                         <td>{{ registration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</td>
                         <td>{{ registration.membershipTypePeriod.membershipType.type }}</td>
                         <td>
-                            <a href="{{ path('admin_memberregistration_edit', { id: registration.id, next: path('person_edit', {id: person.id})})}}"><i class="fa fa-pencil"></i></a>
+                            <a href="{{ path('admin_memberregistration_edit', { id: registration.id, next: path('admin_person_edit', {id: person.id})})}}"><i class="fa fa-pencil"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <a href="{{ path('admin_memberregistration_new') }}" class="btn btn-primary">Add Member Registration</a>
+        </div>
+
+        <div class="tab-pane" id="charges" role="tabpanel">
+            <h2>Charges</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Paid</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                {% for charge in person.charge %}
+                    <tr>
+                        <td>{{ charge.createddatetime|date('d M Y') }}
+                        <td>{{ charge.description }}</td>
+                        <td>&pound;{{ charge.amount|number_format(2) }}
+                        <td>
+                            {% if charge.paid %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('admin_membercharge_show', { personId: person.id, id: charge.id})}}"><i class="fa fa-search"></i></a>
                         </td>
                     </tr>
                 {% endfor %}

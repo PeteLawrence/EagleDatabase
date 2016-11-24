@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Payment Types</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for paymentType in paymentTypes %}
+            <tr>
+                <td>{{ paymentType.type }}</td>
+                <td>
+                    <a href="{{ path('admin_paymenttype_edit', { 'id': paymentType.id }) }}" class="btn"><i class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_paymenttype_new') }}" class="btn btn-primary">Create</a>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Charge</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Description</th>
+                <td>{{ charge.description }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>&pound;{{ charge.amount|number_format(2) }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ charge.createddatetime|date('d M Y') }}</td>
+            </tr>
+            <tr>
+                <th>Due</th>
+                <td>{{ charge.duedatetime|date('d M Y') }}</td>
+            </tr>
+            {% if charge.paid %}
+                <tr>
+                    <th>Paid</th>
+                    <td>
+                        Yes - {{ charge.paiddatetime|date('d M Y') }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td>
+                        {{ charge.paymentType.type }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Reference</th>
+                    <td>
+                        {{ charge.reference }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th>Paid</th>
+                    <td>No</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}
