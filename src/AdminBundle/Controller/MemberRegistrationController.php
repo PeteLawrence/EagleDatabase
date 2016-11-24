@@ -52,6 +52,7 @@ class MemberRegistrationController extends Controller
             // Create a MemberRegistrationCharge object
             $memberRegistrationCharge = new MemberRegistrationCharge;
             $memberRegistrationCharge->setPerson($memberRegistration->getPerson());
+            $memberRegistrationCharge->setDescription('Membership');
             $memberRegistrationCharge->setAmount($memberRegistration->getMembershipTypePeriod()->getPrice());
             $memberRegistrationCharge->setPaid(false);
             $memberRegistrationCharge->setCreateddatetime(new \DateTime());

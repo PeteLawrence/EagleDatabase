@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\MemberRegistration;
 use AppBundle\Entity\MemberRegistrationCharge;
 use AppBundle\Entity\Charge;
+use AppBundle\Entity\OtherCharge;
 
 /**
  * MemberRegistration controller.
@@ -23,8 +24,31 @@ class MemberChargeController extends Controller
      * @Route("/new", name="admin_membercharge_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $personId)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $person = $em->getRepository('AppBundle:Person')->findOneById($personId);
+
+        $charge = new OtherCharge();
+        $charge->setPerson($person);
+        $charge->setDuedatetime(new \DateTime());
+        $form = $this->createForm('AppBundle\Form\Type\OtherChargeType', $charge);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $charge->setCreateddatetime(new \DateTime());
+
+            $em->persist($charge);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_person_edit', array('id' => $person->getId()));
+        }
+
+        return $this->render('admin/person/chargenew.html.twig', array(
+            'charge' => $charge,
+            'form' => $form->createView(),
+        ));
     }
 
 
