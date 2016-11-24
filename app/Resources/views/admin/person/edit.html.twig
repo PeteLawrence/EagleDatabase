@@ -132,12 +132,15 @@
                         </td>
                         <td>
                             <a href="{{ path('admin_membercharge_show', { personId: person.id, id: charge.id})}}"><i class="fa fa-search"></i></a>
+                            {% if not charge.paid %}
+                                <a href="{{ path('admin_membercharge_approve', { personId: person.id, id: charge.id})}}"><i class="fa fa-check"></i></a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
             </table>
 
-            <a href="{{ path('admin_memberregistration_new') }}" class="btn btn-primary">Add Member Registration</a>
+            <a href="{{ path('admin_membercharge_new', { personId: person.id }) }}" class="btn btn-primary">Add Charge</a>
         </div>
 
         <div class="tab-pane" id="qualifications" role="tabpanel">

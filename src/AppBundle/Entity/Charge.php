@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -24,11 +25,13 @@ abstract class Charge
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank
      */
     private $description;
 
     /**
      * @ORM\Column(type="decimal", nullable=false)
+     * @Assert\NotBlank
      */
     private $amount;
 
