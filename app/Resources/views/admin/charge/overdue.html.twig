@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Overdue Charges</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Due Date</th>
+                <th>Member</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for charge in charges %}
+            <tr>
+                <td>{{ charge.duedatetime|date('d M Y')}}</td>
+                <td>{{ charge.person.name }}</td>
+                <td>{{ charge.description }}</td>
+                <td>&pound;{{ charge.amount|number_format(2) }}</td>
+                <td>
+                    <a href="{{ path('admin_person_edit', { id: charge.person.id })}}"><i class="fa fa-user"></i></a>
+                    <a href="{{ path('admin_membercharge_approve', { personId: charge.person.id, id: charge.id})}}"><i class="fa fa-check"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <strong>Total Overdue: &pound;{{ totalOverdue|number_format(2) }}</strong>
+{% endblock %}

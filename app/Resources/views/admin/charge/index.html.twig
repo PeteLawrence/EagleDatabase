@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Charges</h1>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_charge_due') }}">Charges Due</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_charge_overdue') }}">Charges Overdue</a>
+        </li>
+    </ul>
+{% endblock %}
