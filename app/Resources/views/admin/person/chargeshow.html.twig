@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_index')}}">People</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_show', { id: charge.person.id }) }}">{{ charge.person.name }}</a>
+        <span class="breadcrumb-item active">Charge: {{ charge.description }}</span>
+    </nav>
+{% endblock %}
+
 {% block body %}
     <h1>Charge</h1>
 

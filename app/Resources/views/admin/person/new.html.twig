@@ -1,5 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_index')}}">People</a>
+        <span class="breadcrumb-item active">New</span>
+    </nav>
+{% endblock %}
+
 {% block body %}
     <h1>Person creation</h1>
 
@@ -8,9 +17,4 @@
         <input type="submit" value="Create" class="btn btn-primary" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('person_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}
