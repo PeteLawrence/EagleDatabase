@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <span class="breadcrumb-item active">Membership Extras</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Membership Extras</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for membershipExtra in membershipExtras %}
+            <tr>
+                <td>{{ membershipExtra.name }}</td>
+                <td>
+                    <a href="{{ path('admin_membershipextra_edit', { 'id': membershipExtra.id }) }}"><i class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_membershipextra_new') }}" class="btn btn-primary">Create a new extra</a>
+{% endblock %}
