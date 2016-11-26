@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Renew{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <a class="breadcrumb-item" href="{{ path('account_membership') }}">Membership</a>
+        <span class="breadcrumb-item active">Renew</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h2>Renew 3</h2>
+
+    <table class="table">
+        <tr>
+            <th>Membership Type</th>
+            <td>{{ memberRegistration.membershipTypePeriod.membershipType.type }}</td>
+            <td>&pound;{{ memberRegistration.membershipTypePeriod.price|number_format(2) }}</td>
+        </tr>
+
+        {% for extra in memberRegistration.memberRegistrationExtra %}
+            <tr>
+                <th>Extra</th>
+                <td>{{ extra.membershipTypePeriodExtra.membershipExtra.name }}</td>
+                <td>&pound;{{ extra.membershipTypePeriodExtra.value|number_format(2) }}</td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <th>Total</th>
+            <td></td>
+            <td>&pound;{{ total|number_format(2)}}
+        </tr>
+    </table>
+
+    {{ form_start(form) }}
+        <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="{{ stripe_publishable_key }}"
+            data-amount="{{ total * 100 }}"
+            data-name="{{ site_name }}"
+            data-description="Membership"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto"
+            data-zip-code="true"
+            data-currency="gbp"
+            data-email="{{ app.user.email }}">
+        </script>
+    {{ form_end(form) }}
+
+{% endblock %}
