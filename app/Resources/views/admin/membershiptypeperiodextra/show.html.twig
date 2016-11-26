@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_membershiptypeperiodextra_index')}}">Membership Type Period Extras</a>
+        <span class="breadcrumb-item active">{{ membershipTypePeriodExtra.name }}</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Membershiptypeperiodextra</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Period</th>
+                <td>{{ membershipTypePeriodExtra.membershipTypePeriod.membershipPeriod.fromdate|date('d M Y') }} - {{ membershipTypePeriodExtra.membershipTypePeriod.membershipPeriod.todate|date('d M Y') }}</td>
+            </tr>
+            <tr>
+                <th>Extra</th>
+                <td>{{ membershipTypePeriodExtra.membershipExtra.name }}</td>
+            </tr>
+            <tr>
+                <th>Value</th>
+                <td>{{ membershipTypePeriodExtra.value }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_membershiptypeperiodextra_edit', { 'id': membershipTypePeriodExtra.id }) }}" class="btn btn-primary">Edit</a>
+
+    {{ form_start(delete_form) }}
+        <input type="submit" value="Delete" class="btn btn-danger">
+    {{ form_end(delete_form) }}
+{% endblock %}
