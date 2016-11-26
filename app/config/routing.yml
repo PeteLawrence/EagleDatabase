@@ -1,7 +1,3 @@
-app_membership_extra:
-    resource: "@AppBundle/Controller/MembershipExtraController.php"
-    type:     annotation
-
 admin:
     resource: "@AdminBundle/Controller/"
     type:     annotation
