@@ -12,16 +12,12 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Renew</h2>
+    <h2>Renew 2</h2>
 
     {{ form_start(form) }}
-
-        <div class="form-group row">
-            <label for="example-text-input" class="col-xs-2 col-form-label">Membership Type</label>
-            <div class="col-xs-4">
-                {{ form_widget(form.membershipTypePeriod) }}
-            </div>
-        </div>
+        {% for child in form.children %}
+            {{ form_row(child) }}
+        {% endfor %}
 
         <input type="submit" value="Next" class="btn btn-primary" />
     {{ form_end(form) }}

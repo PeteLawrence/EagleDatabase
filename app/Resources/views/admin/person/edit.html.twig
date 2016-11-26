@@ -97,6 +97,7 @@
                         <th>From</th>
                         <th>To</th>
                         <th>Type</th>
+                        <th>Paid</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -105,6 +106,7 @@
                         <td>{{ registration.membershipTypePeriod.membershipPeriod.fromDate|date('d/m/Y') }}</td>
                         <td>{{ registration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</td>
                         <td>{{ registration.membershipTypePeriod.membershipType.type }}</td>
+                        <td></td>
                         <td>
                             <a href="{{ path('admin_memberregistration_edit', { id: registration.id, next: path('admin_person_edit', {id: person.id})})}}"><i class="fa fa-pencil"></i></a>
                         </td>
