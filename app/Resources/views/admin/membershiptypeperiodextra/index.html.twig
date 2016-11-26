@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <span class="breadcrumb-item active">Membership Type Period Extras</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Membership Type Period Extras</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Extra</th>
+                <th>Period</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for membershipTypePeriodExtra in membershipTypePeriodExtras %}
+            <tr>
+                <td>{{ membershipTypePeriodExtra.membershipExtra.name }}</td>
+                <td>{{ membershipTypePeriodExtra.membershipTypePeriod.membershipPeriod.fromdate|date('d M Y') }}</td>
+                <td>&pound;{{ membershipTypePeriodExtra.value|number_format(2) }}</td>
+                <td>
+                    <a href="{{ path('admin_membershiptypeperiodextra_edit', { 'id': membershipTypePeriodExtra.id }) }}" class="btn"><i class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_membershiptypeperiodextra_new') }}" class="btn btn-primary">Create</a>
+{% endblock %}
