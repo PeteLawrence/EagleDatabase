@@ -219,6 +219,20 @@ class AccountController extends Controller
             $memberRegistration->setRegistrationDateTime(new \DateTime());
             $memberRegistration->setPerson($this->getUser());
             $em->persist($memberRegistration);
+
+            //Create a MemberRegistrationCharge and mark as paid
+            $memberRegistrationCharge = new \AppBundle\Entity\MemberRegistrationCharge();
+            $memberRegistrationCharge->setDescription('Membership');
+            $memberRegistrationCharge->setAmount($charge->amount/100);
+            $memberRegistrationCharge->setReference($charge->id);
+            $memberRegistrationCharge->setPaid(true);
+            $memberRegistrationCharge->setPaiddatetime(new \DateTime());
+            $memberRegistrationCharge->setDuedatetime(new \DateTime());
+            $memberRegistrationCharge->setCreateddatetime(new \DateTime());
+            $memberRegistrationCharge->setMemberRegistration($memberRegistration);
+            $memberRegistrationCharge->setPerson($memberRegistration->getPerson());
+            $em->persist($memberRegistrationCharge);
+
             $em->flush();
 
             $this->addFlash('notice', 'Your renewal has been successful');
