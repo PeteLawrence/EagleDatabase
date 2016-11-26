@@ -1,11 +1,19 @@
 {% extends 'base.html.twig' %}
 
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+      <a class="breadcrumb-item" href="/">Home</a>
+      <span class="breadcrumb-item active">Admin</span>
+    </nav>
+{% endblock %}
+
 {% block body %}
     <h1>Admin</h1>
 
     <ul>
         <li><a href="{{ path('admin_activity_index') }}">Activities</a></li>
         <li><a href="{{ path('admin_activitytype_index') }}">Activity Types</a></li>
+        <li><a href="{{ path('admin_charge_index') }}">Charges</a></li>
         <li><a href="{{ path('admin_location_index') }}">Locations</a></li>
         <li><a href="{{ path('admin_person_index') }}">Members</a></li>
         <li><a href="{{ path('admin_membershipperiod_index') }}">Membership Periods</a></li>

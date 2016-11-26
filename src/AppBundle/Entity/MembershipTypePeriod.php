@@ -26,6 +26,11 @@ class MembershipTypePeriod
     private $memberRegistration;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MembershipTypePeriodExtra", mappedBy="membershipTypePeriod")
+     */
+    private $membershipTypePeriodExtra;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MembershipType", inversedBy="membershipTypePeriod")
      * @ORM\JoinColumn(name="membership_type_id", referencedColumnName="id")
      */
@@ -161,5 +166,39 @@ class MembershipTypePeriod
     public function getMembershipPeriod()
     {
         return $this->membershipPeriod;
+    }
+
+    /**
+     * Add membershipTypePeriodExtra
+     *
+     * @param \AppBundle\Entity\MembershipTypePeriodExtra $membershipTypePeriodExtra
+     *
+     * @return MembershipTypePeriod
+     */
+    public function addMembershipTypePeriodExtra(\AppBundle\Entity\MembershipTypePeriodExtra $membershipTypePeriodExtra)
+    {
+        $this->membershipTypePeriodExtra[] = $membershipTypePeriodExtra;
+
+        return $this;
+    }
+
+    /**
+     * Remove membershipTypePeriodExtra
+     *
+     * @param \AppBundle\Entity\MembershipTypePeriodExtra $membershipTypePeriodExtra
+     */
+    public function removeMembershipTypePeriodExtra(\AppBundle\Entity\MembershipTypePeriodExtra $membershipTypePeriodExtra)
+    {
+        $this->membershipTypePeriodExtra->removeElement($membershipTypePeriodExtra);
+    }
+
+    /**
+     * Get membershipTypePeriodExtra
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMembershipTypePeriodExtra()
+    {
+        return $this->membershipTypePeriodExtra;
     }
 }

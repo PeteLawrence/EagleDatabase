@@ -1,5 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Email List</span>
+    </nav>
+{% endblock %}
+
 {% block body %}
     <h1>Email List</h1>
 

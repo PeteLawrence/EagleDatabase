@@ -21,6 +21,11 @@ class MemberRegistration
     private $registrationDateTime;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistrationExtra", mappedBy="memberRegistration")
+     */
+    private $memberRegistrationExtra;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistrationCharge", mappedBy="memberRegistration")
      */
     private $memberRegistrationCharge;
@@ -158,5 +163,39 @@ class MemberRegistration
     public function getMemberRegistrationCharge()
     {
         return $this->memberRegistrationCharge;
+    }
+
+    /**
+     * Add memberRegistrationExtra
+     *
+     * @param \AppBundle\Entity\MemberRegistrationExtra $memberRegistrationExtra
+     *
+     * @return MemberRegistration
+     */
+    public function addMemberRegistrationExtra(\AppBundle\Entity\MemberRegistrationExtra $memberRegistrationExtra)
+    {
+        $this->memberRegistrationExtra[] = $memberRegistrationExtra;
+
+        return $this;
+    }
+
+    /**
+     * Remove memberRegistrationExtra
+     *
+     * @param \AppBundle\Entity\MemberRegistrationExtra $memberRegistrationExtra
+     */
+    public function removeMemberRegistrationExtra(\AppBundle\Entity\MemberRegistrationExtra $memberRegistrationExtra)
+    {
+        $this->memberRegistrationExtra->removeElement($memberRegistrationExtra);
+    }
+
+    /**
+     * Get memberRegistrationExtra
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMemberRegistrationExtra()
+    {
+        return $this->memberRegistrationExtra;
     }
 }
