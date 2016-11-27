@@ -27,7 +27,7 @@ class MemberRegistration
     private $memberRegistrationExtra;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistrationCharge", mappedBy="memberRegistration")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\MemberRegistrationCharge", mappedBy="memberRegistration")
      */
     private $memberRegistrationCharge;
 
@@ -198,5 +198,31 @@ class MemberRegistration
     public function getMemberRegistrationExtra()
     {
         return $this->memberRegistrationExtra;
+    }
+
+
+    public function getTotal()
+    {
+        $total = $this->membershipTypePeriod->getPrice();
+
+        foreach ($this->memberRegistrationExtra as $extra) {
+            $total += $extra->getMembershipTypePeriodExtra()->getValue();
+        }
+
+        return $total;
+    }
+
+    /**
+     * Set memberRegistrationCharge
+     *
+     * @param \AppBundle\Entity\MemberRegistrationCharge $memberRegistrationCharge
+     *
+     * @return MemberRegistration
+     */
+    public function setMemberRegistrationCharge(\AppBundle\Entity\MemberRegistrationCharge $memberRegistrationCharge = null)
+    {
+        $this->memberRegistrationCharge = $memberRegistrationCharge;
+
+        return $this;
     }
 }

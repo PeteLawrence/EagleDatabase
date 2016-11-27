@@ -8,8 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
 class MemberRegistrationCharge extends \AppBundle\Entity\Charge
 {
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MemberRegistration", inversedBy="memberRegistrationCharge")
-     * @ORM\JoinColumn(name="member_registration_id", referencedColumnName="id")
+     * 
+     * @ORM\JoinColumn(name="member_registration_id", referencedColumnName="id", unique=true)
+     * @ORM\OneToOne(
+     *     targetEntity="AppBundle\Entity\MemberRegistration",
+     *     inversedBy="memberRegistrationCharge",
+     *     cascade={"persist"}
+     * )
      */
     private $memberRegistration;
 

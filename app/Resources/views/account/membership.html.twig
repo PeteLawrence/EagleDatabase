@@ -19,6 +19,7 @@
                 <th>Registered</th>
                 <th>Dates</th>
                 <th>Type</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,9 @@
                     <td>{{ registration.registrationDateTime|date('d M Y H:i') }}</td>
                     <td>{{ registration.membershipTypePeriod.membershipPeriod.fromDate|date('d M Y')}} - {{ registration.membershipTypePeriod.membershipPeriod.toDate|date('d M Y')}}</td>
                     <td>{{ registration.membershipTypePeriod.membershipType.type }}</td>
+                    <td>
+                        <a href="{{ path('account_membership_detail', { id: registration.id }) }}" class="btn"><i class="fa fa-search"></i></a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

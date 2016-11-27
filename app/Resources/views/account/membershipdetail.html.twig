@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Membership Detail{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <a class="breadcrumb-item" href="{{ path('account_membership') }}">Membership</a>
+        <span class="breadcrumb-item active">{{ memberRegistration.membershipTypePeriod.membershipPeriod.fromDate|date('d M Y') }} - {{ memberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('d M Y') }}</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h2>Membership Detail</h2>
+
+    <table class="table">
+        <tr>
+            <th>Registration Date</th>
+            <td>{{ memberRegistration.registrationDateTime|date('d M Y') }}</td>
+        </tr>
+        <tr>
+            <th>Period</th>
+            <td>
+                {{ memberRegistration.membershipTypePeriod.membershipPeriod.fromDate|date('d M Y') }} - {{ memberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('d M Y') }}
+            </td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ memberRegistration.membershipTypePeriod.membershipType.type }}</td>
+        </tr>
+        <tr>
+            <th>Paid</th>
+            <td>
+                {% if memberRegistration.memberRegistrationCharge.paid %}
+                    Yes - {{ memberRegistration.memberRegistrationCharge.paiddatetime|date('d M Y') }}
+                {% else %}
+                    No
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+    <h2>Pricing</h2>
+    <table class="table">
+        <tr>
+            <th>Membership Type</th>
+            <td>{{ memberRegistration.membershipTypePeriod.membershipType.type }}</td>
+            <td>&pound;{{ memberRegistration.membershipTypePeriod.price|number_format(2) }}</td>
+        </tr>
+
+        {% for extra in memberRegistration.memberRegistrationExtra %}
+            <tr>
+                <th>Extra</th>
+                <td>{{ extra.membershipTypePeriodExtra.membershipExtra.name }}</td>
+                <td>&pound;{{ extra.membershipTypePeriodExtra.value|number_format(2) }}</td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <th>Total</th>
+            <td></td>
+            <td><strong>&pound;{{ memberRegistration.total|number_format(2) }}</strong></td>
+        </tr>
+    </table>
+
+{% endblock %}

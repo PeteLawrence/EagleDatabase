@@ -51,6 +51,22 @@ class AccountController extends Controller
 
 
     /**
+     * @Route("/membership/{id}/view", name="account_membership_detail")
+     */
+    public function membershipDetailAction(Request $request, MemberRegistration $memberRegistration)
+    {
+        // replace this example code with whatever you need
+        return $this->render(
+            'account/membershipdetail.html.twig',
+            [
+                'memberRegistration' => $memberRegistration
+            ]
+        );
+    }
+
+
+
+    /**
      * @Route("/membership/renew", name="account_membership_renew")
      */
     public function membershipRenewAction(Request $request)
@@ -192,9 +208,7 @@ class AccountController extends Controller
 
         //Get available membership options
         $form = $this->buildStripePaymentForm();
-
         $form->handleRequest($request);
-        dump($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Configure Stripe
