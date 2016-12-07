@@ -5,7 +5,7 @@
         <a class="breadcrumb-item" href="/">Home</a>
         <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
         <a class="breadcrumb-item" href="{{ path('admin_membershiptypeperiodextra_index')}}">Membership Type Period Extras</a>
-        <span class="breadcrumb-item active">{{ membershipTypePeriodExtra.name }}</span>
+        <span class="breadcrumb-item active">{{ membershipTypePeriodExtra.membershipExtra.name }}</span>
     </nav>
 {% endblock %}
 
@@ -24,7 +24,7 @@
             </tr>
             <tr>
                 <th>Value</th>
-                <td>{{ membershipTypePeriodExtra.value }}</td>
+                <td>&pound;{{ membershipTypePeriodExtra.value|number_format(2) }}</td>
             </tr>
         </tbody>
     </table>
