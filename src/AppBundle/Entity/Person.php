@@ -124,6 +124,21 @@ class Person implements AdvancedUserInterface, \Serializable
     private $isActive;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $nextOfKinName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $nextOfKinRelation;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $nextOfKinContactDetails;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activity", mappedBy="organiser")
      */
     private $activity2;
@@ -996,5 +1011,77 @@ class Person implements AdvancedUserInterface, \Serializable
     public function getCharge()
     {
         return $this->charge;
+    }
+
+    /**
+     * Set nextOfKinName
+     *
+     * @param string $nextOfKinName
+     *
+     * @return Person
+     */
+    public function setNextOfKinName($nextOfKinName)
+    {
+        $this->nextOfKinName = $nextOfKinName;
+
+        return $this;
+    }
+
+    /**
+     * Get nextOfKinName
+     *
+     * @return string
+     */
+    public function getNextOfKinName()
+    {
+        return $this->nextOfKinName;
+    }
+
+    /**
+     * Set nextOfKinRelation
+     *
+     * @param string $nextOfKinRelation
+     *
+     * @return Person
+     */
+    public function setNextOfKinRelation($nextOfKinRelation)
+    {
+        $this->nextOfKinRelation = $nextOfKinRelation;
+
+        return $this;
+    }
+
+    /**
+     * Get nextOfKinRelation
+     *
+     * @return string
+     */
+    public function getNextOfKinRelation()
+    {
+        return $this->nextOfKinRelation;
+    }
+
+    /**
+     * Set nextOfKinContactDetails
+     *
+     * @param string $nextOfKinContactDetails
+     *
+     * @return Person
+     */
+    public function setNextOfKinContactDetails($nextOfKinContactDetails)
+    {
+        $this->nextOfKinContactDetails = $nextOfKinContactDetails;
+
+        return $this;
+    }
+
+    /**
+     * Get nextOfKinContactDetails
+     *
+     * @return string
+     */
+    public function getNextOfKinContactDetails()
+    {
+        return $this->nextOfKinContactDetails;
     }
 }
