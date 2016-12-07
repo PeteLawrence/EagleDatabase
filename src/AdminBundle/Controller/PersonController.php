@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Person;
 use AppBundle\Form\Type\PersonType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 /**
  * Person controller.
@@ -87,6 +89,9 @@ class PersonController extends Controller
         $editForm = $this->createForm('AppBundle\Form\Type\PersonType', $person);
         $editForm->handleRequest($request);
 
+        $nextOfKinForm = $this->buildNextOfKinForm($person);
+        $nextOfKinForm->handleRequest($request);
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($person);
@@ -95,10 +100,21 @@ class PersonController extends Controller
             return $this->redirectToRoute('admin_person_index');
         }
 
+        if ($nextOfKinForm->isSubmitted() && $nextOfKinForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($person);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_person_index');
+        }
+
+
+
         return $this->render('admin/person/edit.html.twig', array(
             'person' => $person,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'nextofkin_form' => $nextOfKinForm->createView()
         ));
     }
 
@@ -134,6 +150,19 @@ class PersonController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_person_delete', array('id' => $person->getId())))
             ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
+
+
+    private function buildNextOfKinForm($user)
+    {
+        return $this->createFormBuilder($user)
+            ->setAction($this->generateUrl('admin_person_edit', [ 'id' => $user->getId() ]))
+            ->setMethod('POST')
+            ->add('nextOfKinName', TextType::class, [ 'attr' => ['placeholder' => 'Name'], 'label' => 'Name' ])
+            ->add('nextOfKinRelation', TextType::class, [ 'attr' => ['placeholder' => 'Relation'], 'label' => 'Relation' ])
+            ->add('nextOfKinContactDetails', TextareaType::class, [ 'attr' => ['placeholder' => 'Contact Details', 'rows' => 3], 'label' => 'Contact Details' ])
             ->getForm()
         ;
     }

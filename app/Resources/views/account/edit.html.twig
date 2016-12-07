@@ -42,7 +42,30 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card-text">
+                    <h4 class="card-title">Next of Kin</h4>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-xs-4 col-form-label">{{ form_label(nameForm.nextOfKinName) }}</label>
+                        <div class="col-xs-8">
+                            {{ form_widget(nameForm.nextOfKinName) }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-xs-4 col-form-label">{{ form_label(nameForm.nextOfKinRelation) }}</label>
+                        <div class="col-xs-8">
+                            {{ form_widget(nameForm.nextOfKinRelation) }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-xs-4 col-form-label">{{ form_label(nameForm.nextOfKinContactDetails) }}</label>
+                        <div class="col-xs-8">
+                            {{ form_widget(nameForm.nextOfKinContactDetails) }}
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
             <div class="card card-block">
                 <h4 class="card-title">Contact Details</h4>

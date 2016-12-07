@@ -21,7 +21,7 @@ class MemberRegistration
     private $registrationDateTime;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistrationExtra", mappedBy="memberRegistration", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistrationExtra", mappedBy="memberRegistration")
      *
      */
     private $memberRegistrationExtra;
