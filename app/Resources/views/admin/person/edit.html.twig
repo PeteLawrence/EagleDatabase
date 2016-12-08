@@ -132,7 +132,13 @@
                         <td>{{ registration.membershipTypePeriod.membershipPeriod.fromDate|date('d/m/Y') }}</td>
                         <td>{{ registration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</td>
                         <td>{{ registration.membershipTypePeriod.membershipType.type }}</td>
-                        <td></td>
+                        <td>
+                            {% if registration.memberRegistrationCharge.paid %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </td>
                         <td>
                             <a href="{{ path('admin_memberregistration_edit', { id: registration.id, next: path('admin_person_edit', {id: person.id})})}}"><i class="fa fa-pencil"></i></a>
                         </td>
@@ -140,7 +146,7 @@
                 {% endfor %}
             </table>
 
-            <a href="{{ path('admin_memberregistration_new') }}" class="btn btn-primary">Add Member Registration</a>
+            <a href="{{ path('admin_enrol', { person: person.id }) }}" class="btn btn-primary">Enrol</a>
         </div>
 
         <div class="tab-pane" id="charges" role="tabpanel">

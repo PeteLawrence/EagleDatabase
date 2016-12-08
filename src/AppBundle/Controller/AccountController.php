@@ -72,8 +72,10 @@ class AccountController extends Controller
      */
     public function membershipRenewAction(Request $request)
     {
+        $membershipService = $this->get('membership_service');
+
         //Get available membership options
-        $form = $this->buildMembershipTypeForm();
+        $form = $membershipService->buildMembershipTypeForm();
 
         $form->handleRequest($request);
 
@@ -84,7 +86,6 @@ class AccountController extends Controller
             return $this->redirectToRoute('account_membership_renew2');
         }
 
-        // replace this example code with whatever you need
         return $this->render(
             'account/renew.html.twig',
             [
@@ -93,40 +94,21 @@ class AccountController extends Controller
         );
     }
 
-    private function buildMembershipTypeForm()
-    {
-        return $this->createFormBuilder()
-            ->setMethod('POST')
-            ->add('membershipTypePeriod',
-                EntityType::class,
-                [
-                    'class' => \AppBundle\Entity\MembershipTypePeriod::class,
-                    'choices' => $this->getAvailableMembershipTypes(),
-                    'choice_label' => function ($mtp) {
-                        return sprintf(
-                            '%s: %s - %s £%s',
-                            $mtp->getMembershipType()->getType(),
-                            $mtp->getMembershipPeriod()->getFromDate()->format('j M Y'),
-                            $mtp->getMembershipPeriod()->getToDate()->format('j M Y'),
-                            $mtp->getPrice()
-                        );
-                    }
-                ])
-            ->getForm();
-    }
 
     /**
      * @Route("/membership/renew2", name="account_membership_renew2")
      */
     public function membershipRenew2Action(Request $request)
     {
+        $membershipService = $this->get('membership_service');
+
         $em = $this->get('doctrine')->getManager();
         $session = $request->getSession();
 
         $mtp = $em->getRepository('AppBundle:MembershipTypePeriod')->findOneById($session->get('renew_mtp'));
 
         //Get available membership options
-        $form = $this->buildMembershipExtrasForm($mtp);
+        $form = $membershipService->buildMembershipExtrasForm($mtp);
 
 
         if ($request->getMethod() == 'POST') {
@@ -155,57 +137,21 @@ class AccountController extends Controller
     }
 
 
-    private function buildMembershipExtrasForm($membershipTypePeriod)
-    {
-        $fb = $this->createFormBuilder()
-            ->setMethod('POST');
-
-        //Loop over each of the extras available given $membershipTypePeriod
-        foreach ($membershipTypePeriod->getMembershipTypePeriodExtra() as $extra) {
-            $fb->add(
-                'extra_' . $extra->getId(),
-                CheckboxType::class,
-                [
-                    'label' => sprintf(
-                        '£%s - %s (%s)',
-                        number_format($extra->getValue(), 2),
-                        $extra->getMembershipExtra()->getName(),
-                        $extra->getMembershipExtra()->getDescription()
-                    )
-                ]
-            );
-        }
-
-        return $fb->getForm();
-    }
-
-
     /**
      * @Route("/membership/renew3", name="account_membership_renew3")
      */
     public function membershipRenew3Action(Request $request)
     {
+        $membershipService = $this->get('membership_service');
         $em = $this->get('doctrine')->getManager();
         $session = $request->getSession();
 
         $total = 0;
 
         //Create the MemberRegistration record
-        $membershipTypePeriod = $em->getRepository('AppBundle:MembershipTypePeriod')->findOneById($session->get('renew_mtp'));
-        $memberRegistration = new MemberRegistration();
-        $memberRegistration->setMembershipTypePeriod($membershipTypePeriod);
-        $total += $membershipTypePeriod->getPrice();
-
-        foreach ($session->get('renew_extras') as $extraId) {
-            $extra = $em->getRepository('AppBundle:MembershipTypePeriodExtra')->findOneById($extraId);
-            $membershipRegistrationExtra = new \AppBundle\Entity\MemberRegistrationExtra;
-            $membershipRegistrationExtra->setMembershipTypePeriodExtra($extra);
-            $membershipRegistrationExtra->setMemberRegistration($memberRegistration);
-            $memberRegistration->addMemberRegistrationExtra($membershipRegistrationExtra);
-
-            $total += $extra->getValue();
-        }
-
+        $membershipTypePeriodId = $session->get('renew_mtp');
+        $membershipTypePeriodExtraIds = $session->get('renew_extras');
+        $memberRegistration = $membershipService->buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds);
 
         //Get available membership options
         $form = $this->buildStripePaymentForm();
@@ -221,7 +167,7 @@ class AccountController extends Controller
             // Create a charge: this will charge the user's card
             try {
                 $charge = \Stripe\Charge::create(array(
-                    "amount" => ($total * 100), // Amount in pence
+                    "amount" => ($memberRegistration->getTotal() * 100), // Amount in pence
                     "currency" => "gbp",
                     "source" => $token,
                     "description" => "Membership"
@@ -272,23 +218,6 @@ class AccountController extends Controller
         return $this->createFormBuilder()
             ->setMethod('POST')
             ->getForm();
-    }
-
-    private function getAvailableMemberShipTypes()
-    {
-        $em = $this->get('doctrine')->getEntityManager();
-        $membershipTypePeriods = $em->getRepository('AppBundle:MembershipTypePeriod')->findAll();
-        $now = new \DateTime();
-
-        $options = [];
-        foreach ($membershipTypePeriods as $mtp) {
-            $mp = $mtp->getMembershipPeriod();
-            if (($mp->getFromDate() < $now) && ($mp->getToDate() > $now)) {
-                $options[] = $mtp;
-            }
-        }
-
-        return $options;
     }
 
 

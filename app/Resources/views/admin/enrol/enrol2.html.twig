@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <span class="breadcrumb-item active">Enrol</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Enrol 2</h1>
+
+    {{ form_start(form) }}
+        {{ form_rest(form) }}
+        <input type="submit" value="Next" class="btn btn-primary" />
+    {{ form_end(form) }}
+{% endblock %}
