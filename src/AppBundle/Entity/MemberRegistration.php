@@ -21,7 +21,7 @@ class MemberRegistration
     private $registrationDateTime;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistrationExtra", mappedBy="memberRegistration")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistrationExtra", mappedBy="memberRegistration", cascade={"persist"})
      *
      */
     private $memberRegistrationExtra;
@@ -205,8 +205,10 @@ class MemberRegistration
     {
         $total = $this->membershipTypePeriod->getPrice();
 
-        foreach ($this->memberRegistrationExtra as $extra) {
-            $total += $extra->getMembershipTypePeriodExtra()->getValue();
+        if (sizeof($this->memberRegistrationExtra) > 0) {
+            foreach ($this->memberRegistrationExtra as $extra) {
+                $total += $extra->getMembershipTypePeriodExtra()->getValue();
+            }
         }
 
         return $total;
