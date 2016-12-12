@@ -10,6 +10,13 @@
 {% endblock %}
 
 {% block body %}
+
+    {% if app.user.admin %}
+        <div class="alert alert-warning" role="alert">
+            <strong>Warning!</strong> You are logged in as an admin.
+        </div>
+    {% endif %}
+
     <h1>Welcome {{ app.user.forename }}!</h1>
 
     <div class="card-deck-wrapper">
