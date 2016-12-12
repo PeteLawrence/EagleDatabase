@@ -59,4 +59,8 @@
         </tbody>
     </table>
 
+    {% if not charge.paid %}
+        <a href="{{ path('admin_membercharge_approve', { personId: charge.person.id, id: charge.id})}}" class="btn btn-primary">Pay</a>
+    {% endif %}
+
 {% endblock %}
