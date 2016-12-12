@@ -99,7 +99,9 @@ class EnrolController extends Controller
      */
     public function enrol3Action(Request $request)
     {
+        $session = $request->getSession();
         $em = $this->get('doctrine')->getManager();
+        $person = $em->getRepository('AppBundle:Person')->findOneById($session->get('enrol_person'));
         $membershipService = $this->get('membership_service');
         $session = $request->getSession();
 
@@ -112,7 +114,7 @@ class EnrolController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $memberRegistration->setRegistrationDateTime(new \DateTime());
-            $memberRegistration->setPerson($this->getUser());
+            $memberRegistration->setPerson($person);
             $em->persist($memberRegistration);
 
             $memberRegistrationCharge = $membershipService->buildMemberRegistrationCharge($memberRegistration, $memberRegistration->getTotal(), false);

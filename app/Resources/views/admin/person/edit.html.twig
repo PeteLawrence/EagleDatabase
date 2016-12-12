@@ -133,7 +133,7 @@
                         <td>{{ registration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</td>
                         <td>{{ registration.membershipTypePeriod.membershipType.type }}</td>
                         <td>
-                            {% if registration.memberRegistrationCharge.paid %}
+                            {% if registration.memberRegistrationCharge and registration.memberRegistrationCharge.paid %}
                                 Yes
                             {% else %}
                                 No

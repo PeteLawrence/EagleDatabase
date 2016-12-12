@@ -9,7 +9,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Enrol 2</h1>
+    <h1>Extras</h1>
+
+    {% if form.children|length == 1 %}
+        <p>No extras can be added</p>
+    {% endif %}
 
     {{ form_start(form) }}
         {{ form_rest(form) }}
