@@ -32,6 +32,10 @@
                         <a href="{{ path('activity_view', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
                     </td>
                 </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Sorry, there's no activities available to you.  Have you enrolled?</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>

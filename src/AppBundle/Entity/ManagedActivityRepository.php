@@ -16,11 +16,17 @@ class ManagedActivityRepository extends EntityRepository
 
     public function queryActivitiesAvailableToPerson($person)
     {
+        $membershipType = 0;
+        if ($person->getCurrentMemberRegistration()) {
+            $membershipType = $person->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
+        }
+
+
         $query = $this->createQueryBuilder('ma')
             ->leftJoin('ma.managedActivityMembershipType', 'mamt')
             ->innerJoin('mamt.membershipType', 'mt')
             ->where('mt.type = ?1')
-            ->setParameter(1, $person->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType());
+            ->setParameter(1, $membershipType);
 
         return $query;
     }
