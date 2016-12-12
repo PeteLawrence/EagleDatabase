@@ -141,6 +141,9 @@
                         </td>
                         <td>
                             <a href="{{ path('admin_memberregistration_edit', { id: registration.id, next: path('admin_person_edit', {id: person.id})})}}"><i class="fa fa-pencil"></i></a>
+                            {% if not registration.memberRegistrationCharge.paid %}
+                                <a href="{{ path('admin_membercharge_show', { personId: person.id, id: registration.memberRegistrationCharge.id})}}" title="View Charge"><i class="fa fa-money"></i></a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
@@ -174,9 +177,9 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="{{ path('admin_membercharge_show', { personId: person.id, id: charge.id})}}"><i class="fa fa-search"></i></a>
+                            <a href="{{ path('admin_membercharge_show', { personId: person.id, id: charge.id})}}" title="View Charge"><i class="fa fa-search"></i></a>
                             {% if not charge.paid %}
-                                <a href="{{ path('admin_membercharge_approve', { personId: person.id, id: charge.id})}}"><i class="fa fa-check"></i></a>
+                                <a href="{{ path('admin_membercharge_approve', { personId: person.id, id: charge.id})}}" title="Pay Charge"><i class="fa fa-money"></i></a>
                             {% endif %}
                         </td>
                     </tr>
