@@ -64,6 +64,20 @@
                     <a href="#" class="btn btn-primary" role="button">Upcoming trips</a>
                 </div>
             </div>
+
+            {% if app.user.nextOfKinName == '' %}
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Next Of Kin</strong>
+                    </div>
+                    <div class="card-block">
+                        <p class="card-text"><em>Please remember to update your next of kin details</em></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('account_edit')}}" class="btn btn-primary" role="button">Update</a>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
