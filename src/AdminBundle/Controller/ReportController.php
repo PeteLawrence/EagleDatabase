@@ -125,6 +125,25 @@ class ReportController extends Controller
     }
 
 
+    /**
+     * Lists all Activity entities.
+     *
+     * @Route("/nextofkin", name="admin_report_nextofkin")
+     * @Method("GET")
+     */
+    public function nextOfKinAction()
+    {
+        $em = $this->get('doctrine')->getManager();
+
+        $people = $em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+
+
+        return $this->render('admin/report/nextOfKin.html.twig', array(
+            'people' => $people
+        ));
+    }
+
+
 
     private function buildVisitsByGenderChart()
     {
