@@ -17,7 +17,8 @@ class ManagedActivityRepository extends EntityRepository
     public function queryActivitiesAvailableToPerson($person)
     {
         $membershipType = 0;
-        if ($person->getCurrentMemberRegistration()) {
+        dump($person);
+        if ($person != 'anon.' && $person->getCurrentMemberRegistration()) {
             $membershipType = $person->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
         }
 
