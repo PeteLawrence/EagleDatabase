@@ -1084,4 +1084,10 @@ class Person implements AdvancedUserInterface, \Serializable
     {
         return $this->nextOfKinContactDetails;
     }
+
+
+    public function isMissingNextOfKinDetails()
+    {
+        return ($this->nextOfKinName == '' or $this->nextOfKinRelation == '' or $this->nextOfKinContactDetails == '');
+    }
 }

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Next Of Kin</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Next Of Kin</h1>
+
+    <table class="table">
+        <tr>
+            <th>Member</th>
+            <th>Name</th>
+            <th>Relation</th>
+            <th>Contact Details</th>
+        </tr>
+        {% for p in people %}
+            <tr {% if p.missingNextOfKinDetails %}class="table-danger"{% endif %}>
+                <td>{{ p.name }}</td>
+                <td>{{ p.nextOfKinName }}</td>
+                <td>{{ p.nextOfKinRelation }}</td>
+                <td>{{ p.nextOfKinContactDetails }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
