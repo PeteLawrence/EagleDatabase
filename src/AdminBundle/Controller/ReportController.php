@@ -37,7 +37,7 @@ class ReportController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $people = $em->getRepository('AppBundle:Person')->findAll();
+        $people = $em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
         $emails = [];
         foreach ($people as $person) {
             if ($person->getEmail() != '') {
@@ -136,7 +136,6 @@ class ReportController extends Controller
         $em = $this->get('doctrine')->getManager();
 
         $people = $em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
-
 
         return $this->render('admin/report/nextOfKin.html.twig', array(
             'people' => $people
