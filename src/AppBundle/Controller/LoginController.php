@@ -60,7 +60,7 @@ class LoginController extends Controller
                 $resetTokenExpiry = $now->add(new \DateInterval('PT20M'));
 
                 //Blank the old password, and populate the reset token
-                $person->setPassword(null);
+                $person->setPassword('XXX'); //Use 'XXX' as field cannot be emtpy.
                 $person->setPasswordResetToken($resetToken);
                 $person->setPasswordResetTokenExpiry($resetTokenExpiry);
 
