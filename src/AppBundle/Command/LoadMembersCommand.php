@@ -30,12 +30,11 @@ class LoadMembersCommand extends ContainerAwareCommand
             $person = new \AppBundle\Entity\Person;
             $person->setForename($data[1]);
             $person->setSurname($data[2]);
-            $person->setEmail($data[11]);
+            $person->setEmail($data[12]);
             $person->setAdmin(false);
             $person->setPassword(null);
-            $person->setGender(null);
             if ($data[12] != 'NULL') {
-                $person->setDob(new \DateTime($data[12]));
+                $person->setDob(new \DateTime($data[13]));
             }
             $person->setAddr1($data[4]);
             $person->setAddr2($data[5]);
