@@ -33,7 +33,7 @@ class LoadMembersCommand extends ContainerAwareCommand
             $person->setEmail($data[12]);
             $person->setAdmin(false);
             $person->setPassword(null);
-            if ($data[12] != 'NULL') {
+            if ($data[13] != 'NULL') {
                 $person->setDob(new \DateTime($data[13]));
             }
             $person->setAddr1($data[4]);
@@ -50,6 +50,12 @@ class LoadMembersCommand extends ContainerAwareCommand
             $person->setGender($data[49]);
 
             $person->setIsActive(true);
+
+            $person->setNextOfKinName($data[20]);
+            $person->setNextOfKinContactDetails($data[21]);
+            $person->setNextOfKinRelation($data[22]);
+
+            $person->setNotes($data[17]);
 
             $em->persist($person);
         }
