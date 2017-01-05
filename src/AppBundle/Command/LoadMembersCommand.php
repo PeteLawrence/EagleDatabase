@@ -57,6 +57,8 @@ class LoadMembersCommand extends ContainerAwareCommand
 
             $person->setNotes($data[17]);
 
+            $person->setPassword('X'); //set to X as can't be null
+
             $em->persist($person);
         }
 
