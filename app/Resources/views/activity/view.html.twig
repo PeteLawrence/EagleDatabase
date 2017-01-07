@@ -13,6 +13,8 @@
 {% block body %}
     <h2>{{ activity.name }}</h2>
 
+    <div class="row">
+
     <div class="col-sm-8">
         <div class="card">
             <h4 class="card-header">Summary</h4>
@@ -72,12 +74,20 @@
             <div class="card-block">
                 <strong>Places</strong> {{ activity.people}} / {{ activity.getSpaces }}
 
+                {% set percentage = (activity.people / activity.spaces) * 100 %}
+
                 {% if ((activity.people / activity.spaces) * 100 ) == 100 %}
-                    <progress class="progress progress-danger" value="{{ activity.people }}" max="{{ activity.spaces }}"></progress>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{percentage}}%" aria-valuenow="{{ activity.people }}" aria-valuemin="0" aria-valuemax="{{ activity.spaces }}"></div>
+                    </div>
                 {% elseif ((activity.people / activity.spaces) * 100 ) > 80 %}
-                    <progress class="progress progress-warning" value="{{ activity.people }}" max="{{ activity.spaces }}"></progress>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{percentage}}%" aria-valuenow="{{ activity.people }}" aria-valuemin="0" aria-valuemax="{{ activity.spaces }}"></div>
+                    </div>
                 {% else %}
-                    <progress class="progress" value="{{ activity.people }}" max="{{ activity.spaces }}"></progress>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{percentage}}%" aria-valuenow="{{ activity.people }}" aria-valuemin="0" aria-valuemax="{{ activity.spaces }}"></div>
+                    </div>
                 {% endif %}
 
 
@@ -104,6 +114,7 @@
         </div>
         {% endif %}
     </div>
+</div>
 
 {% endblock %}
 
