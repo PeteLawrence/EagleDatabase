@@ -21,8 +21,8 @@ class ActivityController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        //$activities = $em->getRepository('AppBundle:Activity')->findAll();
-        $activities = $em->getRepository('AppBundle:ManagedActivity')->findActivitiesAvailableToPerson($user);
+        $activities = $em->getRepository('AppBundle:Activity')->findAll();
+        //$activities = $em->getRepository('AppBundle:ManagedActivity')->findActivitiesAvailableToPerson($user);
 
         return $this->render('activity/index.html.twig', array(
             'activities' => $activities,
@@ -90,7 +90,7 @@ class ActivityController extends Controller
     private function buildSignupForm($activity)
     {
         return $this->createFormBuilder()
-            ->add('notes', TextareaType::class, [ 'attr' => ['rows' => '5'] ])
+            ->add('notes', TextareaType::class, [ 'attr' => ['rows' => '5'], 'label' => 'Notes to the organiser' ])
             ->setAction($this->generateUrl('activity_signup', array('id' => $activity->getId())))
             ->setMethod('POST')
             ->getForm()
