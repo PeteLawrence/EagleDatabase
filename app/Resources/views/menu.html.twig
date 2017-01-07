@@ -1,13 +1,13 @@
-<nav class="navbar navbar-dark bg-inverse">
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
     <a class="navbar-brand" href="{{ path('homepage') }}">{{ site_name }}</a>
 
-    <ul class="nav navbar-nav pull-xs-left">
+    <ul class="nav navbar-nav mr-auto">
         <li class="nav-item">
             <a class="nav-link" href="{{ path('activity_index')}}"><i class="fa fa-map-o"></i> Activities</a>
         </li>
     </ul>
 
-    <ul class="nav navbar-nav float-xs-right">
+    <ul class="nav navbar-toggleable-md navbar-nav mr-0">
         {% if app.user %}
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
