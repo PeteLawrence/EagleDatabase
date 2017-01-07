@@ -841,7 +841,6 @@ class Person implements AdvancedUserInterface, \Serializable
     public function __get($name)
     {
         if (is_array($this->personAttribute)) {
-            dump('a');
             foreach ($this->personAttribute as $personAttribute) {
                 if ($personAttribute->getAttribute()->getCode() == $name) {
                     return $personAttribute->getAttributeValue()->getValue();
