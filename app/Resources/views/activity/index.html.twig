@@ -30,6 +30,9 @@
                     <td>{{ activity.activityType.type }}</td>
                     <td>
                         <a href="{{ path('activity_view', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
+                        {% if app.user == activity.organiser %}
+                            <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-users"></i></a>
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}
