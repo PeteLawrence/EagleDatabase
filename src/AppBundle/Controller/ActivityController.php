@@ -71,6 +71,21 @@ class ActivityController extends Controller
             $em->persist($participant);
             $em->flush();
 
+            //Send an email to the organiser
+            $message = \Swift_Message::newInstance()
+                ->setSubject(sprintf('%s has signed up to %s', $participant->getPerson()->getName(), $activity->getName()))
+                ->setFrom($this->getParameter('site.email'))
+                ->setTo($activity->getOrganiser()->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/activitySignup.html.twig',
+                        array('signup' => $participant)
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+
+            //Display confirmation flash message
             $this->addFlash('notice', 'You have signed up to the activity');
 
             return $this->redirectToRoute('activity_view', [ 'id' => $activity->getId() ]);
@@ -82,6 +97,25 @@ class ActivityController extends Controller
             [
                 'activity' => $activity,
                 'form' => $signupForm->createView()
+            ]
+        );
+    }
+
+
+    /**
+     * @Route("/{id}/participants", name="activity_participants")
+     */
+    public function participantsAction(Request $request, Activity $activity)
+    {
+        //Only allow the organiser access to this page
+        if ($activity->getOrganiser() != $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return $this->render(
+            'activity/participants.html.twig',
+            [
+                'activity' => $activity
             ]
         );
     }

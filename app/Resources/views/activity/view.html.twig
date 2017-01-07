@@ -36,6 +36,10 @@
             </div>
         </div>
 
+        {% if app.user == activity.organiser %}
+            <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm btn-primary">View participants</a>
+        {% endif %}
+
         {#<div class="card">
             <h4 class="card-header">Weather</h4>
             <div class="card-block" style="height: 170px; overflow-y: scroll;">

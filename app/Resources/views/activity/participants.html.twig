@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participants{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="/">Home</a>
+    <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
+    <a class="breadcrumb-item" href="{{ path('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+    <span class="breadcrumb-item active">Participants</span>
+
+</nav>
+{% endblock %}
+
+{% block body %}
+    <h2>Participants</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Notes</th>
+                <th>Next of Kin</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for participant in activity.participant %}
+                <tr>
+                    <td>{{ participant.person.name }}</td>
+                    <td>{{ participant.notes }}</td>
+                    <td><a href="#" class="nok" title="{{ participant.person.nextofKinName }} ({{ participant.person.nextofKinRelation }})" data-content="{{ participant.person.nextOfKinContactDetails }}">{{ participant.person.nextofKinName }}</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">No one has signed up yet</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$('.nok').popover({
+  trigger: 'hover'
+})
+</script>
+{% endblock %}
