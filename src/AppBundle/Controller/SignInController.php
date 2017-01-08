@@ -65,6 +65,7 @@ class SignInController extends Controller
                     return $er->queryMembersAtDate(new \DateTime());
                 },
                 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); },
+                'label' => 'Select your name from the list below',
                 'placeholder' => ''
             ])
             ->getForm()

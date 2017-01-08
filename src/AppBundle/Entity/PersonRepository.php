@@ -22,6 +22,8 @@ class PersonRepository extends EntityRepository
             ->innerJoin('mtp.membershipPeriod', 'mp')
             ->where('?1 BETWEEN mp.fromDate AND mp.toDate')
             ->andWhere('mr.registrationDateTime <= ?1')
+            ->orderBy('p.forename')
+            ->addOrderBy('p.surname')
             ->setParameter(1, $date);
 
         return $query;
