@@ -211,6 +211,11 @@ class MemberRegistration
             }
         }
 
+        //Ensure that total doesn't become negative
+        if ($total < 0) {
+            $total = 0;
+        }
+
         return $total;
     }
 

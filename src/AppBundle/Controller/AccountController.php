@@ -208,7 +208,7 @@ class AccountController extends Controller
                 'form' => $form->createView(),
                 'memberRegistration' => $memberRegistration,
                 'stripe_publishable_key' => $this->getParameter('stripe.publishable_key'),
-                'total' => $total
+                'total' => $memberRegistration->getTotal()
             ]
         );
     }
