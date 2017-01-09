@@ -30,7 +30,7 @@ abstract class Charge
     private $description;
 
     /**
-     * @ORM\Column(type="decimal", nullable=false)
+     * @ORM\Column(type="decimal", nullable=false, precision=8, scale=2)
      * @Assert\NotBlank
      */
     private $amount;
