@@ -18,6 +18,8 @@ class MembershipPeriodType extends AbstractType
         $builder
             ->add('fromDate', DateType::class, [ 'required' => true, 'format' => 'd MMMM y', 'widget' => 'choice'])
             ->add('toDate', DateType::class, [ 'required' => true, 'format' => 'd MMMM y', 'widget' => 'choice'])
+            ->add('signupFromDate', DateType::class, [ 'required' => true, 'format' => 'd MMMM y', 'widget' => 'choice'])
+            ->add('signupToDate', DateType::class, [ 'required' => true, 'format' => 'd MMMM y', 'widget' => 'choice'])
         ;
     }
 

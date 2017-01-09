@@ -11,11 +11,11 @@
             </tr>
             <tr>
                 <th>From</th>
-                <td>{% if membershipTypePeriod.fromDate %}{{ membershipTypePeriod.fromDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if membershipTypePeriod.membershipPeriod.fromDate %}{{ membershipTypePeriod.membershipPeriod.fromDate|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>To</th>
-                <td>{% if membershipTypePeriod.toDate %}{{ membershipTypePeriod.toDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if membershipTypePeriod.membershipPeriod.toDate %}{{ membershipTypePeriod.membershipPeriod.toDate|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Price</th>

@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -23,6 +24,16 @@ class MembershipPeriod
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $toDate;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $signupFromDate;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $signupToDate;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MembershipTypePeriod", mappedBy="membershipPeriod")
@@ -126,5 +137,53 @@ class MembershipPeriod
     public function getMembershipTypePeriod()
     {
         return $this->membershipTypePeriod;
+    }
+
+    /**
+     * Set signupFromDate
+     *
+     * @param \DateTime $signupFromDate
+     *
+     * @return MembershipPeriod
+     */
+    public function setSignupFromDate($signupFromDate)
+    {
+        $this->signupFromDate = $signupFromDate;
+
+        return $this;
+    }
+
+    /**
+     * Get signupFromDate
+     *
+     * @return \DateTime
+     */
+    public function getSignupFromDate()
+    {
+        return $this->signupFromDate;
+    }
+
+    /**
+     * Set signupToDate
+     *
+     * @param \DateTime $signupToDate
+     *
+     * @return MembershipPeriod
+     */
+    public function setSignupToDate($signupToDate)
+    {
+        $this->signupToDate = $signupToDate;
+
+        return $this;
+    }
+
+    /**
+     * Get signupToDate
+     *
+     * @return \DateTime
+     */
+    public function getSignupToDate()
+    {
+        return $this->signupToDate;
     }
 }

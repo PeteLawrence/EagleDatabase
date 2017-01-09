@@ -25,7 +25,7 @@ class MembershipService
         $options = [];
         foreach ($membershipTypePeriods as $mtp) {
             $mp = $mtp->getMembershipPeriod();
-            if (($mp->getFromDate() < $now) && ($mp->getToDate() > $now)) {
+            if (($mp->getSignupFromDate() < $now) && ($mp->getSignupToDate() > $now)) {
                 $options[] = $mtp;
             }
         }
