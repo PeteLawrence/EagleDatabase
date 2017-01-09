@@ -70,6 +70,35 @@ class ReportController extends Controller
 
 
     /**
+     * Lists all Activity entities.
+     *
+     * @Route("/attendanceleague", name="admin_report_attendanceleague")
+     * @Method({"GET", "POST"})
+     */
+    public function attendanceLeagueAction(Request $request)
+    {
+        $reportService = $this->get('eagle_report');
+
+        $form = $this->createForm(\AppBundle\Form\Type\DateRangeSelectorType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            return $this->render('admin/report/attendanceleague.html.twig', array(
+                'form' => $form->createView(),
+                'attendance' => $reportService->getAttendanceLeague($data['fromDate'], $data['toDate'])
+            ));
+        }
+
+
+        return $this->render('admin/report/attendanceleague.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+
+    /**
      * Displays a membership overview page
      *
      * @Route("/membership", name="admin_report_membership")

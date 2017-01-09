@@ -215,4 +215,21 @@ class ReportService
 
         return $chart;
     }
+
+
+
+    public function getAttendanceLeague($fromDate, $toDate)
+    {
+        $q = $this->em->createQuery('SELECT person.forename, person.surname, COUNT(pa.id) AS c FROM AppBundle:Person person JOIN person.participant pa JOIN pa.managedActivity ma WHERE ma.activityStart BETWEEN ?1 AND ?2 GROUP BY person.id ORDER BY c DESC');
+        $q->setParameter(1, $fromDate);
+        $q->setParameter(2, $toDate);
+
+        $rows = [];
+
+        foreach ($q->getResult() as $result) {
+            $rows[$result['forename'] . ' ' . $result['surname']] = $result['c'];
+        }
+
+        return $rows;
+    }
 }
