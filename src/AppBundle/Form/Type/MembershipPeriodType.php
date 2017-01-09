@@ -16,8 +16,8 @@ class MembershipPeriodType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fromDate', DateType::class, [ 'required' => true, 'widget' => 'single_text'])
-            ->add('toDate', DateType::class, [ 'required' => true, 'widget' => 'single_text'])
+            ->add('fromDate', DateType::class, [ 'required' => true, 'format' => 'd MMMM y', 'widget' => 'choice'])
+            ->add('toDate', DateType::class, [ 'required' => true, 'format' => 'd MMMM y', 'widget' => 'choice'])
         ;
     }
 

@@ -262,7 +262,7 @@ class AccountController extends Controller
             ->add('surname', TextType::class, [ 'attr' => ['placeholder' => 'Surname'] ])
             ->add('email', EmailType::class, [ 'attr' => ['placeholder' => 'Email Address'] ])
             ->add('gender', ChoiceType::class, [ 'choices' => [ 'Female' => 'F', 'Male' => 'M'] ])
-            ->add('dob', BirthdayType::class, [ 'widget' => 'choice', 'label' => 'D.o.B', 'format' => 'd MMM y', 'years' => range(1910, date('Y')) ])
+            ->add('dob', BirthdayType::class, [ 'widget' => 'choice', 'label' => 'D.o.B', 'format' => 'd MMMM y', 'years' => range(1910, date('Y')) ])
             ->add('addr1', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 1'] ])
             ->add('addr2', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 2'] ])
             ->add('addr3', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 3'] ])

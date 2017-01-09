@@ -25,7 +25,7 @@ class PersonType extends AbstractType
             ->add('surname', TextType::class, [ 'attr' => ['placeholder' => 'Surname'] ])
             ->add('email', EmailType::class, [ 'attr' => ['placeholder' => 'Email Address'] ])
             ->add('gender', ChoiceType::class, [ 'choices' => [ 'Female' => 'F', 'Male' => 'M'] ])
-            ->add('dob', BirthdayType::class, [ 'html5' => true, 'widget' => 'single_text', 'label' => 'D.o.B' ])
+            ->add('dob', BirthdayType::class, [ 'html5' => true, 'widget' => 'choice', 'format' => 'd MMMM y', 'label' => 'D.o.B' ])
             ->add('addr1', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 1'] ])
             ->add('addr2', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 2'] ])
             ->add('addr3', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 3'] ])
