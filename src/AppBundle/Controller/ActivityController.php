@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Activity;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * @Route("/activity")
@@ -119,6 +120,70 @@ class ActivityController extends Controller
             ]
         );
     }
+
+
+    /**
+     * @Route("/{id}/participants/add", name="activity_participants_add")
+     */
+    public function participantsAddAction(Request $request, Activity $activity)
+    {
+        //Only allow the organiser access to this page
+        if ($activity->getOrganiser() != $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->buildAddParticipantForm($activity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $attendingStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('attending');
+            $participant = new \AppBundle\Entity\Participant();
+            $participant->setManagedActivity($activity);
+            $participant->setPerson($data['person']);
+            $participant->setParticipantStatus($attendingStatus);
+            $participant->setNotes($data['notes']);
+
+            $em->persist($participant);
+            $em->flush();
+
+            $this->addFlash('notice', sprintf('%s has been added to %s', $participant->getPerson()->getName(), $activity->getName()));
+
+            return $this->redirectToRoute('activity_view', array('id' => $participant->getManagedActivity()->getId()));
+        }
+
+        return $this->render(
+            'activity/participants_add.html.twig',
+            [
+                'activity' => $activity,
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+
+    private function buildAddParticipantForm($activity)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('activity_participants_add', array('id' => $activity->getId())))
+            ->setMethod('POST')
+            ->add('person', EntityType::class, [
+                'class' => 'AppBundle:Person',
+                'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($activity) {
+                    return $er->queryMembersAtDate(new \DateTime());
+                },
+                'choice_label' => function (\AppBundle\Entity\Person $a) { return $a->getForename() . ' ' . $a->getSurname(); },
+                'label' => 'Participant',
+                'placeholder' => ''
+            ])
+            ->add('notes', TextAreaType::class, [])
+            ->getForm()
+        ;
+    }
+
+
 
 
     private function buildSignupForm($activity)
