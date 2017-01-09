@@ -30,12 +30,12 @@ class Location
     private $postcode;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=6)
      */
     private $longitude;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=6)
      */
     private $latitude;
 
