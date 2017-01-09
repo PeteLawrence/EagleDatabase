@@ -19,6 +19,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Mobile</th>
                 <th>Notes</th>
                 <th>Next of Kin</th>
             </tr>
@@ -28,6 +29,7 @@
             {% for participant in activity.participant %}
                 <tr>
                     <td>{{ participant.person.name }}</td>
+                    <td>{{ participant.person.mobile }}</td>
                     <td>{{ participant.notes }}</td>
                     <td><a href="#" class="nok" title="{{ participant.person.nextofKinName }} ({{ participant.person.nextofKinRelation }})" data-content="{{ participant.person.nextOfKinContactDetails }}">{{ participant.person.nextofKinName }}</a></td>
                 </tr>
@@ -38,6 +40,10 @@
             {% endfor %}
         </tbody>
     </table>
+
+    {% if app.user == activity.organiser %}
+        <a href="{{ path('activity_participants_add', { id: activity.id })}}" class="btn btn-primary">Add Participant</a>
+    {% endif %}
 
 {% endblock %}
 
