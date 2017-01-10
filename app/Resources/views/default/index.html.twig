@@ -1,7 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="jumbotron">
-    <h1 class="display-4">Welcome to {{ site_name }}!</h1>
+
+<div class="banner-image" style="position:relative; height: 18rem; margin-top: -25px; margin-bottom: 10px;">
+    <div class="banner-image-fill" style="background-size: cover; background-image: url('/images/banner.jpg'); background-position: 0 -40px; height: 100%; width: 100%;">
+    </div>
 </div>
+
+<h1 class="display-5">{{ site_name }}</h1>
+
+<div class="card-deck">
+    <div class="card">
+        <div class="card-header">
+            <strong>Activities</strong>
+        </div>
+        <div class="card-block">
+            <p class="card-text">View, and signup to upcoming activities</p>
+        </div>
+        <div class="card-footer text-right">
+            <a href="{{ path('activity_index')}}" class="btn btn-primary" role="button">Activities</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <strong>Profile</strong>
+        </div>
+        <div class="card-block">
+            <p class="card-text">Update your profile.</p>
+        </div>
+        <div class="card-footer text-right">
+            <a href="{{ path('account_edit')}}" class="btn btn-primary" role="button">Profile</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <strong>Contact</strong>
+        </div>
+        <div class="card-block">
+            <p class="card-text">Find out who to contact for help.</p>
+        </div>
+        <div class="card-footer text-right">
+            <a href="{{ path('contact_index')}}" class="btn btn-primary" role="button">Contact</a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
