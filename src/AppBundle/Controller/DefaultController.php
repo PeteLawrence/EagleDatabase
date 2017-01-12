@@ -29,4 +29,14 @@ class DefaultController extends Controller
         return $this->render('default/centre.html.twig');
     }
 
+
+    /**
+     * @Route("/faqs", name="faqs")
+     */
+    public function faqsAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/faqs.html.twig');
+    }
+
 }
