@@ -22,8 +22,6 @@
         {# Menu Bar #}
         {% include 'menu.html.twig' %}
 
-        <br />
-
         {# Bread Crumbs #}
         {% block breadcrumbs %}{% endblock %}
 
@@ -32,6 +30,29 @@
 
         {# Main Content #}
         {% block body %}{% endblock %}
+
+        {# Bottom nav menu #}
+        <div class="row mt-3">
+            <div class="col-12">
+                <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Documents &amp; Downloads</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Who's Who</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Grants &amp; Awards</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('contact_index')}}">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
 
 
