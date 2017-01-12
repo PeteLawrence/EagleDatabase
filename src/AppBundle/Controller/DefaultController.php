@@ -18,4 +18,14 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
         ]);
     }
+
+
+    /**
+     * @Route("/centre", name="centre")
+     */
+    public function centreAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/centre.html.twig');
+    }
 }

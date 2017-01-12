@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="banner-image" style="position:relative; height: 18rem; margin-top: -25px; margin-bottom: 10px;">
+<div class="banner-image" style="position:relative; height: 18rem; margin-bottom: 10px;">
     <div class="banner-image-fill" style="background-size: cover; background-image: url('/images/banner.jpg'); background-position: 0 -40px; height: 100%; width: 100%;">
     </div>
 </div>
@@ -18,7 +18,7 @@
         </p>
     </div>
     <div class="col-md-4">
-        <img src="https://farm8.staticflickr.com/7727/27250465320_edfc75cbfc_z_d.jpg" class="float-right rounded img-fluid" />
+        <img src="https://farm8.staticflickr.com/7727/27250465320_edfc75cbfc_z_d.jpg" class="float-right rounded img-fluid my-2" />
     </div>
 </div>
 
@@ -32,7 +32,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <img src="https://farm9.staticflickr.com/8198/28938835010_f535903c37_z_d.jpg" class="rounded img-fluid" />
+        <img src="https://farm9.staticflickr.com/8198/28938835010_f535903c37_z_d.jpg" class="rounded img-fluid my-2" />
     </div>
     <div class="col-md-8">
         <p>
@@ -43,66 +43,5 @@
         </p>
     </div>
 </div>
-
-<div class="row mt-2">
-    <div class="col-12">
-        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-
-            <ul class="nav navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Documents &amp; Downloads</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Who's Who</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Grants &amp; Awards</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('contact_index')}}">Contact</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</div>
-
-
-<!--
-<div class="card-deck">
-    <div class="card">
-        <div class="card-header">
-            <strong>Activities</strong>
-        </div>
-        <div class="card-block">
-            <p class="card-text">View, and signup to upcoming activities</p>
-        </div>
-        <div class="card-footer text-right">
-            <a href="{{ path('activity_index')}}" class="btn btn-primary" role="button">Activities</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <strong>Profile</strong>
-        </div>
-        <div class="card-block">
-            <p class="card-text">Update your profile.</p>
-        </div>
-        <div class="card-footer text-right">
-            <a href="{{ path('account_edit')}}" class="btn btn-primary" role="button">Profile</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <strong>Contact</strong>
-        </div>
-        <div class="card-block">
-            <p class="card-text">Find out who to contact for help.</p>
-        </div>
-        <div class="card-footer text-right">
-            <a href="{{ path('contact_index')}}" class="btn btn-primary" role="button">Contact</a>
-        </div>
-    </div>
-</div>
--->
 
 {% endblock %}
