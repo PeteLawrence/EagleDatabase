@@ -11,16 +11,49 @@
 
 {% block body %}
     <h1>Contact</h1>
-    <p>Find below details of who to contact.</p>
 
-    <h3>General Information</h3>
-    <p>For general information about the club and what we do contact  <a href="mailto:info@eaglecanoeclub.org.uk">info@eaglecanoeclub.org.uk</a>.</p>
+    <div class="row">
+        <div class="col-7">
+            <p>Find below details of who to contact.</p>
 
-    <h3>Database Issues</h3>
-    <p>For issues relating to the database, email <a href="mailto:db@eaglecanoeclub.org.uk">db@eaglecanoeclub.org.uk</a>.</p>
+            <h3>General Information</h3>
+            <p>For general information about the club and what we do contact  <a href="mailto:info@eaglecanoeclub.org.uk">info@eaglecanoeclub.org.uk</a>.</p>
 
-    <h3>Activities</h3>
-    <p>For issues relating to a specific activity, please contact the organiser using the details circulated by email.</p>
+            <h3>Database Issues</h3>
+            <p>For issues relating to the database, email <a href="mailto:db@eaglecanoeclub.org.uk">db@eaglecanoeclub.org.uk</a>.</p>
+
+            <h3>Activities</h3>
+            <p>For issues relating to a specific activity, please contact the organiser using the details circulated by email.</p>
+        </div>
+
+        <div class="col-5">
+            <div id="map" style="width: 100%; height: 330px;"></div>
+        </div>
+    </div>
+
+{% endblock %}
 
 
+{% block javascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&callback=initMap" async defer></script>
+
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'));
+
+        var position = { lat: 52.641370, lng: 1.278015 };
+
+        var marker = new google.maps.Marker({
+          position: position,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+          map: map,
+          title: 'Eagle Canoe Centre'
+        });
+
+        map.setCenter(position);
+        map.setZoom(15);
+
+      }
+    </script>
 {% endblock %}
