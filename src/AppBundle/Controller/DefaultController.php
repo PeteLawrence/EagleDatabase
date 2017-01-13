@@ -39,4 +39,14 @@ class DefaultController extends Controller
         return $this->render('default/faqs.html.twig');
     }
 
+
+    /**
+     * @Route("/whoswho", name="whoswho")
+     */
+    public function whoswhoAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/whoswho.html.twig');
+    }
+
 }
