@@ -31,6 +31,16 @@ class DefaultController extends Controller
 
 
     /**
+     * @Route("/howtojoin", name="howtojoin")
+     */
+    public function howtojoinAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/howtojoin.html.twig');
+    }
+
+
+    /**
      * @Route("/faqs", name="faqs")
      */
     public function faqsAction(Request $request)
@@ -47,6 +57,16 @@ class DefaultController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render('default/whoswho.html.twig');
+    }
+
+
+    /**
+     * @Route("/grantsandawards", name="grantsandawards")
+     */
+    public function grantsandawardsAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/grantsandawards.html.twig');
     }
 
 }
