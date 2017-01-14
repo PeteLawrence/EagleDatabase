@@ -69,4 +69,13 @@ class DefaultController extends Controller
         return $this->render('default/grantsandawards.html.twig');
     }
 
+
+    /**
+     * @Route("/docsanddownloads", name="docsanddownloads")
+     */
+    public function docsanddownloadsAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/docsanddownloads.html.twig');
+    }
 }
