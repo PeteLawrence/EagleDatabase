@@ -72,7 +72,8 @@ class MembershipService
                         number_format($extra->getValue(), 2),
                         $extra->getMembershipExtra()->getName(),
                         $extra->getMembershipExtra()->getDescription()
-                    )
+                    ),
+                    'required' => false
                 ]
             );
         }
