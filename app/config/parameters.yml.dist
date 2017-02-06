@@ -25,5 +25,6 @@ parameters:
     site.name: 'EagleDB'
     site.email: 'eagledb@example.com'
     site.google_maps_key: 'AI.........'
+    site.signInEmail: 'signin@eample.com'
 
     darksky.key: 'XXXXXX'
