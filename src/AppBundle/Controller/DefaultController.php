@@ -88,9 +88,31 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $activities = $em->getRepository('AppBundle:Activity')->findAll();
 
+        $days = [];
+        $date = new \DateTime();
+        for ($i = 0; $i < 120; $i++) {
+            $d = $date->format('d M Y');
+            
+            $days[$d] = [
+                'start' => $d,
+                'activities' => []
+            ];
+            $date->add(new \DateInterval('P1D'));
+        }
+
+        foreach ($activities as $activity) {
+            $d = $activity->getActivityStart()->format('d M Y');
+
+            if (isset($days[$d])) {
+                $days[$d]['activities'][] = $activity;
+            }
+        }
+
+
+        dump($days);
         // replace this example code with whatever you need
         return $this->render('default/programme.html.twig', [
-            'activities' => $activities
+            'days' => $days
         ]);
     }
 }

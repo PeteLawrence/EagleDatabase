@@ -14,7 +14,7 @@
 <div class="row">
     <div class="col-md-12">
         <table class="table">
-            <thead>
+            <thead class="thead-default">
                 <tr>
                     <th>Date</th>
                     <th>Activity</th>
@@ -24,13 +24,20 @@
             </thead>
 
             <tbody>
-                {% for activity in activities %}
-                    <tr {% if activity.activityType.color %} style="background-color: {{activity.activityType.color}};"{% endif %}>
-                        <td>{{ activity.activityStart|date('l, d M Y') }}</td>
-                        <td>{{ activity.name }}</td>
-                        <td>{% if activity.organiser %}{{ activity.organiser.name}}{% endif %}</td>
-                        <td></td>
-                    </tr>
+                {% for day in days %}
+                    {% for activity in day.activities %}
+                        <tr {% if activity.activityType.color %} style="background-color: {{activity.activityType.color}};"{% endif %}>
+                            <td>{{ day.start|date('l, d M Y') }}</td>
+                            <td>{{ activity.name }}</td>
+                            <td>{% if activity.organiser %}{{ activity.organiser.name }}{% endif %}</td>
+                            <td></td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ day.start|date('l, d M Y') }}</td>
+                            <td colspan="3">No activities</td>
+                        </tr>
+                    {% endfor %}
                 {% endfor %}
             </tbody>
         </table>
