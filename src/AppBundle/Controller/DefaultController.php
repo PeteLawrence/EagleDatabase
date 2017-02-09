@@ -78,4 +78,19 @@ class DefaultController extends Controller
         // replace this example code with whatever you need
         return $this->render('default/docsanddownloads.html.twig');
     }
+
+
+    /**
+     * @Route("/programme", name="programme")
+     */
+    public function programmeAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $activities = $em->getRepository('AppBundle:Activity')->findAll();
+
+        // replace this example code with whatever you need
+        return $this->render('default/programme.html.twig', [
+            'activities' => $activities
+        ]);
+    }
 }
