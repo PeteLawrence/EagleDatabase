@@ -134,7 +134,7 @@ class Person implements AdvancedUserInterface, \Serializable
     private $nextOfKinRelation;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $nextOfKinContactDetails;
 

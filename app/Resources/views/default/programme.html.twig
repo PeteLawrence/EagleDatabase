@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Programme{% endblock %}
+
+{% block body %}
+
+<div class="banner-image" style="position:relative; height: 18rem; margin-bottom: 10px;">
+    <div class="banner-image-fill" style="background-size: cover; background-image: url('/images/banner.jpg'); background-position: 0 -40px; height: 100%; width: 100%;">
+    </div>
+</div>
+
+<h1 class="display-5">Programme</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Activity</th>
+                    <th>Organiser</th>
+                    <th>Leader</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for activity in activities %}
+                    <tr {% if activity.activityType.color %} style="background-color: {{activity.activityType.color}};"{% endif %}>
+                        <td>{{ activity.activityStart|date('l, d M Y') }}</td>
+                        <td>{{ activity.name }}</td>
+                        <td>{% if activity.organiser %}{{ activity.organiser.name}}{% endif %}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+{% endblock %}
