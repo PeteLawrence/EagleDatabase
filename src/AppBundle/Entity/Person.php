@@ -978,6 +978,12 @@ class Person implements AdvancedUserInterface, \Serializable
         return $this->forename . ' ' . $this->surname;
     }
 
+
+    public function getShortName()
+    {
+        return $this->forename . ' ' . substr($this->surname, 0, 1);
+    }
+
     /**
      * Add charge
      *

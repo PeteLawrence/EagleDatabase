@@ -16,10 +16,11 @@
         <table class="table">
             <thead class="thead-default">
                 <tr>
-                    <th>Date</th>
+                    <th colspan="2">Date</th>
+                    <th>Time</th>
                     <th>Activity</th>
                     <th>Organiser</th>
-                    <th>Leader</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -27,15 +28,18 @@
                 {% for day in days %}
                     {% for activity in day.activities %}
                         <tr {% if activity.activityType.color %} style="background-color: {{activity.activityType.color}};"{% endif %}>
-                            <td>{{ day.start|date('l, d M Y') }}</td>
+                            <td>{{ day.start|date('l') }}</td>
+                            <td>{{ day.start|date('d M Y') }}</td>
+                            <td>{{ activity.activityStart|date('H:i') }}</td>
                             <td>{{ activity.name }}</td>
-                            <td>{% if activity.organiser %}{{ activity.organiser.name }}{% endif %}</td>
-                            <td></td>
+                            <td>{% if activity.organiser %}<abbr title="{{ activity.organiser.name }}">{{ activity.organiser.shortName }}</abbr>{% endif %}</td>
+                            <td><a href="{{ path('activity_view', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a></td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td>{{ day.start|date('l, d M Y') }}</td>
-                            <td colspan="3">No activities</td>
+                            <td>{{ day.start|date('l') }}</td>
+                            <td>{{ day.start|date('d M Y') }}</td>
+                            <td colspan="5"></td>
                         </tr>
                     {% endfor %}
                 {% endfor %}
