@@ -35,6 +35,10 @@
             <h2>Details</h2>
             {{ form_start(edit_form) }}
                 <div class="row">
+                    <div class="col-md-3"><strong>Membership Number</strong></div>
+                    <div class="col-md-2">{{ person.id }}</div>
+                </div>
+                <div class="row">
                     <div class="col-md-1 text-md-right"><strong>{{ form_label(edit_form.forename) }}</strong></div>
                     <div class="col-md-2">{{ form_widget(edit_form.forename) }}</div>
 

@@ -621,7 +621,7 @@ class Person implements AdvancedUserInterface, \Serializable
      */
     public function getUsername()
     {
-        return $this->email;
+        return $this->id;
     }
 
     /**

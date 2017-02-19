@@ -14,6 +14,7 @@
     <table class="table" data-toggle="table" data-search="true" data-filter-control="true">
         <thead>
             <tr>
+                <th data-sortable="true" data-filter-control="input" data-field="id">#</th>
                 <th data-sortable="true" data-filter-control="input" data-field="name">Name</th>
                 <th data-filter-control="input" data-field="email">Email</th>
                 <th data-filter-control="select" data-field="admin">Admin</th>
@@ -24,6 +25,7 @@
         <tbody>
         {% for person in people %}
             <tr>
+                <td>{{ person.id }}</td>
                 <td>{{ person.forename }} {{ person.surname }}</td>
                 <td>{{ person.email }}</td>
                 <td>{% if person.admin %}Yes{% else %}No{% endif %}</td>
