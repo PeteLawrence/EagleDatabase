@@ -41,6 +41,26 @@ class DefaultController extends Controller
 
 
     /**
+     * @Route("/picsandvideos", name="picsandvideos")
+     */
+    public function picsandvideosAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/picsandvideos.html.twig');
+    }
+
+
+        /**
+         * @Route("/whatson", name="whatson")
+         */
+        public function whatsonAction(Request $request)
+        {
+            // replace this example code with whatever you need
+            return $this->render('default/whatson.html.twig');
+        }
+
+
+    /**
      * @Route("/faqs", name="faqs")
      */
     public function faqsAction(Request $request)
