@@ -26,6 +26,9 @@
                     </div>
                     <div class="card-block">
                         <p class="card-text">
+                            <strong>Membership Number: {{ app.user.id }}</strong>
+                        </p>
+                        <p class="card-text">
                             You are currently registered with {{ site_name }} as a <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }}</strong> until <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</strong>.
                         </p>
 
@@ -40,6 +43,9 @@
                         <strong>Your Membership</strong>
                     </div>
                     <div class="card-block">
+                        <p class="card-text">
+                            <strong>Membership Number: {{ app.user.id }}</strong>
+                        </p>
                         <p class="card-text">
                             Your membership has expired.
                         </p>

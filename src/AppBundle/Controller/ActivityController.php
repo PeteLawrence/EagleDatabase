@@ -207,7 +207,7 @@ class ActivityController extends Controller
     private function buildSignupForm($activity)
     {
         return $this->createFormBuilder()
-            ->add('notes', TextareaType::class, [ 'attr' => ['rows' => '5'], 'label' => 'Notes to the organiser' ])
+            ->add('notes', TextareaType::class, [ 'attr' => ['rows' => '5'], 'label' => 'Notes to the organiser', 'required' => false ])
             ->setAction($this->generateUrl('activity_signup', array('id' => $activity->getId())))
             ->setMethod('POST')
             ->getForm()
