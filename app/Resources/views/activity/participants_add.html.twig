@@ -2,17 +2,14 @@
 
 {% block title %}Participants{% endblock %}
 
-{% block breadcrumbs %}
-<nav class="breadcrumb">
-    <a class="breadcrumb-item" href="/">Home</a>
-    <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
-    <a class="breadcrumb-item" href="{{ path('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
-    <span class="breadcrumb-item active">Participants</span>
-
-</nav>
-{% endblock %}
-
 {% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
+        <a class="breadcrumb-item" href="{{ path('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+        <span class="breadcrumb-item active">Participants</span>
+    </nav>
+    
     <h2>Add Participants</h2>
 
     {{ form_start(form) }}
