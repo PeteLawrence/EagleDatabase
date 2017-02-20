@@ -1,17 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminbase.html.twig' %}
 
 {% block title %}Membership Detail{% endblock %}
 
-{% block breadcrumbs %}
+{% block body %}
     <nav class="breadcrumb">
         <a class="breadcrumb-item" href="/">Home</a>
         <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
         <a class="breadcrumb-item" href="{{ path('account_membership') }}">Membership</a>
         <span class="breadcrumb-item active">{{ memberRegistration.membershipTypePeriod.membershipPeriod.fromDate|date('d M Y') }} - {{ memberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('d M Y') }}</span>
     </nav>
-{% endblock %}
 
-{% block body %}
     <h2>Membership Detail</h2>
 
     <table class="table">

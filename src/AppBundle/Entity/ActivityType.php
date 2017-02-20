@@ -20,6 +20,11 @@ class ActivityType
     private $type;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $color;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activity", mappedBy="activityType")
      */
     private $activity;
@@ -97,5 +102,29 @@ class ActivityType
     public function getActivity()
     {
         return $this->activity;
+    }
+
+    /**
+     * Set color
+     *
+     * @param string $color
+     *
+     * @return ActivityType
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
     }
 }

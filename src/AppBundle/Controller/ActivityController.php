@@ -20,14 +20,32 @@ class ActivityController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-
         $activities = $em->getRepository('AppBundle:Activity')->findAll();
-        //$activities = $em->getRepository('AppBundle:ManagedActivity')->findActivitiesAvailableToPerson($user);
 
-        return $this->render('activity/index.html.twig', array(
-            'activities' => $activities,
-        ));
+        $days = [];
+        $date = new \DateTime();
+        for ($i = 0; $i < 120; $i++) {
+            $d = $date->format('d M Y');
+
+            $days[$d] = [
+                'start' => $d,
+                'activities' => []
+            ];
+            $date->add(new \DateInterval('P1D'));
+        }
+
+        foreach ($activities as $activity) {
+            $d = $activity->getActivityStart()->format('d M Y');
+
+            if (isset($days[$d])) {
+                $days[$d]['activities'][] = $activity;
+            }
+        }
+
+        // replace this example code with whatever you need
+        return $this->render('activity/index.html.twig', [
+            'days' => $days
+        ]);
     }
 
 

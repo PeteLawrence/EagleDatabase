@@ -22,16 +22,40 @@
         {# Menu Bar #}
         {% include 'menu.html.twig' %}
 
-        <br />
-
-        {# Bread Crumbs #}
-        {% block breadcrumbs %}{% endblock %}
-
         {# Flash Messages #}
         {% include 'messages.html.twig' %}
 
         {# Main Content #}
         {% block body %}{% endblock %}
+
+        {# Bottom nav menu #}
+        <div class="row mt-3">
+            <div class="col-12">
+                <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('docsanddownloads')}}">Documents &amp; Downloads</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('whoswho') }}">Who's Who</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('grantsandawards')}}">Grants &amp; Awards</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.flickr.com/photos/99278423@N03/sets/" target="_blank">Photos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" target="_blank">Videos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('contact_index')}}">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
 
 

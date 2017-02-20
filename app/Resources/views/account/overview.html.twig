@@ -1,15 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminbase.html.twig' %}
 
 {% block title %}Account Overview{% endblock %}
 
-{% block breadcrumbs %}
+{% block body %}
+
     <nav class="breadcrumb">
       <a class="breadcrumb-item" href="/">Home</a>
       <span class="breadcrumb-item active">Account</span>
     </nav>
-{% endblock %}
-
-{% block body %}
 
     {% if app.user.admin %}
         <div class="alert alert-warning" role="alert">

@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Documents and Downloads{% endblock %}
+
+{% block body %}
+
+{% include 'components/banner.html.twig' %}
+
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="/">Home</a>
+    <span class="breadcrumb-item active">Documents &amp; Downloads</span>
+</nav>
+
+<h1 class="display-5">Documents and Downloads</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <h5>Application Forms</h5>
+        <ul>
+            <li><a href="{{ asset('/downloads/5_1 v3 2015_2016 Application Form.pdf') }}" target="_blank">Application for membership</a></li>
+            <li><a href="{{ asset('/downloads/5_3 v6 2017_2018 Membership Fees.doc') }}" target="_blank">Membership, insurance, and course fees</a></li>
+            <li><a href="{{ asset('/downloads/5_7 v3 Disclosure For Application.pdf') }}" target="_blank">Disclosure for application as adult member of Eagle Canoe Club</a></li>
+            <li><a href="{{ asset('/downloads/5_8 v3 Code of Conduct.pdf') }}" target="_blank">Code of conduct</a></li>
+        </ul>
+
+        <h5>Other Club Documents</h5>
+        <ul>
+            <li><a href="{{ asset('/downloads/5_5 v4 Welcome to Eagle Canoe Club 2015.pdf') }}" target="_blank">Welcome to Eagle Canoe Club</a></li>
+            <li><a href="{{ asset('/downloads/5_6 v4 Child and Vulnerable Adult Protection Policy.pdf') }}" target="_blank">Child and Vulnerable Adult Protection Policy</a></li>
+        </ul>
+
+        <h5>Club Policies</h5>
+
+        <h6>Articles of Association</h6>
+        <p>
+            The club became an independent club in 1998 and had its own constitution which set out how the club would operate and the function of the committee. In 2014 the club became a company limited by guarantee to enable it to move forward with some exciting projects and thrive in the future.
+        </p>
+
+        <ul>
+            <li><a href="{{ asset('/downloads/Eagle Articles of association CASC Final.pdf') }}" target="_blank">Articles of Association</a></li>
+        </ul>
+
+        <h6>Rules of the club</h6>
+        <p>
+            The club’s management guidelines and operating procedures set out the remit within which the club operates. Within this framework, the club has produced a short list of rules and a code of conduct, which are sent out to all members with their enrolment packs and asks all members to abide by these “common sense” rules.
+        </p>
+
+        <ul>
+            <li><a href="{{ asset('/downloads/1_2 v2 Management guidelines and Club operating and safety procedures.pdf') }}" target="_blank">Management guidelines and operating and safety procedures</a></li>
+            <li><a href="{{ asset('/downloads/5_4 v2 Rules of the club.pdf') }}" target="_blank">Rules of the Club</a></li>
+        </ul>
+
+        <h6>Risk Assessments</h6>
+
+        <p>
+            The club takes the safety of its members seriously and annually undertakes risk assessments for the premises and sites we use and of the buildings and equipment.
+        </p>
+
+        <h6>Child and Vulnerable Adult Protection Policy</h6>
+        <p>
+            The club has an adopted Child and Vulnerable Adult Protection Policy and holds an annual training session relating to welfare issues to remind everyone about our responsibilities as individuals and a club, to ensure:
+        </p>
+        <ul>
+            <li>the safety of our young members and what to do should any concerns be raised</li>
+            <li>that coaches and members understand how some of our activities may have risks and discuss how to manage them safely</li>
+            <li>that coaches and members do not engage in activities in a way which poses a risk for young people or ourselves</li>
+        </ul>
+
+        <p>
+            The club has a Welfare Officer (Hazel Roe, who can be contacted on 01953 602887) and a Deputy Welfare Officer (Kate Pontin, who can be contacted on 01603 485525)
+        </p>
+        <p>
+            The Club’s policy can be downloaded here:
+        </p>
+        <ul>
+            <li><a href="{{ asset('/downloads/5_6 v4 Child and Vulnerable Adult Protection Policy.pdf') }}" target="_blank">Child protection policy</a></li>
+            <li><a href="{{ asset('/downloads/1_3_v4_Process__DBS_Checks__Club_Members.pdf') }}" target="_blank">Process for CRB checks for eagle canoe club members</a></li>
+        </ul>
+
+        <h6>Other Useful Documents</h6>
+        <ul>
+            <li><a href="{{ asset('/downloads/3_7 v3 overnight consent form.pdf') }}" target="_blank">Overnight events / activities parent consent form</a></li>
+        </ul>
+
+    </div>
+    <div class="col-md-4">
+        <img src="https://farm8.staticflickr.com/7727/27250465320_edfc75cbfc_z_d.jpg" class="float-right rounded img-fluid my-2" />
+    </div>
+</div>
+
+{% endblock %}

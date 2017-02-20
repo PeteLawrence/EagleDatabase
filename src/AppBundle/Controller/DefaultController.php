@@ -18,4 +18,95 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
         ]);
     }
+
+
+    /**
+     * @Route("/centre", name="centre")
+     */
+    public function centreAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/centre.html.twig');
+    }
+
+
+    /**
+     * @Route("/howtojoin", name="howtojoin")
+     */
+    public function howtojoinAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/howtojoin.html.twig');
+    }
+
+
+    /**
+     * @Route("/newsletters", name="newsletters")
+     */
+    public function newslettersAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/newsletters.html.twig');
+    }
+
+
+    /**
+     * @Route("/picsandvideos", name="picsandvideos")
+     */
+    public function picsandvideosAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/picsandvideos.html.twig');
+    }
+
+
+        /**
+         * @Route("/whatson", name="whatson")
+         */
+        public function whatsonAction(Request $request)
+        {
+            // replace this example code with whatever you need
+            return $this->render('default/whatson.html.twig');
+        }
+
+
+    /**
+     * @Route("/faqs", name="faqs")
+     */
+    public function faqsAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/faqs.html.twig');
+    }
+
+
+    /**
+     * @Route("/whoswho", name="whoswho")
+     */
+    public function whoswhoAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/whoswho.html.twig');
+    }
+
+
+    /**
+     * @Route("/grantsandawards", name="grantsandawards")
+     */
+    public function grantsandawardsAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/grantsandawards.html.twig');
+    }
+
+
+    /**
+     * @Route("/docsanddownloads", name="docsanddownloads")
+     */
+    public function docsanddownloadsAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/docsanddownloads.html.twig');
+    }
+
 }

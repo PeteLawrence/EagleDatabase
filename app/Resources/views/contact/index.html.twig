@@ -2,25 +2,69 @@
 
 {% block title %}Contact{% endblock %}
 
-{% block breadcrumbs %}
+{% block body %}
+
+    {% include 'components/banner.html.twig' %}
+
     <nav class="breadcrumb">
       <a class="breadcrumb-item" href="/">Home</a>
       <span class="breadcrumb-item active">Contact</span>
     </nav>
+
+    <h1>Contact</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <p>
+                The club is based at the Eagle Canoe Centre, on Helford Street, Norwich, next to Machine Mart. The centre is beside the River Wensum, opposite Anderson’s Meadow. For Sat Nav, use NR2 4LY, or see the map.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7">
+            <h3>General Information</h3>
+            <p>For general information about the club and what we do contact <a href="mailto:secretary@eaglecanoeclub.org">secretary@eaglecanoeclub.org</a>.</p>
+
+            <h3>Hiring Eagle Canoe Centre</h3>
+            <p>If you are looking to hire the site and facilities, please email Stuart Pontin - <a href="mailto:chairman@eaglecanoeclub.org?subject=Venue Hire">chairman@eaglecanoeclub.org</a>.</p>
+
+            <h3>Child Protection</h3>
+            <p>If you have concerns relating to child protection issues, contact either our Welfare Officer, Hazel Roe, on 01953 602887, or our Deputy Welfare Officer, Kate Pontin, on 01603 485525.</p>
+
+            <h3>Website</h3>
+            <p>For issues relating to the website, email <a href="mailto:db@eaglecanoeclub.org.uk">db@eaglecanoeclub.org.uk</a>.</p>
+        </div>
+
+        <div class="col-lg-5 text-right">
+            <div id="map" style="width: 100%; height: 370px;"></div>
+            <a href="https://www.google.co.uk/maps/place/Eagle+Canoe+Club/@52.6413732,1.2758293,17z" target="_blank">Enlarge Map</a>
+        </div>
+    </div>
+
 {% endblock %}
 
-{% block body %}
-    <h1>Contact</h1>
-    <p>Find below details of who to contact.</p>
 
-    <h3>General Information</h3>
-    <p>For general information about the club and what we do contact  <a href="mailto:info@eaglecanoeclub.org.uk">info@eaglecanoeclub.org.uk</a>.</p>
+{% block javascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&callback=initMap" async defer></script>
 
-    <h3>Database Issues</h3>
-    <p>For issues relating to the database, email <a href="mailto:db@eaglecanoeclub.org.uk">db@eaglecanoeclub.org.uk</a>.</p>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'));
 
-    <h3>Activities</h3>
-    <p>For issues relating to a specific activity, please contact the organiser using the details circulated by email.</p>
+        var position = { lat: 52.641370, lng: 1.278015 };
 
+        var marker = new google.maps.Marker({
+          position: position,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+          map: map,
+          title: 'Eagle Canoe Centre'
+        });
 
+        map.setCenter(position);
+        map.setZoom(15);
+
+      }
+    </script>
 {% endblock %}

@@ -4,46 +4,53 @@
 
 {% block body %}
 
-<div class="banner-image" style="position:relative; height: 18rem; margin-top: -25px; margin-bottom: 10px;">
-    <div class="banner-image-fill" style="background-size: cover; background-image: url('/images/banner.jpg'); background-position: 0 -40px; height: 100%; width: 100%;">
+{% include 'components/banner.html.twig' %}
+
+<h1 class="display-5">Welcome to {{ site_name }}!</h1>
+
+<div class="row">
+    <div class="col-lg-8">
+        <p>
+            Welcome to Norwich Eagle Canoe Club. We are a thriving paddlesport club based just outside of the city centre, offering fantastic opportunities to learn canoeing and kayaking. We cater for all abilities, from complete beginners to accomplished paddlers. Our focus is on recreational paddling and the club has a great family atmosphere that keeps our members coming back year after year.
+        </p>
+        <p>
+            We provide a safe and natural environment to enjoy both kayaking and canoeing with coaching from <a href="https://www.britishcanoeing.org.uk/coaching-leadership/" target="_blank">qualified coaches</a> and experienced paddlers, using an ever-expanding fleet of canoes and kayaks.
+        </p>
+    </div>
+    <div class="col-lg-4">
+        <img src="https://farm8.staticflickr.com/7727/27250465320_edfc75cbfc_z_d.jpg" class="rounded img-fluid figure-img" />
     </div>
 </div>
 
-<h1 class="display-5">{{ site_name }}</h1>
+<div class="row">
+    <div class="col-lg-4">
+        <img src="https://farm9.staticflickr.com/8198/28938835010_f535903c37_z_d.jpg" class="rounded img-fluid my-2" />
+    </div>
+    <div class="col-lg-8">
+        <p>
+            We meet every Wednesday from April to October and on the first and third Wednesday of each month during the winter. As well as Wednesday club nights, we offer <a href="https://www.britishcanoeing.org.uk/go-canoeing/build-my-skills/#star-awards" target="_blank">British Canoeing star award courses</a> on Monday nights, trips and activities almost every weekend (both near and far!), dedicated This Girl Can activities, and monthly pool sessions.
+        </p>
+        <p>
+            Norwich Eagle Canoe Club has been in existence for over 50 years and in 1998 became affiliated to <a href="https://www.britishcanoeing.org.uk/" target="_blank">British Canoeing</a>, the national governing body for paddlesports. The club continues to grow, and the range of activities and events offered evolves annually following feedback from members and coaches.
+        </p>
+        <p>
+            In 2009 the club gained <a href="http://www.sportenglandclubmatters.com/club-mark/" target="_blank">Clubmark</a> accreditation and in 2013 was awarded <a href="http://www.sportenglandclubmatters.com/eagle-canoe-club/" target="_blank">Top Club</a> accreditation, the only national cross-sports quality accreditation scheme for clubs with junior sections. The accreditation is built around a set of core criteria, which ensure that accredited clubs operate to a set of consistent, accepted and adopted operating standards.
+        </p>
+    </div>
+</div>
 
-<div class="card-deck">
-    <div class="card">
-        <div class="card-header">
-            <strong>Activities</strong>
-        </div>
-        <div class="card-block">
-            <p class="card-text">View, and signup to upcoming activities</p>
-        </div>
-        <div class="card-footer text-right">
-            <a href="{{ path('activity_index')}}" class="btn btn-primary" role="button">Activities</a>
-        </div>
+<div class="row">
+    <div class="col-lg-8">
+        <h4>Photos and Videos</h4>
+        <p>
+            Take a look at our <a href="https://www.flickr.com/photos/99278423@N03/sets/" target="_blank">photo gallery</a>, YouTube channel and <a href="https://www.facebook.com/Eaglecanoeclub" target="_blank">Facebook page</a> to get an idea of the kind of activities we offer. We also have a <a href="{{ url('newsletters') }}">newsletter</a> which our members contribute to.
+        </p>
+        <p>
+            We hope you find the all the information you need on our website, from <a href="{{ url('howtojoin') }}">becoming a member</a>, finding more about <a href="{{ url('whatson') }}">what’s on</a> and <a href="{{ url('centre') }}">using our clubhouse facilities</a>. If there is anything else you would like to know, <a href="{{ url('contact_index') }}">please get in touch</a>.
+        </p>
     </div>
-    <div class="card">
-        <div class="card-header">
-            <strong>Profile</strong>
-        </div>
-        <div class="card-block">
-            <p class="card-text">Update your profile.</p>
-        </div>
-        <div class="card-footer text-right">
-            <a href="{{ path('account_edit')}}" class="btn btn-primary" role="button">Profile</a>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <strong>Contact</strong>
-        </div>
-        <div class="card-block">
-            <p class="card-text">Find out who to contact for help.</p>
-        </div>
-        <div class="card-footer text-right">
-            <a href="{{ path('contact_index')}}" class="btn btn-primary" role="button">Contact</a>
-        </div>
+    <div class="col-lg-4">
+        <img src="https://farm6.staticflickr.com/5606/15802558611_e9215ef308_z_d.jpg" class="rounded img-fluid my-2" />
     </div>
 </div>
 

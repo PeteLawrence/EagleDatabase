@@ -15,7 +15,7 @@ class ContactController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render('contact/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
+            'google_maps_key' => $this->getParameter('site.google_maps_key')
         ]);
     }
 }
