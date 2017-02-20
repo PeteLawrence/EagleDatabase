@@ -44,6 +44,7 @@ twig:
     globals:
         site_name: '%site.name%'
         site_email: '%site.email%'
+        google_ua_number: '%site.google_ua_number%'
 
 # Doctrine Configuration
 doctrine:
