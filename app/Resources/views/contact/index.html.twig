@@ -2,14 +2,15 @@
 
 {% block title %}Contact{% endblock %}
 
-{% block breadcrumbs %}
+{% block body %}
+
+    {% include 'components/banner.html.twig' %}
+
     <nav class="breadcrumb">
       <a class="breadcrumb-item" href="/">Home</a>
       <span class="breadcrumb-item active">Contact</span>
     </nav>
-{% endblock %}
 
-{% block body %}
     <h1>Contact</h1>
 
     <div class="row">
