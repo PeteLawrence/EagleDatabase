@@ -7,6 +7,11 @@
 
 {% include 'components/banner.html.twig' %}
 
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="/">Home</a>
+    <span class="breadcrumb-item active">Activities</span>
+</nav>
+
 <h1 class="display-5">Activities</h1>
 
 <div class="row">
@@ -30,8 +35,17 @@
                             <td>{{ day.start|date('d M Y') }}</td>
                             <td>{{ activity.activityStart|date('H:i') }}</td>
                             <td>{{ activity.name }}</td>
-                            <td>{% if activity.organiser %}<abbr title="{{ activity.organiser.name }}">{{ activity.organiser.shortName }}</abbr>{% endif %}</td>
-                            <td><a href="{{ path('activity_view', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a></td>
+                            <td>
+                                {% if activity.organiser %}
+                                    <abbr title="{{ activity.organiser.name }}">{{ activity.organiser.shortName }}</abbr>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('activity_view', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
+                                {% if app.user == activity.organiser %}
+                                    <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-users"></i></a>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% else %}
                         <tr>
