@@ -26,5 +26,6 @@ parameters:
     site.email: 'eagledb@example.com'
     site.google_maps_key: 'AI.........'
     site.signInEmail: 'signin@eample.com'
+    site.google_ua_number: 'UA-XXXXXXX-Y'
 
     darksky.key: 'XXXXXX'
