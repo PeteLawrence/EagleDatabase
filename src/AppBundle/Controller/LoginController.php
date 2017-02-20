@@ -49,7 +49,7 @@ class LoginController extends Controller
             $data = $form->getData();
             //Lookup the user
             $em = $this->get('doctrine')->getManager();
-            $person = $em->getRepository('AppBundle:Person')->findOneByEmail($data['email']);
+            $person = $em->getRepository('AppBundle:Person')->findOneById($data['membershipNumber']);
 
             if ($person) {
                 //Generate a password reset token
@@ -57,7 +57,7 @@ class LoginController extends Controller
                 $generator->setUppercase()->setLowercase()->setNumbers()->setSymbols(false)->setLength(32);
                 $resetToken = $generator->generatePassword();
                 $now = new \DateTime();
-                $resetTokenExpiry = $now->add(new \DateInterval('PT20M'));
+                $resetTokenExpiry = $now->add(new \DateInterval('PT30M'));
 
                 //Blank the old password, and populate the reset token
                 $person->setPassword('XXX'); //Use 'XXX' as field cannot be emtpy.
@@ -152,7 +152,7 @@ class LoginController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('reset_password'))
             ->setMethod('POST')
-            ->add('email', TextType::class, [ 'attr' => ['placeholder' => 'Email Address' ]])
+            ->add('membershipNumber', TextType::class, [ 'attr' => ['placeholder' => 'Membership Number' ]])
             ->getForm()
         ;
     }
