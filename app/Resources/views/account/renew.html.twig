@@ -1,17 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminbase.html.twig' %}
 
 {% block title %}Renew{% endblock %}
 
-{% block breadcrumbs %}
+{% block body %}
     <nav class="breadcrumb">
         <a class="breadcrumb-item" href="/">Home</a>
         <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
         <a class="breadcrumb-item" href="{{ path('account_membership') }}">Membership</a>
         <span class="breadcrumb-item active">Renew</span>
     </nav>
-{% endblock %}
 
-{% block body %}
     <h2>Renew</h2>
 
     {{ form_start(form) }}
