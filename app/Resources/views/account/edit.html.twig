@@ -1,16 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminbase.html.twig' %}
 
 {% block title %}Profile{% endblock %}
 
-{% block breadcrumbs %}
-<nav class="breadcrumb">
-    <a class="breadcrumb-item" href="/">Home</a>
-    <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
-    <span class="breadcrumb-item active">Profile</span>
-</nav>
-{% endblock %}
-
 {% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <span class="breadcrumb-item active">Profile</span>
+    </nav>
+
     <h2>Your Profile</h2>
 
     {{ form_start(nameForm) }}

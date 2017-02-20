@@ -134,7 +134,7 @@ class Person implements AdvancedUserInterface, \Serializable
     private $nextOfKinRelation;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $nextOfKinContactDetails;
 
@@ -976,6 +976,12 @@ class Person implements AdvancedUserInterface, \Serializable
     public function getName()
     {
         return $this->forename . ' ' . $this->surname;
+    }
+
+
+    public function getShortName()
+    {
+        return $this->forename . ' ' . substr($this->surname, 0, 1);
     }
 
     /**

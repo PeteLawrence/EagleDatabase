@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Eagle Canoe Centre{% endblock %}
+
+{% block body %}
+
+{% include 'components/banner.html.twig' %}
+
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="/">Home</a>
+    <span class="breadcrumb-item active">Newsletters</span>
+</nav>
+
+<h1 class="display-5">Newsletters</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <ul>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Spring 2010.pdf') }}" target="_blank">Spring 2010</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Summer 2010.pdf') }}" target="_blank">Summer 2010</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Winter 2010.pdf') }}" target="_blank">Winter 2010</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Summer 2011.pdf') }}" target="_blank">Summer 2011</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Autumn 2011.pdf') }}" target="_blank">Autumn 2011</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Winter 2011.pdf') }}" target="_blank">Winter 2011</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Spring 2012.pdf') }}" target="_blank">Spring 2012</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Summer 2012.pdf') }}" target="_blank">Summer 2012</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Autumn 2012.pdf') }}" target="_blank">Autumn 2012</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Winter 2013.pdf') }}" target="_blank">Winter 2013</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Summer 2013.pdf') }}" target="_blank">Summer 2013</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Summer Autumn 2013.pdf') }}" target="_blank">Summer/Autumn 2013</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Winter 2014.pdf') }}" target="_blank">Winter 2014</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Spring Summer 2014.pdf') }}" target="_blank">Spring/Summer 2014</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Winter 2015.pdf') }}" target="_blank">Winter 2015</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter Spring Summer 2015.pdf') }}" target="_blank">Spring/Summer 2015</a></li>
+            <li><a href="{{ asset('/newsletters/Eagle Newsletter 2016.pdf') }}" target="_blank">2016</a></li>
+        </ul>
+
+    </div>
+    <div class="col-md-4">
+        <img src="https://farm8.staticflickr.com/7727/27250465320_edfc75cbfc_z_d.jpg" class="float-right rounded img-fluid my-2" />
+    </div>
+</div>
+
+{% endblock %}

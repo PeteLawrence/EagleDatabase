@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}How To Join{% endblock %}
+
+{% block body %}
+
+{% include 'components/banner.html.twig' %}
+
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="/">Home</a>
+    <span class="breadcrumb-item active">How To Join</span>
+</nav>
+
+<h1 class="display-5">How To Join</h1>
+
+<div class="row">
+    <div class="col-9">
+        <p>
+            Joining the club couldn’t be easier. Please print, fill in and sign the documents listed below and bring them along with your <a href="{{ asset('/downloads/5_3 v6 2017_2018 Membership Fees.doc') }}" target="_blank">membership fee</a> on an enrolment night (the first Wednesday of the month April-September).
+        </p>
+
+        <ul>
+            <li><a href="{{ asset('/downloads/5_1 v3 2015_2016 Application Form.pdf') }}" target="_blank">Membership form</a></li>
+            <li><a href="{{ asset('/downloads/5_7 v3 Disclosure For Application.pdf') }}" target="_blank">Disclosure form</a></li>
+            <li><a href="{{ asset('/downloads/5_8 v3 Code of Conduct.pdf') }}" target="_blank">Code of conduct</a></li>
+        </ul>
+
+        <p>
+            Full details of membership, insurance and course fees can be found here.
+        </p>
+        <p>
+            If you have trouble downloading the forms or questions about membership, please email secretary@eaglecanoeclub.org.uk.
+        </p>
+        <p>
+            New members enrol on the first Wednesday of the month throughout the spring and summer (April to September). We suggest that those looking to enrol arrive at about 7pm, as this gives us time to get existing members organised and on the water.
+        </p>
+        <p>
+            Generally new members don’t paddle on the night of enrolment, but you can get afloat the following week. There will be an existing club members to show you round and tell you a bit more about how we operate on a club night so you can arrive ready to go the following week.
+        </p>
+        <p>
+            Other documents relating to the club’s policies and procedures can be found <a href="{{ url('docsanddownloads') }}" target="_blank">here</a>.
+        </p>
+    </div>
+
+    <div class="col-3">
+        <img src="https://farm9.staticflickr.com/8897/18458876390_cef189059e_z_d.jpg" class="float-right rounded img-fluid my-2" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4">
+        <img src="https://farm8.staticflickr.com/7785/27528181582_0c57992417_z_d.jpg" class="rounded img-fluid my-2" />
+    </div>
+    <div class="col-8">
+        <h4>Taster sessions</h4>
+
+        <p>
+            If you’re not sure that you’re ready to join, why not come along to a Taster session? These are held on the Monday prior to enrolment night throughout the summer months. To find out when the next one is taking place have a look at the club calendar.
+        </p>
+        <p>
+            To book a place, please email <a href="mailto:secretary@eaglecanoeclub.org?subject=Taster Session">secretary@eaglecanoeclub.org</a>. There is a small charge of £10 per adult and £5 per child for these sessions.
+        </p>
+        <p>
+            If you have any further questions about joining the club please have a look at our FAQ page or email <a href="mailto:secretary@eaglecanoeclub.org">secretary@eaglecanoeclub.org</a>.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

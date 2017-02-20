@@ -2,15 +2,13 @@
 
 {% block title %}{{ activity.name }}{% endblock %}
 
-{% block breadcrumbs %}
-<nav class="breadcrumb">
-    <a class="breadcrumb-item" href="/">Home</a>
-    <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
-    <span class="breadcrumb-item active">{{ activity.name }}</span>
-</nav>
-{% endblock %}
-
 {% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
+        <span class="breadcrumb-item active">{{ activity.name }}</span>
+    </nav>
+
     <h2>{{ activity.name }}</h2>
 
     <div class="row">

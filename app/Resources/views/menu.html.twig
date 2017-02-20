@@ -1,12 +1,31 @@
 <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#topNavBar" aria-controls="topNavBar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
     <a class="navbar-brand" href="{{ path('homepage') }}">{{ site_name }}</a>
+
+    <div class="collapse navbar-collapse" id="topNavBar">
 
     <ul class="nav navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('activity_index')}}"><i class="fa fa-map-o"></i> Activities</a>
+            <a class="nav-link" href="{{ path('centre') }}">Eagle Canoe Centre</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('contact_index')}}"><i class="fa fa-envelope-o"></i> Contact</a>
+            <a class="nav-link" href="{{ path('howtojoin')}}">How To Join</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('whatson')}}">What's On</a>
+        </li>
+        {#}<li class="nav-item">
+            <a class="nav-link" href="{{ path('picsandvideos') }}">Pics &amp; Videos</a>
+        </li>#}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('faqs') }}">FAQs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('contact_index')}}">Contact</a>
         </li>
     </ul>
 
@@ -31,12 +50,14 @@
                 </div>
             </li>
         {% else %}
-            <li class="nav-item">
+            {#}<li class="nav-item">
                 <a href="{{ path('register') }}" class="nav-link"><i class="fa fa-user-plus"></i> Register</a>
-            </li>
+            </li>#}
             <li class="nav-item">
                 <a href="{{ path('login') }}" class="nav-link"><i class="fa fa-sign-in"></i> Login</a>
             </li>
         {% endif %}
     </ul>
+
+</div>
 </nav>

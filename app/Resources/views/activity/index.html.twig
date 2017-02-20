@@ -2,48 +2,64 @@
 
 {% block title %}Activities{% endblock %}
 
-{% block breadcrumbs %}
+
+{% block body %}
+
+{% include 'components/banner.html.twig' %}
+
 <nav class="breadcrumb">
     <a class="breadcrumb-item" href="/">Home</a>
     <span class="breadcrumb-item active">Activities</span>
 </nav>
-{% endblock %}
 
-{% block body %}
-    <h2>Activities</h2>
+<h1 class="display-5">Activities</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for activity in activities %}
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead class="thead-default">
                 <tr>
-                    <td>{{ activity.activityStart|date('d M Y H:i') }}</td>
-                    <td>{{ activity.name }}</td>
-                    <td>{{ activity.activityType.type }}</td>
-                    <td>
-                        <a href="{{ path('activity_view', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
-                        {% if app.user == activity.organiser %}
-                            <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-users"></i></a>
-                        {% endif %}
-                    </td>
+                    <th colspan="2">Date</th>
+                    <th>Time</th>
+                    <th>Activity</th>
+                    <th>Organiser</th>
+                    <th></th>
                 </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">Sorry, there's no activities available to you.  Have you enrolled?</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
 
-    <h3>iCal Feed</h3>
-    <p>Click the following icon to add the programme to your calendar -<a href="{{ path('calendar_ical')}}" class="btn" title="iCal Feed"><i class="fa fa-calendar"></i></a></p>
+            <tbody>
+                {% for day in days %}
+                    {% for activity in day.activities %}
+                        <tr {% if activity.activityType.color %} style="background-color: {{activity.activityType.color}};"{% endif %}>
+                            <td>{{ day.start|date('l') }}</td>
+                            <td>{{ day.start|date('d M Y') }}</td>
+                            <td>{{ activity.activityStart|date('H:i') }}</td>
+                            <td>{{ activity.name }}</td>
+                            <td>
+                                {% if activity.organiser %}
+                                    <abbr title="{{ activity.organiser.name }}">{{ activity.organiser.shortName }}</abbr>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('activity_view', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
+                                {% if app.user == activity.organiser %}
+                                    <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-users"></i></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ day.start|date('l') }}</td>
+                            <td>{{ day.start|date('d M Y') }}</td>
+                            <td colspan="5"></td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
 
 {% endblock %}
