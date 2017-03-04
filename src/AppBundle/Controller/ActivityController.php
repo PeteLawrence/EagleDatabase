@@ -127,7 +127,10 @@ class ActivityController extends Controller
     public function participantsAction(Request $request, Activity $activity)
     {
         //Only allow the organiser access to this page
-        if ($activity->getOrganiser() != $this->getUser()) {
+        if (
+            $activity->getOrganiser() != $this->getUser() and
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
             throw $this->createAccessDeniedException();
         }
 
@@ -146,7 +149,10 @@ class ActivityController extends Controller
     public function participantsAddAction(Request $request, Activity $activity)
     {
         //Only allow the organiser access to this page
-        if ($activity->getOrganiser() != $this->getUser()) {
+        if (
+            $activity->getOrganiser() != $this->getUser() and
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
             throw $this->createAccessDeniedException();
         }
 

@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        {% if app.user == activity.organiser %}
+        {% if app.user == activity.organiser or is_granted('ROLE_ADMIN') %}
             <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm btn-primary">View participants</a>
         {% endif %}
 
