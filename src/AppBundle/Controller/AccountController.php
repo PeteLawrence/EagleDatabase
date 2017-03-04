@@ -26,8 +26,21 @@ class AccountController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $em = $this->get('doctrine')->getManager();
+        $activityRepository = $em->getRepository('AppBundle:ManagedActivity');
+
+        $upcomingActivities = $activityRepository->findUpcomingActivities($this->getUser());
+        $nextActivity = null;
+        if (sizeof($upcomingActivities)) {
+            $nextActivity = $upcomingActivities[0];
+        }
+
         // replace this example code with whatever you need
-        return $this->render('account/overview.html.twig');
+        return $this->render('account/overview.html.twig',
+            [
+                'nextActivity' => $nextActivity
+            ]
+        );
     }
 
 
@@ -36,6 +49,7 @@ class AccountController extends Controller
      */
     public function activitiesAction(Request $request)
     {
+
         // replace this example code with whatever you need
         return $this->render('account/activities.html.twig');
     }

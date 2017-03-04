@@ -21,7 +21,6 @@ class ManagedActivityRepository extends EntityRepository
             $membershipType = $person->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
         }
 
-
         $query = $this->createQueryBuilder('ma')
             ->leftJoin('ma.managedActivityMembershipType', 'mamt')
             ->innerJoin('mamt.membershipType', 'mt')
@@ -29,5 +28,25 @@ class ManagedActivityRepository extends EntityRepository
             ->setParameter(1, $membershipType);
 
         return $query;
+    }
+
+
+
+    public function findUpcomingActivities($person)
+    {
+        $now = new \DateTime();
+
+        $q = $this->createQueryBuilder('ma')
+            ->innerJoin('ma.participant', 'pa')
+            ->innerJoin('pa.person', 'p')
+            ->where('p.id = ?1')
+            ->andWhere('ma.activityStart >= ?2')
+            ->setParameter(1, $person->getId())
+            ->setParameter(2, $now)
+            ->orderBy('ma.activityStart');
+
+        $a = $q->getQuery()->getResult();
+
+        return $a;
     }
 }
