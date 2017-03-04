@@ -42,7 +42,7 @@
                             </td>
                             <td>
                                 <a href="{{ path('activity_view', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
-                                {% if app.user == activity.organiser %}
+                                {% if app.user == activity.organiser or is_granted('ROLE_ADMIN') %}
                                     <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-users"></i></a>
                                 {% endif %}
                             </td>
