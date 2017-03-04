@@ -13,6 +13,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nivoslider/3.2/nivo-slider.min.css" integrity="sha256-RxI5c+tx2nFpvcr20TojMnNRkSevluZMCr/9DgjQ0jw=" crossorigin="anonymous" />
+
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
 	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
 
@@ -70,6 +72,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nivoslider/3.2/jquery.nivo.slider.pack.min.js" integrity="sha256-66ApDNLFhIKyILJVmsbuCCSQAsj/j1cETZLc4FD9hGM=" crossorigin="anonymous"></script>
+
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -78,6 +82,12 @@
 
       ga('create', '{{ google_ua_number }}', 'auto');
       ga('send', 'pageview');
+    </script>
+
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#slider').nivoSlider();
+        });
     </script>
 
     {% block javascripts %}{% endblock %}
