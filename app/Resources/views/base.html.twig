@@ -61,7 +61,6 @@
         </div>
     </div>
 
-
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
@@ -76,7 +75,15 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-      ga('create', '{{ google_ua_number }}', 'auto');
+      {% if app.user %}
+        {# Add in the ID of the logged inuser #}
+        ga('create', '{{ google_ua_number }}', 'auto', {
+            userId: {{ app.user.id }}
+        });
+      {% else %}
+        ga('create', '{{ google_ua_number }}', 'auto');
+      {% endif %}
+
       ga('send', 'pageview');
     </script>
 
