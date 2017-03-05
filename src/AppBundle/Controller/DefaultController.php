@@ -60,14 +60,14 @@ class DefaultController extends Controller
     }
 
 
-        /**
-         * @Route("/whatson", name="whatson")
-         */
-        public function whatsonAction(Request $request)
-        {
-            // replace this example code with whatever you need
-            return $this->render('default/whatson.html.twig');
-        }
+    /**
+     * @Route("/whatson", name="whatson")
+     */
+    public function whatsonAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/whatson.html.twig');
+    }
 
 
     /**
