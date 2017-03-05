@@ -56,7 +56,7 @@ class LoadMembersCommand extends ContainerAwareCommand
             $person->setNextOfKinContactDetails($data[20]);
             $person->setNextOfKinRelation($data[21]);
 
-            $person->setNotes($data[17]);
+            $person->setNotes($data[16]);
 
             $em->persist($person);
         }
