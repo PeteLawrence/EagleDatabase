@@ -52,7 +52,7 @@ class LoginController extends Controller
             $em = $this->get('doctrine')->getManager();
             $person = $em->getRepository('AppBundle:Person')->findOneById($data['membershipNumber']);
 
-            if ($person and strtolower($person->getEmail()) == strtolower($data['email'])) {
+            if ($person && strtolower($person->getEmail()) == strtolower($data['email'])) {
                 //Generate a password reset token
                 $generator = new ComputerPasswordGenerator();
                 $generator->setUppercase()->setLowercase()->setNumbers()->setSymbols(false)->setLength(32);

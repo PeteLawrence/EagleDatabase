@@ -27,7 +27,6 @@ class LoadMembersCommand extends ContainerAwareCommand
 
 
         while (($data = fgetcsv($fh, 1000, ",")) !== false) {
-            var_dump($data);
             printf('%s %s', $data[1], $data[2]);
             $person = new \AppBundle\Entity\Person;
             $person->setForename($data[1]);
