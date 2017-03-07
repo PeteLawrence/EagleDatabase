@@ -41,7 +41,7 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/newsletters", name="newsletters")
+     * @Route("/newsletter", name="newsletter")
      */
     public function newslettersAction(Request $request)
     {
