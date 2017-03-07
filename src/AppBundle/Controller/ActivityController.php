@@ -128,7 +128,7 @@ class ActivityController extends Controller
     {
         //Only allow the organiser access to this page
         if (
-            $activity->getOrganiser() != $this->getUser() and
+            $activity->getOrganiser() != $this->getUser() &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
         ) {
             throw $this->createAccessDeniedException();
@@ -150,7 +150,7 @@ class ActivityController extends Controller
     {
         //Only allow the organiser access to this page
         if (
-            $activity->getOrganiser() != $this->getUser() and
+            $activity->getOrganiser() != $this->getUser() &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
         ) {
             throw $this->createAccessDeniedException();
