@@ -23,12 +23,12 @@ class ManagedActivityType extends AbstractType
         $builder
             ->add('name', TextType::class, [ 'required' => true ])
             ->add('description', TextareaType::class, [ 'attr' => [ 'rows' => 8] ])
-            ->add('activityStart', DateTimeType::class, [ 'required' => true, 'date_format' => 'd MMMM y', 'date_widget' => 'choice', 'time_widget' => 'choice' ])
-            ->add('activityEnd', DateTimeType::class, [ 'required' => true, 'date_format' => 'd MMMM y', 'date_widget' => 'choice', 'time_widget' => 'choice' ])
+            ->add('activityStart', DateTimeType::class, [ 'required' => true, 'date_format' => 'd MMMM y', 'date_widget' => 'choice', 'time_widget' => 'choice', 'minutes' => [ 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] ])
+            ->add('activityEnd', DateTimeType::class, [ 'required' => true, 'date_format' => 'd MMMM y', 'date_widget' => 'choice', 'time_widget' => 'choice', 'minutes' => [ 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] ])
             ->add('spaces')
             ->add('allowOnlineSignup', CheckboxType::class)
-            ->add('signupStart', DateTimeType::class, [ 'required' => false, 'date_format' => 'd MMMM y', 'date_widget' => 'choice', 'time_widget' => 'choice' ])
-            ->add('signupEnd', DateTimeType::class, [ 'required' => false, 'date_format' => 'd MMMM y', 'date_widget' => 'choice', 'time_widget' => 'choice' ])
+            ->add('signupStart', DateTimeType::class, [ 'required' => false, 'date_format' => 'd MMMM y', 'date_widget' => 'choice', 'time_widget' => 'choice', 'minutes' => [ 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] ])
+            ->add('signupEnd', DateTimeType::class, [ 'required' => false, 'date_format' => 'd MMMM y', 'date_widget' => 'choice', 'time_widget' => 'choice', 'minutes' => [ 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] ])
             ->add('activityType', EntityType::class, ['class' => 'AppBundle:ActivityType', 'choice_label' => 'type' ])
             ->add('organiser', EntityType::class, [
                 'class' => 'AppBundle:Person',
