@@ -24,7 +24,7 @@ class ActivityController extends Controller
 
         $days = [];
         $date = new \DateTime();
-        for ($i = 0; $i < 120; $i++) {
+        for ($i = 0; $i < 180; $i++) {
             $d = $date->format('d M Y');
 
             $days[$d] = [
