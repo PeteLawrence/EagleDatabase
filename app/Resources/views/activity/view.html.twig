@@ -98,18 +98,22 @@
                 {% endif %}
 
 
-                {% if app.user.attending(activity) %}
-                    You are signed up
-                {% else %}
-                    {% if activity.allowOnlineSignup %}
-                        {% if activity.acceptingSignups %}
-                            <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary">Sign Up</a>
-                        {% else %}
-                            Signup from {{ activity.signupStart|date('jS M Y H:i') }}
-                        {% endif %}
+                {% if app.user %}
+                    {% if app.user.attending(activity) %}
+                        You are signed up
                     {% else %}
-                        Online sign up is not available
+                        {% if activity.allowOnlineSignup %}
+                            {% if activity.acceptingSignups %}
+                                <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary">Sign Up</a>
+                            {% else %}
+                                Signup from {{ activity.signupStart|date('jS M Y H:i') }}
+                            {% endif %}
+                        {% else %}
+                            Online sign up is not available
+                        {% endif %}
                     {% endif %}
+                {% else %}
+                    <p>Please <a href="{{ path('login') }}">login</a> in order to sign up</p>
                 {% endif %}
             </div>
         </div>
