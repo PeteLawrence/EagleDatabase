@@ -67,6 +67,45 @@ class ActivityController extends Controller
 
 
     /**
+     * @Route("/{id}/edit", name="activity_edit")
+     */
+    public function editAction(Request $request, Activity $activity)
+    {
+        //Only allow the organiser access to this page
+        if (
+            $activity->getOrganiser() != $this->getUser() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
+            throw $this->createAccessDeniedException();
+        }
+        
+        if ($activity instanceof UnmanagedActivity) {
+            $editForm = $this->createForm('AppBundle\Form\Type\UnmanagedActivityType', $activity);
+        } else {
+            $editForm = $this->createForm('AppBundle\Form\Type\ManagedActivityType', $activity);
+        }
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($activity);
+            $em->flush();
+
+            return $this->redirectToRoute('activity_view', array('id' => $activity->getId()));
+        }
+
+        // replace this example code with whatever you need
+        return $this->render(
+            'activity/edit.html.twig',
+            [
+                'activity' => $activity,
+                'edit_form' => $editForm->createView()
+            ]
+        );
+    }
+
+
+    /**
      * @Route("/{id}/signup", name="activity_signup")
      */
     public function signupAction(Request $request, Activity $activity)
