@@ -32,7 +32,7 @@ class SendSignupEmailsCommand extends ContainerAwareCommand
 
                 //Build the email
                 $message = \Swift_Message::newInstance()
-                    ->setSubject(sprintf('Sign-in Form for ', $activity->getName()))
+                    ->setSubject(sprintf('Sign-in form for %s', $activity->getName()))
                     ->setFrom($this->getContainer()->getParameter('site.email'))
                     ->setTo($this->getContainer()->getParameter('site.signInEmail'))
                     ->setBody(
