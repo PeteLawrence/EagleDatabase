@@ -27,7 +27,7 @@ class SendSignupEmailsCommand extends ContainerAwareCommand
 
         $now = new \DateTime();
         foreach ($activities as $activity) {
-            if (($activity->getActivityStart()->format('Y-m-d') == $now->format('Y-m-d')) && $activity->getAllowOnlineSignup()) {
+            if ($activity->getActivityStart()->format('Y-m-d') == $now->format('Y-m-d')) {
                 $logger->info('Found activity commencing today ' . $activity->getName());
 
                 //Build the email
