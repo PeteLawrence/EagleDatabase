@@ -18,6 +18,12 @@ class SendSignupEmailsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        //Set the context so that URL's contain the correct URL
+        $context = $this->getContainer()->get('router')->getContext();
+        $context->setHost('www.eaglecanoeclub.co.uk');
+        $context->setScheme('https');
+
+
         $em = $this->getContainer()->get('doctrine')->getManager();
         $templating = $this->getContainer()->get('templating');
         $logger = $this->getContainer()->get('logger');
@@ -35,7 +41,7 @@ class SendSignupEmailsCommand extends ContainerAwareCommand
                     ->setSubject(sprintf('Sign-in form for %s', $activity->getName()))
                     ->setFrom($this->getContainer()->getParameter('site.email'))
                     ->setTo($this->getContainer()->getParameter('site.signInEmail'))
-                    ->setBody(
+                ->setBody(
                         $templating->render(
                             'emails/signInForm.html.twig',
                             array('activity' => $activity)
