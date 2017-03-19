@@ -31,8 +31,17 @@
                 {% for day in days %}
                     {% for activity in day.activities %}
                         <tr {% if activity.activityType.color %} style="background-color: {{activity.activityType.color}};"{% endif %}>
-                            <td>{{ day.start|date('l') }}</td>
-                            <td>{{ day.start|date('d M Y') }}</td>
+                            {% if day.start == "now"|date('d M Y') %}
+                                <td><strong>{{ day.start|date('l') }}</strong></td>
+                                <td><strong>{{ day.start|date('d M Y') }}</strong></td>
+                            {% else %}
+                                <td>
+                                    {{ day.start|date('l') }}
+                                </td>
+                                <td>
+                                    {{ day.start|date('d M Y') }}
+                                </td>
+                            {% endif %}
                             <td>{{ activity.activityStart|date('H:i') }}</td>
                             <td>{{ activity.name }}</td>
                             <td>
@@ -50,8 +59,21 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td>{{ day.start|date('l') }}</td>
-                            <td>{{ day.start|date('d M Y') }}</td>
+                            {% if day.start == "now"|date('d M Y') %}
+                                <td>
+                                    <strong>{{ day.start|date('l') }}</strong>
+                                </td>
+                                <td>
+                                    <strong>{{ day.start|date('d M Y') }}</strong>
+                                </td>
+                            {% else %}
+                                <td>
+                                    {{ day.start|date('l') }}
+                                </td>
+                                <td>
+                                    {{ day.start|date('d M Y') }}
+                                </td>
+                            {% endif %}
                             <td colspan="5"></td>
                         </tr>
                     {% endfor %}

@@ -24,6 +24,7 @@ class ActivityController extends Controller
 
         $days = [];
         $date = new \DateTime();
+        $date->sub(new \DateInterval('P3D'));
         for ($i = 0; $i < 180; $i++) {
             $d = $date->format('d M Y');
 
@@ -78,7 +79,7 @@ class ActivityController extends Controller
         ) {
             throw $this->createAccessDeniedException();
         }
-        
+
         if ($activity instanceof UnmanagedActivity) {
             $editForm = $this->createForm('AppBundle\Form\Type\UnmanagedActivityType', $activity);
         } else {
