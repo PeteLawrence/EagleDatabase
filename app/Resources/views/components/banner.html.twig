@@ -1,6 +1,5 @@
-<div class="banner-image" style="position:relative; height: 18rem; margin-bottom: 10px; overflow: hidden;" id="slider">
-    <img src="/images/slider/slider1.jpg" style=" top: -250px; position: relative; width: 100%;"/>
-    <img src="/images/slider/slider2.jpg" style=" top: -420px; position: relative; width: 100%;" />
-    <img src="/images/slider/slider3.jpg" style=" top: -300px; position: relative; width: 100%;" />
-    <img src="/images/slider/slider4.jpg" style=" top: -300px; position: relative; width: 100%;"  />
+<div class="banner-image hidden-md-down" style="position:relative; height: 18rem; margin-bottom: 10px; overflow: hidden;" id="slider">
+    {% for i in 1..5 %}
+        <img src="/images/slider/slider{{ random(24) }}.jpg"/>
+    {% endfor %}
 </div>

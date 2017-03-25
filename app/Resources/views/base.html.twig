@@ -93,7 +93,14 @@
 
     <script type="text/javascript">
         $(window).on('load', function() {
-            $('#slider').nivoSlider();
+            $('#slider').nivoSlider({
+                animSpeed: 750,
+                controlNav: false,
+                directionNav: false,
+                effect: 'sliceDownLeft',
+                pauseTime: 5000,
+                randomStart: true
+            });
         });
     </script>
 
