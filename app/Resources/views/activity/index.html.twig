@@ -31,8 +31,17 @@
                 {% for day in days %}
                     {% for activity in day.activities %}
                         <tr {% if activity.activityType.color %} style="background-color: {{activity.activityType.color}};"{% endif %}>
-                            <td>{{ day.start|date('l') }}</td>
-                            <td>{{ day.start|date('d M Y') }}</td>
+                            {% if day.start == "now"|date('d M Y') %}
+                                <td><strong>{{ day.start|date('l') }}</strong></td>
+                                <td><strong>{{ day.start|date('d M Y') }}</strong></td>
+                            {% else %}
+                                <td>
+                                    {{ day.start|date('l') }}
+                                </td>
+                                <td>
+                                    {{ day.start|date('d M Y') }}
+                                </td>
+                            {% endif %}
                             <td>{{ activity.activityStart|date('H:i') }}</td>
                             <td>{{ activity.name }}</td>
                             <td>
@@ -41,16 +50,30 @@
                                 {% endif %}
                             </td>
                             <td>
-                                <a href="{{ path('activity_view', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
-                                {% if app.user == activity.organiser %}
+                                {% if app.user == activity.organiser or is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('activity_edit', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
                                     <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-users"></i></a>
                                 {% endif %}
+                                <a href="{{ path('activity_view', { 'id': activity.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
                             </td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td>{{ day.start|date('l') }}</td>
-                            <td>{{ day.start|date('d M Y') }}</td>
+                            {% if day.start == "now"|date('d M Y') %}
+                                <td>
+                                    <strong>{{ day.start|date('l') }}</strong>
+                                </td>
+                                <td>
+                                    <strong>{{ day.start|date('d M Y') }}</strong>
+                                </td>
+                            {% else %}
+                                <td>
+                                    {{ day.start|date('l') }}
+                                </td>
+                                <td>
+                                    {{ day.start|date('d M Y') }}
+                                </td>
+                            {% endif %}
                             <td colspan="5"></td>
                         </tr>
                     {% endfor %}
@@ -60,6 +83,8 @@
 
     </div>
 </div>
+
+<a href="{{ path('calendar_ical')}}"><i class="fa fa-calendar"></i> Subscribe via iCal</a>
 
 
 {% endblock %}

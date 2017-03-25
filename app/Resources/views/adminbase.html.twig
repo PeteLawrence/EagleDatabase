@@ -46,7 +46,15 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-      ga('create', '{{ google_ua_number }}', 'auto');
+      {% if app.user %}
+        {# Add in the ID of the logged inuser #}
+        ga('create', '{{ google_ua_number }}', 'auto', {
+            userId: {{ app.user.id }}
+        });
+      {% else %}
+        ga('create', '{{ google_ua_number }}', 'auto');
+      {% endif %}
+
       ga('send', 'pageview');
     </script>
 
