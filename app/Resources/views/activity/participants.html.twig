@@ -38,7 +38,7 @@
         </tbody>
     </table>
 
-    {% if app.user == activity.organiser %}
+    {% if app.user == activity.organiser or is_granted('ROLE_ADMIN') %}
         <a href="{{ path('activity_participants_add', { id: activity.id })}}" class="btn btn-primary">Add Participant</a>
     {% endif %}
 

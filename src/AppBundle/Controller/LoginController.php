@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -51,7 +52,7 @@ class LoginController extends Controller
             $em = $this->get('doctrine')->getManager();
             $person = $em->getRepository('AppBundle:Person')->findOneById($data['membershipNumber']);
 
-            if ($person) {
+            if ($person && strtolower($person->getEmail()) == strtolower($data['email'])) {
                 //Generate a password reset token
                 $generator = new ComputerPasswordGenerator();
                 $generator->setUppercase()->setLowercase()->setNumbers()->setSymbols(false)->setLength(32);
@@ -81,6 +82,8 @@ class LoginController extends Controller
                 $this->get('mailer')->send($message);
 
                 $this->addFlash('notice', 'You have been emailed instructions');
+            } else {
+                $this->addFlash('warning', 'No account could be found with the details that you entered.');
             }
         }
 
@@ -152,7 +155,8 @@ class LoginController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('reset_password'))
             ->setMethod('POST')
-            ->add('membershipNumber', TextType::class, [ 'attr' => ['placeholder' => 'Membership Number' ]])
+            ->add('membershipNumber', TextType::class, [ 'attr' => ['placeholder' => 'Membership Number' ], 'label' => 'Membership Number'])
+            ->add('email', EmailType::class, [ 'attr' => [' placeholder' => 'Email Address'], 'label' => 'Email Address'])
             ->getForm()
         ;
     }

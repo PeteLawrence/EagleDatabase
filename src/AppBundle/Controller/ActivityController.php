@@ -24,7 +24,8 @@ class ActivityController extends Controller
 
         $days = [];
         $date = new \DateTime();
-        for ($i = 0; $i < 120; $i++) {
+        $date->sub(new \DateInterval('P3D'));
+        for ($i = 0; $i < 180; $i++) {
             $d = $date->format('d M Y');
 
             $days[$d] = [
@@ -61,6 +62,45 @@ class ActivityController extends Controller
             [
                 'activity' => $activity,
                 'google_maps_key' => $this->getParameter('site.google_maps_key')
+            ]
+        );
+    }
+
+
+    /**
+     * @Route("/{id}/edit", name="activity_edit")
+     */
+    public function editAction(Request $request, Activity $activity)
+    {
+        //Only allow the organiser access to this page
+        if (
+            $activity->getOrganiser() != $this->getUser() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if ($activity instanceof UnmanagedActivity) {
+            $editForm = $this->createForm('AppBundle\Form\Type\UnmanagedActivityType', $activity);
+        } else {
+            $editForm = $this->createForm('AppBundle\Form\Type\ManagedActivityType', $activity);
+        }
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($activity);
+            $em->flush();
+
+            return $this->redirectToRoute('activity_view', array('id' => $activity->getId()));
+        }
+
+        // replace this example code with whatever you need
+        return $this->render(
+            'activity/edit.html.twig',
+            [
+                'activity' => $activity,
+                'edit_form' => $editForm->createView()
             ]
         );
     }
@@ -127,7 +167,10 @@ class ActivityController extends Controller
     public function participantsAction(Request $request, Activity $activity)
     {
         //Only allow the organiser access to this page
-        if ($activity->getOrganiser() != $this->getUser()) {
+        if (
+            $activity->getOrganiser() != $this->getUser() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
             throw $this->createAccessDeniedException();
         }
 
@@ -146,7 +189,10 @@ class ActivityController extends Controller
     public function participantsAddAction(Request $request, Activity $activity)
     {
         //Only allow the organiser access to this page
-        if ($activity->getOrganiser() != $this->getUser()) {
+        if (
+            $activity->getOrganiser() != $this->getUser() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
             throw $this->createAccessDeniedException();
         }
 
