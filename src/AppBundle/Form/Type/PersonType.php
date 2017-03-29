@@ -35,6 +35,7 @@ class PersonType extends AbstractType
             ->add('telephone')
             ->add('mobile')
             ->add('disability')
+            ->add('bcMembershipNumber', TextType::class, [ 'attr' => ['placeholder' => 'BC Membership Number'] ])
             ->add('notes', TextareaType::class)
             ->add('admin', CheckboxType::class)
             ->add('isactive', CheckboxType::class, [ 'label' => 'Active' ])
