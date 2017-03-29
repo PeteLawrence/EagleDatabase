@@ -139,6 +139,11 @@ class Person implements AdvancedUserInterface, \Serializable
     private $nextOfKinContactDetails;
 
     /**
+     * @ORM\Column(type="string", length=8, nullable=true)
+     */
+    private $bcMembershipNumber;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activity", mappedBy="organiser")
      */
     private $activity2;
@@ -1094,5 +1099,29 @@ class Person implements AdvancedUserInterface, \Serializable
     public function isMissingNextOfKinDetails()
     {
         return ($this->nextOfKinName == '' || $this->nextOfKinRelation == '' || $this->nextOfKinContactDetails == '');
+    }
+
+    /**
+     * Set bcMembershipNumber
+     *
+     * @param string $bcMembershipNumber
+     *
+     * @return Person
+     */
+    public function setBcMembershipNumber($bcMembershipNumber)
+    {
+        $this->bcMembershipNumber = $bcMembershipNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get bcMembershipNumber
+     *
+     * @return string
+     */
+    public function getBcMembershipNumber()
+    {
+        return $this->bcMembershipNumber;
     }
 }
