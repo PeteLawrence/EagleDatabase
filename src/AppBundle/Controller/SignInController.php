@@ -66,7 +66,10 @@ class SignInController extends Controller
                 },
                 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname() . ' (' . $a->getId() . ')'; },
                 'label' => 'Select your name from the list below',
-                'placeholder' => ''
+                'placeholder' => '',
+                'attr' => [
+                    'class' => 'input-lg'
+                ]
             ])
             ->getForm()
         ;

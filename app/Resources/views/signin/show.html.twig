@@ -15,6 +15,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
 
     <title>{% block title %}Sign-in form for {{ activity.name }}{% endblock %}</title>
+
+    <style>
+        .select2-container {
+            height: 3em;
+        }
+        .select2-selection--single {
+            height: 3em !important;
+        }
+        .select2-selection__rendered {
+            height: 3em !important;
+            line-height: 3em !important;
+        }
+        .select2-selection__arrow {
+            margin-top: 10px;
+        }
+        .select2-results__option {
+            line-height: 1.75em;
+        }
+    </style>
+
 </head>
 <body>
     <div class="container">
@@ -29,7 +49,7 @@
                 {% endfor %}
                 {{ form_start(signin_form) }}
                     {{ form_widget(signin_form) }}
-                    <input type="submit" value="Sign In" class="btn btn-primary" />
+                    <input type="submit" value="Sign In" class="btn btn-primary btn-lg" />
                 {{ form_end(signin_form) }}
             </div>
         </div>
