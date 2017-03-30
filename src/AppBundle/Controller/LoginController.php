@@ -58,7 +58,7 @@ class LoginController extends Controller
                 $generator->setUppercase()->setLowercase()->setNumbers()->setSymbols(false)->setLength(32);
                 $resetToken = $generator->generatePassword();
                 $now = new \DateTime();
-                $resetTokenExpiry = $now->add(new \DateInterval('PT30M'));
+                $resetTokenExpiry = $now->add(new \DateInterval('PT6H'));
 
                 //Blank the old password, and populate the reset token
                 $person->setPassword('XXX'); //Use 'XXX' as field cannot be emtpy.
