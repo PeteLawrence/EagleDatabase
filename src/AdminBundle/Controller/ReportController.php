@@ -51,6 +51,23 @@ class ReportController extends Controller
         ]);
     }
 
+
+        /**
+         * Lists Active Members
+         *
+         * @Route("/activemembers", name="admin_report_activemembers")
+         * @Method("GET")
+         */
+        public function activeMembersAction()
+        {
+            $reportService = $this->get('eagle_report');
+
+
+            return $this->render('admin/report/activemembers.html.twig', array(
+                'activeMembers' => $reportService->getActiveMembers()
+            ));
+        }
+
     /**
      * Lists all Activity entities.
      *

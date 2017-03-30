@@ -173,6 +173,16 @@ class ReportService
     }
 
 
+    public function getActiveMembers()
+    {
+        $now = new \DateTime();
+
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($now);
+
+        return $members;
+    }
+
+
     public function buildCalendarChart()
     {
         $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findAll();

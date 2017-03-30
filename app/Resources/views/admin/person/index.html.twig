@@ -18,7 +18,6 @@
                 <th data-sortable="true" data-filter-control="input" data-field="name">Name</th>
                 <th data-filter-control="input" data-field="email">Email</th>
                 <th data-filter-control="select" data-field="admin">Admin</th>
-                <th data-filter-control="select" data-field="active">Active</th>
                 <th></th>
             </tr>
         </thead>
@@ -29,7 +28,6 @@
                 <td>{{ person.forename }} {{ person.surname }}</td>
                 <td>{{ person.email }}</td>
                 <td>{% if person.admin %}Yes{% else %}No{% endif %}</td>
-                <td>No</td>
                 <td>
                     <a href="{{ path('admin_person_show', { 'id': person.id }) }}" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
                     <a href="{{ path('admin_person_edit', { 'id': person.id }) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
