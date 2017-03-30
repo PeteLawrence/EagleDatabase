@@ -175,13 +175,14 @@ class ReportService
 
     public function buildCalendarChart()
     {
-        $activities = $this->em->getRepository('AppBundle:Activity')->findAll();
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findAll();
 
 
         $data = [[['label' => 'Date', 'type' => 'date'], ['label' => 'Type', 'type' => 'number'], [ 'role' => 'tooltip' ]]];
 
         foreach ($activities as $activity) {
-            $data[] = [ $activity->getActivityStart(), $activity->getPeople(), $activity->getName() ];
+            $tooltip = sprintf('%s - %s', $activity->getName(), sizeof($activity->getParticipant()));
+            $data[] = [ $activity->getActivityStart(), $activity->getPeople(), $tooltip];
         }
 
 
