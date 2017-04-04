@@ -82,11 +82,13 @@ class MembershipService
     }
 
 
-    public function buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds)
+    public function buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds, $member)
     {
         $membershipTypePeriod = $this->em->getRepository('AppBundle:MembershipTypePeriod')->findOneById($membershipTypePeriodId);
         $memberRegistration = new MemberRegistration();
         $memberRegistration->setMembershipTypePeriod($membershipTypePeriod);
+        $memberRegistration->setRegistrationDateTime(new \DateTime());
+        $memberRegistration->setPerson($member);
 
         foreach ($membershipTypePeriodExtraIds as $extraId) {
             $extra = $this->em->getRepository('AppBundle:MembershipTypePeriodExtra')->findOneById($extraId);
