@@ -220,6 +220,7 @@ class AccountController extends Controller
             'account/renew3.html.twig',
             [
                 'form' => $form->createView(),
+                'payLaterForm' => $this->buildPayLaterForm()->createView(),
                 'memberRegistration' => $memberRegistration,
                 'stripe_publishable_key' => $this->getParameter('stripe.publishable_key'),
                 'total' => $memberRegistration->getTotal()
@@ -227,10 +228,68 @@ class AccountController extends Controller
         );
     }
 
+
+    /**
+     * @Route("/membership/renew/paylater", name="account_membership_renew_paylater")
+     */
+    public function membershipRenewPayLaterAction(Request $request)
+    {
+        $membershipService = $this->get('membership_service');
+        $em = $this->get('doctrine')->getManager();
+        $session = $request->getSession();
+
+        //Create the MemberRegistration record
+        $membershipTypePeriodId = $session->get('renew_mtp');
+        $membershipTypePeriodExtraIds = $session->get('renew_extras');
+
+        $memberRegistration = $membershipService->buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds);
+
+        $memberRegistration->setRegistrationDateTime(new \DateTime());
+        $memberRegistration->setPerson($this->getUser());
+        $em->persist($memberRegistration);
+
+        //Create a MemberRegistrationCharge and mark as paid
+        $now = new \DateTime();
+        $dueDate = clone $now;
+        $dueDate->add(new \DateInterval('P7D'));
+
+        $memberRegistrationCharge = new \AppBundle\Entity\MemberRegistrationCharge();
+        $memberRegistrationCharge->setDescription('Membership');
+        $memberRegistrationCharge->setAmount($memberRegistration->getTotal());
+        $memberRegistrationCharge->setPaid(false);
+        $memberRegistrationCharge->setDuedatetime($dueDate);
+        $memberRegistrationCharge->setCreateddatetime($now);
+        $memberRegistrationCharge->setMemberRegistration($memberRegistration);
+        $memberRegistrationCharge->setPerson($memberRegistration->getPerson());
+        $em->persist($memberRegistrationCharge);
+
+        dump($memberRegistration);
+        dump($memberRegistrationCharge);
+        //$em->flush();
+        die();
+
+
+
+        $this->addFlash('notice', 'Your renewal has been successful.  Please bring along your payment to the next club night.');
+
+        return $this->redirectToRoute('account_overview');
+    }
+
+
+
     private function buildStripePaymentForm()
     {
         return $this->createFormBuilder()
             ->setMethod('POST')
+            ->getForm();
+    }
+
+
+    private function buildPayLaterForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('POST')
+            ->setAction($this->generateUrl('account_membership_renew_paylater'))
             ->getForm();
     }
 
