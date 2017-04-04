@@ -37,8 +37,8 @@
         </div>
 
         {% if app.user == activity.organiser or is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm btn-info">View Participants</a>
-            <a href="{{ path('activity_edit', { 'id': activity.id }) }}" class="btn btn-sm btn-warning">Edit Activity</a>
+            <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm btn-info"><i class="fa fa-users"></i> View Participants</a>
+            <a href="{{ path('activity_edit', { 'id': activity.id }) }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> Edit Activity</a>
         {% endif %}
 
         {#<div class="card">
