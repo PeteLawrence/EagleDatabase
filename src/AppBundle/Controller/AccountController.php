@@ -66,6 +66,16 @@ class AccountController extends Controller
 
 
     /**
+     * @Route("/charges", name="account_charges")
+     */
+    public function chargesAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('account/charges.html.twig');
+    }
+
+
+    /**
      * @Route("/membership/{id}/view", name="account_membership_detail")
      */
     public function membershipDetailAction(Request $request, MemberRegistration $memberRegistration)
