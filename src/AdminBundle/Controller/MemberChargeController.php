@@ -67,6 +67,36 @@ class MemberChargeController extends Controller
 
 
     /**
+     * Displays a form to edit a Charge
+     *
+     * @Route("/{id}/edit", name="admin_membercharge_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, Charge $charge)
+    {
+        $editForm = $this->createForm('AppBundle\Form\Type\OtherChargeType', $charge);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            //Mark as paid
+            $charge->setPaid(true);
+            $charge->setPaiddatetime(new \DateTime());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($charge);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_person_edit', array('id' => $charge->getPerson()->getId()));
+        }
+
+        return $this->render('admin/person/chargeedit.html.twig', array(
+            'charge' => $charge,
+            'edit_form' => $editForm->createView()
+        ));
+    }
+
+
+    /**
      * Displays a form to approve a Charge
      *
      * @Route("/{id}/approve", name="admin_membercharge_approve")

@@ -59,6 +59,8 @@
         </tbody>
     </table>
 
+    <a href="{{ path('admin_membercharge_edit', { personId: charge.person.id, id: charge.id})}}" class="btn btn-sm btn-warning" title="Edit Charge"><i class="fa fa-pencil"></i> Edit Charge</a>
+
     {% if not charge.paid %}
         <a href="{{ path('admin_membercharge_approve', { personId: charge.person.id, id: charge.id})}}" class="btn btn-primary">Pay</a>
     {% endif %}
