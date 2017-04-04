@@ -1,0 +1,46 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Charges{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <span class="breadcrumb-item active">Charges</span>
+    </nav>
+
+    <h2>Charges</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Created Date</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Paid</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for charge in app.user.charge %}
+                <tr>
+                    <td>{{ charge.createdDateTime|date('d/m/Y') }}</td>
+                    <td>&pound;{{ charge.amount|number_format(2) }}</td>
+                    <td>{{ charge.description }}</td>
+                    <td>
+                        {% if charge.paid %}
+                            <i class="fa fa-check text-success"></i> (paid {{ charge.paidDateTime|date('d/m/Y') }})
+                        {% else %}
+                            {% if charge.dueDateTime|date('Y-m-d') < "now"|date('Y-m-d') %}
+                                <i class="fa fa-times text-danger"></i>
+                            {% else %}
+                                <i class="fa fa-times"></i>
+                            {% endif %}
+                            (due {{ charge.dueDateTime|date('d/m/Y') }})
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
