@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
@@ -157,17 +158,42 @@ class AccountController extends Controller
     public function membershipRenew3Action(Request $request)
     {
         $membershipService = $this->get('membership_service');
-        $em = $this->get('doctrine')->getManager();
         $session = $request->getSession();
-
-        $total = 0;
 
         //Create the MemberRegistration record
         $membershipTypePeriodId = $session->get('renew_mtp');
         $membershipTypePeriodExtraIds = $session->get('renew_extras');
-        $memberRegistration = $membershipService->buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds);
+        $memberRegistration = $membershipService->buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds, $this->getUser());
 
-        //Get available membership options
+
+        // replace this example code with whatever you need
+        return $this->render(
+            'account/renew3.html.twig',
+            [
+                'form' => $this->buildStripePaymentForm()->createView(),
+                'payLaterForm' => $this->buildPayLaterForm()->createView(),
+                'memberRegistration' => $memberRegistration,
+                'stripe_publishable_key' => $this->getParameter('stripe.publishable_key'),
+                'total' => $memberRegistration->getTotal()
+            ]
+        );
+    }
+
+
+    /**
+     * @Route("/membership/renew/paynow", name="account_membership_renew_paynow")
+     */
+    public function membershipRenewPayNowAction(Request $request)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $membershipService = $this->get('membership_service');
+        $session = $request->getSession();
+
+        //Create the MemberRegistration record
+        $membershipTypePeriodId = $session->get('renew_mtp');
+        $membershipTypePeriodExtraIds = $session->get('renew_extras');
+        $memberRegistration = $membershipService->buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds, $this->getUser());
+
         $form = $this->buildStripePaymentForm();
         $form->handleRequest($request);
 
@@ -176,7 +202,8 @@ class AccountController extends Controller
              \Stripe\Stripe::setApiKey($this->getParameter('stripe.secret_key'));
 
             // Get the credit card details submitted by the form
-            $token = $_POST['stripeToken'];
+            $data = $form->getData();
+            $token = $data['stripeToken'];
 
             // Create a charge: this will charge the user's card
             try {
@@ -191,8 +218,6 @@ class AccountController extends Controller
                 throw new \Exception('There was an error taking your payment.');
             }
 
-            $memberRegistration->setRegistrationDateTime(new \DateTime());
-            $memberRegistration->setPerson($this->getUser());
             $em->persist($memberRegistration);
 
             //Create a MemberRegistrationCharge and mark as paid
@@ -210,22 +235,13 @@ class AccountController extends Controller
 
             $em->flush();
 
+            $membershipService->clearSessionEntries($session);
+
             $this->addFlash('notice', 'Your renewal has been successful');
 
             return $this->redirectToRoute('account_overview');
         }
 
-        // replace this example code with whatever you need
-        return $this->render(
-            'account/renew3.html.twig',
-            [
-                'form' => $form->createView(),
-                'payLaterForm' => $this->buildPayLaterForm()->createView(),
-                'memberRegistration' => $memberRegistration,
-                'stripe_publishable_key' => $this->getParameter('stripe.publishable_key'),
-                'total' => $memberRegistration->getTotal()
-            ]
-        );
     }
 
 
@@ -242,10 +258,8 @@ class AccountController extends Controller
         $membershipTypePeriodId = $session->get('renew_mtp');
         $membershipTypePeriodExtraIds = $session->get('renew_extras');
 
-        $memberRegistration = $membershipService->buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds);
+        $memberRegistration = $membershipService->buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds, $this->getUser());
 
-        $memberRegistration->setRegistrationDateTime(new \DateTime());
-        $memberRegistration->setPerson($this->getUser());
         $em->persist($memberRegistration);
 
         //Create a MemberRegistrationCharge and mark as paid
@@ -263,12 +277,9 @@ class AccountController extends Controller
         $memberRegistrationCharge->setPerson($memberRegistration->getPerson());
         $em->persist($memberRegistrationCharge);
 
-        dump($memberRegistration);
-        dump($memberRegistrationCharge);
-        //$em->flush();
-        die();
+        $em->flush();
 
-
+        $membershipService->clearSessionEntries($session);
 
         $this->addFlash('notice', 'Your renewal has been successful.  Please bring along your payment to the next club night.');
 
@@ -276,11 +287,12 @@ class AccountController extends Controller
     }
 
 
-
     private function buildStripePaymentForm()
     {
         return $this->createFormBuilder()
             ->setMethod('POST')
+            ->setAction($this->generateUrl('account_membership_renew_paynow'))
+            ->add('stripeToken', HiddenType::class, [ 'attr' => ['id' => 'stripetoken'] ])
             ->getForm();
     }
 
