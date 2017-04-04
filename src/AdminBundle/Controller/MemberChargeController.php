@@ -78,10 +78,6 @@ class MemberChargeController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            //Mark as paid
-            $charge->setPaid(true);
-            $charge->setPaiddatetime(new \DateTime());
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($charge);
             $em->flush();
