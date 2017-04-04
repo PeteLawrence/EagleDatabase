@@ -34,8 +34,47 @@
         </tr>
     </table>
 
-    {{ form_start(form) }}
-        <script
+    <button id="paynow" class="btn btn-primary" value="Pay Now" />Pay Now</button>
+
+    {{ form_start(payLaterForm) }}
+        <input type="submit" class="btn btn-warning" value="Pay Later" />
+    {{ form_end(form) }}
+
+
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script>
+    var handler = StripeCheckout.configure({
+        key: '{{ stripe_publishable_key }}',
+        image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+        locale: 'auto',
+        token: function(token) {
+            // You can access the token ID with `token.id`.
+            // Get the token ID to your server-side code for use.
+            console.log(token);
+            window.location = '?token=' + token.id;
+        }
+    });
+
+    document.getElementById('paynow').addEventListener('click', function(e) {
+        console.log('click');
+    // Open Checkout with further options:
+        handler.open({
+            name: '{{ site_name }}',
+            description: 'Membership',
+            zipCode: true,
+            amount: {{ total * 100 }},
+            email: '{{ app.user.email }}',
+            currency: 'gbp'
+        });
+        e.preventDefault();
+    });
+
+    // Close Checkout on page navigation:
+    window.addEventListener('popstate', function() {
+      handler.close();
+    });
+    </script>
+        <!--<script
             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="{{ stripe_publishable_key }}"
             data-amount="{{ total * 100 }}"
@@ -46,7 +85,6 @@
             data-zip-code="true"
             data-currency="gbp"
             data-email="{{ app.user.email }}">
-        </script>
-    {{ form_end(form) }}
+        </script>-->
 
 {% endblock %}
