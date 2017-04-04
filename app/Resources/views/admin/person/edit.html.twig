@@ -186,6 +186,7 @@
                             {% endif %}
                         </td>
                         <td>
+                            <a href="{{ path('admin_membercharge_edit', { personId: person.id, id: charge.id})}}" title="Edit Charge"><i class="fa fa-pencil"></i></a>
                             <a href="{{ path('admin_membercharge_show', { personId: person.id, id: charge.id})}}" title="View Charge"><i class="fa fa-search"></i></a>
                             {% if not charge.paid %}
                                 <a href="{{ path('admin_membercharge_approve', { personId: person.id, id: charge.id})}}" title="Pay Charge"><i class="fa fa-money"></i></a>

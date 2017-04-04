@@ -1,0 +1,26 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_index')}}">People</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_show', { id: charge.person.id }) }}">{{ charge.person.name }}</a>
+        <a class="breadcrumb-item" href="{{ path('admin_membercharge_show', { personId: charge.person.id, id: charge.id})}}) }}">Charge: {{ charge.description }}</a>
+        <span class="breadcrumb-item active">Edit</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Charge</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" class="btn btn-primary" value="Save" />
+    {{ form_end(edit_form) }}
+
+    {% if not charge.paid %}
+        <a href="{{ path('admin_membercharge_approve', { personId: charge.person.id, id: charge.id})}}" class="btn btn-primary">Pay</a>
+    {% endif %}
+
+{% endblock %}

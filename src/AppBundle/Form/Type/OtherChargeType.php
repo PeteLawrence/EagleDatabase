@@ -22,7 +22,9 @@ class OtherChargeType extends AbstractType
         $builder
             ->add('amount', MoneyType::class, [ 'currency' => 'GBP' ])
             ->add('description', TextType::class)
+            ->add('createddatetime', DateTimeType::class)
             ->add('duedatetime', DateTimeType::class)
+            ->add('paiddatetime', DateTimeType::class)
             ->add('paid', CheckboxType::class)
             ->add('paymentType', EntityType::class, [ 'class' => 'AppBundle:PaymentType', 'choice_label' => 'type', 'placeholder' => '' ])
             ->add('reference')
