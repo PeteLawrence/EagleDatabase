@@ -109,7 +109,7 @@ class EnrolController extends Controller
 
         $membershipTypePeriodId = $session->get('enrol_mtp');
         $membershipTypePeriodExtraIds = $session->get('enrol_extras');
-        $memberRegistration = $membershipService->buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds);
+        $memberRegistration = $membershipService->buildMembershipRegistration($membershipTypePeriodId, $membershipTypePeriodExtraIds, $this->getUser());
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
