@@ -39,7 +39,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 offset-sm-3">
+            <div class="col-6 offset-3">
                 <h1>Sign In</h1>
                 <h2>{{ activity.name}} - {{ activity.activityStart|date("d/m/Y") }}</h2>
                 {% for flash_message in app.session.flashBag.get('notice') %}
