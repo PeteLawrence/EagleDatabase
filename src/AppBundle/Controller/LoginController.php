@@ -193,8 +193,8 @@ class LoginController extends Controller
     {
         return $this->createFormBuilder()
             ->setMethod('POST')
-            ->add('email', EmailType::class, [ 'attr' => ['placeholder' => 'Email Address'] ])
-            ->add('dob', BirthdayType::class,  ['format' => 'd MMMM y'] )
+            ->add('email', EmailType::class, [ 'attr' => ['placeholder' => 'Email Address'], 'label' => 'Email Address' ])
+            ->add('dob', BirthdayType::class,  ['label' => 'Date Of Birth', 'format' => 'd MMMM y', 'years' => range(date('Y') - 100, date('Y'))] )
             ->getForm();
     }
 
