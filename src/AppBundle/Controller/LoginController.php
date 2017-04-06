@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -147,6 +148,54 @@ class LoginController extends Controller
                 'form' => $form->createView()
             ]
         );
+    }
+
+
+    /**
+     * Resets a users passord
+     *
+     * @Route("/lookup", name="lookup_membership_number")
+     */
+    public function membershipNumberLookupAction(Request $request)
+    {
+        $em = $this->get('doctrine')->getManager();
+
+        $form = $this->createMembershipNumberLookupForm();
+        $form->handleRequest($request);
+
+        $results = null;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $results = $em->getRepository('AppBundle:Person')->findMembersByEmailAndDob($data['email'], $data['dob']);
+            /*if (!$results) {
+                throw $this->createNotFoundException('No such user');
+            }*/
+
+            if (sizeof($results) == 0) {
+                $this->addFlash('warning', 'Sorry, we couldn\'t find a member with the details supplied.');
+            }
+        }
+
+
+        return $this->render(
+            'login/lookupMembershipNumber.html.twig',
+            [
+                'form' => $form->createView(),
+                'results' => $results
+            ]
+        );
+    }
+
+
+    private function createMembershipNumberLookupForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('POST')
+            ->add('email', EmailType::class, [ 'attr' => ['placeholder' => 'Email Address'] ])
+            ->add('dob', BirthdayType::class,  ['format' => 'd MMMM y'] )
+            ->getForm();
     }
 
 
