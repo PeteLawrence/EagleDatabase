@@ -27,7 +27,6 @@ class SignInController extends Controller
             throw $this->createAccessDeniedException('Sign In Key was invalid');
         }
 
-
         $form = $this->createSigninForm($activity);
         $form->handleRequest($request);
 
@@ -35,16 +34,21 @@ class SignInController extends Controller
             $em = $this->getDoctrine()->getManager();
             $data = $form->getData();
 
-            $participant = new Participant();
-            $participant->setManagedActivity($activity);
-            $participant->setPerson($data['person']);
+            $p = $data['person'];
 
-            $em->persist($participant);
-            $em->flush();
+            if ($p != null) {
+                $participant = new Participant();
+                $participant->setManagedActivity($activity);
+                $participant->setPerson($p);
 
-            $this->addFlash('notice', 'You have been signed in!');
+                $em->persist($participant);
+                $em->flush();
 
-            return $this->redirectToRoute('signin_show', [ 'id' => $activity->getId(), 'key' => $activity->getSigninKey() ]);
+                $message = sprintf('%s, you have been signed in!', $participant->getPerson()->getForename());
+                $this->addFlash('notice', $message);
+
+                return $this->redirectToRoute('signin_show', [ 'id' => $activity->getId(), 'key' => $activity->getSigninKey() ]);
+            }
         }
 
         return $this->render('signin/show.html.twig', array(
