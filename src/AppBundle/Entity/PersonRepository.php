@@ -28,4 +28,17 @@ class PersonRepository extends EntityRepository
 
         return $query;
     }
+
+
+    public function findMembersByEmailAndDob($email, $dob)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.email = ?1')
+            ->andWhere('p.dob = ?2')
+            ->setParameter(1, $email)
+            ->setParameter(2, $dob->format('Y-m-d'))
+        ;
+
+        return $query->getQuery()->getResult();
+    }
 }

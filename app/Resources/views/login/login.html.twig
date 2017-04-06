@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-6 push-md-3">
             <h2>Login</h2>
-            <p>Enter your {{ site_name }} username and password below to login</p>
+            <p>Enter your {{ site_name }} id and password below to login</p>
 
             {% if error %}
                 <div class="alert alert-danger" role="alert">
@@ -39,7 +39,14 @@
             </form>
 
             <p>
-                <a href="{{ path('reset_password')}}" class="pull-xs-right">Forgot your password?</a>
+                <ul>
+                    <li>
+                        <a href="{{ path('lookup_membership_number') }}">Forgot your membership number?</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('reset_password')}}">Forgot your password?</a>
+                    </li>
+                </ul>
             </p>
         </div>
     </div>

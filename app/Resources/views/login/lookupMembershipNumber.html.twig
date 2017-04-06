@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Membership Number Lookup{% endblock %}
+
+{% block body %}
+    <h2>Membership Number Lookup</h1>
+
+    <div class="row">
+        <div class="col-md-6 push-md-3">
+            {% if results is iterable and results|length > 0 %}
+                {% if results|length == 1 %}
+                    <p>
+                        Your membership number is <strong>{{ results[0].id}}</strong>.
+                        <a href="{{ path('login') }}"> Click here</a> to login</a>.
+                    </p>
+                {% elseif results|length > 1 %}
+                    <p>Multiple results found:</p>
+                    <ul>
+                        {% for r in results %}
+                            <li>{{ r.forename }} - {{ r.id }}</li>
+                        {% endfor %}
+                {% endif %}
+            {% else %}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <input type="submit" class="btn btn-primary" value="Lookup" />
+                {{ form_end(form) }}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
