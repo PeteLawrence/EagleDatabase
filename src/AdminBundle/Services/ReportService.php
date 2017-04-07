@@ -248,7 +248,7 @@ class ReportService
 
 
 
-    public function buildEnrolmentChart()
+    public function buildEnrolmentByTypeChart()
     {
         $registrations = $this->em->getRepository('AppBundle:MemberRegistration')->findAll();
 
@@ -285,11 +285,7 @@ class ReportService
             $month = $registration->getRegistrationDateTime()->format($groupBy);
             $type = $registration->getMembershipTypePeriod()->getMembershipType()->getType();
 
-            if (isset($counts[$month][$type])) {
-                $counts[$month][$type]++;
-            } else {
-                $counts[$month][$type] = 1;
-            }
+            $counts[$month][$type]++;
         }
 
 
@@ -312,7 +308,61 @@ class ReportService
 
         //Build the chart object
         $chart = new ColumnChart();
-        $chart->getOptions()->setTitle('Enrolments');
+        $chart->getOptions()->setTitle('Enrolments by Type');
+        $chart->getOptions()->setIsStacked(true);
+        $chart->getOptions()->setHeight('300');
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+
+
+    public function buildEnrolmentByGenderChart()
+    {
+        $registrations = $this->em->getRepository('AppBundle:MemberRegistration')->findAll();
+
+        $counts = [];
+        $genders = ['F', 'M'];
+        $months = [];
+
+        $groupBy = 'M Y';
+
+
+        foreach ($registrations as $registration) {
+            $month = $registration->getRegistrationDateTime()->format($groupBy);
+            if (!in_array($month, $months)) {
+                $months[] = $month;
+            }
+        }
+
+        //Build empty data array
+        foreach ($months as $month) {
+            $counts[$month] = ['F' => 0, 'M' => 0];
+        }
+
+        //Populate the data array
+        foreach ($registrations as $registration) {
+            $month = $registration->getRegistrationDateTime()->format($groupBy);
+            $gender = $registration->getPerson()->getGender();
+
+            $counts[$month][$gender]++;
+        }
+
+
+        //Turn the data array into a Google Charts Data table
+        $data = [
+            ['Month', 'Female', 'Male']
+        ];
+
+        foreach ($counts as $month => $counts) {
+            $row = [$month, $counts['F'], $counts['M']];
+            $data[] = $row;
+        }
+
+        //Build the chart object
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Enrolments by Gender');
         $chart->getOptions()->setIsStacked(true);
         $chart->getOptions()->setHeight('300');
         $chart->getData()->setArrayToDataTable($data);

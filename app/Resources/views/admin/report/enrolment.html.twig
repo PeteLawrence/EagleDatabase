@@ -14,10 +14,12 @@
 {% block body %}
     <h1>Enrolment</h1>
 
-    <div id="enrolmentChart"></div>
+    <div id="enrolmentByTypeChart"></div>
+    <div id="enrolmentByGenderChart"></div>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-        {{ gc_draw(enrolmentChart, 'enrolmentChart') }}
+        {{ gc_draw(enrolmentByTypeChart, 'enrolmentByTypeChart') }}
+        {{ gc_draw(enrolmentByGenderChart, 'enrolmentByGenderChart') }}
     </script>
 {% endblock %}

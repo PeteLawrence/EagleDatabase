@@ -200,7 +200,8 @@ class ReportController extends Controller
         $reportService = $this->get('eagle_report');
 
         return $this->render('admin/report/enrolment.html.twig', array(
-            'enrolmentChart' => $reportService->buildEnrolmentChart(),
+            'enrolmentByTypeChart' => $reportService->buildEnrolmentByTypeChart(),
+            'enrolmentByGenderChart' => $reportService->buildEnrolmentByGenderChart()
         ));
     }
 
