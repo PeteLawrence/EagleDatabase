@@ -17,15 +17,21 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Type</th>
+                <th>Enrolled</th>
             </tr>
         </thead>
         <tbody>
             {% for member in activeMembers %}
                 <tr>
+                    <td>{{ member.id }}</td>
                     <td>{{ member.forename }} {{ member.surname }}</td>
                     <td>{{ member.email }}</td>
+                    <td>{{ member.currentMemberRegistration.membershipTypePeriod.membershipType.type }}</td>
+                    <td>{{ member.currentMemberRegistration.registrationDateTime|date('d/m/Y') }}
                 </tr>
             {% endfor %}
         </tbody>
