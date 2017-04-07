@@ -248,7 +248,7 @@ class ReportService
 
 
 
-    public function buildEnrolementChart()
+    public function buildEnrolmentChart()
     {
         $registrations = $this->em->getRepository('AppBundle:MemberRegistration')->findAll();
 
@@ -309,7 +309,7 @@ class ReportService
 
         //Build the chart object
         $chart = new ColumnChart();
-        $chart->getOptions()->setTitle('Enrolements');
+        $chart->getOptions()->setTitle('Enrolments');
         $chart->getOptions()->setIsStacked(true);
         $chart->getData()->setArrayToDataTable($data);
 
