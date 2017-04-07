@@ -294,18 +294,21 @@ class ReportService
 
 
         //Turn the data array into a Google Charts Data table
+        $r = ['Month'];
+        foreach ($types as $type) {
+            $r[] = $type;
+        }
         $data = [
-            [ 'Month', 'Adults', 'Youths', 'Coaches' ]
+            $r
         ];
 
         foreach ($counts as $month => $counts) {
             $row = [$month];
-            foreach ($counts as $type => $amount) {
-                $row[] = $amount;
+            foreach ($types as $type) {
+                $row[] = $counts[$type];
             }
             $data[] = $row;
         }
-        dump($data);
 
         //Build the chart object
         $chart = new ColumnChart();
