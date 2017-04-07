@@ -1,0 +1,23 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Reports: Enrolement{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Enrolement</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Enrolement</h1>
+
+    <div id="enrolementChart"></div>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        {{ gc_draw(enrolementChart, 'enrolementChart') }}
+    </script>
+{% endblock %}
