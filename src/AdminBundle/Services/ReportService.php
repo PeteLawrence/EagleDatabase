@@ -17,6 +17,8 @@ class ReportService
     }
 
 
+
+
     public function buildGenderChart($date)
     {
         //Fetch data
@@ -242,5 +244,75 @@ class ReportService
         }
 
         return $rows;
+    }
+
+
+
+    public function buildEnrolementChart()
+    {
+        $registrations = $this->em->getRepository('AppBundle:MemberRegistration')->findAll();
+
+        $counts = [];
+        $types = [];
+        $months = [];
+
+        $groupBy = 'M Y';
+
+
+        foreach ($registrations as $registration) {
+            $type = $registration->getMembershipTypePeriod()->getMembershipType()->getType();
+            if (!in_array($type, $types)) {
+                $types[] = $type;
+            }
+
+            $month = $registration->getRegistrationDateTime()->format($groupBy);
+            if (!in_array($month, $months)) {
+                $months[] = $month;
+            }
+        }
+
+        //Build empty data array
+        foreach ($months as $month) {
+            $r = [];
+            foreach ($types as $type) {
+                $r[$type] = 0;
+            }
+            $counts[$month] = $r;
+        }
+
+        //Populate the data array
+        foreach ($registrations as $registration) {
+            $month = $registration->getRegistrationDateTime()->format($groupBy);
+            $type = $registration->getMembershipTypePeriod()->getMembershipType()->getType();
+
+            if (isset($counts[$month][$type])) {
+                $counts[$month][$type]++;
+            } else {
+                $counts[$month][$type] = 1;
+            }
+        }
+
+
+        //Turn the data array into a Google Charts Data table
+        $data = [
+            [ 'Month', 'Adults', 'Youths', 'Coaches' ]
+        ];
+
+        foreach ($counts as $month => $counts) {
+            $row = [$month];
+            foreach ($counts as $type => $amount) {
+                $row[] = $amount;
+            }
+            $data[] = $row;
+        }
+        dump($data);
+
+        //Build the chart object
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Enrolements');
+        $chart->getOptions()->setIsStacked(true);
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
     }
 }

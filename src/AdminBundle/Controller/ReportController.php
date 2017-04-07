@@ -189,6 +189,22 @@ class ReportController extends Controller
     }
 
 
+    /**
+     * Lists all Activity entities.
+     *
+     * @Route("/enrolement", name="admin_report_enrolement")
+     * @Method("GET")
+     */
+    public function enrolementAction()
+    {
+        $reportService = $this->get('eagle_report');
+
+        return $this->render('admin/report/enrolement.html.twig', array(
+            'enrolementChart' => $reportService->buildEnrolementChart(),
+        ));
+    }
+
+
 
     private function buildVisitsByGenderChart()
     {
