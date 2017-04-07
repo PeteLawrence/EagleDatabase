@@ -314,6 +314,7 @@ class ReportService
         $chart = new ColumnChart();
         $chart->getOptions()->setTitle('Enrolments');
         $chart->getOptions()->setIsStacked(true);
+        $chart->getOptions()->setHeight('300');
         $chart->getData()->setArrayToDataTable($data);
 
         return $chart;
