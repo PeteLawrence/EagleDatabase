@@ -172,6 +172,7 @@ class ReportService
         $map = new Map();
         $map->getData()->setArrayToDataTable($data);
         $map->getOptions()->setShowTip(true);
+        $map->getOptions()->setUseMapTypeControl(true);
 
         return $map;
     }
