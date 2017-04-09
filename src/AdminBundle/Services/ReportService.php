@@ -166,7 +166,7 @@ class ReportService
 
         $data = [['Location', 'Name'] ];
         foreach($grouper->getGroups() as $group) {
-            $data[] = [ $group['name'], sprintf('%s: %s', $group['name'], $group['count']) ];
+            $data[] = [ $group['name'] . ', UK', sprintf('%s: %s', $group['name'], $group['count']) ];
         }
 
         $map = new Map();
