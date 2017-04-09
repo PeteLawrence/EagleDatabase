@@ -22,7 +22,7 @@ class MemberRegistrationExtra
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MemberRegistration", inversedBy="memberRegistrationExtra")
-     * @ORM\JoinColumn(name="member_registration_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="member_registration_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $memberRegistration;
 
