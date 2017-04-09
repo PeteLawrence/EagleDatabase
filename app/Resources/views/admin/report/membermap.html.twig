@@ -1,0 +1,25 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Reports: Member Map{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Member Map</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Map</h1>
+
+    <div id="memberMap" style="height: 600px;"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&callback=initMap" async defer></script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        {{ gc_draw(memberMap, 'memberMap') }}
+    </script>
+{% endblock %}

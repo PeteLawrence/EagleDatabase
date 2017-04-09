@@ -4,6 +4,7 @@ namespace AdminBundle\Services;
 
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\CalendarChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\Map;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use Doctrine\ORM\EntityManager;
 
@@ -145,6 +146,34 @@ class ReportService
 
 
         return $chart;
+    }
+
+
+    public function buildMemberMap()
+    {
+        $grouper = new \AppBundle\Util\TextGrouper();
+        $now = new \DateTime();
+
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($now);
+
+        foreach ($members as $member) {
+            //Split out the outgoing part of the postcode
+            $postcodeParts = explode(' ', $member->getPostcode());
+            $outgoingPart = $postcodeParts[0];
+
+            $grouper->addItem($member->getPostcode());
+        }
+
+        $data = [['Location', 'Name'] ];
+        foreach($grouper->getGroups() as $group) {
+            $data[] = [ $group['name'], sprintf('%s: %s', $group['name'], $group['count']) ];
+        }
+
+        $map = new Map();
+        $map->getData()->setArrayToDataTable($data);
+        $map->getOptions()->setShowTip(true);
+
+        return $map;
     }
 
 
