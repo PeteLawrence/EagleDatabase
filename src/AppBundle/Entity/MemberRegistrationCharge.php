@@ -9,12 +9,8 @@ class MemberRegistrationCharge extends \AppBundle\Entity\Charge
 {
     /**
      * 
-     * @ORM\JoinColumn(name="member_registration_id", referencedColumnName="id", unique=true)
-     * @ORM\OneToOne(
-     *     targetEntity="AppBundle\Entity\MemberRegistration",
-     *     inversedBy="memberRegistrationCharge",
-     *     cascade={"persist"}
-     * )
+     * @ORM\JoinColumn(name="member_registration_id", referencedColumnName="id", unique=true, onDelete="CASCADE")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\MemberRegistration", inversedBy="memberRegistrationCharge")
      */
     private $memberRegistration;
 

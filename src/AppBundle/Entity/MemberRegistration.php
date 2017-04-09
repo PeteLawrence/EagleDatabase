@@ -21,13 +21,21 @@ class MemberRegistration
     private $registrationDateTime;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistrationExtra", mappedBy="memberRegistration", cascade={"persist"})
+     * @ORM\OneToMany(
+     *     targetEntity="AppBundle\Entity\MemberRegistrationExtra",
+     *     mappedBy="memberRegistration",
+     *     cascade={"detach","persist","remove"}
+     * )
      *
      */
     private $memberRegistrationExtra;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\MemberRegistrationCharge", mappedBy="memberRegistration")
+     * @ORM\OneToOne(
+     *     targetEntity="AppBundle\Entity\MemberRegistrationCharge",
+     *     mappedBy="memberRegistration",
+     *     cascade={"detach","persist","remove"}
+     * )
      */
     private $memberRegistrationCharge;
 
