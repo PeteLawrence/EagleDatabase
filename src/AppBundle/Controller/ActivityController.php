@@ -242,7 +242,7 @@ class ActivityController extends Controller
                 'label' => 'Participant',
                 'placeholder' => ''
             ])
-            ->add('notes', TextAreaType::class, [])
+            ->add('notes', TextAreaType::class, [ 'required' => false ])
             ->getForm()
         ;
     }
