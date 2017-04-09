@@ -116,6 +116,24 @@ class ReportController extends Controller
 
 
     /**
+     * Displays a map of members addresses
+     *
+     * @Route("/membermap", name="admin_report_membermap")
+     * @Method({"GET", "POST"})
+     */
+    public function memberMapAction(Request $request)
+    {
+        $reportService = $this->get('eagle_report');
+
+        return $this->render('admin/report/membermap.html.twig', array(
+            'memberMap' => $reportService->buildMemberMap(),
+            'google_maps_key' => $this->getParameter('site.google_maps_key')
+        ));
+
+    }
+
+
+    /**
      * Displays a membership overview page
      *
      * @Route("/membership", name="admin_report_membership")
@@ -146,6 +164,23 @@ class ReportController extends Controller
         }
     }
 
+    /**
+     * Lists all Activity entities.
+     *
+     * @Route("/nextofkin", name="admin_report_nextofkin")
+     * @Method("GET")
+     */
+    public function nextOfKinAction()
+    {
+        $em = $this->get('doctrine')->getManager();
+
+        $people = $em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+
+        return $this->render('admin/report/nextOfKin.html.twig', array(
+            'people' => $people
+        ));
+    }
+
 
     /**
      * Lists all Activity entities.
@@ -167,24 +202,6 @@ class ReportController extends Controller
             'qualificationChart' => $this->buildQualificationChart(),
             'whiteWaterGenderChart' => $this->buildWhiteWaterGenderChart(),
             'whiteWaterAgeChart' => $this->buildWhiteWaterAgeChart()
-        ));
-    }
-
-
-    /**
-     * Lists all Activity entities.
-     *
-     * @Route("/nextofkin", name="admin_report_nextofkin")
-     * @Method("GET")
-     */
-    public function nextOfKinAction()
-    {
-        $em = $this->get('doctrine')->getManager();
-
-        $people = $em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
-
-        return $this->render('admin/report/nextOfKin.html.twig', array(
-            'people' => $people
         ));
     }
 
