@@ -31,12 +31,12 @@ class ManagedActivityRepository extends EntityRepository
     }
 
 
-    public function findActivitiesBetweenDates($from, $to)
+    public function findActivitiesBetweenDates($from, $to, $activityType)
     {
-        return $this->queryActivitiesBetweenDates($from, $to)->getQuery()->getResult();
+        return $this->queryActivitiesBetweenDates($from, $to, $activityType)->getQuery()->getResult();
     }
 
-    public function queryActivitiesBetweenDates($from, $to)
+    public function queryActivitiesBetweenDates($from, $to, $activityType)
     {
         $q = $this->createQueryBuilder('ma')
             ->where('ma.activityStart >= ?1')
@@ -44,6 +44,11 @@ class ManagedActivityRepository extends EntityRepository
             ->setParameter(1, $from)
             ->setParameter(2, $to)
             ->orderBy('ma.activityStart');
+
+        if ($activityType) {
+            $q->andWhere('ma.activityType = ?3');
+            $q->setParameter(3, $activityType);
+        }
 
         return $q;
     }
