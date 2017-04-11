@@ -80,6 +80,7 @@ class ReportService
         $chart->getOptions()->getBar()->setGroupWidth('95%');
         $chart->getOptions()->getExplorer()->setAxis('horizontal');
         $chart->getOptions()->getExplorer()->setKeepInBounds(true);
+        $chart->getOptions()->getExplorer()->setMaxZoomIn(0.1);
         $chart->getData()->setArrayToDataTable($counts);
 
         return $chart;
@@ -124,6 +125,7 @@ class ReportService
         $chart->getOptions()->getBar()->setGroupWidth('95%');
         $chart->getOptions()->getExplorer()->setAxis('horizontal');
         $chart->getOptions()->getExplorer()->setKeepInBounds(true);
+        $chart->getOptions()->getExplorer()->setMaxZoomIn(0.1);
         $chart->getData()->setArrayToDataTable($counts);
 
         return $chart;
