@@ -258,6 +258,25 @@ class ReportController extends Controller
     }
 
 
+    /**
+     * Lists youth members
+     *
+     * @Route("/youth", name="admin_report_youth")
+     * @Method("GET")
+     */
+    public function youthAction()
+    {
+        $em = $this->get('doctrine')->getManager();
+
+        $youth = $em->getRepository('AppBundle:MembershipType')->findOneByType('Coach');
+        $people = $em->getRepository('AppBundle:Person')->findMembersByType($youth);
+
+        return $this->render('admin/report/youth.html.twig', array(
+            'people' => $people
+        ));
+    }
+
+
 
     private function buildVisitsByGenderChart()
     {

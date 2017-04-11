@@ -1,0 +1,32 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Reports: Youth Members{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Youth Members</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Youth Members</h1>
+
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>DoB</th>
+            <th>Age</th>
+        </tr>
+        {% for p in people %}
+            {% set diff = date().diff(date(p.dob)) %}
+            <tr>
+                <td>{{ p.name }}</td>
+                <td>{{ p.dob|date('d/m/y') }}</td>
+                <td>{{ diff.y }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
