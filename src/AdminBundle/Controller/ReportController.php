@@ -86,6 +86,28 @@ class ReportController extends Controller
     }
 
 
+
+    /**
+     * Lists all Activity entities.
+     *
+     * @Route("/attendancedetail", name="admin_report_attendancedetail")
+     * @Method("GET")
+     */
+    public function attendanceDetailAction()
+    {
+        $reportService = $this->get('eagle_report');
+
+        $from = new \DateTime('2017-01-01');
+        $to = new \DateTime('2017-12-31');
+
+
+        return $this->render('admin/report/attendancedetail.html.twig', array(
+            'attendanceByGenderChart' => $reportService->buildAttendanceByGenderChart($from, $to),
+            'attendanceByTypeChart' => $reportService->buildAttendanceByTypeChart($from, $to)
+        ));
+    }
+
+
     /**
      * Lists all Activity entities.
      *
