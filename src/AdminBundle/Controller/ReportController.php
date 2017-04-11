@@ -347,11 +347,17 @@ class ReportController extends Controller
     {
         return $this->createFormBuilder()
             ->setMethod('POST')
-            ->add('fromDate', DateType::class)
-            ->add('toDate', DateType::class)
+            ->add('fromDate', DateType::class, [
+                'data' => new \DateTime('first day of january')
+            ])
+            ->add('toDate', DateType::class, [
+                'data' => new \DateTime('last day of december')
+            ])
             ->add('activityType', EntityType::class, [
                 'class' => 'AppBundle:ActivityType',
                 'choice_label' => function (\AppBundle\Entity\ActivityType $at) { return $at->getType(); },
+                'placeholder' => 'All',
+                'required' => false
             ])
             ->getForm()
         ;
