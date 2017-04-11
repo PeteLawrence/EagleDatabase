@@ -72,6 +72,7 @@ class ReportService
 
             $counts[] = [$activity->getActivityStart(), $activity->getName(), $males, $females];
         }
+        dump($counts);
 
 
         $chart = new ColumnChart();
@@ -97,13 +98,14 @@ class ReportService
 
         $counts = [ $headers ];
         foreach ($activities as $activity) {
-            foreach ($activity->getParticipant() as $p) {
-                $row = [$activity->getActivityStart(), $activity->getName()];
+            $row = [$activity->getActivityStart(), $activity->getName()];
 
-                //Add in 0 counts for each member type
-                for ($i = 0; $i < sizeof($membershipTypes); $i++) {
-                    $row[] = 0;
-                }
+            //Add in 0 counts for each member type
+            for ($i = 0; $i < sizeof($membershipTypes); $i++) {
+                $row[] = 0;
+            }
+
+            foreach ($activity->getParticipant() as $p) {
 
                 if ($p->getPerson() && $p->getPerson()->getCurrentMemberRegistration()) {
                     $type = $p->getPerson()->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
@@ -113,6 +115,7 @@ class ReportService
                 $counts[] = $row;
             }
         }
+        dump($counts);
 
 
         $chart = new ColumnChart();
