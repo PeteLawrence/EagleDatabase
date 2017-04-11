@@ -268,7 +268,7 @@ class ReportController extends Controller
     {
         $em = $this->get('doctrine')->getManager();
 
-        $youth = $em->getRepository('AppBundle:MembershipType')->findOneByType('Coach');
+        $youth = $em->getRepository('AppBundle:MembershipType')->findOneByType('Youth');
         $people = $em->getRepository('AppBundle:Person')->findMembersByType($youth);
 
         return $this->render('admin/report/youth.html.twig', array(
