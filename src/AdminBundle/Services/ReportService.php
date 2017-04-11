@@ -112,8 +112,9 @@ class ReportService
                     $pos = array_search($type, $headers);
                     $row[$pos]++;
                 }
-                $counts[] = $row;
+
             }
+            $counts[] = $row;
         }
         dump($counts);
 
