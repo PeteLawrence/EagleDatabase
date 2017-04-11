@@ -51,9 +51,9 @@ class ReportService
 
 
 
-    public function buildAttendanceByGenderChart($from, $to)
+    public function buildAttendanceByGenderChart($from, $to, $activityType)
     {
-        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to);
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
 
         $counts = [['Name', ['role' => 'tooltip'], 'Males', 'Females']];
         foreach ($activities as $activity) {
@@ -78,19 +78,19 @@ class ReportService
         $chart->getOptions()->setIsStacked(true);
         $chart->getOptions()->setHeight('300');
         //$chart->getOptions()->getBar()->setGroupWidth('95%');
-        $chart->getOptions()->getExplorer()->setAxis('horizontal');
-        $chart->getOptions()->getExplorer()->setKeepInBounds(true);
-        $chart->getOptions()->getExplorer()->setMaxZoomIn(0.1);
+        //$chart->getOptions()->getExplorer()->setAxis('horizontal');
+        //$chart->getOptions()->getExplorer()->setKeepInBounds(true);
+        //$chart->getOptions()->getExplorer()->setMaxZoomIn(0.1);
         $chart->getData()->setArrayToDataTable($counts);
 
         return $chart;
     }
 
 
-    public function buildAttendanceByTypeChart($from, $to)
+    public function buildAttendanceByTypeChart($from, $to, $activityType)
     {
         $membershipTypes = $this->em->getRepository('AppBundle:MembershipType')->findAll();
-        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to);
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
 
         $headers = ['Name', ['role' => 'tooltip']];
         foreach ($membershipTypes as $mt) {

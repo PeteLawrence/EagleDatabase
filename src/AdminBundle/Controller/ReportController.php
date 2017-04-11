@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 /**
  * Activity controller.
@@ -91,19 +93,30 @@ class ReportController extends Controller
      * Lists all Activity entities.
      *
      * @Route("/attendancedetail", name="admin_report_attendancedetail")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function attendanceDetailAction()
+    public function attendanceDetailAction(Request $request)
     {
         $reportService = $this->get('eagle_report');
 
         $from = new \DateTime('2017-01-01');
         $to = new \DateTime('2017-12-31');
 
+        $form = $this->buildAttendanceDetailForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            return $this->render('admin/report/attendancedetail.html.twig', array(
+                'attendanceByGenderChart' => $reportService->buildAttendanceByGenderChart($data['fromDate'], $data['toDate'], $data['activityType']),
+                'attendanceByTypeChart' => $reportService->buildAttendanceByTypeChart($data['fromDate'], $data['toDate'], $data['activityType']),
+                'form' => $form->createView()
+            ));
+        }
+
 
         return $this->render('admin/report/attendancedetail.html.twig', array(
-            'attendanceByGenderChart' => $reportService->buildAttendanceByGenderChart($from, $to),
-            'attendanceByTypeChart' => $reportService->buildAttendanceByTypeChart($from, $to)
+            'form' => $form->createView()
         ));
     }
 
@@ -327,5 +340,20 @@ class ReportController extends Controller
         );
 
         return $chart;
+    }
+
+
+    private function buildAttendanceDetailForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('POST')
+            ->add('fromDate', DateType::class)
+            ->add('toDate', DateType::class)
+            ->add('activityType', EntityType::class, [
+                'class' => 'AppBundle:ActivityType',
+                'choice_label' => function (\AppBundle\Entity\ActivityType $at) { return $at->getType(); },
+            ])
+            ->getForm()
+        ;
     }
 }
