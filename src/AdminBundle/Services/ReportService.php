@@ -72,8 +72,6 @@ class ReportService
 
             $counts[] = [$activity->getActivityStart(), $activity->getName(), $males, $females];
         }
-        dump($counts);
-
 
         $chart = new ColumnChart();
         $chart->getOptions()->setTitle('Attendance by Gender');
@@ -116,8 +114,6 @@ class ReportService
             }
             $counts[] = $row;
         }
-        dump($counts);
-
 
         $chart = new ColumnChart();
         $chart->getOptions()->setTitle('Attendance by Type');
