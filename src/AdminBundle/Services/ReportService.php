@@ -105,7 +105,7 @@ class ReportService
                     $row[] = 0;
                 }
 
-                if ($p->getPerson()->getCurrentMemberRegistration()) {
+                if ($p->getPerson() && $p->getPerson()->getCurrentMemberRegistration()) {
                     $type = $p->getPerson()->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
                     $pos = array_search($type, $headers);
                     $row[$pos]++;
