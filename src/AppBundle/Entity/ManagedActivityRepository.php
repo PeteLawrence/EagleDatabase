@@ -31,6 +31,24 @@ class ManagedActivityRepository extends EntityRepository
     }
 
 
+    public function findActivitiesBetweenDates($from, $to)
+    {
+        return $this->queryActivitiesBetweenDates($from, $to)->getQuery()->getResult();
+    }
+
+    public function queryActivitiesBetweenDates($from, $to)
+    {
+        $q = $this->createQueryBuilder('ma')
+            ->where('ma.activityStart >= ?1')
+            ->andWhere('ma.activityStart < ?2')
+            ->setParameter(1, $from)
+            ->setParameter(2, $to)
+            ->orderBy('ma.activityStart');
+
+        return $q;
+    }
+
+
 
     public function findUpcomingActivities($person)
     {

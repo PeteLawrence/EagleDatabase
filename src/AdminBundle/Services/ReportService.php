@@ -50,6 +50,80 @@ class ReportService
     }
 
 
+
+    public function buildAttendanceByGenderChart($from, $to)
+    {
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to);
+
+        $counts = [['Name', ['role' => 'tooltip'], 'Males', 'Females']];
+        foreach ($activities as $activity) {
+            $males = 0;
+            $females = 0;
+            foreach ($activity->getParticipant() as $p) {
+                $gender = $p->getPerson()->getGender();
+                if ($gender == 'M') {
+                    $males++;
+                } else {
+                    $females++;
+                }
+            }
+
+            $counts[] = [$activity->getActivityStart(), $activity->getName(), $males, $females];
+        }
+
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Attendance by Gender');
+        $chart->getOptions()->setIsStacked(true);
+        $chart->getOptions()->setHeight('300');
+        $chart->getOptions()->getBar()->setGroupWidth('95%');
+        $chart->getData()->setArrayToDataTable($counts);
+
+        return $chart;
+    }
+
+
+    public function buildAttendanceByTypeChart($from, $to)
+    {
+        $membershipTypes = $this->em->getRepository('AppBundle:MembershipType')->findAll();
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to);
+
+        $headers = ['Name', ['role' => 'tooltip']];
+        foreach ($membershipTypes as $mt) {
+            $headers[] = $mt->getType();
+        }
+
+        $counts = [ $headers ];
+        foreach ($activities as $activity) {
+            foreach ($activity->getParticipant() as $p) {
+                $row = [$activity->getActivityStart(), $activity->getName()];
+
+                //Add in 0 counts for each member type
+                for ($i = 0; $i < sizeof($membershipTypes); $i++) {
+                    $row[] = 0;
+                }
+
+                if ($p->getPerson()->getCurrentMemberRegistration()) {
+                    $type = $p->getPerson()->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
+                    $pos = array_search($type, $headers);
+                    $row[$pos]++;
+                }
+                $counts[] = $row;
+            }
+        }
+
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Attendance by Type');
+        $chart->getOptions()->setIsStacked(true);
+        $chart->getOptions()->setHeight('300');
+        $chart->getOptions()->getBar()->setGroupWidth('95%');
+        $chart->getData()->setArrayToDataTable($counts);
+
+        return $chart;
+    }
+
+
     public function buildReturningChart($date)
     {
         //Fetch data
@@ -230,6 +304,7 @@ class ReportService
 
         $cal = new CalendarChart();
         $cal->getData()->setArrayToDataTable($data);
+        $cal->getOptions()->setHeight(400);
 
         return $cal;
     }
