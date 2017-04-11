@@ -78,6 +78,8 @@ class ReportService
         $chart->getOptions()->setIsStacked(true);
         $chart->getOptions()->setHeight('300');
         $chart->getOptions()->getBar()->setGroupWidth('95%');
+        $chart->getOptions()->getExplorer()->setAxis('horizontal');
+        $chart->getOptions()->getExplorer()->setKeepInBounds(true);
         $chart->getData()->setArrayToDataTable($counts);
 
         return $chart;
@@ -120,6 +122,8 @@ class ReportService
         $chart->getOptions()->setIsStacked(true);
         $chart->getOptions()->setHeight('300');
         $chart->getOptions()->getBar()->setGroupWidth('95%');
+        $chart->getOptions()->getExplorer()->setAxis('horizontal');
+        $chart->getOptions()->getExplorer()->setKeepInBounds(true);
         $chart->getData()->setArrayToDataTable($counts);
 
         return $chart;
