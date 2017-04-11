@@ -60,11 +60,13 @@ class ReportService
             $males = 0;
             $females = 0;
             foreach ($activity->getParticipant() as $p) {
-                $gender = $p->getPerson()->getGender();
-                if ($gender == 'M') {
-                    $males++;
-                } else {
-                    $females++;
+                if ($p->getPerson()) {
+                    $gender = $p->getPerson()->getGender();
+                    if ($gender == 'M') {
+                        $males++;
+                    } else {
+                        $females++;
+                    }
                 }
             }
 
