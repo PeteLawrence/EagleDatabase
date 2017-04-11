@@ -77,7 +77,7 @@ class ReportService
         $chart->getOptions()->setTitle('Attendance by Gender');
         $chart->getOptions()->setIsStacked(true);
         $chart->getOptions()->setHeight('300');
-        $chart->getOptions()->getBar()->setGroupWidth('95%');
+        //$chart->getOptions()->getBar()->setGroupWidth('95%');
         $chart->getOptions()->getExplorer()->setAxis('horizontal');
         $chart->getOptions()->getExplorer()->setKeepInBounds(true);
         $chart->getOptions()->getExplorer()->setMaxZoomIn(0.1);
@@ -122,7 +122,7 @@ class ReportService
         $chart->getOptions()->setTitle('Attendance by Type');
         $chart->getOptions()->setIsStacked(true);
         $chart->getOptions()->setHeight('300');
-        $chart->getOptions()->getBar()->setGroupWidth('95%');
+        //$chart->getOptions()->getBar()->setGroupWidth('95%');
         $chart->getOptions()->getExplorer()->setAxis('horizontal');
         $chart->getOptions()->getExplorer()->setKeepInBounds(true);
         $chart->getOptions()->getExplorer()->setMaxZoomIn(0.1);
