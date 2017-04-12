@@ -87,6 +87,42 @@ class ReportService
     }
 
 
+    public function buildAttendanceByGenderPieChart($from, $to, $activityType)
+    {
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
+
+        $males = 0;
+        $females = 0;
+        foreach ($activities as $activity) {
+            foreach ($activity->getParticipant() as $p) {
+                if ($p->getPerson()) {
+                    $gender = $p->getPerson()->getGender();
+                    if ($gender == 'M') {
+                        $males++;
+                    } else {
+                        $females++;
+                    }
+                }
+            }
+
+            $counts[] = [$activity->getActivityStart(), $activity->getName(), $males, $females];
+        }
+
+        $data = [
+            ['Gender', 'Count' ],
+            ['Male', $males],
+            ['Female', $females]
+        ];
+
+        $chart = new PieChart();
+        $chart->getOptions()->setTitle('Attendance by Gender');
+        $chart->getOptions()->setHeight('300');
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+
     public function buildAttendanceByTypeChart($from, $to, $activityType)
     {
         $membershipTypes = $this->em->getRepository('AppBundle:MembershipType')->findAll();
@@ -127,6 +163,41 @@ class ReportService
         $chart->getOptions()->getExplorer()->setKeepInBounds(true);
         $chart->getOptions()->getExplorer()->setMaxZoomIn(0.1);
         $chart->getData()->setArrayToDataTable($counts);
+
+        return $chart;
+    }
+
+
+    public function buildAttendanceByTypePieChart($from, $to, $activityType)
+    {
+        $membershipTypes = $this->em->getRepository('AppBundle:MembershipType')->findAll();
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
+
+        $counts = [];
+        foreach ($activities as $activity) {
+            foreach ($activity->getParticipant() as $p) {
+
+                if ($p->getPerson() && $p->getPerson()->getCurrentMemberRegistration()) {
+                    $type = $p->getPerson()->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
+                    if (isset($counts[$type])) {
+                        $counts[$type]++;
+                    } else {
+                        $counts[$type] = 0;
+                    }
+                }
+            }
+        }
+
+        $data = [[ 'Type', 'Count']];
+
+        foreach ($counts as $type => $count) {
+            $data[] = [$type, $count];
+        }
+
+        $chart = new PieChart();
+        $chart->getOptions()->setTitle('Attendance by Type');
+        $chart->getOptions()->setHeight('300');
+        $chart->getData()->setArrayToDataTable($data);
 
         return $chart;
     }

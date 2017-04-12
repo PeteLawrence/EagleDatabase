@@ -32,12 +32,17 @@
         {{ form_end(form) }}
     </div>
 
+
     <div id="attendanceByGenderChart"></div>
     <div id="attendanceByTypeChart"></div>
+    <div id="attendanceByGenderPieChart"></div>
+    <div id="attendanceByTypePieChart"></div>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
         {% if attendanceByGenderChart is defined %}{{ gc_draw(attendanceByGenderChart, 'attendanceByGenderChart') }}{% endif %}
         {% if attendanceByTypeChart is defined %}{{ gc_draw(attendanceByTypeChart, 'attendanceByTypeChart') }}{% endif %}
+        {% if attendanceByGenderPieChart is defined %}{{ gc_draw(attendanceByGenderPieChart, 'attendanceByGenderPieChart') }}{% endif %}
+        {% if attendanceByTypePieChart is defined %}{{ gc_draw(attendanceByTypePieChart, 'attendanceByTypePieChart') }}{% endif %}
     </script>
 {% endblock %}
