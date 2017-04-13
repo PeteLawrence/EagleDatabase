@@ -117,7 +117,14 @@ class EnrolController extends Controller
             $memberRegistration->setPerson($person);
             $em->persist($memberRegistration);
 
+            //Add a charge
             $memberRegistrationCharge = $membershipService->buildMemberRegistrationCharge($memberRegistration, $memberRegistration->getTotal(), false);
+
+            //If total == 0 mark as paid immediately
+            if ($memberRegistration->getTotal() == 0) {
+                $memberRegistrationCharge->setPaid(true);
+                $memberRegistrationCharge->setPaidDateTime(new \DateTime());
+            }
             $em->persist($memberRegistrationCharge);
 
             $em->flush();
