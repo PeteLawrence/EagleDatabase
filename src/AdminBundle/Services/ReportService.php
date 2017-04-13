@@ -285,11 +285,13 @@ class ReportService
         //Fetch data
         $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
         foreach ($members as $member) {
-            $now = new \DateTime();
+            //Get the date at which the member joined
             $joinedDate = $member->getJoinedDate();
 
-            $length = $joinedDate->diff($now)->y;
+            //Calculate the number of years they've been a member for
+            $length = $joinedDate->diff($date)->y;
 
+            //Add to grouper
             $grouper->addItem($length);
         }
 
