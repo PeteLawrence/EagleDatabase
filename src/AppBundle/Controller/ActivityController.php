@@ -213,6 +213,7 @@ class ActivityController extends Controller
             $em->persist($participant);
             $em->flush();
 
+            //Display a flash message
             $this->addFlash('notice', sprintf('%s has been added to %s', $participant->getPerson()->getName(), $activity->getName()));
 
             return $this->redirectToRoute('activity_view', array('id' => $participant->getManagedActivity()->getId()));
