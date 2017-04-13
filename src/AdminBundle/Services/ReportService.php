@@ -367,7 +367,7 @@ class ReportService
     {
         $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
 
-        return $this->buildMembershipTypeChart($members);
+        return $this->buildMembershipTypePieChart($members);
     }
 
 
