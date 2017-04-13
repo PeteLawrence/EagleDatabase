@@ -18,19 +18,14 @@ class ReportService
     }
 
 
-
-
-    public function buildGenderChart($date)
+    public function buildGenderPieChart($persons)
     {
-        //Fetch data
-        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
-
         $females = 0;
         $males = 0;
-        foreach ($members as $member) {
-            if ($member->getGender() == 'F') {
+        foreach ($persons as $person) {
+            if ($person->getGender() == 'F') {
                 $females++;
-            } elseif ($member->getGender() == 'M') {
+            } elseif ($person->getGender() == 'M') {
                 $males ++;
             }
         }
@@ -47,6 +42,15 @@ class ReportService
         );
 
         return $chart;
+    }
+
+
+    public function buildGenderChart($date)
+    {
+        //Fetch data
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
+
+        return $this->buildGenderPieChart($members);
     }
 
 
@@ -166,6 +170,8 @@ class ReportService
 
         return $chart;
     }
+
+
 
 
     public function buildAttendanceByTypePieChart($from, $to, $activityType)
@@ -331,14 +337,14 @@ class ReportService
     }
 
 
-    public function buildMembershipTypeChart($date)
+    public function buildMembershipTypePieChart($persons)
     {
         $grouper = new \AppBundle\Util\TextGrouper();
 
         //Fetch data
-        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
-        foreach ($members as $member) {
-            $membershipType = $member->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
+
+        foreach ($persons as $person) {
+            $membershipType = $person->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
 
             $grouper->addItem($membershipType);
         }
@@ -355,6 +361,13 @@ class ReportService
 
 
         return $chart;
+    }
+
+    public function buildMembershipTypeChart($date)
+    {
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
+
+        return $this->buildMembershipTypeChart($members);
     }
 
 

@@ -17,16 +17,21 @@ class MembershipExtra
     private $id;
 
     /**
-     * @ORM\Column(nullable=false)
+     * @ORM\Column(type="string", nullable=false)
      * @Assert\NotBlank()
      */
     private $name;
 
     /**
-     * @ORM\Column(nullable=false)
+     * @ORM\Column(type="string", nullable=false)
      * @Assert\NotBlank()
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default":0})
+     */
+    private $adminSelectableOnly;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MembershipTypePeriodExtra", mappedBy="membershipExtra")
@@ -130,5 +135,29 @@ class MembershipExtra
     public function getMembershipTypePeriodExtra()
     {
         return $this->membershipTypePeriodExtra;
+    }
+
+    /**
+     * Set adminSelectableOnly
+     *
+     * @param boolean $adminSelectableOnly
+     *
+     * @return MembershipExtra
+     */
+    public function setAdminSelectableOnly($adminSelectableOnly)
+    {
+        $this->adminSelectableOnly = $adminSelectableOnly;
+
+        return $this;
+    }
+
+    /**
+     * Get adminSelectableOnly
+     *
+     * @return boolean
+     */
+    public function getAdminSelectableOnly()
+    {
+        return $this->adminSelectableOnly;
     }
 }

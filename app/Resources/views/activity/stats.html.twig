@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
+        <a class="breadcrumb-item" href="{{ path('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+        <span class="breadcrumb-item active">Statistics</span>
+    </nav>
+
+    <h2>Statistics</h2>
+
+    <h3>Participants: {{ activity.participant|length }}</h3>
+
+    <div class="row">
+        <div class="col-6">
+            <div id="genderPieChart"></div>
+        </div>
+        <div class="col-6">
+            <div id="membershipTypePieChart"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    {% if genderPieChart is defined %}{{ gc_draw(genderPieChart, 'genderPieChart') }}{% endif %}
+    {% if membershipTypePieChart is defined %}{{ gc_draw(membershipTypePieChart, 'membershipTypePieChart') }}{% endif %}
+</script>
+{% endblock %}
