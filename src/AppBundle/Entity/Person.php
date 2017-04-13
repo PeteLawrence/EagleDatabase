@@ -761,15 +761,20 @@ class Person implements AdvancedUserInterface, \Serializable
         $this->memberRegistration->removeElement($memberRegistration);
     }
 
+    public function getMemberRegistrationAtDate($date)
+    {
+        foreach ($this->memberRegistration as $memberRegistration) {
+            if ($memberRegistration->getMembershipTypePeriod()->getMembershipPeriod()->getFromDate() < $date && $memberRegistration->getMembershipTypePeriod()->getMembershipPeriod()->getToDate() > $date) {
+                return $memberRegistration;
+            }
+        }
+    }
+
     public function getCurrentMemberRegistration()
     {
         $now = new \DateTime();
 
-        foreach ($this->memberRegistration as $memberRegistration) {
-            if ($memberRegistration->getMembershipTypePeriod()->getMembershipPeriod()->getFromDate() < $now && $memberRegistration->getMembershipTypePeriod()->getMembershipPeriod()->getToDate() > $now) {
-                return $memberRegistration;
-            }
-        }
+        return $this->getMemberRegistrationAtDate($now);
     }
 
     /**
