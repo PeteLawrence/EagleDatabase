@@ -254,7 +254,7 @@ class ActivityController extends Controller
             [
                 'activity' => $activity,
                 'genderPieChart' => $reportService->buildGenderPieChart($persons),
-                'membershipTypePieChart' => $reportService->buildMembershipTypePieChart($persons)
+                'membershipTypePieChart' => $reportService->buildMembershipTypePieChart($persons, $activity->getActivityStart())
             ]
         );
     }

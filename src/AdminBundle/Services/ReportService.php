@@ -339,14 +339,14 @@ class ReportService
     }
 
 
-    public function buildMembershipTypePieChart($persons)
+    public function buildMembershipTypePieChart($persons, $date)
     {
         $grouper = new \AppBundle\Util\TextGrouper();
 
         //Fetch data
 
         foreach ($persons as $person) {
-            $membershipType = $person->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
+            $membershipType = $person->getMemberRegistrationAtDate($date)->getMembershipTypePeriod()->getMembershipType()->getType();
 
             $grouper->addItem($membershipType);
         }
@@ -369,7 +369,7 @@ class ReportService
     {
         $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
 
-        return $this->buildMembershipTypePieChart($members);
+        return $this->buildMembershipTypePieChart($members, $date);
     }
 
 
