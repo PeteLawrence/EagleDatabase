@@ -21,6 +21,11 @@ class MembershipType
     private $type;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default":0})
+     */
+    private $adminSelectableOnly;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MembershipTypePeriod", mappedBy="membershipType")
      */
     private $membershipTypePeriod;
@@ -176,5 +181,29 @@ class MembershipType
     public function getManagedActivityMembershipType()
     {
         return $this->managedActivityMembershipType;
+    }
+
+    /**
+     * Set adminSelectableOnly
+     *
+     * @param boolean $adminSelectableOnly
+     *
+     * @return MembershipType
+     */
+    public function setAdminSelectableOnly($adminSelectableOnly)
+    {
+        $this->adminSelectableOnly = $adminSelectableOnly;
+
+        return $this;
+    }
+
+    /**
+     * Get adminSelectableOnly
+     *
+     * @return boolean
+     */
+    public function getAdminSelectableOnly()
+    {
+        return $this->adminSelectableOnly;
     }
 }

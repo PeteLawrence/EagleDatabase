@@ -228,6 +228,37 @@ class ActivityController extends Controller
     }
 
 
+    /**
+     * @Route("/{id}/stats", name="activity_stats")
+     */
+    public function statsAction(Request $request, Activity $activity)
+    {
+        $reportService = $this->get('eagle_report');
+
+        //Only allow the organiser access to this page
+        if (
+            $activity->getOrganiser() != $this->getUser() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $persons = [];
+        foreach ($activity->getParticipant() as $p) {
+            $persons[] = $p->getPerson();
+        }
+
+        return $this->render(
+            'activity/stats.html.twig',
+            [
+                'activity' => $activity,
+                'genderPieChart' => $reportService->buildGenderPieChart($persons),
+                'membershipTypePieChart' => $reportService->buildMembershipTypePieChart($persons)
+            ]
+        );
+    }
+
+
     private function buildAddParticipantForm($activity)
     {
         return $this->createFormBuilder()
