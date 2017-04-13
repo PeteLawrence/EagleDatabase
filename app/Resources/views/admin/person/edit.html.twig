@@ -20,6 +20,9 @@
             <a class="nav-link" href="#nextofkin" data-toggle="tab" role="tab">Next of Kin</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#activityhistory" data-toggle="tab" role="tab">Activity History</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#history" data-toggle="tab" role="tab">Member History</a>
         </li>
         <li class="nav-item">
@@ -122,6 +125,30 @@
             <input type="submit" value="Save" class="btn btn-primary" />
 
             {{ form_end(nextofkin_form) }}
+        </div>
+
+        <div class="tab-pane" id="activityhistory" role="tabpanel">
+            <h2>Activity History</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for participant in person.participant %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('activity_view', { id: participant.managedActivity.id }) }}">{{ participant.managedActivity.name }}</td>
+                            <td>{{ participant.managedActivity.activityStart|date('d/m/Y')}}</td>
+                            <td>{{ participant.managedActivity.activityType.type }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
 
         <div class="tab-pane" id="history" role="tabpanel">
