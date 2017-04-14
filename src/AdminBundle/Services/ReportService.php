@@ -346,9 +346,10 @@ class ReportService
         //Fetch data
 
         foreach ($persons as $person) {
-            $membershipType = $person->getMemberRegistrationAtDate($date)->getMembershipTypePeriod()->getMembershipType()->getType();
-
-            $grouper->addItem($membershipType);
+            if ($person->getMemberRegistrationAtDate($date)) {
+                $membershipType = $person->getMemberRegistrationAtDate($date)->getMembershipTypePeriod()->getMembershipType()->getType();
+                $grouper->addItem($membershipType);
+            }
         }
 
         $data = [['Type', 'Count']];
