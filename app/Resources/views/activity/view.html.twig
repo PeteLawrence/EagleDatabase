@@ -107,7 +107,11 @@
                     {% else %}
                         {% if activity.allowOnlineSignup %}
                             {% if activity.acceptingSignups %}
-                                <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary">Sign Up</a>
+                                {% if app.user.getMemberRegistrationAtDate(activity.activityStart) %}
+                                    <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary">Sign Up</a>
+                                {% else %}
+                                    You must have an active membership to sign up
+                                {% endif %}
                             {% else %}
                                 Signup from {{ activity.signupStart|date('jS M Y H:i') }}
                             {% endif %}
