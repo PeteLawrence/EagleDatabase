@@ -349,6 +349,8 @@ class ReportService
             if ($person->getMemberRegistrationAtDate($date)) {
                 $membershipType = $person->getMemberRegistrationAtDate($date)->getMembershipTypePeriod()->getMembershipType()->getType();
                 $grouper->addItem($membershipType);
+            } else {
+                $grouper->addItem('Non Member');
             }
         }
 
