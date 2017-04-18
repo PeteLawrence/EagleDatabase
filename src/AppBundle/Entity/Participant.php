@@ -26,6 +26,11 @@ class Participant
     private $notes;
 
     /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     */
+    private $signupMethod;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person", inversedBy="participant")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
@@ -171,5 +176,29 @@ class Participant
     public function getNotes()
     {
         return $this->notes;
+    }
+
+    /**
+     * Set signupMethod
+     *
+     * @param string $signupMethod
+     *
+     * @return Participant
+     */
+    public function setSignupMethod($signupMethod)
+    {
+        $this->signupMethod = $signupMethod;
+
+        return $this;
+    }
+
+    /**
+     * Get signupMethod
+     *
+     * @return string
+     */
+    public function getSignupMethod()
+    {
+        return $this->signupMethod;
     }
 }

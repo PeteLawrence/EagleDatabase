@@ -38,6 +38,8 @@ class SignInController extends Controller
 
             if ($p != null) {
                 $participant = new Participant();
+                $participant->setSignupMethod('onsite');
+                $participant->setSignupDatetime(new \DateTime());
                 $participant->setManagedActivity($activity);
                 $participant->setPerson($p);
 

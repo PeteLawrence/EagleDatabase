@@ -45,6 +45,8 @@ class ActivityParticipantController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $participant->setSignupMethod('admin');
+            $participant->setSignupDateTime(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($participant);
             $em->flush();
