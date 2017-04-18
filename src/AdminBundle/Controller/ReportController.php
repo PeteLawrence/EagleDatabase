@@ -154,6 +154,24 @@ class ReportController extends Controller
 
 
     /**
+     * Database Engagement Report
+     *
+     * @Route("/databaseengagement", name="admin_report_databaseengagement")
+     * @Method({"GET", "POST"})
+     */
+    public function databaseEngagementAction(Request $request)
+    {
+        $reportService = $this->get('eagle_report');
+
+        return $this->render('admin/report/databaseengagement.html.twig', array(
+            'accountStatusPieChart' => $reportService->buildAccountStatusPieChart(),
+            'usedOnlineSignupPieChart' => $reportService->buildUsedOnlineSignUpPieChart()
+        ));
+
+    }
+
+
+    /**
      * Displays a map of members addresses
      *
      * @Route("/membermap", name="admin_report_membermap")
