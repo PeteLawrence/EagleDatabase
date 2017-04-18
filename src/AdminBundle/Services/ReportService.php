@@ -258,6 +258,7 @@ class ReportService
                 case 'XXX':
                 case null:
                     $states['inactive']++;
+                    break;
                 default:
                     $states['active']++;
             }
