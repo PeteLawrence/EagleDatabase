@@ -123,6 +123,7 @@ class ActivityController extends Controller
             $participant = new \AppBundle\Entity\Participant;
             $participant->setManagedActivity($activity);
             $participant->setPerson($this->get('security.token_storage')->getToken()->getUser());
+            $participant->setSignupMethod('online');
             $participant->setSignupDateTime(new \DateTime());
             $participant->setParticipantStatus($participantStatus);
             $participant->setNotes($data['notes']);
@@ -205,6 +206,8 @@ class ActivityController extends Controller
             $data = $form->getData();
             $attendingStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('attending');
             $participant = new \AppBundle\Entity\Participant();
+            $participant->setSignupMethod('manual');
+            $participant->setSignupDateTime(new \DateTime());
             $participant->setManagedActivity($activity);
             $participant->setPerson($data['person']);
             $participant->setParticipantStatus($attendingStatus);
