@@ -36,19 +36,24 @@
     <div id="attendanceByTypeChart"></div>
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-4">
             <div id="attendanceByGenderPieChart"></div>
         </div>
-        <div class="col-6">
+        <div class="col-4">
             <div id="attendanceByTypePieChart"></div>
         </div>
+        <div class="col-4">
+            <div id="attendanceBySignupMethodPieChart"></div>
+        </div>
     </div>
-        
+
+
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
         {% if attendanceByGenderChart is defined %}{{ gc_draw(attendanceByGenderChart, 'attendanceByGenderChart') }}{% endif %}
         {% if attendanceByTypeChart is defined %}{{ gc_draw(attendanceByTypeChart, 'attendanceByTypeChart') }}{% endif %}
         {% if attendanceByGenderPieChart is defined %}{{ gc_draw(attendanceByGenderPieChart, 'attendanceByGenderPieChart') }}{% endif %}
         {% if attendanceByTypePieChart is defined %}{{ gc_draw(attendanceByTypePieChart, 'attendanceByTypePieChart') }}{% endif %}
+        {% if attendanceBySignupMethodPieChart is defined %}{{ gc_draw(attendanceBySignupMethodPieChart, 'attendanceBySignupMethodPieChart') }}{% endif %}
     </script>
 {% endblock %}

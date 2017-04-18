@@ -112,6 +112,7 @@ class ReportController extends Controller
                 'attendanceByGenderPieChart' => $reportService->buildAttendanceByGenderPieChart($data['fromDate'], $data['toDate'], $data['activityType']),
                 'attendanceByTypeChart' => $reportService->buildAttendanceByTypeChart($data['fromDate'], $data['toDate'], $data['activityType']),
                 'attendanceByTypePieChart' => $reportService->buildAttendanceByTypePieChart($data['fromDate'], $data['toDate'], $data['activityType']),
+                'attendanceBySignupMethodPieChart' => $reportService->buildAttendanceBySignupMethodPieChart($data['fromDate'], $data['toDate'], $data['activityType']),
                 'form' => $form->createView()
             ));
         }
