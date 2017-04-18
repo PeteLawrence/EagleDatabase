@@ -253,11 +253,11 @@ class ReportService
         foreach ($members as $member) {
             switch ($member->getPassword()) {
                 case 'X':
-                    $states['settingup']++;
-                    break;
-                case 'XXX':
                 case null:
                     $states['inactive']++;
+                    break;
+                case 'XXX':
+                    $states['settingup']++;
                     break;
                 default:
                     $states['active']++;
