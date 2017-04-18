@@ -82,9 +82,9 @@
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
       {% if app.user %}
-        {# Add in the ID of the logged inuser #}
+        {# Add in the ID of the logged in user #}
         ga('create', '{{ google_ua_number }}', 'auto', {
-            userId: {{ app.user.id }}
+            userId: '{{ app.user.id }}'
         });
       {% else %}
         ga('create', '{{ google_ua_number }}', 'auto');
