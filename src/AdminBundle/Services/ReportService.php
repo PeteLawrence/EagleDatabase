@@ -126,6 +126,36 @@ class ReportService
         return $chart;
     }
 
+    public function buildAttendanceBySignupMethodPieChart($from, $to, $activityType)
+    {
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
+
+        $methods = ['onsite' => 0, 'online' => 0, 'manual' => 0, 'admin' => 0];
+        foreach ($activities as $activity) {
+            foreach ($activity->getParticipant() as $participant) {
+                $method = $participant->getSignupMethod();
+                if ($method != null && in_array($method, array_keys($methods))) {
+                    $methods[$method]++;
+                }
+            }
+        }
+
+        $data = [
+            ['Method', 'Count' ],
+            ['Online', $methods['online']],
+            ['On Site', $methods['onsite']],
+            ['Manual', $methods['manual']],
+            ['Admin', $methods['admin']],
+        ];
+
+        $chart = new PieChart();
+        $chart->getOptions()->setTitle('Signup Method');
+        $chart->getOptions()->setHeight('300');
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
 
     public function buildAttendanceByTypeChart($from, $to, $activityType)
     {
