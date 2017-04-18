@@ -1,0 +1,32 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Reports: Attendance Detail{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Attendance Detail</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Attendance Detail</h1>
+
+    <div class="row">
+        <div class="col-4">
+            <div id="accountStatusPieChart"></div>
+        </div>
+        <div class="col-4">
+            <div id="usedOnlineSignupPieChart"></div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        {% if accountStatusPieChart is defined %}{{ gc_draw(accountStatusPieChart, 'accountStatusPieChart') }}{% endif %}
+        {% if usedOnlineSignupPieChart is defined %}{{ gc_draw(usedOnlineSignupPieChart, 'usedOnlineSignupPieChart') }}{% endif %}
+    </script>
+{% endblock %}

@@ -239,6 +239,79 @@ class ReportService
     }
 
 
+    public function buildAccountStatusPieChart()
+    {
+        //Fetch current members
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+
+        $states = [
+            'active' => 0,
+            'inactive' => 0,
+            'settingup' => 0
+        ];
+
+        foreach ($members as $member) {
+            switch ($member->getPassword()) {
+                case 'X':
+                    $states['settingup']++;
+                    break;
+                case 'XXX':
+                case null:
+                    $states['inactive']++;
+                default:
+                    $states['active']++;
+            }
+        }
+
+        $data = [
+            ['Method', 'Count' ],
+            ['Active', $states['active']],
+            ['Setting Up', $states['settingup']],
+            ['Inactive', $states['inactive']],
+        ];
+
+        $chart = new PieChart();
+        $chart->getOptions()->setTitle('Account Status');
+        $chart->getOptions()->setHeight('300');
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+
+    public function buildUsedOnlineSignUpPieChart()
+    {
+        //Fetch current members
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+
+        $yes = 0;
+        $no = 0;
+
+        foreach ($members as $member) {
+            foreach ($member->getParticipant() as $p) {
+                if ($p->getSignupMethod() == 'online') {
+                    $yes++;
+                    continue 2;
+                }
+            }
+            $no++;
+        }
+
+        $data = [
+            ['Signed Up Online', 'Count' ],
+            ['Yes', $yes],
+            ['No', $no]
+        ];
+
+        $chart = new PieChart();
+        $chart->getOptions()->setTitle('Signed Up Online');
+        $chart->getOptions()->setHeight('300');
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+
     public function buildReturningChart($date)
     {
         //Fetch data
