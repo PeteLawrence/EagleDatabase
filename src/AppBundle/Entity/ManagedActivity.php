@@ -150,7 +150,7 @@ class ManagedActivity extends \AppBundle\Entity\Activity
         if ($this->signupStart == null || $this->signupEnd == null) {
             return true;
         }
-        
+
         $now = new \DateTime();
 
         return (($this->signupStart < $now) && ($this->signupEnd > $now));
@@ -188,5 +188,18 @@ class ManagedActivity extends \AppBundle\Entity\Activity
     public function getManagedActivityMembershipType()
     {
         return $this->managedActivityMembershipType;
+    }
+
+
+
+    public function isAttending($person)
+    {
+        foreach ($this->participant as $p) {
+            if ($p->getPerson() == $person) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

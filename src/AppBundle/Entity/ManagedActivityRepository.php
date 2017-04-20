@@ -72,4 +72,18 @@ class ManagedActivityRepository extends EntityRepository
 
         return $a;
     }
+
+
+    public function findNextActivities($count)
+    {
+        $now = new \DateTime();
+
+        $q = $this->createQueryBuilder('ma')
+            ->where('ma.activityStart >= ?1')
+            ->setParameter(1, $now)
+            ->orderBy('ma.activityStart')
+            ->setMaxResults($count);
+
+        return $q->getQuery()->getResult();
+    }
 }
