@@ -24,21 +24,24 @@
     <div class="col-lg-4 hidden-sm-down">
         <div class="card">
             <h4 class="card-header">Upcoming Events</h4>
-                <ul class="pt-3">
-                    {% for activity in upcomingActivities %}
-                        <dl>
-                            <dt>
-                                {{ activity.activityStart|date('d')}}<sup>{{ activity.activityStart|date('S')}}</sup> {{ activity.activityStart|date('F')}}
-                            </dt>
-                            <dd>
-                                <a href="{{ url('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
-                                {% if app.user and activity.attending(app.user) %}
-                                    <span class="badge badge-success">Attending</span>
-                                {% endif %}
-                            </dd>
-                        </dl>
-                    {% endfor %}
-                </ul>
+            <ul class="pt-3">
+                {% for activity in upcomingActivities %}
+                    <dl>
+                        <dt>
+                            {{ activity.activityStart|date('d')}}<sup>{{ activity.activityStart|date('S')}}</sup> {{ activity.activityStart|date('F')}}
+                        </dt>
+                        <dd>
+                            <a href="{{ url('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+                            {% if app.user and activity.attending(app.user) %}
+                                <span class="badge badge-success">Attending</span>
+                            {% endif %}
+                        </dd>
+                    </dl>
+                {% endfor %}
+            </ul>
+            <div class="card-footer text-muted text-right">
+                <a href="{{ url('activity_index') }}" class="btn btn-primary btn-sm">View More</a>
+            </div>
         </div>
     </div>
 </div>
