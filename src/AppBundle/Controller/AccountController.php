@@ -30,16 +30,12 @@ class AccountController extends Controller
         $em = $this->get('doctrine')->getManager();
         $activityRepository = $em->getRepository('AppBundle:ManagedActivity');
 
-        $upcomingActivities = $activityRepository->findUpcomingActivities($this->getUser());
-        $nextActivity = null;
-        if (sizeof($upcomingActivities)) {
-            $nextActivity = $upcomingActivities[0];
-        }
+        $upcomingActivities = $activityRepository->findUpcomingActivities($this->getUser(), 3);
 
         // replace this example code with whatever you need
         return $this->render('account/overview.html.twig',
             [
-                'nextActivity' => $nextActivity
+                'upcomingActivities' => $upcomingActivities
             ]
         );
     }

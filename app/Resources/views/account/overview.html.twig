@@ -60,17 +60,24 @@
 
             <div class="card">
                 <div class="card-header">
-                    <strong>Your Next Trip</strong>
+                    <strong>Your Upcoming Activities</strong>
                 </div>
                 <div class="card-block">
-                    <p class="card-text">
-                        {% if nextActivity %}
-                            <a href="{{ path('activity_view', { id: nextActivity.id })}}">
-                                {{ nextActivity.activityStart|date('d M Y')}} - {{ nextActivity.name }}
-                            </a>
+                        <dl>
+                        {% for activity in upcomingActivities %}
+                            <dt>
+                                {{ activity.activityStart|date('d')}}<sup>{{ activity.activityStart|date('S')}}</sup> {{ activity.activityStart|date('F')}}
+                            </dt>
+                            <dd>
+                                <a href="{{ url('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+                                {% if app.user and activity.attending(app.user) %}
+                                    <span class="badge badge-success">Attending</span>
+                                {% endif %}
+                            </dd>
                         {% else %}
                             <em>You're not signed up to any upcoming trips :(</em></p>
-                        {% endif %}
+                        {% endfor %}
+                        </dl>
                 </div>
                 <div class="card-footer">
                     <a href="{{ path('account_activities')}}" class="btn btn-primary" role="button">Your Trips</a>

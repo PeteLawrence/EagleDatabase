@@ -55,7 +55,7 @@ class ManagedActivityRepository extends EntityRepository
 
 
 
-    public function findUpcomingActivities($person)
+    public function findUpcomingActivities($person, $count)
     {
         $now = new \DateTime();
 
@@ -66,7 +66,8 @@ class ManagedActivityRepository extends EntityRepository
             ->andWhere('ma.activityStart >= ?2')
             ->setParameter(1, $person->getId())
             ->setParameter(2, $now)
-            ->orderBy('ma.activityStart');
+            ->orderBy('ma.activityStart')
+            ->setMaxResults($count);
 
         $a = $q->getQuery()->getResult();
 
