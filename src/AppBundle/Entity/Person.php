@@ -1128,4 +1128,5 @@ class Person implements AdvancedUserInterface, \Serializable
     {
         return $this->bcMembershipNumber;
     }
+
 }

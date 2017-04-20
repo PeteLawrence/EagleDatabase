@@ -13,9 +13,14 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $em = $this->get('doctrine')->getManager();
+
+        $upcomingActivities = $em->getRepository('AppBundle:ManagedActivity')->findNextActivities(3);
+
+
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
+            'upcomingActivities' => $upcomingActivities
         ]);
     }
 

@@ -16,20 +16,39 @@
         <p>
             We provide a safe and natural environment to enjoy both kayaking and canoeing with coaching from <a href="https://www.britishcanoeing.org.uk/coaching-leadership/" target="_blank">qualified coaches</a> and experienced paddlers, using an ever-expanding fleet of canoes and kayaks.
         </p>
+        <p>
+            We meet every Wednesday from April to October and on the first and third Wednesday of each month during the winter. As well as Wednesday club nights, we offer <a href="https://www.britishcanoeing.org.uk/go-canoeing/build-my-skills/#star-awards" target="_blank">British Canoeing star award courses</a> on Monday nights, trips and activities almost every weekend (both near and far!), dedicated <a href="http://www.thisgirlcan.co.uk/" target="_blank">This Girl Can</a> activities, and monthly pool sessions.
+        </p>
     </div>
-    <div class="col-lg-4">
-        <img src="https://farm8.staticflickr.com/7727/27250465320_edfc75cbfc_z_d.jpg" class="rounded img-fluid figure-img" />
+
+    <div class="col-lg-4 hidden-sm-down">
+        <div class="card">
+            <h4 class="card-header">Upcoming Events</h4>
+                <ul class="pt-3">
+                    {% for activity in upcomingActivities %}
+                        <dl>
+                            <dt>
+                                {{ activity.activityStart|date('d')}}<sup>{{ activity.activityStart|date('S')}}</sup> {{ activity.activityStart|date('F')}}
+                            </dt>
+                            <dd>
+                                <a href="{{ url('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+                                {% if app.user and activity.attending(app.user) %}
+                                    <span class="badge badge-success">Attending</span>
+                                {% endif %}
+                            </dd>
+                        </dl>
+                    {% endfor %}
+                </ul>
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-lg-4 hidden-sm-down">
-        <img src="https://farm9.staticflickr.com/8198/28938835010_f535903c37_z_d.jpg" class="rounded img-fluid my-2" />
+        <img src="https://farm8.staticflickr.com/7727/27250465320_edfc75cbfc_z_d.jpg" class="rounded img-fluid my-1" />
     </div>
     <div class="col-lg-8">
-        <p>
-            We meet every Wednesday from April to October and on the first and third Wednesday of each month during the winter. As well as Wednesday club nights, we offer <a href="https://www.britishcanoeing.org.uk/go-canoeing/build-my-skills/#star-awards" target="_blank">British Canoeing star award courses</a> on Monday nights, trips and activities almost every weekend (both near and far!), dedicated <a href="http://www.thisgirlcan.co.uk/" target="_blank">This Girl Can</a> activities, and monthly pool sessions.
-        </p>
+        <h4>History</h4>
         <p>
             Norwich Eagle Canoe Club has been in existence for over 50 years and in 1998 became affiliated to <a href="https://www.britishcanoeing.org.uk/" target="_blank">British Canoeing</a>, the national governing body for paddlesports. The club continues to grow, and the range of activities and events offered evolves annually following feedback from members and coaches.
         </p>
