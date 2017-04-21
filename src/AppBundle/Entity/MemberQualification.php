@@ -200,4 +200,22 @@ class MemberQualification
     {
         return $this->reference;
     }
+
+
+    public function isExpired()
+    {
+        $now = new \DateTime();
+
+        return ($this->validTo < $now);
+    }
+
+
+    public function isExpiringSoon()
+    {
+        $now = new \DateTime();
+
+        $limit = $this->validTo->sub(new \DateInterval('P3M'));
+
+        return ($limit < $now);
+    }
 }

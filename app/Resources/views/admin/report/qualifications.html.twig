@@ -35,10 +35,17 @@
             </thead>
             <tbody>
                 {% for qualification in qualifications %}
-                    <tr class="{% if qualification.validTo > "now" %}table-danger{% endif %}">
+                    <tr>
                         <td>{{ qualification.person.name }}</td>
                         <td>{{ qualification.validFrom|date('jS F Y') }}</td>
-                        <td>{{ qualification.validTo|date('jS F Y') }}</td>
+                        <td>
+                            {{ qualification.validTo|date('jS F Y') }}
+                            {% if qualification.expired %}
+                                <span class="badge badge-danger">Expired</span>
+                            {% elseif qualification.expiringSoon %}
+                                <span class="badge badge-warning">Expiring Soon</span>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
             </tbody>
