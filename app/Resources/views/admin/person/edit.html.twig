@@ -28,7 +28,9 @@
             <a class="nav-link" href="#history" data-toggle="tab" role="tab">Member History</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#charges" data-toggle="tab" role="tab">Charges</a>
+            <a class="nav-link" href="#charges" data-toggle="tab" role="tab">
+                Charges {% if person.unpaidCharges|length > 0 %}<span class="badge badge-pill badge-danger">{{ person.unpaidCharges|length}}</span>{% endif %}
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#qualifications" data-toggle="tab" role="tab">Qualifications</a>

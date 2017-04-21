@@ -1129,4 +1129,18 @@ class Person implements AdvancedUserInterface, \Serializable
         return $this->bcMembershipNumber;
     }
 
+
+    public function getUnpaidCharges()
+    {
+        $unpaidCharges = [];
+
+        foreach ($this->charge as $charge) {
+            if (!$charge->getPaid()) {
+                $unpaidCharges[] = $charge;
+            }
+        }
+
+        return $unpaidCharges;
+    }
+
 }
