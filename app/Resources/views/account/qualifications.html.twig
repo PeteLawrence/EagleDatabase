@@ -24,8 +24,10 @@
                     <td>{{ qualification.qualification.name }}</td>
                     <td>
                         {{ qualification.validTo|date('jS F Y')}}
-                        {% if qualification.validTo|date('Ymd') < "now"|date('Ymd') %}
+                        {% if qualification.expired %}
                             <span class="badge badge-danger">Expired</span>
+                        {% elseif qualification.expiringSoon %}
+                            <span class="badge badge-warning">Expiring Soon</span>
                         {% endif %}
                     </td>
                 </tr>
