@@ -6,26 +6,26 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Person</th>
                 <th>Qualification</th>
-                <th>Expiration</th>
+                <th>Valid</th>
+                <th>To</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for memberQualification in memberQualifications %}
             <tr>
-                <td>{{ memberQualification.person.forename}} {{ memberQualification.person.surname}}</td>
                 <td>{{ memberQualification.qualification.name }}</td>
-                <td>{{ memberQualification.expiration|date('d/m/Y') }}</td>
+                <td>{{ memberQualification.validFrom|date('d/m/Y') }}</td>
+                <td>{{ memberQualification.validTo|date('d/m/Y') }}</td>
                 <td>
-                    <a href="{{ path('admin_memberqualification_show', { 'id': memberQualification.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
-                    <a href="{{ path('admin_memberqualification_edit', { 'id': memberQualification.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
+                    <a href="{{ path('admin_memberqualification_show', { 'personId': memberQualification.person.id, 'id': memberQualification.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
+                    <a href="{{ path('admin_memberqualification_edit', { 'personId': memberQualification.person.id, 'id': memberQualification.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_memberqualification_new') }}" class="btn btn-primary">Create</a>
+    <a href="{{ path('admin_memberqualification_new', { personId: person.id}) }}" class="btn btn-primary">Create</a>
 {% endblock %}

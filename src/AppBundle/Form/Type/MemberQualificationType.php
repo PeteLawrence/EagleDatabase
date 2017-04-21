@@ -7,6 +7,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use AppBundle\Entity\Person;
 
 class MemberQualificationType extends AbstractType
@@ -18,12 +20,14 @@ class MemberQualificationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('expiration', DateType::class, [ 'html5' => true, 'widget' => 'single_text' ])
             ->add('qualification', EntityType::class, ['class' => 'AppBundle:Qualification', 'choice_label' => 'name' ])
-            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
+            ->add('reference', TextType::class, [ 'required' => false ])
+            ->add('validFrom', DateType::class, [ 'html5' => true, 'widget' => 'choice', 'format' => 'd MMMM y' ])
+            ->add('validTo', DateType::class, [ 'html5' => true, 'widget' => 'choice', 'format' => 'd MMMM y', 'required' => false ])
+            ->add('notes', TextareaType::class, [ 'attr' => [ 'rows' => 5 ], 'required' => false ])
+            //->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
         ;
     }
-
     /**
      * @param OptionsResolver $resolver
      */

@@ -234,22 +234,30 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Expires</th>
+                        <th>Valid From</th>
+                        <th>Valid To</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 {% for qualification in person.memberQualification %}
                     <tr>
                         <td>{{ qualification.qualification.name }}</td>
-                        <td>{{ qualification.expiration|date('d/m/Y') }}</td>
+                        <td>{{ qualification.validFrom|date('d/m/Y') }}</td>
                         <td>
-                            <a href="{{ path('admin_memberqualification_edit', { id: qualification.id})}}"><i class="fa fa-pencil"></i></a>
+                            {% if qualification.validTo %}
+                                {{ qualification.validTo|date('d/m/Y') }}
+                            {% else %}
+                                ...
+                            {% endif %}
+                            </td>
+                        <td>
+                            <a href="{{ path('admin_memberqualification_edit', { personId: person.id, id: qualification.id})}}"><i class="fa fa-pencil"></i></a>
                         </td>
                     </tr>
                 {% endfor %}
             </table>
 
-            <a href="{{ path('admin_memberqualification_new') }}" class="btn btn-primary">Add Qualification</a>
+            <a href="{{ path('admin_memberqualification_new', { personId: person.id }) }}" class="btn btn-primary">Add Qualification</a>
         </div>
     </div>
 

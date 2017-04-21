@@ -18,7 +18,22 @@ class MemberQualification
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $expiration;
+    private $validFrom;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $validTo;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $notes;
+
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     */
+    private $reference;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Qualification", inversedBy="memberQualification")
@@ -40,30 +55,6 @@ class MemberQualification
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set expiration
-     *
-     * @param \DateTime $expiration
-     *
-     * @return MemberQualification
-     */
-    public function setExpiration($expiration)
-    {
-        $this->expiration = $expiration;
-
-        return $this;
-    }
-
-    /**
-     * Get expiration
-     *
-     * @return \DateTime
-     */
-    public function getExpiration()
-    {
-        return $this->expiration;
     }
 
     /**
@@ -112,5 +103,101 @@ class MemberQualification
     public function getPerson()
     {
         return $this->person;
+    }
+
+    /**
+     * Set validFrom
+     *
+     * @param \DateTime $validFrom
+     *
+     * @return MemberQualification
+     */
+    public function setValidFrom($validFrom)
+    {
+        $this->validFrom = $validFrom;
+
+        return $this;
+    }
+
+    /**
+     * Get validFrom
+     *
+     * @return \DateTime
+     */
+    public function getValidFrom()
+    {
+        return $this->validFrom;
+    }
+
+    /**
+     * Set validTo
+     *
+     * @param \DateTime $validTo
+     *
+     * @return MemberQualification
+     */
+    public function setValidTo($validTo)
+    {
+        $this->validTo = $validTo;
+
+        return $this;
+    }
+
+    /**
+     * Get validTo
+     *
+     * @return \DateTime
+     */
+    public function getValidTo()
+    {
+        return $this->validTo;
+    }
+
+    /**
+     * Set notes
+     *
+     * @param string $notes
+     *
+     * @return MemberQualification
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get notes
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Set reference
+     *
+     * @param string $reference
+     *
+     * @return MemberQualification
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
     }
 }
