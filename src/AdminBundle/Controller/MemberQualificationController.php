@@ -11,7 +11,7 @@ use AppBundle\Entity\MemberQualification;
 /**
  * MemberQualification controller.
  *
- * @Route("/memberqualification")
+ * @Route("/person/{personId}/qualification")
  */
 class MemberQualificationController extends Controller
 {
@@ -21,13 +21,15 @@ class MemberQualificationController extends Controller
      * @Route("/", name="admin_memberqualification_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request, $personId)
     {
         $em = $this->getDoctrine()->getManager();
 
+        $person = $em->getRepository('AppBundle:Person')->findOneById($personId);
         $memberQualifications = $em->getRepository('AppBundle:MemberQualification')->findAll();
 
         return $this->render('admin/memberqualification/index.html.twig', array(
+            'person' => $person,
             'memberQualifications' => $memberQualifications,
         ));
     }
@@ -38,18 +40,21 @@ class MemberQualificationController extends Controller
      * @Route("/new", name="admin_memberqualification_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $personId)
     {
+        $em = $this->getDoctrine()->getManager();
+        $person = $em->getRepository('AppBundle:Person')->findOneById($personId);
+
         $memberQualification = new MemberQualification();
         $form = $this->createForm('AppBundle\Form\Type\MemberQualificationType', $memberQualification);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $memberQualification->setPerson($person);
             $em->persist($memberQualification);
             $em->flush();
 
-            return $this->redirectToRoute('admin_memberqualification_show', array('id' => $memberQualification->getId()));
+            return $this->redirectToRoute('admin_person_edit', array('id' => $person->getId()));
         }
 
         return $this->render('admin/memberqualification/new.html.twig', array(
@@ -58,21 +63,6 @@ class MemberQualificationController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a MemberQualification entity.
-     *
-     * @Route("/{id}", name="admin_memberqualification_show")
-     * @Method("GET")
-     */
-    public function showAction(MemberQualification $memberQualification)
-    {
-        $deleteForm = $this->createDeleteForm($memberQualification);
-
-        return $this->render('admin/memberqualification/show.html.twig', array(
-            'memberQualification' => $memberQualification,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
     /**
      * Displays a form to edit an existing MemberQualification entity.
@@ -91,7 +81,7 @@ class MemberQualificationController extends Controller
             $em->persist($memberQualification);
             $em->flush();
 
-            return $this->redirectToRoute('admin_memberqualification_edit', array('id' => $memberQualification->getId()));
+            return $this->redirectToRoute('admin_person_edit', array('id' => $memberQualification->getPerson()->getId()));
         }
 
         return $this->render('admin/memberqualification/edit.html.twig', array(
@@ -118,7 +108,7 @@ class MemberQualificationController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('admin_memberqualification_index');
+        return $this->redirectToRoute('admin_person_edit', array('id' => $memberQualification->getPerson()->getId()));
     }
 
     /**
@@ -131,7 +121,7 @@ class MemberQualificationController extends Controller
     private function createDeleteForm(MemberQualification $memberQualification)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_memberqualification_delete', array('id' => $memberQualification->getId())))
+            ->setAction($this->generateUrl('admin_memberqualification_delete', array('personId' => $memberQualification->getPerson()->getId(), 'id' => $memberQualification->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
