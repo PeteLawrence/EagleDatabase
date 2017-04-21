@@ -43,7 +43,7 @@ abstract class Charge
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $paid;
+    protected $paid;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)

@@ -25,9 +25,9 @@ class OtherChargeType extends AbstractType
             ->add('createddatetime', DateTimeType::class)
             ->add('duedatetime', DateTimeType::class)
             ->add('paiddatetime', DateTimeType::class)
-            ->add('paid', CheckboxType::class)
-            ->add('paymentType', EntityType::class, [ 'class' => 'AppBundle:PaymentType', 'choice_label' => 'type', 'placeholder' => '' ])
-            ->add('reference')
+            ->add('paid', CheckboxType::class, [ 'required' => false ])
+            ->add('paymentType', EntityType::class, [ 'class' => 'AppBundle:PaymentType', 'choice_label' => 'type', 'placeholder' => '', 'required' => false ])
+            ->add('reference', TextType::class, [ 'required' => false ])
         ;
     }
 
