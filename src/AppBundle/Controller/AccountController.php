@@ -73,6 +73,16 @@ class AccountController extends Controller
 
 
     /**
+     * @Route("/qualifications", name="account_qualifications")
+     */
+    public function qualificationsAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('account/qualifications.html.twig');
+    }
+
+
+    /**
      * @Route("/membership/{id}/view", name="account_membership_detail")
      */
     public function membershipDetailAction(Request $request, MemberRegistration $memberRegistration)

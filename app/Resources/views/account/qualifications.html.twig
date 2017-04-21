@@ -1,0 +1,36 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Qualifications{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <span class="breadcrumb-item active">Qualifications</span>
+    </nav>
+
+    <h2>Qualifications</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Qualification</th>
+                <th>Expires</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for qualification in app.user.memberQualification %}
+                <tr>
+                    <td>{{ qualification.qualification.name }}</td>
+                    <td>
+                        {{ qualification.validTo|date('jS F Y')}}
+                        {% if qualification.validTo|date('Ymd') < "now"|date('Ymd') %}
+                            <span class="badge badge-danger">Expired</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
