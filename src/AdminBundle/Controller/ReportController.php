@@ -280,6 +280,36 @@ class ReportController extends Controller
 
 
     /**
+     * Lists Qualifications
+     *
+     * @Route("/qualifications", name="admin_report_qualifications")
+     * @Method({"GET", "POST"})
+     */
+    public function qualificationsAction(Request $request)
+    {
+        $em = $this->get('doctrine')->getManager();
+
+        $form = $this->buildQualificationsForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $qualifications = $em->getRepository('AppBundle:MemberQualification')->findByQualification($data['qualification']);
+
+            return $this->render('admin/report/qualifications.html.twig', array(
+                'form' => $form->createView(),
+                'qualifications' => $qualifications
+            ));
+        } else {
+            return $this->render('admin/report/qualifications.html.twig', array(
+                'form' => $form->createView()
+            ));
+        }
+    }
+
+
+    /**
      * Lists youth members
      *
      * @Route("/youth", name="admin_report_youth")
@@ -401,6 +431,21 @@ class ReportController extends Controller
                 'class' => 'AppBundle:ActivityType',
                 'choice_label' => function (\AppBundle\Entity\ActivityType $at) { return $at->getType(); },
                 'placeholder' => 'All',
+                'required' => false
+            ])
+            ->getForm()
+        ;
+    }
+
+
+    private function buildQualificationsForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('POST')
+            ->add('qualification', EntityType::class, [
+                'class' => 'AppBundle:Qualification',
+                'choice_label' => function (\AppBundle\Entity\Qualification $q) { return $q->getName(); },
+                'placeholder' => '',
                 'required' => false
             ])
             ->getForm()
