@@ -54,6 +54,11 @@ abstract class Activity
     private $weatherDataPoints;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ActivityMessage", mappedBy="activity")
+     */
+    private $activityMessage;
+
+    /**
      *
      */
     private $weatherObservation;

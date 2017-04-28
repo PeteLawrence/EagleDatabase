@@ -107,6 +107,67 @@ class ActivityController extends Controller
 
 
     /**
+     * @Route("/{id}/contact", name="activity_contact")
+     */
+    public function contactAction(Request $request, Activity $activity)
+    {
+        //Only allow the organiser access to this page
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $em = $this->get('doctrine')->getManager();
+
+        //Build and Handle the contact form
+        $contactForm = $this->buildContactForm($activity);
+        $contactForm->handleRequest($request);
+
+
+        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
+            $data = $contactForm->getData();
+
+            $message = new \AppBundle\Entity\ActivityMessage;
+            $message->setActivity($activity);
+            $message->setPerson($this->getUser());
+            $message->setMessage($data['message']);
+            $message->setSentDateTime(new \DateTime());
+
+            $em->persist($message);
+            $em->flush();
+
+            //Send an email to the organiser
+            $message = \Swift_Message::newInstance()
+                ->setSubject(sprintf('%s has contacted you about %s', $message->getPerson()->getName(), $activity->getName()))
+                ->setFrom($this->getParameter('site.email'))
+                ->setTo($activity->getOrganiser()->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/activityContact.html.twig',
+                        array('activity' => $activity, 'message' => $message)
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+
+            //Display confirmation flash message
+            $this->addFlash('notice', 'Your message has been sent to the organiser');
+
+            return $this->redirectToRoute('activity_view', [ 'id' => $activity->getId() ]);
+        }
+
+        return $this->render(
+            'activity/contact.html.twig',
+            [
+                'activity' => $activity,
+                'contactForm' => $contactForm->createView()
+            ]
+        );
+    }
+
+
+
+
+    /**
      * @Route("/{id}/signup", name="activity_signup")
      */
     public function signupAction(Request $request, Activity $activity)
@@ -305,6 +366,15 @@ class ActivityController extends Controller
     }
 
 
+    private function buildContactForm($activity)
+    {
+        return $this->createFormBuilder()
+            ->add('message', TextareaType::class, [ 'attr' => ['rows' => '5'], 'label' => 'Message to the organiser', 'required' => true ])
+            //->setAction($this->generateUrl('activity_signup', array('id' => $activity->getId())))
+            ->setMethod('POST')
+            ->getForm()
+        ;
+    }
 
 
     private function buildSignupForm($activity)
@@ -316,4 +386,6 @@ class ActivityController extends Controller
             ->getForm()
         ;
     }
+
+
 }

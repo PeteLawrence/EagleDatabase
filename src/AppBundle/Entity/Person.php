@@ -148,6 +148,11 @@ class Person implements AdvancedUserInterface, \Serializable
     private $activity2;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ActivityMessage", mappedBy="person")
+     */
+    private $activityMessage;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Charge", mappedBy="person")
      */
     private $charge;
