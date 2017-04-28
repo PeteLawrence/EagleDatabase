@@ -1,0 +1,13 @@
+<dl>
+    <dt>Sent</dt>
+    <dd>{{ message.sentDateTime|date('d M Y H:i:s') }}</dd>
+
+    <dt>From</dt>
+    <dd>{{ message.person.name}} - {{ message.person.email }}</dd>
+
+    <dt>Activity</dt>
+    <dd>{{ activity.name }} - {{ activity.activityStart|date('d M Y') }}</dd>
+
+    <dt>Message</dt>
+    <dd>{{ message.message }}</dd>
+</dl>
