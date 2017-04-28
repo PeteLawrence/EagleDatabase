@@ -38,26 +38,35 @@
             <div class="col-12">
                 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
 
-                    <ul class="nav navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('docsanddownloads')}}">Documents &amp; Downloads</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('whoswho') }}">Who's Who</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('grantsandawards')}}">Grants &amp; Awards</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.flickr.com/photos/99278423@N03/sets/" target="_blank">Photos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://m.youtube.com/channel/UCzVxt4-IvHKj_gZwx6ySdvA" target="_blank">Videos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('contact_index')}}">Contact</a>
-                        </li>
-                    </ul>
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#bottomNavBar" aria-controls="bottomNavBar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <span class="navbar-brand">&nbsp;</span>
+
+                    <div class="collapse navbar-collapse" id="bottomNavBar">
+
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('docsanddownloads')}}">Documents &amp; Downloads</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('whoswho') }}">Who's Who</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('grantsandawards')}}">Grants &amp; Awards</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.flickr.com/photos/99278423@N03/sets/" target="_blank">Photos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://m.youtube.com/channel/UCzVxt4-IvHKj_gZwx6ySdvA" target="_blank">Videos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('contact_index')}}">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
             </div>
         </div>
