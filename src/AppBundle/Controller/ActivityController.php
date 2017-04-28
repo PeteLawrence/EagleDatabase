@@ -233,6 +233,28 @@ class ActivityController extends Controller
 
 
     /**
+     * @Route("/{id}/participants/emaillist", name="activity_participants_emaillist")
+     */
+    public function participantsEmailListAction(Request $request, Activity $activity)
+    {
+        //Only allow the organiser access to this page
+        if (
+            $activity->getOrganiser() != $this->getUser() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return $this->render(
+            'activity/participantsEmailList.html.twig',
+            [
+                'activity' => $activity
+            ]
+        );
+    }
+
+
+    /**
      * @Route("/{id}/stats", name="activity_stats")
      */
     public function statsAction(Request $request, Activity $activity)
