@@ -39,7 +39,8 @@
     </table>
 
     {% if app.user == activity.organiser or is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('activity_participants_add', { id: activity.id })}}" class="btn btn-primary">Add Participant</a>
+        <a href="{{ path('activity_participants_add', { id: activity.id })}}" class="btn btn-primary btn-sm"><i class="fa fa-user-plus"></i> Add Participant</a>
+        <a href="{{ path('activity_participants_emaillist', { id: activity.id })}}" class="btn btn-info btn-sm"><i class="fa fa-envelope"></i> Email List</a>
     {% endif %}
 
 {% endblock %}
