@@ -8,60 +8,60 @@
 
     <div class="collapse navbar-collapse" id="topNavBar">
 
-    <ul class="nav navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('centre') }}">Eagle Canoe Centre</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('howtojoin')}}">How To Join</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('whatson')}}">What's On</a>
-        </li>
-        {#}<li class="nav-item">
-            <a class="nav-link" href="{{ path('picsandvideos') }}">Pics &amp; Videos</a>
-        </li>#}
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('faqs') }}">FAQs</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('contact_index')}}">Contact</a>
-        </li>
-    </ul>
-
-    <ul class="nav navbar-toggleable-md navbar-nav mr-0">
-        {% if app.user %}
-            {% if is_granted('ROLE_ADMIN') %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('admin_index') }}"><i class="fa fa-cogs"></i> Admin</a>
-                </li>
-            {% endif %}
-
-            <li class="nav-item dropdown">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-user"></i> {{ app.user.forename }} <span class="caret"></span></a>
-
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <a href="{{ path('account_overview') }}" class="dropdown-item"><i class="fa fa-user"></i> Overview</a>
-                    <a href="{{ path('account_activities') }}" class="dropdown-item"><i class="fa fa-map"></i> Activities</a>
-                    <a href="{{ path('account_charges') }}" class="dropdown-item"><i class="fa fa-money"></i> Charges</a>
-                    {% if app.user.memberQualification|length > 0 %}
-                        <a href="{{ path('account_qualifications') }}" class="dropdown-item"><i class="fa fa-trophy"></i> Qualifications</a>
-                    {% endif %}
-                    <a href="{{ path('account_edit') }}" class="dropdown-item"><i class="fa fa-pencil"></i> Profile</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ path('logout') }}" class="dropdown-item"><i class="fa fa-sign-out"></i> Logout</a>
-                </div>
+        <ul class="nav navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('centre') }}">Eagle Canoe Centre</a>
             </li>
-        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('howtojoin')}}">How To Join</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('whatson')}}">What's On</a>
+            </li>
             {#}<li class="nav-item">
-                <a href="{{ path('register') }}" class="nav-link"><i class="fa fa-user-plus"></i> Register</a>
+                <a class="nav-link" href="{{ path('picsandvideos') }}">Pics &amp; Videos</a>
             </li>#}
             <li class="nav-item">
-                <a href="{{ path('login') }}" class="nav-link"><i class="fa fa-sign-in"></i> Login</a>
+                <a class="nav-link" href="{{ path('faqs') }}">FAQs</a>
             </li>
-        {% endif %}
-    </ul>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('contact_index')}}">Contact</a>
+            </li>
+        </ul>
 
-</div>
+        <ul class="nav navbar-toggleable-md navbar-nav mr-0">
+            {% if app.user %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_index') }}"><i class="fa fa-cogs"></i> Admin</a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i> {{ app.user.forename }} <span class="caret"></span></a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <a href="{{ path('account_overview') }}" class="dropdown-item"><i class="fa fa-user"></i> Overview</a>
+                        <a href="{{ path('account_activities') }}" class="dropdown-item"><i class="fa fa-map"></i> Activities</a>
+                        <a href="{{ path('account_charges') }}" class="dropdown-item"><i class="fa fa-money"></i> Charges</a>
+                        {% if app.user.memberQualification|length > 0 %}
+                            <a href="{{ path('account_qualifications') }}" class="dropdown-item"><i class="fa fa-trophy"></i> Qualifications</a>
+                        {% endif %}
+                        <a href="{{ path('account_edit') }}" class="dropdown-item"><i class="fa fa-pencil"></i> Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ path('logout') }}" class="dropdown-item"><i class="fa fa-sign-out"></i> Logout</a>
+                    </div>
+                </li>
+            {% else %}
+                {#}<li class="nav-item">
+                    <a href="{{ path('register') }}" class="nav-link"><i class="fa fa-user-plus"></i> Register</a>
+                </li>#}
+                <li class="nav-item">
+                    <a href="{{ path('login') }}" class="nav-link"><i class="fa fa-sign-in"></i> Login</a>
+                </li>
+            {% endif %}
+        </ul>
+
+    </div>
 </nav>
