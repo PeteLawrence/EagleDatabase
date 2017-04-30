@@ -165,7 +165,8 @@ class ReportController extends Controller
 
         return $this->render('admin/report/databaseengagement.html.twig', array(
             'accountStatusPieChart' => $reportService->buildAccountStatusPieChart(),
-            'usedOnlineSignupPieChart' => $reportService->buildUsedOnlineSignUpPieChart()
+            'usedOnlineSignupPieChart' => $reportService->buildUsedOnlineSignUpPieChart(),
+            'onlineSignupCountChart' => $reportService->buildOnlineSignupCountChart()
         ));
 
     }
