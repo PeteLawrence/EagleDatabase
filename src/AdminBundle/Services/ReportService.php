@@ -313,6 +313,40 @@ class ReportService
     }
 
 
+    public function buildOnlineSignupCountChart()
+    {
+        //Fetch current members
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+
+        $groups = range(1,10);
+        $grouper = new \AppBundle\Util\Grouper($groups);
+
+        foreach ($members as $member) {
+            $count = 0;
+
+            foreach ($member->getParticipant() as $p) {
+                if ($p->getSignupMethod() == 'online') {
+                    $count++;
+                }
+            }
+
+            $grouper->addItem($count);
+        }
+
+
+        $data = [['Activities', 'Count']];
+        foreach ($grouper->getGroups() as $group) {
+            $data[] = [ $group['name'], $group['count']];
+        }
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Online Signups Per Person');
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+
     public function buildReturningChart($date)
     {
         //Fetch data
