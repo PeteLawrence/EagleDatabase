@@ -43,11 +43,16 @@ class SignInController extends Controller
                 $participant->setManagedActivity($activity);
                 $participant->setPerson($p);
 
-                $em->persist($participant);
-                $em->flush();
+                try {
+                    $em->persist($participant);
+                    $em->flush();
 
-                $message = sprintf('%s, you have been signed in!', $participant->getPerson()->getForename());
-                $this->addFlash('notice', $message);
+                    $message = sprintf('%s, you have been signed in!', $participant->getPerson()->getForename());
+                    $this->addFlash('notice', $message);
+                } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+                    $message = sprintf('%s, you have already signed in!', $participant->getPerson()->getForename());
+                    $this->addFlash('error', $message);
+                }
 
                 return $this->redirectToRoute('signin_show', [ 'id' => $activity->getId(), 'key' => $activity->getSigninKey() ]);
             }
