@@ -29,6 +29,10 @@
 </form>
 </div>
 
+{% if memberCount is defined %}
+    <h3>Total Members: {{ memberCount }}</h3>
+{% endif %}
+
 <div class="row">
     <div class="col-lg-4">
         <div id="genderChart"></div>
