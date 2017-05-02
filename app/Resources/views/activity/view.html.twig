@@ -101,25 +101,27 @@
                 {% endif %}
 
                 {% if is_granted('ROLE_USER') %}
-                    {% if app.user.attending(activity) %}
-                        You are signed up
-                    {% else %}
-                        {% if activity.allowOnlineSignup %}
-                            {% if activity.acceptingSignups %}
-                                {% if app.user.getMemberRegistrationAtDate(activity.activityStart) %}
-                                    <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary">Sign Up</a>
+                    <div class="my-2">
+                        {% if app.user.attending(activity) %}
+                            You are signed up
+                        {% else %}
+                            {% if activity.allowOnlineSignup %}
+                                {% if activity.acceptingSignups %}
+                                    {% if app.user.getMemberRegistrationAtDate(activity.activityStart) %}
+                                        <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary"><i class="fa fa-check-square-o"></i> Sign Up</a>
+                                    {% else %}
+                                        You must have an active membership to sign up
+                                    {% endif %}
                                 {% else %}
-                                    You must have an active membership to sign up
+                                    Signup from {{ activity.signupStart|date('jS M Y H:i') }}
                                 {% endif %}
                             {% else %}
-                                Signup from {{ activity.signupStart|date('jS M Y H:i') }}
+                                Online sign up is not available
                             {% endif %}
-                        {% else %}
-                            Online sign up is not available
                         {% endif %}
-                    {% endif %}
+                    </div>
 
-                    <div>
+                    <div class="my-2">
                         <a href="{{path('activity_contact', { id: activity.id }) }}" class="btn btn-sm btn-primary"><i class="fa fa-envelope"></i> Contact the organiser</a>
                     </div>
                 {% else %}
