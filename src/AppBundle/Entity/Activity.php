@@ -432,4 +432,38 @@ abstract class Activity
     {
         return sprintf('%s - %s', $this->name, $this->activityStart->format('d M Y'));
     }
+
+    /**
+     * Add activityMessage
+     *
+     * @param \AppBundle\Entity\ActivityMessage $activityMessage
+     *
+     * @return Activity
+     */
+    public function addActivityMessage(\AppBundle\Entity\ActivityMessage $activityMessage)
+    {
+        $this->activityMessage[] = $activityMessage;
+
+        return $this;
+    }
+
+    /**
+     * Remove activityMessage
+     *
+     * @param \AppBundle\Entity\ActivityMessage $activityMessage
+     */
+    public function removeActivityMessage(\AppBundle\Entity\ActivityMessage $activityMessage)
+    {
+        $this->activityMessage->removeElement($activityMessage);
+    }
+
+    /**
+     * Get activityMessage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActivityMessage()
+    {
+        return $this->activityMessage;
+    }
 }

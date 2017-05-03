@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
+        <a class="breadcrumb-item" href="{{ path('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+        <span class="breadcrumb-item active">Messages</span>
+    </nav>
+
+    <h2>Messages</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>From</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for message in activity.activityMessage %}
+                <tr>
+                    <td>{{ message.sentDateTime|date('j M Y H:i') }}</td>
+                    <td>{{ message.person.name }}</td>
+                    <td>{{ message.message }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">No one has contacted you yet</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
