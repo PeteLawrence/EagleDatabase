@@ -9,8 +9,14 @@
         <a class="breadcrumb-item" href="{{ path('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
         <span class="breadcrumb-item active">Sign Up</span>
     </nav>
-    
+
     <h2>{{ activity.name }}</h2>
+
+    {% if activity.cost and activity.cost > 0 %}
+        <div class="alert alert-warning" role="alert">
+          Please note that there is a £{{activity.cost|number_format(2)}} charge for attending this activity.
+        </div>
+    {% endif %}
 
     <p>
         Click the button below to sign up to the activity.

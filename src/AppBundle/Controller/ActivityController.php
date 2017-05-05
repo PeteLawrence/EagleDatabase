@@ -210,8 +210,21 @@ class ActivityController extends Controller
             $participant->setSignupDateTime(new \DateTime());
             $participant->setParticipantStatus($participantStatus);
             $participant->setNotes($data['notes']);
-
             $em->persist($participant);
+
+            //Add a charge if applicable
+            if ($activity->getCost() > 0) {
+                $now = new \DateTime();
+                $charge = new \AppBundle\Entity\ActivityCharge;
+                $charge->setManagedActivity($activity);
+                $charge->setPerson($participant->getPerson());
+                $charge->setDescription('Activity: ' . $activity->getName());
+                $charge->setAmount($activity->getCost());
+                $charge->setCreatedDateTime($now);
+                $charge->setDueDateTime($now->add(new \DateInterval('P1W')));
+                $em->persist($charge);
+            }
+
             $em->flush();
 
             //Send an email to the organiser

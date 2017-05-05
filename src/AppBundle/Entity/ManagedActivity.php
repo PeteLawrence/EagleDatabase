@@ -24,6 +24,11 @@ class ManagedActivity extends \AppBundle\Entity\Activity
     private $signupEnd;
 
     /**
+     * @ORM\Column(type="decimal", length=6, nullable=true)
+     */
+    private $cost;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Participant", mappedBy="managedActivity")
      */
     private $participant;
@@ -32,6 +37,11 @@ class ManagedActivity extends \AppBundle\Entity\Activity
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ManagedActivityMembershipType", mappedBy="managedActivity")
      */
     private $managedActivityMembershipType;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ActivityCharge", mappedBy="managedActivity")
+     */
+    private $activityCharge;
 
     /**
      * Set signinKey
@@ -201,5 +211,63 @@ class ManagedActivity extends \AppBundle\Entity\Activity
         }
 
         return false;
+    }
+
+    /**
+     * Set cost
+     *
+     * @param string $cost
+     *
+     * @return ManagedActivity
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+
+        return $this;
+    }
+
+    /**
+     * Get cost
+     *
+     * @return string
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
+
+    /**
+     * Add activityCharge
+     *
+     * @param \AppBundle\Entity\ActivityCharge $activityCharge
+     *
+     * @return ManagedActivity
+     */
+    public function addActivityCharge(\AppBundle\Entity\ActivityCharge $activityCharge)
+    {
+        $this->activityCharge[] = $activityCharge;
+
+        return $this;
+    }
+
+    /**
+     * Remove activityCharge
+     *
+     * @param \AppBundle\Entity\ActivityCharge $activityCharge
+     */
+    public function removeActivityCharge(\AppBundle\Entity\ActivityCharge $activityCharge)
+    {
+        $this->activityCharge->removeElement($activityCharge);
+    }
+
+    /**
+     * Get activityCharge
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActivityCharge()
+    {
+        return $this->activityCharge;
     }
 }

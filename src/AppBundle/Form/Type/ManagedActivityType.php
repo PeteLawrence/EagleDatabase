@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,6 +31,7 @@ class ManagedActivityType extends AbstractType
             ->add('signupStart', DateTimeType::class, [ 'required' => false, 'date_format' => 'd MMMM y', 'date_widget' => 'choice', 'time_widget' => 'choice', 'minutes' => [ 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] ])
             ->add('signupEnd', DateTimeType::class, [ 'required' => false, 'date_format' => 'd MMMM y', 'date_widget' => 'choice', 'time_widget' => 'choice', 'minutes' => [ 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] ])
             ->add('activityType', EntityType::class, ['class' => 'AppBundle:ActivityType', 'choice_label' => 'type' ])
+            ->add('cost', MoneyType::class, [ 'currency' => 'GBP' ])
             ->add('organiser', EntityType::class, [
                 'class' => 'AppBundle:Person',
                 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); },
