@@ -18,6 +18,45 @@ class ReportService
     }
 
 
+    public function buildRegularEmailsList()
+    {
+        $people = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+        $emails = [];
+
+        foreach ($people as $person) {
+            $email = $person->getEmail();
+
+            if (strpos($email, '@btinternet') == false) {
+                $emails[] = $email;
+            }
+        }
+
+        $emails = array_unique($emails);
+        $emailsString = implode('; ', $emails);
+
+        return $emailsString;
+    }
+
+    public function buildBtEmailsList()
+    {
+        $people = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+        $emails = [];
+
+        foreach ($people as $person) {
+            $email = $person->getEmail();
+
+            if (strpos($email, '@btinternet')) {
+                $emails[] = $email;
+            }
+        }
+
+        $emails = array_unique($emails);
+        $emailsString = implode('; ', $emails);
+
+        return $emailsString;
+    }
+
+
     public function buildGenderPieChart($persons)
     {
         $females = 0;

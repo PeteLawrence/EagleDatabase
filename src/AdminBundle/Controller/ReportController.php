@@ -37,19 +37,11 @@ class ReportController extends Controller
      */
     public function emaillistAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $people = $em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
-        $emails = [];
-        foreach ($people as $person) {
-            if ($person->getEmail() != '') {
-                $emails[] = $person->getEmail();
-            }
-        }
-        $emailsString = implode('; ', $emails);
+        $reportService = $this->get('eagle_report');
 
         return $this->render('admin/report/emaillist.html.twig', [
-            'emailsString' => $emailsString
+            'regularEmailsString' => $reportService->buildRegularEmailsList(),
+            'btEmailsString' => $reportService->buildBtEmailsList()
         ]);
     }
 
