@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Activity;
+use AppBundle\Entity\Participant;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -325,6 +326,56 @@ class ActivityController extends Controller
                 'form' => $form->createView()
             ]
         );
+    }
+
+
+
+    /**
+     * @Route("/{id}/participants/delete/{participant}", name="activity_participants_delete")
+     */
+    public function participantsDeleteAction(Request $request, Activity $activity, \AppBundle\Entity\Participant $participant)
+    {
+        $deleteForm = $this->createDeleteParticipantForm($activity, $participant);
+        $deleteForm->handleRequest($request);
+
+        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->remove($participant);
+            $em->flush();
+
+            //Display a flash message
+            $this->addFlash('notice', sprintf('%s has been removed from %s', $participant->getPerson()->getName(), $activity->getName()));
+
+            return $this->redirectToRoute('activity_participants', array('id' => $participant->getManagedActivity()->getId()));
+        }
+
+
+        return $this->render(
+            'activity/participantsDelete.html.twig',
+            [
+                'activity' => $activity,
+                'participant' => $participant,
+                'deleteForm' => $deleteForm->createView()
+            ]
+        );
+    }
+
+
+    /**
+     * Creates a form to delete a Activity entity.
+     *
+     * @param Activity $activity The Activity entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteParticipantForm(Activity $activity, Participant $participant)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('activity_participants_delete', array('id' => $activity->getId(), 'participant' => $participant->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
     }
 
 
