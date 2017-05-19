@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participants{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
+        <a class="breadcrumb-item" href="{{ path('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+        <span class="breadcrumb-item active">Participants</span>
+    </nav>
+
+    <h2>Delete Participant</h2>
+
+    <p>
+        Are you sure that you want to remove {{ participant.person.name }} from {{ activity.name }}?
+    </p>
+
+    {{ form_start(deleteForm) }}
+        {{ form_widget(deleteForm) }}
+        <input type="submit" value="Remove" class="btn btn-danger" />
+    {{ form_end(deleteForm) }}
+
+{% endblock %}
