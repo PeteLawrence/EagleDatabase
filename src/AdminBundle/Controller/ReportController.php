@@ -292,11 +292,13 @@ class ReportController extends Controller
 
             $membershipData = $reportService->getGrantsMembershipData($data['membershipPeriod']);
             $participationData = $reportService->getGrantsParticipationData($data['membershipPeriod']);
+            $coachingData = $reportService->getGrantsCoachingData($data['membershipPeriod']);
 
             return $this->render('admin/report/grants.html.twig', array(
                 'form' => $form->createView(),
                 'membership' => $membershipData,
-                'participation' => $participationData
+                'participation' => $participationData,
+                'coaching' => $coachingData
             ));
         }
 
