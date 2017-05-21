@@ -873,12 +873,12 @@ class ReportService
 
         foreach ($activities as $activity) {
             foreach ($activity->getParticipant() as $p) {
-                $mr = $member->getCurrentMemberRegistration();
+                $person = $p->getPerson();
+                $mr = $person->getCurrentMemberRegistration();
                 if ($mr) {
-                    $type = $member->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
-
+                    $type = $person->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
                     if ($type == 'Coach') {
-                        $data['coachingSessions'][$member->getGender()]++;
+                        $data['coachingSessions'][$person->getGender()]++;
                     }
                 }
             }
