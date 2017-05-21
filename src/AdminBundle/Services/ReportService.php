@@ -842,6 +842,52 @@ class ReportService
     }
 
 
+    public function getGrantsCoachingData($membershipPeriod)
+    {
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersByMembershipPeriod($membershipPeriod);
+
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($membershipPeriod->getFromDate(), $membershipPeriod->getToDate(), null);
+
+        $data = [
+            'coaches' => [
+                'F' => 0,
+                'M' => 0
+            ],
+            'coachingSessions' => [
+                'F' => 0,
+                'M' => 0
+            ]
+        ];
+
+        foreach ($members as $member) {
+            $mr = $member->getCurrentMemberRegistration();
+            if ($mr) {
+                $type = $member->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
+
+                if ($type == 'Coach') {
+                    $data['coaches'][$member->getGender()]++;
+                }
+            }
+
+        }
+
+        foreach ($activities as $activity) {
+            foreach ($activity->getParticipant() as $p) {
+                $mr = $member->getCurrentMemberRegistration();
+                if ($mr) {
+                    $type = $member->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
+
+                    if ($type == 'Coach') {
+                        $data['coachingSessions'][$member->getGender()]++;
+                    }
+                }
+            }
+        }
+
+        return $data;
+    }
+
+
     private function getBritishCanoeingMemberType($person)
     {
         $diff = $person->getDob()->diff(new \DateTime());

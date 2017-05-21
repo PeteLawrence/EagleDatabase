@@ -55,7 +55,6 @@
                 <td>{{ membership.disabled.F }}</td>
                 <td>{{ membership.disabled.M }}</td>
             </tr>
-            <tr>
         </tbody>
     </table>
 
@@ -94,10 +93,31 @@
                 <td>{{ participation.disabled.F }}</td>
                 <td>{{ participation.disabled.M }}</td>
             </tr>
-            <tr>
         </tbody>
     </table>
 
+
     <h2>Volunteers &amp; Coaches</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Females</th>
+                <th>Males</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Coaches</th>
+                <td>{{ coaching.coaches.F }}</td>
+                <td>{{ coaching.coaches.M }}</td>
+            </tr>
+            <tr>
+                <th>Coaching Sessions</th>
+                <td>{{ coaching.coachingSessions.F }}</td>
+                <td>{{ coaching.coachingSessions.M }}</td>
+            </tr>
+        </tbody>
+    </table>
 
 {% endblock %}
