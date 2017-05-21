@@ -335,6 +335,14 @@ class ActivityController extends Controller
      */
     public function participantsDeleteAction(Request $request, Activity $activity, \AppBundle\Entity\Participant $participant)
     {
+        //Only allow the organiser access to this page
+        if (
+            $activity->getOrganiser() != $this->getUser() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
+            throw $this->createAccessDeniedException();
+        }
+        
         $deleteForm = $this->createDeleteParticipantForm($activity, $participant);
         $deleteForm->handleRequest($request);
 
