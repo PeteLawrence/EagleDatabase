@@ -186,4 +186,11 @@ class MembershipPeriod
     {
         return $this->signupToDate;
     }
+
+
+
+    public function getName()
+    {
+        return sprintf('%s → %s', $this->fromDate->format('jS M Y'), $this->toDate->format('jS M Y'));
+    }
 }

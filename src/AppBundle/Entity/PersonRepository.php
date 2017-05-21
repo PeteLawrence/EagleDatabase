@@ -72,4 +72,19 @@ class PersonRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
+
+
+    public function findMembersByMembershipPeriod($membershipPeriod)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->innerJoin('p.memberRegistration', 'mr')
+            ->innerJoin('mr.membershipTypePeriod', 'mtp')
+            ->where('mtp.membershipPeriod = ?1')
+            ->setParameter(1, $membershipPeriod)
+        ;
+
+        return $query->getQuery()->getResult();
+    }
+
+
 }

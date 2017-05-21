@@ -748,4 +748,113 @@ class ReportService
 
         return $chart;
     }
+
+
+
+    public function getGrantsMembershipData($membershipPeriod)
+    {
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersByMembershipPeriod($membershipPeriod);
+
+        $data = [
+            'total' => [
+                'F' => 0,
+                'M' => 0
+            ],
+            'adults' => [
+                'F' => 0,
+                'M' => 0
+            ],
+            'youth' => [
+                'F' => 0,
+                'M' => 0
+            ],
+            'kids' => [
+                'F' => 0,
+                'M' => 0
+            ],
+            'disabled' => [
+                'F' => 0,
+                'M' => 0
+            ],
+        ];
+
+        foreach ($members as $member) {
+            $gender = $member->getGender();
+
+            $data['total'][$gender]++;
+
+            $type = $this->getBritishCanoeingMemberType($member);
+
+            $data[$type][$gender]++;
+
+            if ($member->getDisability()) {
+                $data['disabled'][$gender]++;
+            }
+        }
+
+        return $data;
+    }
+
+
+
+    public function getGrantsParticipationData($membershipPeriod)
+    {
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($membershipPeriod->getFromDate(), $membershipPeriod->getToDate(), null);
+
+        $data = [
+            'total' => [
+                'F' => 0,
+                'M' => 0
+            ],
+            'adults' => [
+                'F' => 0,
+                'M' => 0
+            ],
+            'youth' => [
+                'F' => 0,
+                'M' => 0
+            ],
+            'kids' => [
+                'F' => 0,
+                'M' => 0
+            ],
+            'disabled' => [
+                'F' => 0,
+                'M' => 0
+            ]
+        ];
+
+        foreach ($activities as $activity) {
+            foreach ($activity->getParticipant() as $p) {
+                $type = $this->getBritishCanoeingMemberType($p->getPerson());
+                $gender = $p->getPerson()->getGender();
+
+                $data['total'][$gender]++;
+                $data[$type][$gender]++;
+
+                if ($p->getPerson()->getDisability()) {
+                    $data['disabled'][$gender]++;
+                }
+            }
+        }
+
+        return $data;
+    }
+
+
+    private function getBritishCanoeingMemberType($person)
+    {
+        $diff = $person->getDob()->diff(new \DateTime());
+        $age = $diff->y;
+
+        if ($age > 25) {
+            $type = 'adults';
+        } else if ($age > 13) {
+            $type = 'youth';
+        } else {
+            $type = 'kids';
+        }
+
+        return $type;
+    }
 }
