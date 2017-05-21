@@ -1,0 +1,103 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Reports: Active Members{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Grant Figures</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Grant Figures</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.membershipPeriod) }}
+    <input type="submit" value="Go" class="btn btn-primary" />
+    {{ form_end(form) }}
+
+
+    <h2>Membership</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Females</th>
+                <th>Males</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Total</th>
+                <td>{{ membership.total.F }}</td>
+                <td>{{ membership.total.M }}</td>
+            </tr>
+            <tr>
+                <th>Adults (26+)</th>
+                <td>{{ membership.adults.F }}</td>
+                <td>{{ membership.adults.M }}</td>
+            </tr>
+            <tr>
+                <th>Youth (14-25)</th>
+                <td>{{ membership.youth.F }}</td>
+                <td>{{ membership.youth.M }}</td>
+            </tr>
+            <tr>
+                <th>Kids (8-13)</th>
+                <td>{{ membership.kids.F }}</td>
+                <td>{{ membership.kids.M }}</td>
+            </tr>
+            <tr>
+                <th>Disabled</th>
+                <td>{{ membership.disabled.F }}</td>
+                <td>{{ membership.disabled.M }}</td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+
+    <h2>Participation</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Females</th>
+                <th>Males</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Total</th>
+                <td>{{ participation.total.F }}</td>
+                <td>{{ participation.total.M }}</td>
+            </tr>
+            <tr>
+                <th>Adults (26+)</th>
+                <td>{{ participation.adults.F }}</td>
+                <td>{{ participation.adults.M }}</td>
+            </tr>
+            <tr>
+                <th>Youth (14-25)</th>
+                <td>{{ participation.youth.F }}</td>
+                <td>{{ participation.youth.M }}</td>
+            </tr>
+            <tr>
+                <th>Kids (8-13)</th>
+                <td>{{ participation.kids.F }}</td>
+                <td>{{ participation.kids.M }}</td>
+            </tr>
+            <tr>
+                <th>Disabled</th>
+                <td>{{ participation.disabled.F }}</td>
+                <td>{{ participation.disabled.M }}</td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+
+    <h2>Volunteers &amp; Coaches</h2>
+
+{% endblock %}

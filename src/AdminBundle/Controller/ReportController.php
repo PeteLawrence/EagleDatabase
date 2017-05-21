@@ -273,6 +273,58 @@ class ReportController extends Controller
     }
 
 
+
+    /**
+     * Displays figures required for the grant bodies
+     *
+     * @Route("/grants", name="admin_report_grants")
+     * @Method({"GET", "POST"})
+     */
+    public function grantsAction(Request $request)
+    {
+        $reportService = $this->get('eagle_report');
+
+        $form = $this->buildGrantsForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $membershipData = $reportService->getGrantsMembershipData($data['membershipPeriod']);
+            $participationData = $reportService->getGrantsParticipationData($data['membershipPeriod']);
+
+            return $this->render('admin/report/grants.html.twig', array(
+                'form' => $form->createView(),
+                'membership' => $membershipData,
+                'participation' => $participationData
+            ));
+        }
+
+        return $this->render('admin/report/grants.html.twig', array(
+            'form' => $form->createView()
+        ));
+
+    }
+
+
+    private function buildGrantsForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('POST')
+            ->add('membershipPeriod', EntityType::class, [
+                'class' => 'AppBundle:MembershipPeriod',
+                'choice_label' => function (\AppBundle\Entity\MembershipPeriod $mp) { return $mp->getName(); },
+                'placeholder' => '',
+                'required' => true
+            ])
+            ->getForm()
+        ;
+    }
+
+
+
+
+
     /**
      * Lists Qualifications
      *
