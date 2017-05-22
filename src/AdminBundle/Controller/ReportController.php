@@ -145,6 +145,25 @@ class ReportController extends Controller
     }
 
 
+
+    /**
+     * Lists all Activity entities.
+     *
+     * @Route("/bcaffiliation", name="admin_report_bcaffiliation")
+     * @Method({"GET", "POST"})
+     */
+    public function bcAffiliationAction(Request $request)
+    {
+        $reportService = $this->get('eagle_report');
+
+        return $this->render('admin/report/bcaffiliation.html.twig', array(
+            'data' => $reportService->getBCAffiliationData(),
+            'volunteerData' => $reportService->getBCAffiliationVolunteerData(),
+            'disabledData' => $reportService->getBCAffiliationDisabledData()
+        ));
+    }
+
+
     /**
      * Database Engagement Report
      *

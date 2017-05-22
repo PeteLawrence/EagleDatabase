@@ -1,0 +1,99 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Reports: Active Members{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">British Canoeing Affiliation</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>British Canoeing Affiliation</h1>
+
+    <h2>Membership</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Males</th>
+                <th>Females</th>
+                <th>Males</th>
+                <th>Females</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>13 and under</th>
+                <td>{{ data.bc.group1.M }}</td>
+                <td>{{ data.bc.group1.F }}</td>
+                <td>{{ data.nonbc.group1.M }}</td>
+                <td>{{ data.nonbc.group1.F }}</td>
+                <th>{{ data.bc.group1.M + data.bc.group1.F + data.nonbc.group1.M + data.nonbc.group1.F }}</th>
+            </tr>
+            <tr>
+                <th>14 - 18</th>
+                <td>{{ data.bc.group2.M }}</td>
+                <td>{{ data.bc.group2.F }}</td>
+                <td>{{ data.nonbc.group2.M }}</td>
+                <td>{{ data.nonbc.group2.F }}</td>
+                <th>{{ data.bc.group2.M + data.bc.group2.F + data.nonbc.group2.M + data.nonbc.group2.F }}</th>
+            </tr>
+            <tr>
+                <th>19 - 25</th>
+                <td>{{ data.bc.group3.M }}</td>
+                <td>{{ data.bc.group3.F }}</td>
+                <td>{{ data.nonbc.group3.M }}</td>
+                <td>{{ data.nonbc.group3.F }}</td>
+                <th>{{ data.bc.group3.M + data.bc.group3.F + data.nonbc.group3.M + data.nonbc.group3.F }}</th>
+            </tr>
+            <tr>
+                <th>26 - 45</th>
+                <td>{{ data.bc.group4.M }}</td>
+                <td>{{ data.bc.group4.F }}</td>
+                <td>{{ data.nonbc.group4.M }}</td>
+                <td>{{ data.nonbc.group4.F }}</td>
+                <th>{{ data.bc.group4.M + data.bc.group4.F + data.nonbc.group4.M + data.nonbc.group4.F }}</th>
+            </tr>
+            <tr>
+                <th>46+</th>
+                <td>{{ data.bc.group5.M }}</td>
+                <td>{{ data.bc.group5.F }}</td>
+                <td>{{ data.nonbc.group5.M }}</td>
+                <td>{{ data.nonbc.group5.F }}</td>
+                <th>{{ data.bc.group5.M + data.bc.group5.F + data.nonbc.group5.M + data.nonbc.group5.F }}</th>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <th>{{ data.bc.group1.M + data.bc.group2.M + data.bc.group3.M + data.bc.group4.M + data.bc.group5.M }}</th>
+                <th>{{ data.bc.group1.F + data.bc.group2.F + data.bc.group3.F + data.bc.group4.F + data.bc.group5.F }}</th>
+                <th>{{ data.nonbc.group1.M + data.nonbc.group2.M + data.nonbc.group3.M + data.nonbc.group4.M + data.nonbc.group5.M }}</th>
+                <th>{{ data.nonbc.group1.F + data.nonbc.group2.F + data.nonbc.group3.F + data.nonbc.group4.F + data.nonbc.group5.F }}</th>
+                <th>{{ data.total }}</th>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h2>Volunteers</h2>
+    <dl>
+        <dt>Volunteers</dt>
+        <dd>{{ volunteerData.volunteers }}</dd>
+
+        <dt>Coaches</dt>
+        <dd>{{ volunteerData.coaches }}</dd>
+    </dl>
+
+    <h2>Disabled</h2>
+    <dl>
+        <dt>Males</dt>
+        <dd>{{ disabledData.M }}</dd>
+
+        <dt>Female</dt>
+        <dd>{{ disabledData.F }}</dd>
+    </dl>
+{% endblock %}
