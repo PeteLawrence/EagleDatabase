@@ -342,7 +342,7 @@ class ActivityController extends Controller
         ) {
             throw $this->createAccessDeniedException();
         }
-        
+
         $deleteForm = $this->createDeleteParticipantForm($activity, $participant);
         $deleteForm->handleRequest($request);
 

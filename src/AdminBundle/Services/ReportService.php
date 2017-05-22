@@ -888,6 +888,140 @@ class ReportService
     }
 
 
+    public function getBCAffiliationData()
+    {
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+
+        $data = [
+            'bc' => [
+                'group1' => [
+                    'M' => 0,
+                    'F' => 0
+                ],
+                'group2' => [
+                    'M' => 0,
+                    'F' => 0
+                ],
+                'group3' => [
+                    'M' => 0,
+                    'F' => 0
+                ],
+                'group4' => [
+                    'M' => 0,
+                    'F' => 0
+                ],
+                'group5' => [
+                    'M' => 0,
+                    'F' => 0
+                ]
+            ],
+            'nonbc' => [
+                'group1' => [
+                    'M' => 0,
+                    'F' => 0
+                ],
+                'group2' => [
+                    'M' => 0,
+                    'F' => 0
+                ],
+                'group3' => [
+                    'M' => 0,
+                    'F' => 0
+                ],
+                'group4' => [
+                    'M' => 0,
+                    'F' => 0
+                ],
+                'group5' => [
+                    'M' => 0,
+                    'F' => 0
+                ]
+            ],
+            'total' => 0
+        ];
+
+
+        foreach ($members as $member) {
+            $group = $this->getBCGroup($member);
+            $bcmember = ($member->getBcMembershipNumber() ? 'bc' : 'nonbc');
+            $gender = $member->getGender();
+
+            $data[$bcmember][$group][$gender]++;
+            $data['total']++;
+        }
+
+        return $data;
+    }
+
+
+    public function getBCAffiliationVolunteerData()
+    {
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+
+        $data = [
+            'volunteers' => 0,
+            'coaches' => 0
+        ];
+
+        foreach ($members as $member) {
+            $mr = $member->getCurrentMemberRegistration();
+            if ($mr) {
+                $type = $member->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
+
+                if ($type == 'Coach') {
+                    $data['coaches']++;
+                    $data['volunteers']++;
+                }
+
+                if ($type == 'Volunteer') {
+                    $data['coaches']++;
+                }
+            }
+        }
+
+        return $data;
+    }
+
+
+    public function getBCAffiliationDisabledData()
+    {
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+
+        $data = [
+            'M' => 0,
+            'F' => 0
+        ];
+
+        foreach ($members as $member) {
+            if ($member->getDisability()) {
+                $data[$member->getGender()]++;
+            }
+        }
+
+        return $data;
+    }
+
+
+    private function getBCGroup($person)
+    {
+        $diff = $person->getDob()->diff(new \DateTime());
+        $age = $diff->y;
+
+        if ($age < 14) {
+            return 'group1';
+        } else if ($age < 19) {
+            return 'group2';
+        } else if ($age < 26) {
+            return 'group3';
+        } else if ($age < 46) {
+            return 'group4';
+        } else {
+            return 'group5';
+        }
+    }
+
+
+
     private function getBritishCanoeingMemberType($person)
     {
         $diff = $person->getDob()->diff(new \DateTime());
