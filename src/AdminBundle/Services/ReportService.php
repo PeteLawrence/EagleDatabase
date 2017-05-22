@@ -18,9 +18,9 @@ class ReportService
     }
 
 
-    public function buildRegularEmailsList()
+    public function buildRegularEmailsList($type)
     {
-        $people = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+        $people = $this->em->getRepository('AppBundle:Person')->findMembersByType($type);
         $emails = [];
 
         foreach ($people as $person) {
@@ -37,9 +37,9 @@ class ReportService
         return $emailsString;
     }
 
-    public function buildBtEmailsList()
+    public function buildBtEmailsList($type)
     {
-        $people = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+        $people = $this->em->getRepository('AppBundle:Person')->findMembersByType($type);
         $emails = [];
 
         foreach ($people as $person) {
