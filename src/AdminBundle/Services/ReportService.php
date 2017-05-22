@@ -974,7 +974,7 @@ class ReportService
                 }
 
                 if ($type == 'Volunteer') {
-                    $data['coaches']++;
+                    $data['volunteers']++;
                 }
             }
         }
