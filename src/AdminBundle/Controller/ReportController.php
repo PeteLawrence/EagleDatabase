@@ -33,34 +33,65 @@ class ReportController extends Controller
      * Lists all Activity entities.
      *
      * @Route("/emaillist", name="admin_report_emaillist")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function emaillistAction()
+    public function emaillistAction(Request $request)
     {
         $reportService = $this->get('eagle_report');
 
+        $form = $this->buildMembershipTypeForm();
+        $form->handleRequest($request);
+
+        $regularEmailsString = '';
+        $btEmailsString = '';
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            dump($data);
+            $regularEmailsString = $reportService->buildRegularEmailsList($data['membershipType']);
+            $btEmailsString = $reportService->buildBtEmailsList($data['membershipType']);
+        }
+
         return $this->render('admin/report/emaillist.html.twig', [
-            'regularEmailsString' => $reportService->buildRegularEmailsList(),
-            'btEmailsString' => $reportService->buildBtEmailsList()
+            'form' => $form->createView(),
+            'regularEmailsString' => $regularEmailsString,
+            'btEmailsString' => $btEmailsString
         ]);
     }
 
 
-        /**
-         * Lists Active Members
-         *
-         * @Route("/activemembers", name="admin_report_activemembers")
-         * @Method("GET")
-         */
-        public function activeMembersAction()
-        {
-            $reportService = $this->get('eagle_report');
+
+    private function buildMembershipTypeForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('POST')
+            ->add('membershipType', EntityType::class, [
+                'class' => 'AppBundle:MembershipType',
+                'choice_label' => function (\AppBundle\Entity\MembershipType $at) { return $at->getType(); },
+                'multiple' => true,
+                'placeholder' => 'All',
+                'required' => false
+            ])
+            ->getForm()
+        ;
+    }
 
 
-            return $this->render('admin/report/activemembers.html.twig', array(
-                'activeMembers' => $reportService->getActiveMembers()
-            ));
-        }
+    /**
+     * Lists Active Members
+     *
+     * @Route("/activemembers", name="admin_report_activemembers")
+     * @Method("GET")
+     */
+    public function activeMembersAction()
+    {
+        $reportService = $this->get('eagle_report');
+
+
+        return $this->render('admin/report/activemembers.html.twig', array(
+            'activeMembers' => $reportService->getActiveMembers()
+        ));
+    }
 
     /**
      * Lists all Activity entities.
