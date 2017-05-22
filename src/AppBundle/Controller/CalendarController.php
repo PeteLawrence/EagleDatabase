@@ -38,7 +38,7 @@ class CalendarController extends Controller
                 $event->setLocation(
                     str_replace(',', "\n", $activity->getStartLocation()->getAddress() . ', ' . $activity->getStartLocation()->getPostcode()),
                     $activity->getStartLocation()->getName(),
-                    sprintf('%s,%s', $activity->getStartLocation()->getLongitude(), $activity->getStartLocation()->getLatitude())
+                    sprintf('%s,%s', $activity->getStartLocation()->getLatitude(), $activity->getStartLocation()->getLongitude())
                 );
             }
 
