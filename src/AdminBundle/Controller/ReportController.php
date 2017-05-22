@@ -47,7 +47,6 @@ class ReportController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            dump($data);
             $regularEmailsString = $reportService->buildRegularEmailsList($data['membershipType']);
             $btEmailsString = $reportService->buildBtEmailsList($data['membershipType']);
         }
