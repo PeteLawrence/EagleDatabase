@@ -15,8 +15,15 @@
     <h1>Email List</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form.membershipType) }}
-        <input type="submit" class="btn btn-primary" value="Go" />
+    <div class="row mb-3">
+        <div class="col-lg-2">
+            {{ form_widget(form.membershipType) }}
+        </div>
+
+        <div class="col-lg-10">
+            <input type="submit" class="btn btn-primary" value="Go" />
+        </div>
+    </div>
     {{ form_end(form) }}
 
     <h2>Regular Emails</h2>
