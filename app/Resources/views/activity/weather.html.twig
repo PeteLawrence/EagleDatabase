@@ -40,7 +40,7 @@
                     {% if dataPoint.precipitationType %}
                         <i class="wi wi-{{ dataPoint.precipitationType}} h4"></i>
                         {% if dataPoint.precipitationIntensity > 0 %}
-                            <sub>{{ dataPoint.precipitationIntensity|number_format(1) }} mm/h</sub>
+                            {{ dataPoint.precipitationIntensity|number_format(1) }} mm/h
                         {% endif %}
                     {% else %}
                         N/A
@@ -48,7 +48,7 @@
                 </td>
                 <td>
                     <i class="wi wi-barometer h4"></i>
-                    <span class="h4">{{ dataPoint.pressure|number_format(1) }}</span><sub>mb</sub>
+                    <span class="h4">{{ dataPoint.pressure|number_format(1) }}</span><sup>mb</sup>
                 </td>
                 <td>
                     <i class="wi wi-wind from-{{dataPoint.windBearing}}-deg h4" title="{{dataPoint.windBearing}}°"></i>
@@ -57,7 +57,7 @@
                 </td>
                 <td>
                     <i class="wi wi-humidity h4"></i>
-                    <span class="h4">{{ dataPoint.humidity*100|number_format(1) }}</span><sub>%</sub>
+                    <span class="h4">{{ dataPoint.humidity*100|number_format(1) }}</span><sup>%</sup>
                 </td>
             </tr>
         {% endfor %}
