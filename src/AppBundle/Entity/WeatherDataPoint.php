@@ -35,6 +35,11 @@ class WeatherDataPoint
     private $precipitationProbability;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $precipitationType;
+
+    /**
      * @ORM\Column(type="decimal", nullable=true)
      */
     private $temperature;
@@ -58,6 +63,16 @@ class WeatherDataPoint
      * @ORM\Column(type="decimal", nullable=true)
      */
     private $cloudCover;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true)
+     */
+    private $humidity;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true)
+     */
+    private $pressure;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -371,5 +386,77 @@ class WeatherDataPoint
     public function getTimeZone()
     {
         return $this->timeZone;
+    }
+
+    /**
+     * Set precipitationType
+     *
+     * @param string $precipitationType
+     *
+     * @return WeatherDataPoint
+     */
+    public function setPrecipitationType($precipitationType)
+    {
+        $this->precipitationType = $precipitationType;
+
+        return $this;
+    }
+
+    /**
+     * Get precipitationType
+     *
+     * @return string
+     */
+    public function getPrecipitationType()
+    {
+        return $this->precipitationType;
+    }
+
+    /**
+     * Set humidity
+     *
+     * @param string $humidity
+     *
+     * @return WeatherDataPoint
+     */
+    public function setHumidity($humidity)
+    {
+        $this->humidity = $humidity;
+
+        return $this;
+    }
+
+    /**
+     * Get humidity
+     *
+     * @return string
+     */
+    public function getHumidity()
+    {
+        return $this->humidity;
+    }
+
+    /**
+     * Set pressure
+     *
+     * @param integer $pressure
+     *
+     * @return WeatherDataPoint
+     */
+    public function setPressure($pressure)
+    {
+        $this->pressure = $pressure;
+
+        return $this;
+    }
+
+    /**
+     * Get pressure
+     *
+     * @return integer
+     */
+    public function getPressure()
+    {
+        return $this->pressure;
     }
 }
