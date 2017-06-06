@@ -48,16 +48,19 @@ class LookupWeatherCommand extends ContainerAwareCommand
                 $weather->setIcon($forecast->icon);
                 $weather->setPrecipitationIntensity($forecast->precipIntensity);
                 $weather->setPrecipitationProbability($forecast->precipProbability);
+                $weather->setPrecipitationType($forecast->precipType);
                 $weather->setTemperature($forecast->temperature);
                 $weather->setWindSpeed($forecast->windSpeed);
                 $weather->setWindBearing($forecast->windBearing);
                 $weather->setVisibility($forecast->visibility);
                 $weather->setCloudCover($forecast->cloudCover);
+                $weather->setHumidity($forecast->humidity);
+                $weather->setPressure($forecast->pressure);
 
                 //Attach the forecast to the activity
                 $weather->setActivity($activity);
-
-                $em->persist($weather);
+                dump($weather);
+                //$em->persist($weather);
             }
         }
 
