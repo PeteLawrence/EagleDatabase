@@ -30,6 +30,7 @@ security:
             remember_me:
                 secret: '%secret%'
                 lifetime: 31536000
+            switch_user: { role: ROLE_ADMIN }
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
