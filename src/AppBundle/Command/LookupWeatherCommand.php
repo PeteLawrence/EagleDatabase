@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class LookupWeatherCommand extends ContainerAwareCommand
 {
@@ -17,17 +18,24 @@ class LookupWeatherCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $io = new SymfonyStyle($input, $output);
         $em = $this->getContainer()->get('doctrine')->getManager();
         $logger = $this->getContainer()->get('logger');
+
+        //Display title
+        $io->title('Weather Lookup');
 
         //Find Activities taking place
         $activities  = $em->getRepository('AppBundle:Activity')->findAll();
 
         //
         $now = new \DateTime(null, new \DateTimeZone('Europe/London'));
+
+        $io->text('Run at: ' . $now->format('Y-m-d H:i:s'));
+
         foreach ($activities as $activity) {
             if ($activity->getActivityStart() <= $now && $activity->getActivityEnd() >= $now) {
-                $logger->info('Looking up weather for activity ' . $activity->getId());
+                $io->text('Looking up weather for activity ' . $activity->getId());
                 $forecast = $this->getForecast(
                     $activity->getStartLocation()->getLongitude(),
                     $activity->getStartLocation()->getLatitude()
@@ -48,10 +56,12 @@ class LookupWeatherCommand extends ContainerAwareCommand
 
                 //Attach the forecast to the activity
                 $weather->setActivity($activity);
-
-                $em->persist($weather);
+                //dump($weather);
+                //$em->persist($weather);
             }
         }
+
+        $io->text('Finished');
 
         $em->flush();
     }
