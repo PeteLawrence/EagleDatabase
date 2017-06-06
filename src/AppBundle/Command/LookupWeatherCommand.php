@@ -56,8 +56,8 @@ class LookupWeatherCommand extends ContainerAwareCommand
 
                 //Attach the forecast to the activity
                 $weather->setActivity($activity);
-                //dump($weather);
-                //$em->persist($weather);
+
+                $em->persist($weather);
             }
         }
 
