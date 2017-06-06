@@ -81,7 +81,6 @@
             <h4 class="card-header">Actions</h4>
             <div class="card-block">
 
-
                 {% if activity.spaces != 0 %}
                     <strong>Places</strong> {{ activity.people}} / {{ activity.getSpaces }}
 
@@ -142,6 +141,12 @@
                         </a>
                         <p>Login to view further details, sign up and contact the organiser</p>
                     </div>
+                {% endif %}
+
+                {% if dateDiff(activity.activityStart, "now").days < 14 %}
+                    <a href="https://darksky.net/details/{{ activity.startLocation.latitude }},{{ activity.startLocation.longitude }}/{{ activity.activityStart|date('Y-m-d') }}/uk224/en" class="btn btn-sm btn-info btn-block" target="_blank">
+                        <i class="wi wi-day-sunny float-left"></i> Weather Forecast
+                    </a>
                 {% endif %}
 
             </div>
