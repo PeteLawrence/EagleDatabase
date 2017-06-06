@@ -440,6 +440,20 @@ class ActivityController extends Controller
     }
 
 
+    /**
+     * @Route("/{id}/weather", name="activity_weather")
+     */
+    public function weatherAction(Request $request, Activity $activity)
+    {
+        return $this->render(
+            'activity/weather.html.twig',
+            [
+                'activity' => $activity
+            ]
+        );
+    }
+
+
     private function buildAddParticipantForm($activity)
     {
         return $this->createFormBuilder()

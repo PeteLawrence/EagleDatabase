@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weather{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
+        <a class="breadcrumb-item" href="{{ path('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+        <span class="breadcrumb-item active">Weather</span>
+    </nav>
+
+    <h2>Weather</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Summary</th>
+                <th>Temperature</th>
+                <th>Precipitation</th>
+                <th>Pressure</th>
+                <th>Wind</th>
+                <th>Humidity</th>
+            </tr>
+        </thead>
+        {% for dataPoint in activity.weatherDataPoints %}
+            <tr>
+                <td class="h4">{{ dataPoint.time|date('H:i', dataPoint.timeZone) }}</td>
+                <td>
+                    <i class="wi wi-forecast-io-{{dataPoint.icon}} h4"></i>
+                    {{ dataPoint.summary }}
+                </td>
+                <td>
+                    <i class="wi wi-thermometer h4"></i>
+                    <span class="h4">{{ dataPoint.temperature|number_format(1) }}</span>
+                    <sup>°C</sup>
+                </td>
+                <td>
+                    {% if dataPoint.precipitationType %}
+                        <i class="wi wi-{{ dataPoint.precipitationType}} h4"></i>
+                        {% if dataPoint.precipitationIntensity > 0 %}
+                            <sub>{{ dataPoint.precipitationIntensity|number_format(1) }} mm/h</sub>
+                        {% endif %}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>
+                    <i class="wi wi-barometer h4"></i>
+                    <span class="h4">{{ dataPoint.pressure|number_format(1) }}</span><sub>mb</sub>
+                </td>
+                <td>
+                    <i class="wi wi-wind from-{{dataPoint.windBearing}}-deg h4" title="{{dataPoint.windBearing}}°"></i>
+                    <span class="h4">{{ dataPoint.windSpeed|number_format(1) }}</span>
+                    <sup>km/h</sup>
+                </td>
+                <td>
+                    <i class="wi wi-humidity h4"></i>
+                    <span class="h4">{{ dataPoint.humidity*100|number_format(1) }}</span><sub>%</sub>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a class="attribution-two-line" href="https://darksky.net/poweredby/">
+        <img src="https://darksky.net/dev/img/attribution/poweredby.png" style="height: 3rem;">
+    </a>
+
+{% endblock %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons-wind.min.css" />
+{% endblock %}
