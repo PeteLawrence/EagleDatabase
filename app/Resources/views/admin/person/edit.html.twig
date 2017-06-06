@@ -35,6 +35,9 @@
         <li class="nav-item">
             <a class="nav-link" href="#qualifications" data-toggle="tab" role="tab">Qualifications</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#actions" data-toggle="tab" role="tab">Actions</a>
+        </li>
     </ul>
 
     <div class="tab-content m-t-1">
@@ -260,6 +263,12 @@
             </table>
 
             <a href="{{ path('admin_memberqualification_new', { personId: person.id }) }}" class="btn btn-primary">Add Qualification</a>
+        </div>
+
+        <div class="tab-pane" id="actions" role="tabpanel">
+            <h2>Actions</h2>
+
+            <a href="{{ path('homepage', { _switch_user: person.id }) }}" class="btn btn-warning btn-sm"><i class="fa fa-snapchat-ghost"></i> Impersonate</a>
         </div>
     </div>
 

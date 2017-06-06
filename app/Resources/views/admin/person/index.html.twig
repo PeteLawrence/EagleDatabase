@@ -29,7 +29,6 @@
                 <td>{{ person.email }}</td>
                 <td>{% if person.admin %}Yes{% else %}No{% endif %}</td>
                 <td>
-                    <a href="{{ path('admin_person_show', { 'id': person.id }) }}" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
                     <a href="{{ path('admin_person_edit', { 'id': person.id }) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
                 </td>
             </tr>
