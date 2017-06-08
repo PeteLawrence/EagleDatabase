@@ -46,6 +46,16 @@ class DefaultController extends Controller
 
 
     /**
+     * @Route("/kitlist", name="kitlist")
+     */
+    public function kitListAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('default/kitList.html.twig');
+    }
+
+
+    /**
      * @Route("/newsletter", name="newsletter")
      */
     public function newslettersAction(Request $request)
