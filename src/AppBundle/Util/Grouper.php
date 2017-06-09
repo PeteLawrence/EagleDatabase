@@ -7,7 +7,7 @@ class Grouper
     private $groupingLimits;
 
 
-    public function __construct($groupingLimits)
+    public function __construct($groupingLimits = 0)
     {
         $this->groupingLimits = $groupingLimits;
 

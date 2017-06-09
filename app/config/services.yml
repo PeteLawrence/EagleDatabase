@@ -7,7 +7,7 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-        public: false
+        public: true
 
     # makes classes in src/AppBundle available to be used as services
     AppBundle\:
@@ -15,7 +15,7 @@ services:
         # you can exclude directories or files
         # but if a service is unused, it's removed anyway
         exclude: '../../src/AppBundle/{Entity,Repository}'
-        
+
     app.form.person:
         class: AppBundle\Form\Type\PersonType
         arguments: ["@doctrine.orm.entity_manager"]
