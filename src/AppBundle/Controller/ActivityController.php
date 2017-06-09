@@ -9,6 +9,7 @@ use AppBundle\Entity\Activity;
 use AppBundle\Entity\Participant;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use AdminBundle\Services\ReportService;
 
 /**
  * @Route("/activity")
@@ -412,10 +413,8 @@ class ActivityController extends Controller
     /**
      * @Route("/{id}/stats", name="activity_stats")
      */
-    public function statsAction(Request $request, Activity $activity)
+    public function statsAction(Request $request, Activity $activity, ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
         //Only allow the organiser access to this page
         if (
             $activity->getOrganiser() != $this->getUser() &&
