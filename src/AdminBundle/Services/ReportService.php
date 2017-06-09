@@ -6,13 +6,12 @@ use CMEN\GoogleChartsBundle\GoogleCharts\Charts\CalendarChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\Map;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
-use Doctrine\ORM\EntityManager;
 
 class ReportService
 {
     private $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(\Doctrine\ORM\EntityManagerInterface $em)
     {
         $this->em = $em;
     }
