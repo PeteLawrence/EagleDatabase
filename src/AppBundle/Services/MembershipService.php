@@ -11,7 +11,7 @@ class MembershipService
     private $em;
     private $formFactory;
 
-    public function __construct(\Doctrine\ORM\EntityManager $em, \Symfony\Component\Form\FormFactory $formFactory)
+    public function __construct(\Doctrine\ORM\EntityManagerInterface $em, \Symfony\Component\Form\FormFactoryInterface $formFactory)
     {
         $this->em = $em;
         $this->formFactory = $formFactory;
