@@ -3,6 +3,4 @@ services:
 #        class: AdminBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
 
-    eagle_report:
-        class: AdminBundle\Services\ReportService
-        arguments: [ "@doctrine.orm.entity_manager" ]
+    # default configuration for services in *this* file
