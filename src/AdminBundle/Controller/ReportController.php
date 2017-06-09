@@ -10,6 +10,7 @@ use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use AdminBundle\Services\ReportService;
 
 /**
  * Activity controller.
@@ -35,10 +36,8 @@ class ReportController extends Controller
      * @Route("/emaillist", name="admin_report_emaillist")
      * @Method({"GET", "POST"})
      */
-    public function emaillistAction(Request $request)
+    public function emaillistAction(Request $request, ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
         $form = $this->buildMembershipTypeForm();
         $form->handleRequest($request);
 
@@ -82,11 +81,8 @@ class ReportController extends Controller
      * @Route("/activemembers", name="admin_report_activemembers")
      * @Method("GET")
      */
-    public function activeMembersAction()
+    public function activeMembersAction(ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
-
         return $this->render('admin/report/activemembers.html.twig', array(
             'activeMembers' => $reportService->getActiveMembers()
         ));
@@ -98,11 +94,8 @@ class ReportController extends Controller
      * @Route("/attendance", name="admin_report_attendance")
      * @Method("GET")
      */
-    public function attendanceAction()
+    public function attendanceAction(ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
-
         return $this->render('admin/report/attendance.html.twig', array(
             'calendarChart' => $reportService->buildCalendarChart(),
             'activityTypeChart' => $reportService->buildActivityTypeChart()
@@ -117,10 +110,8 @@ class ReportController extends Controller
      * @Route("/attendancedetail", name="admin_report_attendancedetail")
      * @Method({"GET", "POST"})
      */
-    public function attendanceDetailAction(Request $request)
+    public function attendanceDetailAction(Request $request, ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
         $from = new \DateTime('2017-01-01');
         $to = new \DateTime('2017-12-31');
 
@@ -152,10 +143,8 @@ class ReportController extends Controller
      * @Route("/attendanceleague", name="admin_report_attendanceleague")
      * @Method({"GET", "POST"})
      */
-    public function attendanceLeagueAction(Request $request)
+    public function attendanceLeagueAction(Request $request, ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
         $form = $this->createForm(\AppBundle\Form\Type\DateRangeSelectorType::class);
         $form->handleRequest($request);
 
@@ -182,10 +171,8 @@ class ReportController extends Controller
      * @Route("/bcaffiliation", name="admin_report_bcaffiliation")
      * @Method({"GET", "POST"})
      */
-    public function bcAffiliationAction(Request $request)
+    public function bcAffiliationAction(Request $request, ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
         return $this->render('admin/report/bcaffiliation.html.twig', array(
             'data' => $reportService->getBCAffiliationData(),
             'volunteerData' => $reportService->getBCAffiliationVolunteerData(),
@@ -200,10 +187,8 @@ class ReportController extends Controller
      * @Route("/databaseengagement", name="admin_report_databaseengagement")
      * @Method({"GET", "POST"})
      */
-    public function databaseEngagementAction(Request $request)
+    public function databaseEngagementAction(Request $request, ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
         return $this->render('admin/report/databaseengagement.html.twig', array(
             'accountStatusPieChart' => $reportService->buildAccountStatusPieChart(),
             'usedOnlineSignupPieChart' => $reportService->buildUsedOnlineSignUpPieChart(),
@@ -219,10 +204,8 @@ class ReportController extends Controller
      * @Route("/membermap", name="admin_report_membermap")
      * @Method({"GET", "POST"})
      */
-    public function memberMapAction(Request $request)
+    public function memberMapAction(Request $request, ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
         return $this->render('admin/report/membermap.html.twig', array(
             'memberMap' => $reportService->buildMemberMap(),
             'google_maps_key' => $this->getParameter('site.google_maps_key')
@@ -237,10 +220,8 @@ class ReportController extends Controller
      * @Route("/membership", name="admin_report_membership")
      * @Method({"GET", "POST"})
      */
-    public function membershipAction(Request $request)
+    public function membershipAction(Request $request, ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
         $form = $this->createForm(\AppBundle\Form\Type\MembershipReportFilterType::class);
         $form->handleRequest($request);
 
@@ -284,37 +265,11 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/overview", name="admin_report_overview")
-     * @Method("GET")
-     */
-    public function overviewAction()
-    {
-        return $this->render('admin/report/overview.html.twig', array(
-            'members' => 120,
-            'coaches' => 21,
-            'genderChart' => $this->buildGenderChart(),
-            'ageChart' => $this->buildAgeChart(),
-            'lengthChart' => $this->buildLengthChart(),
-            'returningChart' => $this->buildReturningChart(),
-            'visitsChart' => $this->buildVisitsChart(),
-            'visitsByGenderChart' => $this->buildVisitsByGenderChart(),
-            'qualificationChart' => $this->buildQualificationChart(),
-            'whiteWaterGenderChart' => $this->buildWhiteWaterGenderChart(),
-            'whiteWaterAgeChart' => $this->buildWhiteWaterAgeChart()
-        ));
-    }
-
-
-    /**
-     * Lists all Activity entities.
-     *
      * @Route("/enrolment", name="admin_report_enrolment")
      * @Method("GET")
      */
-    public function enrolmentAction()
+    public function enrolmentAction(ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
         return $this->render('admin/report/enrolment.html.twig', array(
             'enrolmentByTypeChart' => $reportService->buildEnrolmentByTypeChart(),
             'enrolmentByGenderChart' => $reportService->buildEnrolmentByGenderChart()
@@ -329,10 +284,8 @@ class ReportController extends Controller
      * @Route("/grants", name="admin_report_grants")
      * @Method({"GET", "POST"})
      */
-    public function grantsAction(Request $request)
+    public function grantsAction(Request $request, ReportService $reportService)
     {
-        $reportService = $this->get('eagle_report');
-
         $form = $this->buildGrantsForm();
         $form->handleRequest($request);
 

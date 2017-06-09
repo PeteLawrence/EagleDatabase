@@ -23,7 +23,7 @@ class EnrolController extends Controller
      * @Route("/", name="admin_enrol")
      * @Method({"GET", "POST"})
      */
-    public function enrolAction(Request $request)
+    public function enrolAction(Request $request, \AppBundle\Services\MembershipService $membershipService)
     {
         if (!$request->query->get('person')) {
             throw new \Exception('No person specified');
@@ -31,7 +31,7 @@ class EnrolController extends Controller
             //Save the person id to the session
             $session = $request->getSession();
 
-            $membershipService = $this->get('membership_service');
+            //$membershipService = $this->get('membership_service');
             $membershipService->clearSessionEntries($session);
 
             $form = $membershipService->buildMembershipTypeForm();
