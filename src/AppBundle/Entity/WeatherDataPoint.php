@@ -25,12 +25,12 @@ class WeatherDataPoint
     private $icon;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", length=8, nullable=true)
      */
     private $precipitationIntensity;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", length=8, nullable=true)
      */
     private $precipitationProbability;
 
@@ -40,12 +40,12 @@ class WeatherDataPoint
     private $precipitationType;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", length=8, nullable=true)
      */
     private $temperature;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", length=8, nullable=true)
      */
     private $windSpeed;
 
@@ -55,22 +55,22 @@ class WeatherDataPoint
     private $windBearing;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", length=8, nullable=true)
      */
     private $visibility;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", length=8, nullable=true)
      */
     private $cloudCover;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", length=8, nullable=true)
      */
     private $humidity;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", length=8, nullable=true)
      */
     private $pressure;
 
