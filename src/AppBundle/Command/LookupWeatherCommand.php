@@ -45,7 +45,7 @@ class LookupWeatherCommand extends ContainerAwareCommand
                 );
 
                 $weather = new \AppBundle\Entity\WeatherDataPoint;
-                $weather->setTime(new \DateTime('@' . $forecast->time));
+                $weather->setTime($now);
                 $weather->setTimeZone($forecast->timezone);
                 $weather->setSummary($forecast->summary);
                 $weather->setIcon($forecast->icon);
