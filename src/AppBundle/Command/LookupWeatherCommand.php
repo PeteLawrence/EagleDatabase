@@ -37,7 +37,6 @@ class LookupWeatherCommand extends ContainerAwareCommand
         $io->text('Run at: ' . $now->format('Y-m-d H:i:s'));
 
         foreach ($activities as $activity) {
-            dump($activity->getActivityStart());
             if ($activity->getActivityStart() <= $now && $activity->getActivityEnd() >= $now) {
                 $io->text('Looking up weather for activity ' . $activity->getId());
                 $forecast = $this->getForecast(
