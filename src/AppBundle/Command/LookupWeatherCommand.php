@@ -70,7 +70,7 @@ class LookupWeatherCommand extends ContainerAwareCommand
 
         $io->text('Finished');
 
-        //$em->flush();
+        $em->flush();
     }
 
     private function getForecast($longitude, $latitude)
