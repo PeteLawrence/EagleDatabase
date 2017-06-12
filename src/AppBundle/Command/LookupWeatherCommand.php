@@ -22,6 +22,9 @@ class LookupWeatherCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
         $logger = $this->getContainer()->get('logger');
 
+        //Set the timezone
+        date_default_timezone_set('Europe/London');
+
         //Display title
         $io->title('Weather Lookup');
 
@@ -29,11 +32,12 @@ class LookupWeatherCommand extends ContainerAwareCommand
         $activities  = $em->getRepository('AppBundle:Activity')->findAll();
 
         //
-        $now = new \DateTime(null, new \DateTimeZone('Europe/London'));
+        $now = new \DateTime();
 
         $io->text('Run at: ' . $now->format('Y-m-d H:i:s'));
 
         foreach ($activities as $activity) {
+            dump($activity->getActivityStart());
             if ($activity->getActivityStart() <= $now && $activity->getActivityEnd() >= $now) {
                 $io->text('Looking up weather for activity ' . $activity->getId());
                 $forecast = $this->getForecast(
@@ -66,7 +70,7 @@ class LookupWeatherCommand extends ContainerAwareCommand
 
         $io->text('Finished');
 
-        $em->flush();
+        //$em->flush();
     }
 
     private function getForecast($longitude, $latitude)
