@@ -39,7 +39,7 @@
                             <i class="fa fa-trash"></i>
                         </a>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('admin_person_edit', { id: participant.id })}}" class="btn btn-primary btn-sm">
+                            <a href="{{ path('admin_person_edit', { id: participant.person.id })}}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-user"></i>
                             </a>
                         {% endif %}
