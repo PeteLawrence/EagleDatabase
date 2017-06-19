@@ -143,8 +143,6 @@
                     </div>
                 {% endif %}
 
-                {{ dump(dateDiff(activity.activityStart, "now")) }}
-
                 {% if dateDiff("now", activity.activityStart).invert and activity.weatherDataPoints|length > 0%}
                     <a href="{{path('activity_weather', { id: activity.id }) }}" class="btn btn-sm btn-info btn-block">
                         <i class="wi wi-day-sunny float-left"></i> Weather Observations
