@@ -42,6 +42,7 @@ class PersonReportService
 
         $timeline = new Timeline();
         $timeline->getData()->setArrayToDataTable($rows, true);
+        $timeline->getOptions()->getTimeline()->setColorByRowLabel(true);
 
         return $timeline;
     }
