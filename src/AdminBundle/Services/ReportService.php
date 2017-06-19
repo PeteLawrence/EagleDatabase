@@ -6,6 +6,7 @@ use CMEN\GoogleChartsBundle\GoogleCharts\Charts\CalendarChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\Map;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\Timeline;
 
 class ReportService
 {
@@ -14,6 +15,39 @@ class ReportService
     public function __construct(\Doctrine\ORM\EntityManagerInterface $em)
     {
         $this->em = $em;
+    }
+
+
+    public function buildParticipationGridTimeline()
+    {
+        $currentMembers = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
+
+        foreach ($currentMembers as $person) {
+            foreach ($person->getParticipant() as $p) {
+                $currentMembershipPeriod = $person->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipPeriod();
+                if (
+                    $p->getManagedActivity()->getActivityStart() <= $currentMembershipPeriod->getFromDate() &&
+                    $p->getManagedActivity()->getActivityStart() < $currentMembershipPeriod->getToDate()
+                ) {
+                    continue;
+                }
+
+                $rows[] = [
+                    $person->getName(),
+                    $p->getManagedActivity()->getName(),
+                    $p->getManagedActivity()->getActivityStart(),
+                    $p->getManagedActivity()->getActivityEnd()
+                ];
+            }
+        }
+
+
+        $timeline = new Timeline();
+        $timeline->getData()->setArrayToDataTable($rows, true);
+        $timeline->getOptions()->getTimeline()->setColorByRowLabel(true);
+        dump($timeline);
+
+        return $timeline;
     }
 
 
