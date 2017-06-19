@@ -143,7 +143,13 @@
                     </div>
                 {% endif %}
 
-                {% if dateDiff(activity.activityStart, "now").days < 14 %}
+                {{ dump(dateDiff(activity.activityStart, "now")) }}
+
+                {% if dateDiff("now", activity.activityStart).invert %}
+                    <a href="{{path('activity_weather', { id: activity.id }) }}" class="btn btn-sm btn-info btn-block">
+                        <i class="wi wi-day-sunny float-left"></i> Weather Observations
+                    </a>
+                {% elseif dateDiff("now", activity.activityStart).days < 14 %}
                     <a href="https://darksky.net/details/{{ activity.startLocation.latitude }},{{ activity.startLocation.longitude }}/{{ activity.activityStart|date('Y-m-d') }}/uk224/en" class="btn btn-sm btn-info btn-block" target="_blank" ga-on="click" ga-event-category="Weather Forecast Lookup" ga-event-action="click" ga-event-label="{{ activity.id }}">
                         <i class="wi wi-day-sunny float-left"></i> Weather Forecast
                     </a>
