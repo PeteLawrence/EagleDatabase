@@ -1,0 +1,23 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_index')}}">People</a>
+        <span class="breadcrumb-item active">{{ person.name }}</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Person: Stats</h1>
+
+
+    <div id="timeline"></div>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        {{ gc_draw(timeline, 'timeline') }}
+    </script>
+
+{% endblock %}
