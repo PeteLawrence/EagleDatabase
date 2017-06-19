@@ -413,6 +413,7 @@ class ReportService
 
         $chart = new ColumnChart();
         $chart->getOptions()->setTitle('Online Signups Per Person');
+        $chart->getOptions()->setHeight(350);
         $chart->getData()->setArrayToDataTable($data);
 
         return $chart;
