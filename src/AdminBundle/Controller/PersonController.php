@@ -10,6 +10,7 @@ use AppBundle\Entity\Person;
 use AppBundle\Form\Type\PersonType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use AppBundle\Services\PersonReportService;
 
 /**
  * Person controller.
@@ -136,6 +137,25 @@ class PersonController extends Controller
         }
 
         return $this->redirectToRoute('admin_person_index');
+    }
+
+
+    /**
+     * Displays a form to edit an existing Person entity.
+     *
+     * @Route("/{id}/stats", name="admin_person_stats")
+     * @Method({"GET", "POST"})
+     */
+    public function statsAction(Request $request, Person $person, PersonReportService $personReportService)
+    {
+        $timeline = $personReportService->buildParticipationTimeline($person);
+
+
+
+        return $this->render('admin/person/stats.html.twig', array(
+            'person' => $person,
+            'timeline' => $timeline
+        ));
     }
 
     /**
