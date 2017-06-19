@@ -1,0 +1,26 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Reports: Participation Grid{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Participation Grid</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+<h1>Participation Grid</h1>
+
+<div id="timeline"></div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    {{ gc_draw(timeline, 'timeline') }}
+</script>
+{% endblock %}

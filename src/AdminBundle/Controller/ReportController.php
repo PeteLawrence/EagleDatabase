@@ -327,6 +327,25 @@ class ReportController extends Controller
 
 
 
+    /**
+     * Displays figures required for the grant bodies
+     *
+     * @Route("/participationgrid", name="admin_report_participationgrid")
+     * @Method({"GET", "POST"})
+     */
+    public function participationGridAction(Request $request, ReportService $reportService)
+    {
+        $timeline = $reportService->buildParticipationGridTimeline();
+
+
+        return $this->render('admin/report/participationgrid.html.twig', array(
+            'timeline' => $timeline
+        ));
+
+    }
+
+
+
 
 
     /**
