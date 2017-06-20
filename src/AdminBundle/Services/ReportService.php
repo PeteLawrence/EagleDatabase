@@ -44,7 +44,7 @@ class ReportService
 
         $timeline = new Timeline();
         $timeline->getData()->setArrayToDataTable($rows, true);
-        $timeline->getOptions()->getTimeline()->setColorByRowLabel(true);
+        //$timeline->getOptions()->getTimeline()->setColorByRowLabel(true);
         $timeline->getOptions()->setHeight(800);
 
         return $timeline;
