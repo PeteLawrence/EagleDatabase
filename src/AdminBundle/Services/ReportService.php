@@ -35,7 +35,7 @@ class ReportService
                 }
 
                 $data[] = [
-                    $person->getName(),
+                    substr($person->getName(), 0, 12),
                     $p->getManagedActivity()->getActivityType()->getType(),
                     $p->getManagedActivity()->getName(),
                     $p->getManagedActivity()->getActivityStart(),
