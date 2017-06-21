@@ -48,6 +48,7 @@ class ReportService
         $timeline->getData()->setArrayToDataTable($data);
         //$timeline->getOptions()->getTimeline()->setColorByRowLabel(true);
         $timeline->getOptions()->getTimeline()->setShowBarLabels(false);
+        $timeline->getOptions()->setAvoidOverlappingGridLines(false);
         $timeline->getOptions()->setHeight(800);
 
         return $timeline;
