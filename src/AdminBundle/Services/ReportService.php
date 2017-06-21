@@ -22,6 +22,8 @@ class ReportService
     {
         $currentMembers = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
 
+        $data = [['Name', 'Type', ['role' => 'tooltip'], 'Start', 'End']];
+
         foreach ($currentMembers as $person) {
             foreach ($person->getParticipant() as $p) {
                 $currentMembershipPeriod = $person->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipPeriod();
@@ -32,8 +34,9 @@ class ReportService
                     continue;
                 }
 
-                $rows[] = [
+                $data[] = [
                     $person->getName(),
+                    $p->getManagedActivity()->getActivityType()->getType(),
                     $p->getManagedActivity()->getName(),
                     $p->getManagedActivity()->getActivityStart(),
                     $p->getManagedActivity()->getActivityEnd()
@@ -41,10 +44,10 @@ class ReportService
             }
         }
 
-
         $timeline = new Timeline();
-        $timeline->getData()->setArrayToDataTable($rows, true);
+        $timeline->getData()->setArrayToDataTable($data);
         //$timeline->getOptions()->getTimeline()->setColorByRowLabel(true);
+        $timeline->getOptions()->getTimeline()->setShowBarLabels(false);
         $timeline->getOptions()->setHeight(800);
 
         return $timeline;
