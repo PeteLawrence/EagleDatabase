@@ -204,6 +204,11 @@ class MemberQualification
 
     public function isExpired()
     {
+        if (!$this->validTo) {
+            //Qualification does not expire
+            return false;
+        }
+
         $now = new \DateTime();
 
         return ($this->validTo < $now);
@@ -212,6 +217,11 @@ class MemberQualification
 
     public function isExpiringSoon()
     {
+        if (!$this->validTo) {
+            //Qualification does not expire
+            return false;
+        }
+        
         $now = new \DateTime();
 
         $limit = $this->validTo->sub(new \DateInterval('P3M'));
