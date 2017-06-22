@@ -1,0 +1,25 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Qualifications{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <a class="breadcrumb-item" href="{{ path('account_qualifications') }}">Qualifications</a>
+        <span class="breadcrumb-item active">{{ memberQualification.qualification.name }}</span>
+    </nav>
+
+    <h2>{{ memberQualification.qualification.name }} - Edit</h2>
+
+    {{ form_start(form) }}
+        {{ form_row(form.qualification) }}
+        {{ form_row(form.validFrom) }}
+        {{ form_row(form.validTo) }}
+        {{ form_row(form.reference) }}
+        {{ form_row(form.notes) }}
+
+        <input type="submit" value="Save" class="btn btn-primary" />
+    {{ form_end(form) }}
+
+{% endblock %}

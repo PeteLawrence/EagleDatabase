@@ -9,13 +9,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use AppBundle\Form\StripePaymentForm;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use AppBundle\Form\StripePaymentForm;
 use Symfony\Component\HttpFoundation\Session\Session;
 use AppBundle\Entity\MemberRegistration;
+use AppBundle\Entity\MemberQualification;
 
 /**
  * @Route("/account")
@@ -79,6 +81,103 @@ class AccountController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render('account/qualifications.html.twig');
+    }
+
+
+
+    /**
+     * @Route("/qualifications/new", name="account_qualifications_new")
+     */
+    public function qualificationsNewAction(Request $request)
+    {
+        $memberQualification = new \AppBundle\Entity\MemberQualification();
+        $form = $this->createForm('AppBundle\Form\Type\MemberQualificationType', $memberQualification);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Set the person on the member qualification
+            $memberQualification->setPerson($this->get('security.token_storage')->getToken()->getUser());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($memberQualification);
+            $em->flush();
+
+            $this->addFlash('notice', sprintf('Your %s qualification has been added', $memberQualification->getQualification()->getName()));
+
+            return $this->redirectToRoute('account_qualifications');
+        }
+
+        // replace this example code with whatever you need
+        return $this->render('account/qualificationsNew.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/qualifications/{id}", name="account_qualifications_edit")
+     */
+    public function qualificationsEditAction(Request $request, MemberQualification $memberQualification)
+    {
+        $form = $this->createForm('AppBundle\Form\Type\MemberQualificationType', $memberQualification);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Set the person on the member qualification
+            $memberQualification->setPerson($this->get('security.token_storage')->getToken()->getUser());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($memberQualification);
+            $em->flush();
+
+            $this->addFlash('notice', sprintf('Your %s qualification has been saved', $memberQualification->getQualification()->getName()));
+
+            return $this->redirectToRoute('account_qualifications');
+        }
+
+        // replace this example code with whatever you need
+        return $this->render('account/qualificationsEdit.html.twig',[
+            'form' => $form->createView(),
+            'memberQualification' => $memberQualification
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/qualifications/{id}/delete", name="account_qualifications_delete")
+     */
+    public function qualificationsDeleteAction(Request $request, MemberQualification $memberQualification)
+    {
+        $deleteForm = $this->createDeleteForm($memberQualification);
+        $deleteForm->handleRequest($request);
+
+        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($memberQualification);
+            $em->flush();
+
+            $this->addFlash('notice', sprintf('Your %s qualification has been deleted', $memberQualification->getQualification()->getName()));
+
+            return $this->redirectToRoute('account_qualifications');
+        }
+
+        // replace this example code with whatever you need
+        return $this->render('account/qualificationsDelete.html.twig',[
+            'deleteForm' => $deleteForm->createView(),
+            'memberQualification' => $memberQualification
+        ]);
+    }
+
+
+    private function createDeleteForm(MemberQualification $memberQualification)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('account_qualifications_delete', array('id' => $memberQualification->getId() )))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
     }
 
 
@@ -376,6 +475,21 @@ class AccountController extends Controller
             ->add('nextOfKinName', TextType::class, [ 'attr' => ['placeholder' => 'Name'], 'label' => 'Name' ])
             ->add('nextOfKinRelation', TextType::class, [ 'attr' => ['placeholder' => 'Relation'], 'label' => 'Relation' ])
             ->add('nextOfKinContactDetails', TextareaType::class, [ 'attr' => ['placeholder' => 'Contact Details', 'rows' => 3], 'label' => 'Contact Details' ])
+            ->getForm()
+        ;
+    }
+
+
+
+    private function buildQualificationForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('POST')
+            ->add('qualification', EntityType::class, [ 'attr' => ['placeholder' => 'Forename(s)'], 'class' => 'AppBundle:Qualification' ])
+            ->add('validFrom', DateType::class, [ 'html5' => true, 'widget' => 'choice', 'format' => 'd MMMM y', 'required' => true, 'years' => range(1970, 2030) ])
+            ->add('validTo', DateType::class, [ 'html5' => true, 'widget' => 'choice', 'format' => 'd MMMM y', 'label' => 'Valid To (if applicable)', 'required' => false, 'years' => range(1970, 2030) ])
+            ->add('reference', TextType::class, [ 'attr' => ['placeholder' => 'Certificate #, etc.']])
+            ->add('notes', TextareaType::class, [ 'attr' => ['placeholder' => 'Notes', 'rows' => 3], 'label' => 'Notes', 'required' => false ])
             ->getForm()
         ;
     }

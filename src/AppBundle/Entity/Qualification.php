@@ -98,4 +98,10 @@ class Qualification
     {
         return $this->memberQualification;
     }
+
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

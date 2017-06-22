@@ -1,0 +1,24 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Qualifications{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <a class="breadcrumb-item" href="{{ path('account_qualifications') }}">Qualifications</a>
+        <span class="breadcrumb-item active">{{ memberQualification.qualification.name }}</span>
+    </nav>
+
+    <h2>{{ memberQualification.qualification.name }} - Delete</h2>
+
+    <p>
+        Are you sure that you want to delete your {{ memberQualification.qualification.name }} qualification?
+    </p>
+
+    {{ form_start(deleteForm) }}
+
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    {{ form_end(deleteForm) }}
+
+{% endblock %}
