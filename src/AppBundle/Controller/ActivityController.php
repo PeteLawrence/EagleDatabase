@@ -317,7 +317,7 @@ class ActivityController extends Controller
             //Display a flash message
             $this->addFlash('notice', sprintf('%s has been added to %s', $participant->getPerson()->getName(), $activity->getName()));
 
-            return $this->redirectToRoute('activity_view', array('id' => $participant->getManagedActivity()->getId()));
+            return $this->redirectToRoute('activity_participants', array('id' => $participant->getManagedActivity()->getId()));
         }
 
         return $this->render(
