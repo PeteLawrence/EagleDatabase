@@ -22,8 +22,8 @@ class MemberQualificationType extends AbstractType
         $builder
             ->add('qualification', EntityType::class, ['class' => 'AppBundle:Qualification', 'choice_label' => 'name' ])
             ->add('reference', TextType::class, [ 'required' => false ])
-            ->add('validFrom', DateType::class, [ 'html5' => true, 'widget' => 'choice', 'format' => 'd MMMM y' ])
-            ->add('validTo', DateType::class, [ 'html5' => true, 'widget' => 'choice', 'format' => 'd MMMM y', 'required' => false ])
+            ->add('validFrom', DateType::class, [ 'html5' => true, 'widget' => 'choice', 'format' => 'd MMMM y', 'years' => range(1975, 2030) ])
+            ->add('validTo', DateType::class, [ 'html5' => true, 'widget' => 'choice', 'format' => 'd MMMM y', 'years' => range(1975, 2030), 'required' => false ])
             ->add('notes', TextareaType::class, [ 'attr' => [ 'rows' => 5 ], 'required' => false ])
             //->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
         ;
