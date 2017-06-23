@@ -20,6 +20,11 @@ class Qualification
     private $name;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $verificationRequired;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberQualification", mappedBy="qualification")
      */
     private $memberQualification;
@@ -103,5 +108,29 @@ class Qualification
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * Set verificationRequired
+     *
+     * @param boolean $verificationRequired
+     *
+     * @return Qualification
+     */
+    public function setVerificationRequired($verificationRequired)
+    {
+        $this->verificationRequired = $verificationRequired;
+
+        return $this;
+    }
+
+    /**
+     * Get verificationRequired
+     *
+     * @return boolean
+     */
+    public function getVerificationRequired()
+    {
+        return $this->verificationRequired;
     }
 }

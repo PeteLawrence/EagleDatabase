@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use AppBundle\Entity\Person;
 
-class MemberQualificationType extends AbstractType
+class MemberQualificationTypePerson extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -49,17 +49,6 @@ class MemberQualificationType extends AbstractType
                     'rows' => 5
                 ],
                 'required' => false
-            ])
-            ->add('verifiedBy', EntityType::class, [
-                'class' => 'AppBundle:Person',
-                'choice_label' => 'name',
-                'required' => false
-            ])
-            ->add('verifiedDateTime', DateType::class, [
-                'html5' => true,
-                'widget' => 'choice',
-                'format' => 'd MMMM y',
-                'years' => range(2017, 2030)
             ])
         ;
     }

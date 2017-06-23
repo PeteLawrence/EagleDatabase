@@ -6,7 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use AppBundle\Entity\Person;
+use AppBundle\Entity\MemberQualification;
 use AppBundle\Form\Type\PersonType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -118,6 +120,50 @@ class PersonController extends Controller
             'nextofkin_form' => $nextOfKinForm->createView()
         ));
     }
+
+
+    /**
+     * Deletes a Person entity.
+     *
+     * @Route("/{id}/qualification/{id2}/verify", name="admin_person_qualification_verify")
+     * @ParamConverter("memberQualification", class="AppBundle:MemberQualification", options={"id" = "id2"})
+     */
+    public function verifyQualificationAction(Request $request, Person $person, MemberQualification $memberQualification)
+    {
+        $form = $this->buildVerifyQualificationForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+
+            $memberQualification->setVerifiedBy($currentUser);
+            $memberQualification->setVerifiedDateTime(new \DateTime());
+
+            //Persist changes
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('admin_person_edit', [ 'id' => $person->getId()]);
+        }
+
+        return $this->render('admin/person/verifyQualification.html.twig', array(
+            'person' => $person,
+            'memberQualification' => $memberQualification,
+            'form' => $form->createView()
+        ));
+
+    }
+
+    private function buildVerifyQualificationForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('POST')
+            ->getForm()
+        ;
+    }
+
+
 
     /**
      * Deletes a Person entity.
