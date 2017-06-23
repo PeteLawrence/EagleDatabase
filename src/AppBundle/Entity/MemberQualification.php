@@ -36,6 +36,16 @@ class MemberQualification
     private $reference;
 
     /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $attachment;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $verifiedDateTime;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Qualification", inversedBy="memberQualification")
      * @ORM\JoinColumn(name="qualification_id", referencedColumnName="id")
      */
@@ -46,6 +56,12 @@ class MemberQualification
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      */
     private $person;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person", inversedBy="verifiedMemberQualifications")
+     * @ORM\JoinColumn(name="verifiedBy", referencedColumnName="id")
+     */
+    private $verifiedBy;
 
     /**
      * Get id
@@ -227,5 +243,77 @@ class MemberQualification
         $limit = $this->validTo->sub(new \DateInterval('P3M'));
 
         return ($limit < $now);
+    }
+
+    /**
+     * Set attachment
+     *
+     * @param string $attachment
+     *
+     * @return MemberQualification
+     */
+    public function setAttachment($attachment)
+    {
+        $this->attachment = $attachment;
+
+        return $this;
+    }
+
+    /**
+     * Get attachment
+     *
+     * @return string
+     */
+    public function getAttachment()
+    {
+        return $this->attachment;
+    }
+
+    /**
+     * Set verifiedDateTime
+     *
+     * @param \DateTime $verifiedDateTime
+     *
+     * @return MemberQualification
+     */
+    public function setVerifiedDateTime($verifiedDateTime)
+    {
+        $this->verifiedDateTime = $verifiedDateTime;
+
+        return $this;
+    }
+
+    /**
+     * Get verifiedDateTime
+     *
+     * @return \DateTime
+     */
+    public function getVerifiedDateTime()
+    {
+        return $this->verifiedDateTime;
+    }
+
+    /**
+     * Set verifiedBy
+     *
+     * @param \AppBundle\Entity\Person $verifiedBy
+     *
+     * @return MemberQualification
+     */
+    public function setVerifiedBy(\AppBundle\Entity\Person $verifiedBy = null)
+    {
+        $this->verifiedBy = $verifiedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get verifiedBy
+     *
+     * @return \AppBundle\Entity\Person
+     */
+    public function getVerifiedBy()
+    {
+        return $this->verifiedBy;
     }
 }

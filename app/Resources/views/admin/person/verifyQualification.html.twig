@@ -1,0 +1,46 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}{{ person.name }}{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_index')}}">People</a>
+        <span class="breadcrumb-item active">{{ person.name }}</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>{{ person.name}} - {{ memberQualification.qualification.name }}</h1>
+
+    <dl>
+        <dt>Qualification</dt>
+        <dd>{{ memberQualification.qualification.name }}</dd>
+
+        <dt>Valid From</dt>
+        <dd>{{ memberQualification.validFrom|date('d M Y') }}</dd>
+
+        <dt>Valid To</dt>
+        <dd>
+            {% if memberQualification.validTo %}
+                {{ memberQualification.validTo|date('d M Y') }}
+            {% else %}
+                Does not expire
+            {% endif %}
+        </dd>
+
+        <dt>Reference</dt>
+        <dd>{{ memberQualification.reference }}</dd>
+
+        <dt>Notes</dt>
+        <dd>{{ memberQualification.notes }}</dd>
+    </dl>
+
+    <a href="{{ path('admin_memberqualification_edit', { personId: person.id, id: memberQualification.id })}}" class="btn btn-warning">Edit</a>
+
+    {{ form_start(form) }}
+        <input type="submit" class="btn btn-primary" value="Verify">
+    {{ form_end(form) }}
+
+{% endblock %}

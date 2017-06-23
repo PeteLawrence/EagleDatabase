@@ -91,7 +91,7 @@ class AccountController extends Controller
     public function qualificationsNewAction(Request $request)
     {
         $memberQualification = new \AppBundle\Entity\MemberQualification();
-        $form = $this->createForm('AppBundle\Form\Type\MemberQualificationType', $memberQualification);
+        $form = $this->createForm('AppBundle\Form\Type\MemberQualificationTypePerson', $memberQualification);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -120,7 +120,7 @@ class AccountController extends Controller
      */
     public function qualificationsEditAction(Request $request, MemberQualification $memberQualification)
     {
-        $form = $this->createForm('AppBundle\Form\Type\MemberQualificationType', $memberQualification);
+        $form = $this->createForm('AppBundle\Form\Type\MemberQualificationTypePerson', $memberQualification);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

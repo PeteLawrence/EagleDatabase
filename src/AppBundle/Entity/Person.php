@@ -168,6 +168,11 @@ class Person implements AdvancedUserInterface, \Serializable
     private $memberQualification;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberQualification", mappedBy="verifiedBy")
+     */
+    private $verifiedMemberQualifications;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberRegistration", mappedBy="person")
      */
     private $memberRegistration;
@@ -1148,4 +1153,72 @@ class Person implements AdvancedUserInterface, \Serializable
         return $unpaidCharges;
     }
 
+
+    /**
+     * Add activityMessage
+     *
+     * @param \AppBundle\Entity\ActivityMessage $activityMessage
+     *
+     * @return Person
+     */
+    public function addActivityMessage(\AppBundle\Entity\ActivityMessage $activityMessage)
+    {
+        $this->activityMessage[] = $activityMessage;
+
+        return $this;
+    }
+
+    /**
+     * Remove activityMessage
+     *
+     * @param \AppBundle\Entity\ActivityMessage $activityMessage
+     */
+    public function removeActivityMessage(\AppBundle\Entity\ActivityMessage $activityMessage)
+    {
+        $this->activityMessage->removeElement($activityMessage);
+    }
+
+    /**
+     * Get activityMessage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActivityMessage()
+    {
+        return $this->activityMessage;
+    }
+
+    /**
+     * Add verifiedMemberQualification
+     *
+     * @param \AppBundle\Entity\MemberQualification $verifiedMemberQualification
+     *
+     * @return Person
+     */
+    public function addVerifiedMemberQualification(\AppBundle\Entity\MemberQualification $verifiedMemberQualification)
+    {
+        $this->verifiedMemberQualifications[] = $verifiedMemberQualification;
+
+        return $this;
+    }
+
+    /**
+     * Remove verifiedMemberQualification
+     *
+     * @param \AppBundle\Entity\MemberQualification $verifiedMemberQualification
+     */
+    public function removeVerifiedMemberQualification(\AppBundle\Entity\MemberQualification $verifiedMemberQualification)
+    {
+        $this->verifiedMemberQualifications->removeElement($verifiedMemberQualification);
+    }
+
+    /**
+     * Get verifiedMemberQualifications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVerifiedMemberQualifications()
+    {
+        return $this->verifiedMemberQualifications;
+    }
 }
