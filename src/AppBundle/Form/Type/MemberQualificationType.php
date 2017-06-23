@@ -59,6 +59,7 @@ class MemberQualificationType extends AbstractType
                 'html5' => true,
                 'widget' => 'choice',
                 'format' => 'd MMMM y',
+                'required' => false,
                 'years' => range(2017, 2030)
             ])
         ;
