@@ -17,7 +17,9 @@ class QualificationType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('verificationRequired', CheckboxType::class)
+            ->add('verificationRequired', CheckboxType::class, [
+                'required' => false
+            ])
         ;
     }
 
