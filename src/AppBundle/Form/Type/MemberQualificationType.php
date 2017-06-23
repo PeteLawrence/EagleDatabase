@@ -22,7 +22,10 @@ class MemberQualificationType extends AbstractType
         $builder
             ->add('qualification', EntityType::class, [
                 'class' => 'AppBundle:Qualification',
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'query_builder' => function ($er) {
+                    return $er->createQueryBuilder('q')->orderBy('q.name');
+                }
             ])
             ->add('reference', TextType::class, [
                 'attr' => [
