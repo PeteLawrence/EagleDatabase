@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ site_name }} :: 404{% endblock %}
+
+{% block body %}
+
+{% include 'components/banner.html.twig' %}
+
+<h2>Error 404 - Page Not Found</h2>
+
+Sorry, no such page exists.  Try returning to the <a href="{{ path('homepage') }}">home page</a>.
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ site_name }} :: 403{% endblock %}
+
+{% block body %}
+
+{% include 'components/banner.html.twig' %}
+
+<h2>Error 403 - Forbidden</h2>
+
+Oops, you don't have permission to do that.  Try returning to the <a href="{{ path('homepage') }}">home page</a>.
+
+{% endblock %}
