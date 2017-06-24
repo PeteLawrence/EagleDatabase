@@ -143,6 +143,11 @@ class Person implements AdvancedUserInterface, \Serializable
     private $bcMembershipNumber;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastLoginDateTime;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activity", mappedBy="organiser")
      */
     private $activity2;
@@ -1220,5 +1225,29 @@ class Person implements AdvancedUserInterface, \Serializable
     public function getVerifiedMemberQualifications()
     {
         return $this->verifiedMemberQualifications;
+    }
+
+    /**
+     * Set lastLoginDateTime
+     *
+     * @param \DateTime $lastLoginDateTime
+     *
+     * @return Person
+     */
+    public function setLastLoginDateTime($lastLoginDateTime)
+    {
+        $this->lastLoginDateTime = $lastLoginDateTime;
+
+        return $this;
+    }
+
+    /**
+     * Get lastLoginDateTime
+     *
+     * @return \DateTime
+     */
+    public function getLastLoginDateTime()
+    {
+        return $this->lastLoginDateTime;
     }
 }
