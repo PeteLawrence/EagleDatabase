@@ -40,3 +40,7 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: app.form.person }
+
+    AppBundle\EventListener\LoginListener:
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login }
