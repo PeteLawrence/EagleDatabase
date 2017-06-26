@@ -330,9 +330,49 @@ class ActivityController extends Controller
     }
 
 
+    /**
+     * @Route("/{id}/participants/{participant}/edit", name="activity_participants_edit")
+     */
+    public function participantsEditAction(Request $request, Activity $activity, \AppBundle\Entity\Participant $participant)
+    {
+        //Only allow the organiser access to this page
+        if (
+            $activity->getOrganiser() != $this->getUser() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $form = $this->createForm('AppBundle\Form\Type\Activity\ParticipantType', $participant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Flush changes
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            //Display a flash message
+            $this->addFlash('notice', sprintf('The notes for %s have been updated', $participant->getPerson()->getName()));
+
+            return $this->redirectToRoute('activity_participants', array('id' => $participant->getManagedActivity()->getId()));
+        }
+
+
+        return $this->render(
+            'activity/participantsEdit.html.twig',
+            [
+                'activity' => $activity,
+                'participant' => $participant,
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+
+
 
     /**
-     * @Route("/{id}/participants/delete/{participant}", name="activity_participants_delete")
+     * @Route("/{id}/participants/{participant}/delete", name="activity_participants_delete")
      */
     public function participantsDeleteAction(Request $request, Activity $activity, \AppBundle\Entity\Participant $participant)
     {

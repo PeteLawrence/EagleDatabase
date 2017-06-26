@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participants{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('activity_index') }}">Activities</a>
+        <a class="breadcrumb-item" href="{{ path('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+        <a class="breadcrumb-item" href="{{ path('activity_participants', { id: activity.id }) }}">{{ activity.name }}</a>
+        <span class="breadcrumb-item active">Edit Participant</span>
+    </nav>
+
+    <h2>Edit: {{ activity.name }} - {{ participant.person.name }}</h2>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Save" class="btn btn-primary" />
+    {{ form_end(form) }}
+
+{% endblock %}

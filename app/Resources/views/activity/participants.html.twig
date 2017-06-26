@@ -38,6 +38,9 @@
                         <a href="{{ path('activity_participants_delete', { id: activity.id, participant: participant.id }) }}" class="btn btn-danger btn-sm" title="Remove">
                             <i class="fa fa-trash"></i>
                         </a>
+                        <a href="{{ path('activity_participants_edit', { id: activity.id, participant: participant.id }) }}" class="btn btn-warning btn-sm" title="Edit">
+                            <i class="fa fa-pencil"></i>
+                        </a>
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('admin_person_edit', { id: participant.person.id })}}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-user"></i>
