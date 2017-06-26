@@ -11,6 +11,15 @@
 
     <h2>{{ activity.name }}</h2>
 
+    {# Display photo upload message if user was on the trip and the trip has started #}
+    {% if app.user.attending(activity) and dateDiff("now", activity.activityStart).invert and dateDiff("now", activity.activityStart).days <= 7 %}
+        <div class="alert alert-info" role="alert">
+            <strong>Taken any photos?</strong> Upload your photos <a href="{{ dropbox_url }}" target="_blank">here</a>.
+        </div>
+    {% endif %}
+
+
+
     <div class="row">
 
     <div class="col-sm-8">
