@@ -516,7 +516,13 @@ class ActivityController extends Controller
     private function buildContactForm($activity)
     {
         return $this->createFormBuilder()
-            ->add('message', TextareaType::class, [ 'attr' => ['rows' => '5'], 'label' => 'Message to the organiser', 'required' => true ])
+            ->add('message', TextareaType::class, [
+                'attr' => [
+                    'rows' => '5'
+                ],
+                'label' => 'Message to the organiser',
+                'required' => true
+            ])
             //->setAction($this->generateUrl('activity_signup', array('id' => $activity->getId())))
             ->setMethod('POST')
             ->getForm()
@@ -527,7 +533,14 @@ class ActivityController extends Controller
     private function buildSignupForm($activity)
     {
         return $this->createFormBuilder()
-            ->add('notes', TextareaType::class, [ 'attr' => ['rows' => '5'], 'label' => 'Notes to the organiser', 'required' => false ])
+            ->add('notes', TextareaType::class, [
+                'attr' => [
+                    'placeholder' => 'What sort of boat would you like to paddle? Can you transport a boat? etc.',
+                    'rows' => '5'
+                ],
+                'label' => 'Notes to the organiser',
+                'required' => false
+            ])
             ->setAction($this->generateUrl('activity_signup', array('id' => $activity->getId())))
             ->setMethod('POST')
             ->getForm()
