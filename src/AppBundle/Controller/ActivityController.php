@@ -63,7 +63,8 @@ class ActivityController extends Controller
             'activity/view.html.twig',
             [
                 'activity' => $activity,
-                'google_maps_key' => $this->getParameter('site.google_maps_key')
+                'google_maps_key' => $this->getParameter('site.google_maps_key'),
+                'dropbox_url' => $this->getParameter('site.dropbox_url')
             ]
         );
     }

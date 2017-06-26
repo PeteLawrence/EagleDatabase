@@ -27,5 +27,6 @@ parameters:
     site.google_maps_key: 'AI.........'
     site.signInEmail: 'signin@eample.com'
     site.google_ua_number: 'UA-XXXXXXX-Y'
+    site.dropbox_url: 'https://www.dropbox.com/request/....'
 
     darksky.key: 'XXXXXX'
