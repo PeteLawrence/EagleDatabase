@@ -80,8 +80,15 @@ class DefaultController extends Controller
      */
     public function whatsonAction(Request $request)
     {
+        $em = $this->get('doctrine')->getManager();
+
+        $upcomingActivities = $em->getRepository('AppBundle:ManagedActivity')->findNextActivities(3);
+
+
         // replace this example code with whatever you need
-        return $this->render('default/whatson.html.twig');
+        return $this->render('default/whatson.html.twig', [
+            'upcomingActivities' => $upcomingActivities
+        ]);
     }
 
 
