@@ -14,7 +14,7 @@
 <h1 class="display-5">What's On</h1>
 
 <div class="row">
-    <div class="col-lg-9">
+    <div class="col-lg-8">
         <p>
             We offer a range of activities throughout the year including weekly club nights throughout the summer months (twice monthly in the winter), star award training, This Girl Can evenings, day trips and weekends away.
         </p>
@@ -84,19 +84,31 @@
 
     </div>
 
-    <div class="col-lg-3">
+
+    <div class="col-lg-4">
         <div class="card">
-            <h4 class="card-header">Links</h4>
-            <div class="card-block text-center">
-                <a href="{{ url('activity_index') }}" class="btn btn-primary">View Programme</a>
+            <h4 class="card-header">Upcoming Events</h4>
+            <dl class="mt-3 mb-0 ml-2">
+            {% for activity in upcomingActivities %}
+                <dt>
+                    {{ activity.activityStart|date('d')}}<sup>{{ activity.activityStart|date('S')}}</sup> {{ activity.activityStart|date('F')}}
+                </dt>
+                <dd>
+                    <a href="{{ url('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+                    {% if app.user and activity.attending(app.user) %}
+                        <span class="badge badge-success">Attending</span>
+                    {% endif %}
+                </dd>
+
+            {% endfor %}
+            </dl>
+            <div class="card-footer text-muted text-right">
+                <a href="{{ url('activity_index') }}" class="btn btn-primary btn-sm">View More</a>
             </div>
         </div>
         <img src="https://farm9.staticflickr.com/8897/18458876390_cef189059e_z_d.jpg" class="float-right rounded img-fluid my-2" />
         <img src="https://farm1.staticflickr.com/323/18763217714_9c86435bfc_z_d.jpg" class="float-right rounded img-fluid my-2" />
         <img src="https://farm3.staticflickr.com/2941/15449163262_0485de97ea_z_d.jpg" class="float-right rounded img-fluid my-2" />
-        <img src="https://farm1.staticflickr.com/438/30998327013_ca454128c6_z_d.jpg" class="float-right rounded img-fluid my-2" />
-        <img src="https://farm1.staticflickr.com/338/20034510511_f0ff1c0f7c_z_d.jpg" class="float-right rounded img-fluid my-2" />
-
     </div>
 </div>
 
