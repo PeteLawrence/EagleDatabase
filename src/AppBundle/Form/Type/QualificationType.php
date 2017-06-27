@@ -17,6 +17,9 @@ class QualificationType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('expiryDateRequired', CheckboxType::class, [
+                'required' => false
+            ])
             ->add('verificationRequired', CheckboxType::class, [
                 'required' => false
             ])

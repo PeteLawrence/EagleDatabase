@@ -25,6 +25,11 @@ class Qualification
     private $verificationRequired;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $expiryDateRequired;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberQualification", mappedBy="qualification")
      */
     private $memberQualification;
@@ -132,5 +137,29 @@ class Qualification
     public function getVerificationRequired()
     {
         return $this->verificationRequired;
+    }
+
+    /**
+     * Set expiryDateRequired
+     *
+     * @param boolean $expiryDateRequired
+     *
+     * @return Qualification
+     */
+    public function setExpiryDateRequired($expiryDateRequired)
+    {
+        $this->expiryDateRequired = $expiryDateRequired;
+
+        return $this;
+    }
+
+    /**
+     * Get expiryDateRequired
+     *
+     * @return boolean
+     */
+    public function getExpiryDateRequired()
+    {
+        return $this->expiryDateRequired;
     }
 }

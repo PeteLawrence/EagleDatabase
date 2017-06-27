@@ -2,9 +2,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Validator\Constraints as AppAssert;
 
 /**
  * @ORM\Entity
+ * @AppAssert\MemberQualificationConstraint
  */
 class MemberQualification
 {
@@ -237,7 +239,7 @@ class MemberQualification
             //Qualification does not expire
             return false;
         }
-        
+
         $now = new \DateTime();
 
         $limit = $this->validTo->sub(new \DateInterval('P3M'));
