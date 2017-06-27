@@ -91,7 +91,7 @@ class QualificationController extends Controller
             $em->persist($qualification);
             $em->flush();
 
-            return $this->redirectToRoute('admin_qualification_edit', array('id' => $qualification->getId()));
+            return $this->redirectToRoute('admin_qualification_index');
         }
 
         return $this->render('admin/qualification/edit.html.twig', array(
