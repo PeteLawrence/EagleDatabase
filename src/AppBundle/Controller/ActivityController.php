@@ -290,7 +290,7 @@ class ActivityController extends Controller
 
         if ($cancelForm->isSubmitted() && $cancelForm->isValid()) {
             $em->remove($participant);
-            //$em->flush();
+            $em->flush();
 
             //Send an email to the organiser
             $message = \Swift_Message::newInstance()
