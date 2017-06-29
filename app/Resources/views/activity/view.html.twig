@@ -52,36 +52,6 @@
             <a href="{{ path('activity_edit', { 'id': activity.id }) }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> Edit</a>
         {% endif %}
 
-        {#<div class="card">
-            <h4 class="card-header">Weather</h4>
-            <div class="card-block" style="height: 170px; overflow-y: scroll;">
-                <table class="table">
-                    {% for dataPoint in activity.weatherDataPoints %}
-                        <tr>
-                            <td class="h2">{{ dataPoint.time|date('H:i', dataPoint.timeZone) }}</td>
-                            <td>
-                                <i class="wi wi-forecast-io-{{dataPoint.icon}} h2"></i>
-                                {% if dataPoint.precipitationIntensity > 0 %}
-                                    <sub>{{ dataPoint.precipitationIntensity }} mm/h</sub>
-                                {% endif %}
-                            </td>
-                            <td>
-                                <i class="wi wi-thermometer h2"></i>
-                                <span class="h2">{{ dataPoint.temperature|number_format(1) }}</span>
-                                <sup>°C</sup>
-                            </td>
-                            <td>
-                                <i class="wi wi-wind from-{{dataPoint.windBearing}}-deg h2" title="{{dataPoint.windBearing}}°"></i>
-                                <span class="h2">{{ dataPoint.windSpeed|number_format(1) }}</span>
-                                <sup>km/h</sup>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-
-            </div>
-        </div>
-        #}
     </div>
 
     <div class="col-sm-4">
@@ -113,6 +83,10 @@
                     <div class="my-2">
                         {% if app.user.attending(activity) %}
                             You are signed up
+                            <a href="{{ path('activity_signup', { id: activity.id } ) }}" class="btn btn-warning btn-sm btn-block">
+                                <i class="fa fa-pencil float-left"></i>
+                                Edit
+                            </a>
                         {% else %}
                             {% if activity.allowOnlineSignup %}
                                 {% if activity.acceptingSignups %}

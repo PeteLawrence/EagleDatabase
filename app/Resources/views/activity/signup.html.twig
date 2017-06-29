@@ -12,22 +12,67 @@
 
     <h2>{{ activity.name }}</h2>
 
-    {% if activity.cost and activity.cost > 0 %}
-        <div class="alert alert-warning" role="alert">
-          Please note that there is a £{{activity.cost|number_format(2)}} charge for attending this activity.
-        </div>
+
+    {% if form is defined %}
+
+        {% if activity.cost and activity.cost > 0 %}
+            <div class="alert alert-warning" role="alert">
+              Please note that there is a £{{activity.cost|number_format(2)}} charge for attending this activity.
+            </div>
+        {% endif %}
+
+        <p>
+            Click the button below to sign up to the activity.
+        </p>
+
+        {{ form_start(form) }}
+            {{ form_row(form.notes) }}
+            <input class="btn btn-primary" type="submit" value="Sign Up" />
+        {{ form_end(form) }}
+
+        <a href="{{ path('activity_view', { id: activity.id }) }}" class="btn btn-secondary">Cancel</a>
+
+    {% else %}
+        <p>You signed up on {{ participant.signupDatetime|date('d M Y') }} at {{ participant.signupDatetime|date('H:i') }}</p>
+
+
+        {% if activity.allowOnlineSignup %}
+            <div class="card mb-3">
+                <h4 class="card-header">Message for the organiser</h4>
+                <div class="card-block">
+                    {% if participant.notes %}
+                        <blockquote class="blockquote">
+                            {{ participant.notes}}
+                        </blockquote>
+                        <a href="{{ path('activity_signup_edit', { id: activity.id } ) }}" class="btn btn-primary btn-sm">
+                            <i class="fa fa-envelope"></i> Update message
+                        </a>
+                    {% else %}
+                        <p>
+                            <em>You have not left a message for the organiser</em>
+                        </p>
+                        <a href="{{ path('activity_signup_edit', { id: activity.id } ) }}" class="btn btn-primary btn-sm">
+                            <i class="fa fa-envelope"></i> Leave a message
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if not activity.inPast %}
+                <div class="card">
+                    <h4 class="card-header">Cancel</h4>
+                    <div class="card-block">
+                        <p>If you can no longer make the activity, you can cancel using the button below</p>
+                        <a href="{{ path('activity_signup_cancel', { id: activity.id } ) }}" class="btn btn-danger btn-sm">
+                            <i class="fa fa-ban"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+
+        {% endif %}
+
     {% endif %}
-
-    <p>
-        Click the button below to sign up to the activity.
-    </p>
-
-    {{ form_start(form) }}
-        {{ form_row(form.notes) }}
-        <input class="btn btn-primary" type="submit" value="Sign Up" />
-    {{ form_end(form) }}
-
-    <a href="{{ path('activity_view', { id: activity.id }) }}" class="btn btn-secondary">Cancel</a>
 
 {% endblock %}
 

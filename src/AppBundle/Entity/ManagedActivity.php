@@ -213,6 +213,17 @@ class ManagedActivity extends \AppBundle\Entity\Activity
         return false;
     }
 
+    public function getParticipantForPerson($person)
+    {
+        foreach ($this->participant as $p) {
+            if ($p->getPerson() == $person) {
+                return $p;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Set cost
      *
@@ -269,5 +280,13 @@ class ManagedActivity extends \AppBundle\Entity\Activity
     public function getActivityCharge()
     {
         return $this->activityCharge;
+    }
+
+
+    public function isInPast()
+    {
+        $now = new \DateTime();
+
+        return $now > $this->getActivityEnd();
     }
 }
