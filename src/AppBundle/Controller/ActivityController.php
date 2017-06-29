@@ -198,6 +198,20 @@ class ActivityController extends Controller
     public function signupAction(Request $request, Activity $activity)
     {
         $em = $this->get('doctrine')->getManager();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $participant = $activity->getParticipantForPerson($user);
+        if ($participant) {
+            return $this->render(
+                'activity/signup.html.twig',
+                [
+                    'activity' => $activity,
+                    'participant' => $participant
+                ]
+            );
+        }
+
+
 
         $signupForm = $this->buildSignupForm($activity);
         $signupForm->handleRequest($request);
@@ -208,7 +222,7 @@ class ActivityController extends Controller
 
             $participant = new \AppBundle\Entity\Participant;
             $participant->setManagedActivity($activity);
-            $participant->setPerson($this->get('security.token_storage')->getToken()->getUser());
+            $participant->setPerson($user);
             $participant->setSignupMethod('online');
             $participant->setSignupDateTime(new \DateTime());
             $participant->setParticipantStatus($participantStatus);
@@ -256,6 +270,98 @@ class ActivityController extends Controller
             [
                 'activity' => $activity,
                 'form' => $signupForm->createView()
+            ]
+        );
+    }
+
+
+    /**
+     * @Route("/{id}/signup/cancel", name="activity_signup_cancel")
+     */
+    public function signupCancelAction(Request $request, Activity $activity)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $participant = $activity->getParticipantForPerson($user);
+
+        $cancelForm = $this->buildSignupCancelForm();
+        $cancelForm->handleRequest($request);
+
+        if ($cancelForm->isSubmitted() && $cancelForm->isValid()) {
+            $em->remove($participant);
+            //$em->flush();
+
+            //Send an email to the organiser
+            $message = \Swift_Message::newInstance()
+                ->setSubject(sprintf('%s will no longer be attending %s', $participant->getPerson()->getName(), $activity->getName()))
+                ->setFrom($this->getParameter('site.email'))
+                ->setTo($activity->getOrganiser()->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/activityCancel.html.twig',
+                        array('participant' => $participant)
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
+
+            //Display confirmation flash message
+            $this->addFlash('notice', sprintf('You have been removed from %s', $activity->getName()));
+
+            return $this->redirectToRoute('activity_view', [ 'id' => $activity->getId() ]);
+        }
+
+        return $this->render(
+            'activity/signupCancel.html.twig',
+            [
+                'activity' => $activity,
+                'participant' => $participant,
+                'cancelForm' => $cancelForm->createView()
+            ]
+        );
+    }
+
+
+    private function buildSignupCancelForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
+
+
+    /**
+     * @Route("/{id}/signup/edit", name="activity_signup_edit")
+     */
+    public function signupEditAction(Request $request, Activity $activity)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $participant = $activity->getParticipantForPerson($user);
+
+
+        $form = $this->createForm('AppBundle\Form\Type\Activity\ParticipantType', $participant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            //Display confirmation flash message
+            $this->addFlash('notice', 'Your changes have been saved');
+
+            return $this->redirectToRoute('activity_signup', [ 'id' => $activity->getId() ]);
+        }
+
+
+        return $this->render(
+            'activity/signupEdit.html.twig',
+            [
+                'activity' => $activity,
+                'participant' => $participant,
+                'form' => $form->createView()
             ]
         );
     }
