@@ -120,6 +120,11 @@ class AccountController extends Controller
      */
     public function qualificationsEditAction(Request $request, MemberQualification $memberQualification)
     {
+        //Only allow members to edit their own qualifications
+        if ($memberQualification->getPerson() != $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $form = $this->createForm('AppBundle\Form\Type\MemberQualificationTypePerson', $memberQualification);
         $form->handleRequest($request);
 
@@ -150,6 +155,11 @@ class AccountController extends Controller
      */
     public function qualificationsDeleteAction(Request $request, MemberQualification $memberQualification)
     {
+        //Only allow members to delete their own qualifications
+        if ($memberQualification->getPerson() != $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $deleteForm = $this->createDeleteForm($memberQualification);
         $deleteForm->handleRequest($request);
 
