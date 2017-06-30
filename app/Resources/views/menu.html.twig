@@ -46,10 +46,18 @@
                         <a href="{{ path('account_activities') }}" class="dropdown-item"><i class="fa fa-map"></i> Activities</a>
                         <a href="{{ path('account_charges') }}" class="dropdown-item"><i class="fa fa-money"></i> Charges</a>
                         {% if app.user.memberQualification|length > 0 %}
-                            <a href="{{ path('account_qualifications') }}" class="dropdown-item"><i class="fa fa-trophy"></i> Qualifications</a>
+                            <a href="{{ path('account_qualifications') }}" class="dropdown-item">
+                                <i class="fa fa-trophy"></i> Qualifications
+                                {% if app.user.expiredQualifications|length > 0 %}
+                                    <span class="badge badge-pill badge-danger">{{ app.user.expiredQualifications|length}}</span>
+                                {% endif %}
+                                {% if app.user.expiringQualifications|length > 0 %}
+                                    <span class="badge badge-pill badge-warning">{{ app.user.expiringQualifications|length}}</span>
+                                {% endif %}
+                            </a>
                         {% endif %}
                         <a href="{{ path('account_edit') }}" class="dropdown-item"><i class="fa fa-pencil"></i> Profile</a>
-                        
+
                         <div class="dropdown-divider"></div>
 
                         {% if is_granted('ROLE_PREVIOUS_ADMIN') %}

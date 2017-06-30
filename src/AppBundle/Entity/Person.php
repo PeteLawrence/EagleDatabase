@@ -1250,4 +1250,34 @@ class Person implements AdvancedUserInterface, \Serializable
     {
         return $this->lastLoginDateTime;
     }
+
+
+
+    public function getExpiredQualifications()
+    {
+        $expiredQualifications = [];
+
+        foreach ($this->memberQualification as $mq) {
+            if ($mq->isExpired()) {
+                $expiredQualifications[] = $mq;
+            }
+        }
+
+        return $expiredQualifications;
+    }
+
+
+    public function getExpiringQualifications()
+    {
+        $expiringQualifications = [];
+
+        foreach ($this->memberQualification as $mq) {
+            if ($mq->isExpiringSoon()) {
+                $expiringQualifications[] = $mq;
+            }
+        }
+
+        return $expiringQualifications;
+    }
+
 }
