@@ -242,9 +242,10 @@ class MemberQualification
 
         $now = new \DateTime();
 
-        $limit = $this->validTo->sub(new \DateInterval('P3M'));
+        $d = clone $this->validTo;
+        $limit = $d->sub(new \DateInterval('P3M'));
 
-        return ($limit < $now);
+        return ($limit < $now  && $this->validTo > $now);
     }
 
     /**
