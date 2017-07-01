@@ -146,7 +146,7 @@
                 </thead>
 
                 <tbody>
-                    {% for participant in person.participant %}
+                    {% for participant in participations %}
                         <tr>
                             <td>
                                 <a href="{{ path('activity_view', { id: participant.managedActivity.id }) }}">{{ participant.managedActivity.name }}</td>
