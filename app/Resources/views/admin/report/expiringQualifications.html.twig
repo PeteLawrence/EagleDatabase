@@ -27,8 +27,18 @@
             {% for qualification in expiringQualifications %}
                 <tr>
                     <td>{{ qualification.person.name }}</td>
-                    <td>{{ qualification.qualification.name }}</td>
-                    <td>{{ qualification.validFTo|date('jS F Y') }}</td>
+                    <td>
+                        {{ qualification.qualification.name }}
+                    </td>
+                    <td>{{ qualification.validTo|date('jS F Y') }}</td>
+                    <td>
+                        <a href="{{ path('admin_person_edit', { id: qualification.person.id} ) }}">
+                            <i class="fa fa-user"></i>
+                        </a>
+                        <a href="{{ path('admin_memberqualification_edit', { personId: qualification.person.id, id: qualification.id } ) }}">
+                            <i class="fa fa-trophy"></i>
+                        </a>
+                    </td>
                 </tr>
             {% else %}
                 <tr>
