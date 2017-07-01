@@ -112,7 +112,7 @@ class PersonController extends Controller
             return $this->redirectToRoute('admin_person_index');
         }
 
-        $participations = $em->getRepository('AppBundle:Participant')->findByPerson($person);
+        $participations = $em->getRepository('AppBundle:Participant')->findByPersonOrdered($person);
 
         return $this->render('admin/person/edit.html.twig', array(
             'person' => $person,

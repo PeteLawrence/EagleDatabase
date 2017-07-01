@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="index1", columns={"person_id","managed_activity_id"})})
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ParticipantRepository")
  */
 class Participant
 {

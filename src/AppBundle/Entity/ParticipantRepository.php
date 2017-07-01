@@ -13,12 +13,14 @@ class ParticipantRepository extends EntityRepository
      *
      * @return [type]         [description]
      */
-    public function findByPerson($person)
+    public function findByPersonOrdered($person)
     {
         $q = $this->createQueryBuilder('p')
             ->innerJoin('p.managedActivity', 'ma')
-            ->where('p.person = ?3')
+            ->where('p.person = ?1')
             ->setParameter(1, $person)
             ->orderBy('ma.activityStart');
+
+        return $q->getQuery()->getResult();
     }
 }
