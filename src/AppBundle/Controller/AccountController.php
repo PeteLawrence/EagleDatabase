@@ -48,9 +48,13 @@ class AccountController extends Controller
      */
     public function activitiesAction(Request $request)
     {
+        $em = $this->get('doctrine')->getManager();
+        $participations = $em->getRepository('AppBundle:Participant')->findByPerson($this->getUser());
 
         // replace this example code with whatever you need
-        return $this->render('account/activities.html.twig');
+        return $this->render('account/activities.html.twig', [
+            'participations' => $participations
+        ]);
     }
 
 

@@ -88,6 +88,8 @@ class PersonController extends Controller
      */
     public function editAction(Request $request, Person $person)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $deleteForm = $this->createDeleteForm($person);
         $editForm = $this->createForm('AppBundle\Form\Type\PersonType', $person);
         $editForm->handleRequest($request);
@@ -104,20 +106,20 @@ class PersonController extends Controller
         }
 
         if ($nextOfKinForm->isSubmitted() && $nextOfKinForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($person);
             $em->flush();
 
             return $this->redirectToRoute('admin_person_index');
         }
 
-
+        $participations = $em->getRepository('AppBundle:Participant')->findByPerson($person);
 
         return $this->render('admin/person/edit.html.twig', array(
             'person' => $person,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'nextofkin_form' => $nextOfKinForm->createView()
+            'nextofkin_form' => $nextOfKinForm->createView(),
+            'participations' => $participations
         ));
     }
 
