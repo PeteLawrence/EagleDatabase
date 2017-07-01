@@ -18,16 +18,16 @@
                 <td>{{ qualification.name }}</td>
                 <td>
                     {% if qualification.expiryDateRequired %}
-                        <span class="badge badge-pill badge-success"><i class="fa fa-check"></i></span>
+                        <i class="fa fa-check text-success"></i>
                     {% else %}
-                        <span class="badge badge-pill badge-danger"><i class="fa fa-times"></i></span>
+                        <i class="fa fa-times text-danger"></i>
                     {% endif %}
                 </td>
                 <td>
                     {% if qualification.verificationRequired %}
-                        <span class="badge badge-pill badge-success"><i class="fa fa-check"></i></span>
+                        <i class="fa fa-check text-success"></i>
                     {% else %}
-                        <span class="badge badge-pill badge-danger"><i class="fa fa-times"></i></span>
+                        <i class="fa fa-times text-danger"></i>
                     {% endif %}</td>
                 <td>
                     <a href="{{ path('admin_qualification_show', { 'id': qualification.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
