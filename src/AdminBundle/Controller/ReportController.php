@@ -413,6 +413,23 @@ class ReportController extends Controller
     }
 
 
+        /**
+         * Lists Qualifications Awaiting Verification
+         *
+         * @Route("/qualificationsrequiringverification", name="admin_report_qualificationsrequiringverification")
+         * @Method({"GET", "POST"})
+         */
+        public function qualificationsRequiringVerificationAction(Request $request)
+        {
+            $em = $this->get('doctrine')->getManager();
+            $qualifications = $em->getRepository('AppBundle:MemberQualification')->finddQualificationsRequiringVerification();
+
+            return $this->render('admin/report/qualificationsRequiringVerification.html.twig', array(
+                'qualifications' => $qualifications
+            ));
+        }
+
+
     /**
      * Lists youth members
      *

@@ -1,0 +1,47 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Reports: Qualifications Requiring Verification{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Qualifications Requiring Verification</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Qualifications Requiring Verification</h1>
+
+
+    <table class="table table-sm table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Qualification</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for qualification in qualifications %}
+                <tr>
+                    <td>{{ qualification.person.name }}</td>
+                    <td>
+                        {{ qualification.qualification.name }}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_person_qualification_verify', { id: qualification.person.id, id2: qualification.id } ) }}">
+                            <i class="fa fa-check"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">
+                        No qualifications require verifying
+                    </td>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
