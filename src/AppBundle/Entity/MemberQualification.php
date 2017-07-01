@@ -7,6 +7,7 @@ use AppBundle\Validator\Constraints as AppAssert;
 /**
  * @ORM\Entity
  * @AppAssert\MemberQualificationConstraint
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\MemberQualificationRepository")
  */
 class MemberQualification
 {

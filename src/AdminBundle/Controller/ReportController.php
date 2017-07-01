@@ -378,6 +378,41 @@ class ReportController extends Controller
     }
 
 
+
+    /**
+     * Lists Expiring Qualifications
+     *
+     * @Route("/expiringqualifications", name="admin_report_expiringqualifications")
+     * @Method({"GET", "POST"})
+     */
+    public function expiringQualificationsAction(Request $request)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $expiringQualifications = $em->getRepository('AppBundle:MemberQualification')->findExpiringQualifications();
+
+        return $this->render('admin/report/expiringQualifications.html.twig', array(
+            'expiringQualifications' => $expiringQualifications
+        ));
+    }
+
+
+    /**
+     * Lists Expired Qualifications
+     *
+     * @Route("/expiredqualifications", name="admin_report_expiredqualifications")
+     * @Method({"GET", "POST"})
+     */
+    public function expiredQualificationsAction(Request $request)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $expiredQualifications = $em->getRepository('AppBundle:MemberQualification')->findExpiredQualifications();
+
+        return $this->render('admin/report/expiredQualifications.html.twig', array(
+            'expiredQualifications' => $expiredQualifications
+        ));
+    }
+
+
     /**
      * Lists youth members
      *
