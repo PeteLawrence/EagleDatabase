@@ -48,4 +48,25 @@ class MemberQualificationRepository extends EntityRepository
 
         return $q->getQuery()->getResult();
     }
+
+
+    /**
+     * Returns activities that a person has attended/signed up for
+     *
+     * @param  [type] $person [description]
+     *
+     * @return [type]         [description]
+     */
+    public function finddQualificationsRequiringVerification()
+    {
+
+        $q = $this->createQueryBuilder('mq')
+            ->innerJoin('mq.qualification', 'q')
+            ->where('mq.verifiedBy IS NULL')
+            ->andWhere('q.verificationRequired = ?1')
+            ->setParameter(1, 1); //true
+
+        return $q->getQuery()->getResult();
+    }
+
 }
