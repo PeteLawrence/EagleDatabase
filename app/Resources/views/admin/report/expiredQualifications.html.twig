@@ -1,0 +1,41 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Reports: Expired Qualifications{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Expired Qualifications</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Expired Qualifications</h1>
+
+
+    <table class="table table-sm table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Qualification</th>
+                <th>Expired</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for qualification in expiredQualifications %}
+                <tr>
+                    <td>{{ qualification.person.name }}</td>
+                    <td>{{ qualification.qualification.name }}</td>
+                    <td>{{ qualification.validTo|date('jS F Y') }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">
+                        No qualifications have expired
+                    </td>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
