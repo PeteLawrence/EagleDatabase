@@ -45,7 +45,7 @@ class SignInController extends Controller
 
                 //Limit sign-in's to within 6 hours of the end of the event to prevent people signing in to the wrong event
                 $limit = clone $activity->getActivityEnd();
-                $limit->sub(new \DateInterval('PT6H'));
+                $limit->add(new \DateInterval('PT6H'));
                 $now = new \DateTime();
                 if ($now > $limit) {
                     $this->addFlash('error', 'Sign-in period has expired.  Are you signing into the right event?');
