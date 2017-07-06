@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Activity;
 use AppBundle\Entity\ManagedActivity;
 use AppBundle\Entity\UnmanagedActivity;
+use AppBundle\Services\MembershipService;
 
 /**
  * Activity controller.
@@ -23,7 +24,7 @@ class EnrolController extends Controller
      * @Route("/", name="admin_enrol")
      * @Method({"GET", "POST"})
      */
-    public function enrolAction(Request $request, \AppBundle\Services\MembershipService $membershipService)
+    public function enrolAction(Request $request, MembershipService $membershipService)
     {
         if (!$request->query->get('person')) {
             throw new \Exception('No person specified');
@@ -58,10 +59,8 @@ class EnrolController extends Controller
      * @Route("/2", name="admin_enrol_2")
      * @Method({"GET", "POST"})
      */
-    public function enrol2Action(Request $request)
+    public function enrol2Action(Request $request, MembershipService $membershipService)
     {
-        $membershipService = $this->get('membership_service');
-
         $session = $request->getSession();
 
         $em = $this->get('doctrine')->getManager();
@@ -97,12 +96,11 @@ class EnrolController extends Controller
      * @Route("/3", name="admin_enrol_3")
      * @Method({"GET", "POST"})
      */
-    public function enrol3Action(Request $request)
+    public function enrol3Action(Request $request, MembershipService $membershipService)
     {
         $session = $request->getSession();
         $em = $this->get('doctrine')->getManager();
         $person = $em->getRepository('AppBundle:Person')->findOneById($session->get('enrol_person'));
-        $membershipService = $this->get('membership_service');
         $session = $request->getSession();
 
         $form = $this->buildConfirmationForm();
