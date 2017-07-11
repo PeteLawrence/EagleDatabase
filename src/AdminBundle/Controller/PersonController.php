@@ -13,6 +13,7 @@ use AppBundle\Form\Type\PersonType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use AppBundle\Services\PersonReportService;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * Person controller.
@@ -97,19 +98,31 @@ class PersonController extends Controller
         $nextOfKinForm = $this->buildNextOfKinForm($person);
         $nextOfKinForm->handleRequest($request);
 
+        $groupsForm = $this->buildGroupsForm($person);
+        $groupsForm->handleRequest($request);
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            dump($person);
+            //die();
             $em = $this->getDoctrine()->getManager();
             $em->persist($person);
             $em->flush();
 
-            return $this->redirectToRoute('admin_person_index');
+            return $this->redirectToRoute('admin_person_edit', [ 'id' => $person->getid() ]);
         }
 
         if ($nextOfKinForm->isSubmitted() && $nextOfKinForm->isValid()) {
             $em->persist($person);
             $em->flush();
 
-            return $this->redirectToRoute('admin_person_index');
+            return $this->redirectToRoute('admin_person_edit', [ 'id' => $person->getid() ]);
+        }
+
+        if ($groupsForm->isSubmitted() && $groupsForm->isValid()) {
+            $em->persist($person);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_person_edit', [ 'id' => $person->getid() ]);
         }
 
         $participations = $em->getRepository('AppBundle:Participant')->findByPersonOrdered($person);
@@ -119,6 +132,7 @@ class PersonController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'nextofkin_form' => $nextOfKinForm->createView(),
+            'groups_form' => $groupsForm->createView(),
             'participations' => $participations
         ));
     }
@@ -234,4 +248,19 @@ class PersonController extends Controller
             ->getForm()
         ;
     }
+
+    private function buildGroupsForm($user)
+    {
+        return $this->createFormBuilder($user)
+            ->setAction($this->generateUrl('admin_person_edit', [ 'id' => $user->getId() ]))
+            ->setMethod('POST')
+            ->add('group', EntityType::class, [
+                'class' => 'AppBundle:Group',
+                'multiple' => true,
+                'expanded' => true]
+            )
+            ->getForm()
+        ;
+    }
+
 }
