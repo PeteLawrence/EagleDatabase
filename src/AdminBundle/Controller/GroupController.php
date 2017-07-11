@@ -73,6 +73,21 @@ class GroupController extends Controller
         ));
     }
 
+
+    /**
+     * Creates an email list for people in the group
+     *
+     * @Route("/{id}/emaillist", name="admin_group_emaillist")
+     * @Method("GET")
+     */
+    public function emailListAction(Group $group)
+    {
+
+        return $this->render('admin/group/emaillist.html.twig', array(
+            'group' => $group
+        ));
+    }
+
     /**
      * Displays a form to edit an existing group entity.
      *
