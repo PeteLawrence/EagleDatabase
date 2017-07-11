@@ -163,6 +163,16 @@ class Person implements AdvancedUserInterface, \Serializable
     private $charge;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Group", inversedBy="person")
+     * @ORM\JoinTable(
+     *     name="GroupToPerson",
+     *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=false)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id", nullable=false)}
+     * )
+     */
+    private $group;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Participant", mappedBy="person")
      */
     private $participant;
@@ -1280,4 +1290,38 @@ class Person implements AdvancedUserInterface, \Serializable
         return $expiringQualifications;
     }
 
+
+    /**
+     * Add group
+     *
+     * @param \AppBundle\Entity\Group $group
+     *
+     * @return Person
+     */
+    public function addGroup(\AppBundle\Entity\Group $group)
+    {
+        $this->group[] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Remove group
+     *
+     * @param \AppBundle\Entity\Group $group
+     */
+    public function removeGroup(\AppBundle\Entity\Group $group)
+    {
+        $this->group->removeElement($group);
+    }
+
+    /**
+     * Get group
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
 }
