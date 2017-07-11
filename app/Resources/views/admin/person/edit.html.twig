@@ -139,7 +139,7 @@
 
         <div class="tab-pane" id="groups" role="tabpanel">
             <h2>Groups</h2>
-            {{ form_start(groups_form) }}
+            {#}{{ form_start(groups_form) }}
             <div class="row">
                 <div class="col-md-12">{{ form_widget(groups_form.group) }}</div>
             </div>
@@ -147,6 +147,7 @@
             <input type="submit" value="Save" class="btn btn-primary" />
 
             {{ form_end(groups_form) }}
+            #}
         </div>
 
         <div class="tab-pane" id="activityhistory" role="tabpanel">

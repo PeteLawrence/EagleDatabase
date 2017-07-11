@@ -92,19 +92,17 @@ class PersonController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $deleteForm = $this->createDeleteForm($person);
+
         $editForm = $this->createForm('AppBundle\Form\Type\PersonType', $person);
         $editForm->handleRequest($request);
 
         $nextOfKinForm = $this->buildNextOfKinForm($person);
         $nextOfKinForm->handleRequest($request);
 
-        $groupsForm = $this->buildGroupsForm($person);
-        $groupsForm->handleRequest($request);
+        //$groupsForm = $this->buildGroupsForm($person);
+        //$groupsForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            dump($person);
-            //die();
-            $em = $this->getDoctrine()->getManager();
             $em->persist($person);
             $em->flush();
 
@@ -118,12 +116,14 @@ class PersonController extends Controller
             return $this->redirectToRoute('admin_person_edit', [ 'id' => $person->getid() ]);
         }
 
-        if ($groupsForm->isSubmitted() && $groupsForm->isValid()) {
+        /*if ($groupsForm->isSubmitted() && $groupsForm->isValid()) {
+            dump($person);
+            die();
             $em->persist($person);
             $em->flush();
 
             return $this->redirectToRoute('admin_person_edit', [ 'id' => $person->getid() ]);
-        }
+        }*/
 
         $participations = $em->getRepository('AppBundle:Participant')->findByPersonOrdered($person);
 
@@ -132,7 +132,7 @@ class PersonController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'nextofkin_form' => $nextOfKinForm->createView(),
-            'groups_form' => $groupsForm->createView(),
+            //'groups_form' => $groupsForm->createView(),
             'participations' => $participations
         ));
     }
