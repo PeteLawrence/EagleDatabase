@@ -1,32 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminbase.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_group_index')}}">Group</a>
+        <span class="breadcrumb-item active">{{ group.name }}</span>
+    </nav>
+{% endblock %}
 
 {% block body %}
-    <h1>Group</h1>
+    <h1>{{ group.name }}</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ group.id }}</td>
-            </tr>
+    <table class="table">
+        <thead>
             <tr>
                 <th>Name</th>
-                <td>{{ group.name }}</td>
+                <th>Actions</th>
             </tr>
+        </thead>
+
+        <tbody>
+            {% for person in group.person %}
+                <tr>
+                    <td>{{ person.name }}</td>
+                    <td></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">Group is empty</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_group_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('admin_group_edit', { 'id': group.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <a href="{{ path('admin_group_emaillist', { id: group.id } ) }}" class="btn btn-info btn-sm">
+        <i class="fa fa-envelope"></i> Email List
+    </a>
 {% endblock %}

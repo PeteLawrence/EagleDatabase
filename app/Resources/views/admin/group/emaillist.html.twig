@@ -5,16 +5,16 @@
         <a class="breadcrumb-item" href="/">Home</a>
         <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
         <a class="breadcrumb-item" href="{{ path('admin_group_index')}}">Group</a>
-        <span class="breadcrumb-item active">Create</span>
+        <a class="breadcrumb-item" href="{{ path('admin_group_show', { id: group.id } )}}">{{ group.name }}</a>
+        <span class="breadcrumb-item active">Email List</span>
     </nav>
 {% endblock %}
 
 {% block body %}
-    <h1>Group creation</h1>
+    <h1>{{ group.name }}</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" class="btn btn-primary" />
-    {{ form_end(form) }}
+    {% for person in group.person %}
+        {{ person.email }};
+    {% endfor %}
 
 {% endblock %}
