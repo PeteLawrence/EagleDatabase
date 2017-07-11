@@ -13,8 +13,10 @@
 {% block body %}
     <h1>{{ group.name }}</h1>
 
-    {% for person in group.person %}
-        {{ person.email }};
-    {% endfor %}
+    <h3>Regular Emails</h3>
+    {{ regularEmailsString }}
+
+    <h3>Crappy BT Emails</h3>
+    {{ btEmailsString }}
 
 {% endblock %}
