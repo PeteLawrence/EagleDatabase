@@ -257,8 +257,12 @@ class PersonController extends Controller
             ->add('group', EntityType::class, [
                 'class' => 'AppBundle:Group',
                 'multiple' => true,
-                'expanded' => true]
-            )
+                'expanded' => true,
+                'query_builder' => function (\Doctrine\ORM\EntityRepository $er) {
+                    return $er->createQueryBuilder('a')
+                        ->orderBy('a.name', 'ASC');
+                    }
+            ])
             ->getForm()
         ;
     }
