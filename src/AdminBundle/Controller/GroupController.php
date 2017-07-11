@@ -6,6 +6,7 @@ use AppBundle\Entity\Group;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Services\GroupService;
 
 /**
  * Group controller.
@@ -80,11 +81,15 @@ class GroupController extends Controller
      * @Route("/{id}/emaillist", name="admin_group_emaillist")
      * @Method("GET")
      */
-    public function emailListAction(Group $group)
+    public function emailListAction(Group $group, GroupService $groupService)
     {
+        $regularEmailsString = $groupService->buildRegularEmailsList($group);
+        $btEmailsString = $groupService->buildBtEmailsList($group);
 
         return $this->render('admin/group/emaillist.html.twig', array(
-            'group' => $group
+            'group' => $group,
+            'regularEmailsString' => $regularEmailsString,
+            'btEmailsString' => $btEmailsString
         ));
     }
 
