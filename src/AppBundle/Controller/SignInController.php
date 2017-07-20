@@ -37,10 +37,13 @@ class SignInController extends Controller
             $p = $data['person'];
 
             if ($p != null) {
+                $participantStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Attending');
+
                 $participant = new Participant();
                 $participant->setSignupMethod('onsite');
                 $participant->setSignupDatetime(new \DateTime());
                 $participant->setManagedActivity($activity);
+                $participant->setParticipantStatus($participantStatus);
                 $participant->setPerson($p);
 
                 //Limit sign-in's to within 6 hours of the end of the event to prevent people signing in to the wrong event
