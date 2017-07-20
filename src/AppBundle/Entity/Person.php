@@ -999,7 +999,18 @@ class Person implements AdvancedUserInterface, \Serializable
     public function isAttending($activity)
     {
         foreach ($this->participant as $participant) {
-            if ($participant->getManagedActivity() == $activity) {
+            if ($participant->getManagedActivity() == $activity && $participant->getParticipantStatus()->getStatus() == 'Attending') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isShortlisted($activity)
+    {
+        foreach ($this->participant as $participant) {
+            if ($participant->getManagedActivity() == $activity && $participant->getParticipantStatus()->getStatus() == 'Shortlist') {
                 return true;
             }
         }

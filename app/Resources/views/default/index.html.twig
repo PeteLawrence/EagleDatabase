@@ -35,8 +35,12 @@
                 </dt>
                 <dd>
                     <a href="{{ url('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
-                    {% if app.user and activity.attending(app.user) %}
-                        <span class="badge badge-success">Attending</span>
+                    {% if app.user %}
+                        {% if activity.attending(app.user) %}
+                            <span class="badge badge-success">Attending</span>
+                        {% elseif activity.shortlisted(app.user)  %}
+                            <span class="badge badge-info">Shortlisted</span>
+                        {% endif %}
                     {% endif %}
                 </dd>
 

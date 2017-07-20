@@ -218,7 +218,18 @@ class ManagedActivity extends \AppBundle\Entity\Activity
     public function isAttending($person)
     {
         foreach ($this->participant as $p) {
-            if ($p->getPerson() == $person) {
+            if ($p->getPerson() == $person && $p->getParticipantStatus()->getStatus() == 'Attending') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isShortlisted($person)
+    {
+        foreach ($this->participant as $p) {
+            if ($p->getPerson() == $person && $p->getParticipantStatus()->getStatus() == 'Shortlist') {
                 return true;
             }
         }
