@@ -161,7 +161,7 @@ class ManagedActivity extends \AppBundle\Entity\Activity
         $people = 0;
         foreach ($this->participant as $p) {
             if ($p->getParticipantStatus()->getCountsTowardsSize()) {
-                $p++;
+                $people++;
             }
         }
 

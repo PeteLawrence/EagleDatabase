@@ -21,9 +21,15 @@
             </div>
         {% endif %}
 
-        <p>
-            Click the button below to sign up to the activity.
-        </p>
+        {% if activity.people >= activity.spaces %}
+            <div class="alert alert-warning" role="alert">
+                This activity is currently full.  Sign up below if you would like to be added to the shortlist.  If a space becomes available you will be notified by the lead coach.
+            </div>
+        {% elseif activity.defaultParticipantStatus.status == 'Shortlist' %}
+            <div class="alert alert-warning" role="alert">
+                Sign up below if you would like to be added to the shortlist.  If a space becomes available you will be notified by the lead coach.
+            </div>
+        {% endif %}
 
         {{ form_start(form) }}
             {{ form_row(form.notes) }}
