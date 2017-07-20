@@ -81,20 +81,18 @@
                         {% else %}
                             {% if activity.allowOnlineSignup %}
                                 {% if activity.acceptingSignups %}
-                                    {% if activity.people < activity.getSpaces %}
 
-                                        {% if app.user.getMemberRegistrationAtDate(activity.activityStart) %}
-                                            <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary btn-block">
-                                                <i class="fa fa-check-square-o float-left"></i>
-                                                Sign Up - {{ activity.defaultParticipantStatus.status }}
-                                            </a>
-                                            {% if activity.signupEnd %}
-                                                Sign up closes on {{ activity.signupEnd|date('jS F') }} at {{ activity.signupEnd|date('H:i') }}
-                                            {% endif %}
-
-                                        {% else %}
-                                            You must have an active membership to sign up
+                                    {% if app.user.getMemberRegistrationAtDate(activity.activityStart) %}
+                                        <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary btn-block">
+                                            <i class="fa fa-check-square-o float-left"></i>
+                                            Sign Up - {{ activity.defaultParticipantStatus.status }}
+                                        </a>
+                                        {% if activity.signupEnd %}
+                                            Sign up closes on {{ activity.signupEnd|date('jS F') }} at {{ activity.signupEnd|date('H:i') }}
                                         {% endif %}
+
+                                    {% else %}
+                                        You must have an active membership to sign up
                                     {% endif %}
                                 {% else %}
                                     Signup from {{ activity.signupStart|date('jS M Y H:i') }}
