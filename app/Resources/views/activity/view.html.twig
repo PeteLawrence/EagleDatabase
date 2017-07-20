@@ -64,26 +64,6 @@
         <div class="card mb-2">
             <h4 class="card-header">Actions</h4>
             <div class="card-block">
-
-                {% if activity.spaces != 0 %}
-                    <strong>Places</strong> {{ activity.people}} / {{ activity.getSpaces }}
-
-                    {% set percentage = (activity.people / activity.spaces) * 100 %}
-                    {% if percentage >= 100 %}
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{percentage}}%" aria-valuenow="{{ activity.people }}" aria-valuemin="0" aria-valuemax="{{ activity.spaces }}"></div>
-                        </div>
-                    {% elseif percentage > 80 %}
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: {{percentage}}%" aria-valuenow="{{ activity.people }}" aria-valuemin="0" aria-valuemax="{{ activity.spaces }}"></div>
-                        </div>
-                    {% else %}
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: {{percentage}}%" aria-valuenow="{{ activity.people }}" aria-valuemin="0" aria-valuemax="{{ activity.spaces }}"></div>
-                        </div>
-                    {% endif %}
-                {% endif %}
-
                 {% if is_granted('ROLE_USER') %}
                     <div class="my-2">
                         {% if app.user.attending(activity) %}
