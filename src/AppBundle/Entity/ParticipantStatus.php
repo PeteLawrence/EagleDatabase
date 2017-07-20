@@ -166,4 +166,10 @@ class ParticipantStatus
     {
         return $this->managedActivity;
     }
+
+
+    public function __toString()
+    {
+        return $this->status;
+    }
 }

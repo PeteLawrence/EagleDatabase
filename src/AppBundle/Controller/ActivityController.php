@@ -218,7 +218,16 @@ class ActivityController extends Controller
 
         if ($signupForm->isSubmitted() && $signupForm->isValid()) {
             $data = $signupForm->getData();
-            $participantStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Attending');
+
+
+            //$participantStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Attending');
+
+            //If trip is not full, use the default status
+            if ($activity->getSpaces() <= $activity->getPeople()) {
+                $participantStatus = $activity->getDefaultParticipantStatus();
+            } else {
+                $participantStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Shortlist');
+            }
 
             $participant = new \AppBundle\Entity\Participant;
             $participant->setManagedActivity($activity);
@@ -450,7 +459,7 @@ class ActivityController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $form = $this->createForm('AppBundle\Form\Type\Activity\ParticipantType', $participant);
+        $form = $this->createForm('AppBundle\Form\Type\Activity\ParticipantWithStatusType', $participant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
