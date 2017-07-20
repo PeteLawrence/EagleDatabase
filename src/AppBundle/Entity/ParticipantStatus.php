@@ -28,6 +28,11 @@ class ParticipantStatus
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Participant", mappedBy="participantStatus")
      */
     private $participant;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ManagedActivity", mappedBy="defaultParticipantStatus")
+     */
+    private $managedActivity;
     /**
      * Constructor
      */
@@ -126,5 +131,39 @@ class ParticipantStatus
     public function getCountsTowardsSize()
     {
         return $this->countsTowardsSize;
+    }
+
+    /**
+     * Add managedActivity
+     *
+     * @param \AppBundle\Entity\ManagedActivity $managedActivity
+     *
+     * @return ParticipantStatus
+     */
+    public function addManagedActivity(\AppBundle\Entity\ManagedActivity $managedActivity)
+    {
+        $this->managedActivity[] = $managedActivity;
+
+        return $this;
+    }
+
+    /**
+     * Remove managedActivity
+     *
+     * @param \AppBundle\Entity\ManagedActivity $managedActivity
+     */
+    public function removeManagedActivity(\AppBundle\Entity\ManagedActivity $managedActivity)
+    {
+        $this->managedActivity->removeElement($managedActivity);
+    }
+
+    /**
+     * Get managedActivity
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getManagedActivity()
+    {
+        return $this->managedActivity;
     }
 }

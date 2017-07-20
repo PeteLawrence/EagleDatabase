@@ -5,9 +5,9 @@ use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Validator\Constraints as AppAssert;
 
 /**
- * @ORM\Entity
- * @AppAssert\MemberQualificationConstraint
  * @ORM\Entity(repositoryClass="AppBundle\Entity\MemberQualificationRepository")
+ * @AppAssert\MemberQualificationConstraint
+ * 
  */
 class MemberQualification
 {
