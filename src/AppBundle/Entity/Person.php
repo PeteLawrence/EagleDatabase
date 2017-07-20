@@ -1007,6 +1007,18 @@ class Person implements AdvancedUserInterface, \Serializable
         return false;
     }
 
+
+    public function getParticipantForActivity($activity)
+    {
+        foreach ($this->participant as $participant) {
+            if ($participant->getManagedActivity() == $activity) {
+                return $participant;
+            }
+        }
+
+        return null;
+    }
+
     public function getName()
     {
         return $this->forename . ' ' . $this->surname;

@@ -67,7 +67,11 @@
                 {% if is_granted('ROLE_USER') %}
                     <div class="my-2">
                         {% if app.user.attending(activity) %}
-                            You are signed up
+                            {% if (app.user.participantForActivity(activity).participantStatus.status == 'Shortlist') %}
+                                You are on the shortlist
+                            {% elseif (app.user.participantForActivity(activity).participantStatus.status == 'Attending') %}
+                                You are signed up
+                            {% endif %}
                             <a href="{{ path('activity_signup', { id: activity.id } ) }}" class="btn btn-warning btn-sm btn-block">
                                 <i class="fa fa-pencil float-left"></i>
                                 Edit
@@ -80,7 +84,7 @@
                                         {% if app.user.getMemberRegistrationAtDate(activity.activityStart) %}
                                             <a href="{{ path('activity_signup', { id: activity.id }) }}" class="btn btn-sm btn-primary btn-block">
                                                 <i class="fa fa-check-square-o float-left"></i>
-                                                Sign Up
+                                                Sign Up - {{ activity.defaultParticipantStatus.status }}
                                             </a>
                                             {% if activity.signupEnd %}
                                                 Sign up closes on {{ activity.signupEnd|date('jS F') }} at {{ activity.signupEnd|date('H:i') }}

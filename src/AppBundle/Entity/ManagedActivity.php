@@ -158,7 +158,14 @@ class ManagedActivity extends \AppBundle\Entity\Activity
 
     public function getPeople()
     {
-        return sizeof($this->participant);
+        $people = 0;
+        foreach ($this->participant as $p) {
+            if ($p->getParticipantStatus()->getCountsTowardsSize()) {
+                $p++;
+            }
+        }
+
+        return $people;
     }
 
     public function acceptingSignups()

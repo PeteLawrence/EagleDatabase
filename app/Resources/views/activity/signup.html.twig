@@ -33,6 +33,12 @@
         <a href="{{ path('activity_view', { id: activity.id }) }}" class="btn btn-secondary">Cancel</a>
 
     {% else %}
+        {% if (app.user.participantForActivity(activity).participantStatus.status == 'Shortlist') %}
+            <div class="alert alert-warning" role="alert">
+                You are currently on the shortlist for this activity.  You will be informed nearer the time whether there's space on the trip for you or not.
+            </div>
+        {% endif %}
+
         <p>You signed up on {{ participant.signupDatetime|date('d M Y') }} at {{ participant.signupDatetime|date('H:i') }}</p>
 
 
