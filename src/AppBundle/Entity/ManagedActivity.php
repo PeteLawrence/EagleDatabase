@@ -44,6 +44,12 @@ class ManagedActivity extends \AppBundle\Entity\Activity
     private $activityCharge;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ParticipantStatus", inversedBy="managedActivity")
+     * @ORM\JoinColumn(name="default_participant_status_id", referencedColumnName="id")
+     */
+    private $defaultParticipantStatus;
+
+    /**
      * Set signinKey
      *
      * @param \DateTime $signinKey
@@ -288,5 +294,29 @@ class ManagedActivity extends \AppBundle\Entity\Activity
         $now = new \DateTime();
 
         return $now > $this->getActivityEnd();
+    }
+
+    /**
+     * Set defaultParticipantStatus
+     *
+     * @param \AppBundle\Entity\ParticipantStatus $defaultParticipantStatus
+     *
+     * @return ManagedActivity
+     */
+    public function setDefaultParticipantStatus(\AppBundle\Entity\ParticipantStatus $defaultParticipantStatus = null)
+    {
+        $this->defaultParticipantStatus = $defaultParticipantStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get defaultParticipantStatus
+     *
+     * @return \AppBundle\Entity\ParticipantStatus
+     */
+    public function getDefaultParticipantStatus()
+    {
+        return $this->defaultParticipantStatus;
     }
 }
