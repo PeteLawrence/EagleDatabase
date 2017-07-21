@@ -27,11 +27,17 @@
             <h4 class="card-header">Summary</h4>
             <div class="card-block">
                 <ul>
-                    <li><strong>Start</strong> {{ activity.activityStart|date('d F Y H:i')}}</li>
-                    <li><strong>End</strong> {{ activity.activityEnd|date('d F Y H:i')}}</li>
+                    <li><strong>Start</strong> {{ activity.activityStart|date('jS F Y H:i')}}</li>
+                    <li><strong>End</strong> {{ activity.activityEnd|date('jS F Y H:i')}}</li>
                     <li><strong>Type</strong> {{ activity.activityType.type }}</li>
                     {% if activity.organiser %}
                         <li><strong>Organiser</strong> {{ activity.organiser.getName }}</li>
+                    {% endif %}
+                    {% if activity.signupStart %}
+                        <li>
+                            <strong>Sign Up</strong>
+                            {{ activity.signupStart|date('jS F H:i')}} - {{ activity.signupEnd|date('jS F Y H:i')}}
+                        </li>
                     {% endif %}
                 </ul>
                 <em>Please note that times and locations may be subject to change.</em>
