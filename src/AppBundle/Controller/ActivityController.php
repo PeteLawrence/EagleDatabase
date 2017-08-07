@@ -223,7 +223,7 @@ class ActivityController extends Controller
             //$participantStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Attending');
 
             //If trip is not full, use the default status
-            if ($activity->getSpaces() <= $activity->getPeople()) {
+            if ($activity->getSpaces() > $activity->getPeople()) {
                 $participantStatus = $activity->getDefaultParticipantStatus();
             } else {
                 $participantStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Shortlist');
