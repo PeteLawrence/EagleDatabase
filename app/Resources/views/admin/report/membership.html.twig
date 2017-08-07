@@ -58,7 +58,7 @@
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 {% if genderChart is defined %}{{ gc_draw(genderChart, 'genderChart') }}{% endif %}
 {% if ageChart is defined %}{{ gc_draw(ageChart, 'ageChart') }}{% endif %}
