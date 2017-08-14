@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Emergency Contacts</h1>
+    <h2>{{ activity.name }}</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Participant Name</th>
+                <th>Emergency Contact Name</th>
+                <th>Relation</th>
+                <th>Contact Details</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for participant in activity.participant %}
+            <tr>
+                <td>{{ participant.person.forename }} {{ participant.person.surname }}</td>
+                <td>{{ participant.person.nextOfKinName }}</td>
+                <td>{{ participant.person.nextOfKinRelation }}</td>
+                <td>{{ participant.person.nextOfKinContactDetails }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

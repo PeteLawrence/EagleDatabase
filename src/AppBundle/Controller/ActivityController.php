@@ -190,8 +190,6 @@ class ActivityController extends Controller
     }
 
 
-
-
     /**
      * @Route("/{id}/signup", name="activity_signup")
      */
@@ -559,6 +557,28 @@ class ActivityController extends Controller
 
         return $this->render(
             'activity/participantsEmailList.html.twig',
+            [
+                'activity' => $activity
+            ]
+        );
+    }
+
+
+    /**
+     * @Route("/{id}/emergencycontacts", name="activity_participants_emergencycontacts")
+     */
+    public function emergencyContactsAction(Request $request, Activity $activity)
+    {
+        //Only allow the organiser access to this page
+        if (
+            $activity->getOrganiser() != $this->getUser() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return $this->render(
+            'activity/emergencycontacts.html.twig',
             [
                 'activity' => $activity
             ]
