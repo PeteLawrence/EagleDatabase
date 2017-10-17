@@ -8,6 +8,54 @@
     "content-hash": "72d44a9feeac99b1b6c8899c0cd4fd5f",
     "packages": [
         {
+            "name": "ambta/doctrine-encrypt-bundle",
+            "version": "2.5.4",
+            "target-dir": "Ambta/DoctrineEncryptBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ambta/DoctrineEncryptBundle.git",
+                "reference": "c2f3403b04b911c6cefd49e2f2e1bc48eb424e59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ambta/DoctrineEncryptBundle/zipball/c2f3403b04b911c6cefd49e2f2e1bc48eb424e59",
+                "reference": "c2f3403b04b911c6cefd49e2f2e1bc48eb424e59",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": ">=2.5",
+                "ext-mcrypt": "*",
+                "php": ">=5.4",
+                "symfony/framework-bundle": ">=2.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ambta\\DoctrineEncryptBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel van Nuil",
+                    "email": "marcel@ambta.com"
+                }
+            ],
+            "description": "Symfony 2 bundle which allows to encrypt data in database with some encrypt algorithm",
+            "keywords": [
+                "Rijndael",
+                "aes256",
+                "decrypt",
+                "doctrine",
+                "encrypt",
+                "symfony"
+            ],
+            "time": "2016-09-30 08:17:40"
+        },
+        {
             "name": "cmen/google-charts-bundle",
             "version": "2.1.1",
             "source": {
