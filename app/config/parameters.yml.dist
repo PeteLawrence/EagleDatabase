@@ -17,8 +17,7 @@ parameters:
     mailer_encryption: ~
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            dlKfa0afsmasf8yfaa7s5a7aQEdPCi7
-
+    secret:            XXXXX
     stripe.secret_key: 'sk_live_XXXXX'
     stripe.publishable_key: 'pk_live_XXXXX'
 
