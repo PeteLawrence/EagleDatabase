@@ -12,16 +12,31 @@
 
     <h2>Renew - Extras</h2>
 
-    {% if form.children|length == 1 %}
-        <p>No extras can be added, simply click 'Next' to continue</p>
-    {% endif %}
+    <dl>
+        <dt>Type</dt>
+        <dd>{{ mtp.membershipType.type }}</dd>
 
-    {{ form_start(form) }}
-        {% for child in form.children %}
-            {{ form_row(child) }}
-        {% endfor %}
+        <dt>Period</dt>
+        <dd>{{ mtp.membershipPeriod.fromDate|date('jS F Y') }} - {{ mtp.membershipPeriod.toDate|date('jS F Y') }}</dd>
 
-        <input type="submit" value="Next" class="btn btn-primary" />
-    {{ form_end(form) }}
+        <dt>Price</dt>
+        <dd>£{{ mtp.price}}</dd>
+
+        <dt>Extras</dt>
+        <dd>
+
+            {% if form.children|length == 1 %}
+                <p>No extras can be added, simply click 'Next' to continue</p>
+            {% endif %}
+
+            {{ form_start(form) }}
+                {% for child in form.children %}
+                    {{ form_row(child) }}
+                {% endfor %}
+
+                <input type="submit" value="Next" class="btn btn-primary" />
+            {{ form_end(form) }}
+        </dd>
+    </dl>
 
 {% endblock %}

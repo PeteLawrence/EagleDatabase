@@ -56,6 +56,28 @@ class MembershipService
             ->getForm();
     }
 
+
+    /*
+     * Given a user, return the next applicable MembershipTypePeriod
+     */
+    public function getNextMembershipTypePeriod($person)
+    {
+        $currentMemberRegistration = $person->getCurrentMemberRegistration();
+        $currentMembershipType = $currentMemberRegistration->getMembershipTypePeriod()->getMembershipType();
+
+        $membershipTypePeriods = $this->em->getRepository('AppBundle:MembershipTypePeriod')->findAll();
+        $now = new \DateTime();
+        foreach ($membershipTypePeriods as $mtp) {
+            $mp = $mtp->getMembershipPeriod();
+            if (($mp->getSignupFromDate() < $now) && ($mp->getSignupToDate() > $now) && $mtp->getMembershipType() == $currentMembershipType && $mtp != $currentMemberRegistration->getMembershipTypePeriod()) {
+                return $mtp;
+            }
+        }
+
+        return null;
+    }
+
+
     public function buildMembershipExtrasForm($membershipTypePeriod)
     {
         $fb = $this->formFactory->createBuilder()
@@ -125,5 +147,55 @@ class MembershipService
         $memberRegistrationCharge->setPerson($memberRegistration->getPerson());
 
         return $memberRegistrationCharge;
+    }
+
+
+    public function buildConfirmForm()
+    {
+        return $this->formFactory->createBuilder()
+            ->setMethod('POST')
+            ->add('confirm', CheckboxType::class, [ 'label' => 'I confirm that the above details are correct'])
+            ->getForm();
+    }
+
+
+    public function canPersonRenew($person)
+    {
+        //Get current membership type
+        $currentMembershipType = $person->getCurrentMemberRegistration();
+        if (!$currentMembershipType) { //not currently a member, so cannot renew
+            return false;
+        }
+
+        //Is there an active MembershipTypePeriod given $currentMembershipType?
+        $nextMembershipTypePeriod = $this->getNextMembershipTypePeriod($person);
+        if (!$nextMembershipTypePeriod) {
+            return false;
+        }
+
+        //Have they already renewed?
+        if ($this->hasPersonRenewed($person)) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public function hasPersonRenewed($person)
+    {
+        $nextMembershipTypePeriod = $this->getNextMembershipTypePeriod($person);  //the next applicable MembershipTypePeriod
+        if (!$nextMembershipTypePeriod) {
+            return false;
+        }
+
+        //
+        foreach ($person->getMemberRegistration() as $r) {
+            if ($r->getMembershipTypePeriod() == $nextMembershipTypePeriod) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

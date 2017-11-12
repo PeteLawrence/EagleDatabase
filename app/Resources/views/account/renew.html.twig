@@ -12,12 +12,57 @@
 
     <h2>Renew</h2>
 
+    <p>Please confirm that the details below are correct.  If any details are wrong you can correct them on your <a href="{{ path('account_edit')}}">profile</a> before continuing.</p>
+
+
+    <dl>
+        <dt>Name</dt>
+        <dd>{{ app.user.name }}</dd>
+
+        <dt>Date Of Birth</dt>
+        <dd>{{ app.user.dob|date('jS F Y') }}</dd>
+
+        <dt>Gender</dt>
+        <dd>
+            {% if (app.user.gender == 'M') %}Male{% endif %}
+            {% if (app.user.gender == 'F') %}Female{% endif %}
+        </dd>
+
+        <dt>Email</dt>
+        <dd>{{ app.user.email }}</dd>
+
+        <dt>Telephone</dt>
+        <dd>{{ app.user.telephone }}</dd>
+
+        <dt>Mobile</dt>
+        <dd>{{ app.user.mobile }}</dd>
+
+        <dt>Address</dt>
+        <dd>
+            <address>
+                {{ app.user.addr1 }},
+                {{ app.user.addr2 }},
+                {{ app.user.town }},
+                {{ app.user.county }},
+                {{ app.user.postcode }}
+            </address>
+        </dd>
+
+        <dt>Next Of Kin</dt>
+        <dd>{{ app.user.nextOfKinName }} - {{ app.user.nextOfKinRelation }} - {{ app.user.nextOfKinContactDetails }}</dd>
+
+        <dt>Membership Type</dt>
+        <dd>
+            {{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }} <em>(To change this please contact the secretary on enrolment night)</em>
+        </dd>
+    </dl>
+
+
     {{ form_start(form) }}
 
         <div class="form-group row">
-            <label for="example-text-input" class="col-2 col-form-label">Membership Type</label>
             <div class="col-4">
-                {{ form_widget(form.membershipTypePeriod) }}
+                {{ form_widget(form.confirm) }}
             </div>
         </div>
 

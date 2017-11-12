@@ -18,6 +18,7 @@ use AppBundle\Form\StripePaymentForm;
 use Symfony\Component\HttpFoundation\Session\Session;
 use AppBundle\Entity\MemberRegistration;
 use AppBundle\Entity\MemberQualification;
+use AppBundle\Services\MembershipService;
 
 /**
  * @Route("/account")
@@ -27,17 +28,20 @@ class AccountController extends Controller
     /**
      * @Route("/", name="account_overview")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, MembershipService $membershipService)
     {
         $em = $this->get('doctrine')->getManager();
         $activityRepository = $em->getRepository('AppBundle:ManagedActivity');
 
         $upcomingActivities = $activityRepository->findUpcomingActivities($this->getUser(), 3);
 
+        $nextMtp = $membershipService->getNextMembershipTypePeriod($this->getUser());
+
         // replace this example code with whatever you need
         return $this->render('account/overview.html.twig',
             [
-                'upcomingActivities' => $upcomingActivities
+                'upcomingActivities' => $upcomingActivities,
+                'canRenew' => $membershipService->canPersonRenew($this->getUser())
             ]
         );
     }
@@ -214,18 +218,15 @@ class AccountController extends Controller
     /**
      * @Route("/membership/renew", name="account_membership_renew")
      */
-    public function membershipRenewAction(Request $request)
+    public function membershipRenewAction(Request $request, MembershipService $membershipService)
     {
-        $membershipService = $this->get('membership_service');
-
         //Get available membership options
-        $form = $membershipService->buildMembershipTypeForm();
+        $form = $membershipService->buildConfirmForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $request->getSession()->set('renew_mtp', $data['membershipTypePeriod']->getId());
 
             return $this->redirectToRoute('account_membership_renew2');
         }
@@ -242,13 +243,25 @@ class AccountController extends Controller
     /**
      * @Route("/membership/renew2", name="account_membership_renew2")
      */
-    public function membershipRenew2Action(Request $request)
+    public function membershipRenew2Action(Request $request,  MembershipService $membershipService)
     {
-        $membershipService = $this->get('membership_service');
-
         $em = $this->get('doctrine')->getManager();
         $session = $request->getSession();
 
+        //Set MTP to be
+        $mtp = $membershipService->getNextMembershipTypePeriod($this->getUser());
+
+        if (!$mtp) {
+            $this->addFlash(
+                'error',
+                'Unable to complete your renewal.  Please contact the club secretary.'
+            );
+            return $this->redirectToRoute('account_overview');
+        }
+
+        $request->getSession()->set('renew_mtp', $mtp->getId());
+
+        ///
         $mtp = $em->getRepository('AppBundle:MembershipTypePeriod')->findOneById($session->get('renew_mtp'));
 
         //Get available membership options
@@ -275,7 +288,8 @@ class AccountController extends Controller
         return $this->render(
             'account/renew2.html.twig',
             [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'mtp' => $mtp
             ]
         );
     }
@@ -284,9 +298,8 @@ class AccountController extends Controller
     /**
      * @Route("/membership/renew3", name="account_membership_renew3")
      */
-    public function membershipRenew3Action(Request $request)
+    public function membershipRenew3Action(Request $request,  MembershipService $membershipService)
     {
-        $membershipService = $this->get('membership_service');
         $session = $request->getSession();
 
         //Create the MemberRegistration record
@@ -312,10 +325,9 @@ class AccountController extends Controller
     /**
      * @Route("/membership/renew/paynow", name="account_membership_renew_paynow")
      */
-    public function membershipRenewPayNowAction(Request $request)
+    public function membershipRenewPayNowAction(Request $request,  MembershipService $membershipService)
     {
         $em = $this->get('doctrine')->getManager();
-        $membershipService = $this->get('membership_service');
         $session = $request->getSession();
 
         //Create the MemberRegistration record
@@ -377,9 +389,8 @@ class AccountController extends Controller
     /**
      * @Route("/membership/renew/paylater", name="account_membership_renew_paylater")
      */
-    public function membershipRenewPayLaterAction(Request $request)
+    public function membershipRenewPayLaterAction(Request $request,  MembershipService $membershipService)
     {
-        $membershipService = $this->get('membership_service');
         $em = $this->get('doctrine')->getManager();
         $session = $request->getSession();
 
