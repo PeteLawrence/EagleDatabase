@@ -2,9 +2,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Validator\Constraints as AppAssert;
 
 /**
  * @ORM\Entity
+ * @AppAssert\MembershipPeriodConstraint
  */
 class MembershipPeriod
 {

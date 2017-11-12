@@ -8,6 +8,8 @@
             <tr>
                 <th>From</th>
                 <th>To</th>
+                <th>Signup From</th>
+                <th>Signup To</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,6 +18,8 @@
             <tr>
                 <td>{% if membershipPeriod.fromDate %}{{ membershipPeriod.fromDate|date('d/m/Y') }}{% endif %}</td>
                 <td>{% if membershipPeriod.toDate %}{{ membershipPeriod.toDate|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if membershipPeriod.signupFromDate %}{{ membershipPeriod.signupFromDate|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if membershipPeriod.signupToDate %}{{ membershipPeriod.signupToDate|date('d/m/Y') }}{% endif %}</td>
                 <td>
                     <a href="{{ path('admin_membershipperiod_edit', { 'id': membershipPeriod.id }) }}" class="btn"><i class="fa fa-pencil"></i></a>
                 </td>
