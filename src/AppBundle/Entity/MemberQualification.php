@@ -49,6 +49,11 @@ class MemberQualification
     private $verifiedDateTime;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $superseded;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Qualification", inversedBy="memberQualification")
      * @ORM\JoinColumn(name="qualification_id", referencedColumnName="id")
      */
@@ -319,5 +324,29 @@ class MemberQualification
     public function getVerifiedBy()
     {
         return $this->verifiedBy;
+    }
+
+    /**
+     * Set superseded
+     *
+     * @param boolean $superseded
+     *
+     * @return MemberQualification
+     */
+    public function setSuperseded($superseded)
+    {
+        $this->superseded = $superseded;
+
+        return $this;
+    }
+
+    /**
+     * Get superseded
+     *
+     * @return boolean
+     */
+    public function getSuperseded()
+    {
+        return $this->superseded;
     }
 }

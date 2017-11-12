@@ -264,7 +264,7 @@
                     </tr>
                 </thead>
                 {% for qualification in person.memberQualification %}
-                    <tr>
+                    <tr {% if qualification.superseded %}class="text-muted"{% endif %}>
                         <td>{{ qualification.qualification.name }}</td>
                         <td>{{ qualification.validFrom|date('d/m/Y') }}</td>
                         <td>

@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use AppBundle\Entity\Person;
@@ -45,6 +46,10 @@ class MemberQualificationType extends AbstractType
                 'format' => 'd MMMM y',
                 'label' => 'Valid to (if applicable)',
                 'years' => range(1975, 2030),
+                'required' => false
+            ])
+            ->add('superseded', CheckboxType::class, [
+                'label' => 'Superseded',
                 'required' => false
             ])
             ->add('notes', TextareaType::class, [

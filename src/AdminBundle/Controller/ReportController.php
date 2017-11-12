@@ -364,7 +364,7 @@ class ReportController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $qualifications = $em->getRepository('AppBundle:MemberQualification')->findByQualification($data['qualification']);
+            $qualifications = $em->getRepository('AppBundle:MemberQualification')->findMemberQualificationsByType($data['qualification']);
 
             return $this->render('admin/report/qualifications.html.twig', array(
                 'form' => $form->createView(),
