@@ -33,8 +33,6 @@ class MembershipPeriodConstraintValidator extends ConstraintValidator
             }
 
             if ($mp->getSignupFromDate() <= $membershipPeriod->getSignupToDate() && $membershipPeriod->getSignupFromDate() <= $mp->getSignupToDate()) {
-                dump($mp);
-                dump($membershipPeriod);
                 $this->context->buildViolation($constraint->message)
                     ->atPath('signupFromDate')
                     ->addViolation();
