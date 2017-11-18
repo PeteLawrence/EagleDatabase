@@ -17,7 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-            new Ambta\DoctrineEncryptBundle\AmbtaDoctrineEncryptBundle(),
+            //new Ambta\DoctrineEncryptBundle\AmbtaDoctrineEncryptBundle(),
             new AppBundle\AppBundle(),
             new AdminBundle\AdminBundle()
         ];
