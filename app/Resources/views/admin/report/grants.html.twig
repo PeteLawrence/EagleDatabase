@@ -19,7 +19,7 @@
     <input type="submit" value="Go" class="btn btn-primary" />
     {{ form_end(form) }}
 
-
+    {% if membership is defined %}
     <h2>Membership</h2>
     <table class="table">
         <thead>
@@ -119,5 +119,7 @@
             </tr>
         </tbody>
     </table>
+
+    {% endif %}
 
 {% endblock %}
