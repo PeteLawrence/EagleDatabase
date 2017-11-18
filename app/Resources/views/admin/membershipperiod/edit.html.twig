@@ -1,5 +1,14 @@
 {% extends 'adminbase.html.twig' %}
 
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_membershipperiod_index')}}">Mempership Periods</a>
+        <span class="breadcrumb-item active">{{ membershipPeriod.fromdate|date('d M Y')}} → {{ membershipPeriod.toDate|date('d M Y') }}</span>
+    </nav>
+{% endblock %}
+
 {% block body %}
     <h1>MembershipPeriod edit</h1>
 

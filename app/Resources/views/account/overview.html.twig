@@ -29,7 +29,7 @@
                             <strong>Membership Number: {{ app.user.id }}</strong>
                         </p>
                         <p class="card-text">
-                            You are currently registered with {{ site_name }} as a <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }}</strong> until <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</strong>.
+                            You are currently registered with {{ site_name }} as a <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }}</strong> until <strong>{{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('jS F Y') }}</strong>.
                         </p>
 
                     </div>

@@ -1,25 +1,29 @@
 {% extends 'adminbase.html.twig' %}
 
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <span class="breadcrumb-item active">Membership Periods</span>
+    </nav>
+{% endblock %}
+
 {% block body %}
     <h1>MembershipPeriod list</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>From</th>
-                <th>To</th>
-                <th>Signup From</th>
-                <th>Signup To</th>
+                <th>Membership Dates</th>
+                <th>Signup Dates</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for membershipPeriod in membershipPeriods %}
             <tr>
-                <td>{% if membershipPeriod.fromDate %}{{ membershipPeriod.fromDate|date('d/m/Y') }}{% endif %}</td>
-                <td>{% if membershipPeriod.toDate %}{{ membershipPeriod.toDate|date('d/m/Y') }}{% endif %}</td>
-                <td>{% if membershipPeriod.signupFromDate %}{{ membershipPeriod.signupFromDate|date('d/m/Y') }}{% endif %}</td>
-                <td>{% if membershipPeriod.signupToDate %}{{ membershipPeriod.signupToDate|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ membershipPeriod.fromDate|date('jS M Y') }} → {{ membershipPeriod.toDate|date('jS M Y') }}</td>
+                <td>{{ membershipPeriod.signupFromDate|date('jS M Y') }} → {{ membershipPeriod.signupToDate|date('jS M Y') }}</td>
                 <td>
                     <a href="{{ path('admin_membershipperiod_edit', { 'id': membershipPeriod.id }) }}" class="btn"><i class="fa fa-pencil"></i></a>
                 </td>

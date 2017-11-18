@@ -14,6 +14,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Membership Type</th>
                 <th>Extra</th>
                 <th>Period</th>
                 <th>Value</th>
@@ -23,8 +24,9 @@
         <tbody>
         {% for membershipTypePeriodExtra in membershipTypePeriodExtras %}
             <tr>
+                <td>{{ membershipTypePeriodExtra.membershipTypePeriod.membershipType.type }}</td>
                 <td>{{ membershipTypePeriodExtra.membershipExtra.name }}</td>
-                <td>{{ membershipTypePeriodExtra.membershipTypePeriod.membershipPeriod.fromdate|date('d M Y') }}</td>
+                <td>{{ membershipTypePeriodExtra.membershipTypePeriod.membershipPeriod.fromdate|date('d M Y') }} → {{ membershipTypePeriodExtra.membershipTypePeriod.membershipPeriod.todate|date('d M Y') }}</td>
                 <td>&pound;{{ membershipTypePeriodExtra.value|number_format(2) }}</td>
                 <td>
                     <a href="{{ path('admin_membershiptypeperiodextra_edit', { 'id': membershipTypePeriodExtra.id }) }}" class="btn"><i class="fa fa-pencil"></i></a>

@@ -31,7 +31,7 @@
                     <td>{{ member.forename }} {{ member.surname }}</td>
                     <td>{{ member.email }}</td>
                     <td>{{ member.currentMemberRegistration.membershipTypePeriod.membershipType.type }}</td>
-                    <td>{{ member.currentMemberRegistration.registrationDateTime|date('d/m/Y') }}
+                    <td>{{ member.currentMemberRegistration.registrationDateTime|date('jS M Y') }}
                 </tr>
             {% endfor %}
         </tbody>

@@ -20,7 +20,7 @@ class MembershipTypePeriodType extends AbstractType
         $builder
             ->add('membershipType', EntityType::class, ['class' => 'AppBundle:MembershipType', 'choice_label' => 'type'])
             ->add('membershipPeriod', EntityType::class, ['class' => 'AppBundle:MembershipPeriod', 'choice_label' => function (MembershipPeriod $a) {
-                return sprintf('%s → %s', $a->getFromDate()->format('d/m/Y'), $a->getToDate()->format('d/m/Y'));
+                return sprintf('%s → %s', $a->getFromDate()->format('jS F Y'), $a->getToDate()->format('jS F Y'));
             }])
             ->add('price', MoneyType::class, [ 'currency' => 'GBP' ])
         ;

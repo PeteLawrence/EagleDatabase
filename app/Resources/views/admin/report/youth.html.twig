@@ -24,7 +24,7 @@
             {% set diff = date().diff(date(p.dob)) %}
             <tr>
                 <td>{{ p.name }}</td>
-                <td>{{ p.dob|date('d/m/Y') }}</td>
+                <td>{{ p.dob|date('jS M Y') }}</td>
                 <td>{{ diff.y }}</td>
             </tr>
         {% endfor %}

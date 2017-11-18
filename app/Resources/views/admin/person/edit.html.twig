@@ -166,7 +166,7 @@
                         <tr>
                             <td>
                                 <a href="{{ path('activity_view', { id: participant.managedActivity.id }) }}">{{ participant.managedActivity.name }}</td>
-                            <td>{{ participant.managedActivity.activityStart|date('d/m/Y')}}</td>
+                            <td>{{ participant.managedActivity.activityStart|date('jS M Y')}}</td>
                             <td>{{ participant.managedActivity.activityType.type }}</td>
                         </tr>
                     {% endfor %}
@@ -188,8 +188,8 @@
                 </thead>
                 {% for registration in person.memberRegistration %}
                     <tr>
-                        <td>{{ registration.membershipTypePeriod.membershipPeriod.fromDate|date('d/m/Y') }}</td>
-                        <td>{{ registration.membershipTypePeriod.membershipPeriod.toDate|date('d/m/Y') }}</td>
+                        <td>{{ registration.membershipTypePeriod.membershipPeriod.fromDate|date('jS M Y') }}</td>
+                        <td>{{ registration.membershipTypePeriod.membershipPeriod.toDate|date('jS M Y') }}</td>
                         <td>{{ registration.membershipTypePeriod.membershipType.type }}</td>
                         <td>
                             {% if registration.memberRegistrationCharge and registration.memberRegistrationCharge.paid %}
@@ -266,10 +266,10 @@
                 {% for qualification in person.memberQualification %}
                     <tr {% if qualification.superseded %}class="text-muted"{% endif %}>
                         <td>{{ qualification.qualification.name }}</td>
-                        <td>{{ qualification.validFrom|date('d/m/Y') }}</td>
+                        <td>{{ qualification.validFrom|date('jS M Y') }}</td>
                         <td>
                             {% if qualification.validTo %}
-                                {{ qualification.validTo|date('d/m/Y') }}
+                                {{ qualification.validTo|date('jS M Y') }}
                             {% else %}
                                 ...
                             {% endif %}
@@ -277,7 +277,7 @@
                         <td>
                             {% if qualification.qualification.verificationRequired %}
                                 {% if qualification.verifiedBy %}
-                                    <span class="verified" title="{{ qualification.verifiedBy.name }}" data-content="{{ qualification.verifiedDateTime|date('d M Y') }}">
+                                    <span class="verified" title="{{ qualification.verifiedBy.name }}" data-content="{{ qualification.verifiedDateTime|date('jS M Y') }}">
                                         <i class="fa fa-check text-success"></i>
                                     </span>
                                 {% else %}

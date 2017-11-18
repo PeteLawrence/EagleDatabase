@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-6 offset-3">
                 <h1>Sign In</h1>
-                <h2>{{ activity.name}} - {{ activity.activityStart|date("d/m/Y") }}</h2>
+                <h2>{{ activity.name}} - {{ activity.activityStart|date("jS M Y") }}</h2>
                 {% for flash_message in app.session.flashBag.get('notice') %}
                     <div class="alert alert-success" role="alert">
                         {{ flash_message }}

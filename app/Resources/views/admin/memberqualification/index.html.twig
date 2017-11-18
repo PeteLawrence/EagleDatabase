@@ -16,8 +16,8 @@
         {% for memberQualification in memberQualifications %}
             <tr>
                 <td>{{ memberQualification.qualification.name }}</td>
-                <td>{{ memberQualification.validFrom|date('d/m/Y') }}</td>
-                <td>{{ memberQualification.validTo|date('d/m/Y') }}</td>
+                <td>{{ memberQualification.validFrom|date('jS M Y') }}</td>
+                <td>{{ memberQualification.validTo|date('jS M Y') }}</td>
                 <td>
                     <a href="{{ path('admin_memberqualification_show', { 'personId': memberQualification.person.id, 'id': memberQualification.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
                     <a href="{{ path('admin_memberqualification_edit', { 'personId': memberQualification.person.id, 'id': memberQualification.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
