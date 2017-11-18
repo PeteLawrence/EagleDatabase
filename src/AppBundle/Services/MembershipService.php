@@ -78,13 +78,19 @@ class MembershipService
     }
 
 
-    public function buildMembershipExtrasForm($membershipTypePeriod)
+    public function buildMembershipExtrasForm($membershipTypePeriod, $includeAdminExtras = true)
     {
         $fb = $this->formFactory->createBuilder()
             ->setMethod('POST');
 
         //Loop over each of the extras available given $membershipTypePeriod
         foreach ($membershipTypePeriod->getMembershipTypePeriodExtra() as $extra) {
+
+            // Don't include the extra if its admin only
+            if (!$includeAdminExtras && $extra->getMembershipExtra()->getAdminSelectableOnly()) {
+                continue;
+            }
+
             $fb->add(
                 'extra_' . $extra->getId(),
                 CheckboxType::class,

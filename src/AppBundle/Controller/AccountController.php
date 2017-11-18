@@ -265,7 +265,7 @@ class AccountController extends Controller
         $mtp = $em->getRepository('AppBundle:MembershipTypePeriod')->findOneById($session->get('renew_mtp'));
 
         //Get available membership options
-        $form = $membershipService->buildMembershipExtrasForm($mtp);
+        $form = $membershipService->buildMembershipExtrasForm($mtp, false);
 
 
         if ($request->getMethod() == 'POST') {

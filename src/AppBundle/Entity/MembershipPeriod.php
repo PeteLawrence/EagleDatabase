@@ -6,7 +6,6 @@ use AppBundle\Validator\Constraints as AppAssert;
 
 /**
  * @ORM\Entity
- * @AppAssert\MembershipPeriodConstraint
  */
 class MembershipPeriod
 {

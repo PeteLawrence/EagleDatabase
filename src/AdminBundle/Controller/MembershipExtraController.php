@@ -89,7 +89,7 @@ class MembershipExtraController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_membershipextra_edit', array('id' => $membershipExtra->getId()));
+            return $this->redirectToRoute('admin_membershipextra_index');
         }
 
         return $this->render('admin/membershipextra/edit.html.twig', array(
