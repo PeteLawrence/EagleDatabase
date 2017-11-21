@@ -44,3 +44,8 @@ services:
     AppBundle\EventListener\LoginListener:
         tags:
             - { name: kernel.event_listener, event: security.interactive_login }
+
+
+    AppBundle\Form\Extension\HelpTextExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }

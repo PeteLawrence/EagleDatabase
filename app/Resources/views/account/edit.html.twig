@@ -17,58 +17,18 @@
             <div class="card card-block">
                 <h4 class="card-title">You</h4>
                 <div class="card-text">
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.forename) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.forename) }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.surname) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.surname) }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.gender) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.gender) }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.dob) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.dob) }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.bcMembershipNumber) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.bcMembershipNumber) }}
-                        </div>
-                    </div>
+                    {{ form_row(nameForm.forename)}}
+                    {{ form_row(nameForm.surname)}}
+                    {{ form_row(nameForm.gender)}}
+                    {{ form_row(nameForm.dob)}}
+                    {{ form_row(nameForm.bcMembershipNumber) }}
                 </div>
 
                 <div class="card-text">
                     <h4 class="card-title">Next of Kin</h4>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.nextOfKinName) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.nextOfKinName) }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.nextOfKinRelation) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.nextOfKinRelation) }}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.nextOfKinContactDetails) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.nextOfKinContactDetails) }}
-                        </div>
-                    </div>
+                    {{ form_row(nameForm.nextOfKinName)}}
+                    {{ form_row(nameForm.nextOfKinRelation)}}
+                    {{ form_row(nameForm.nextOfKinContactDetails)}}
                 </div>
             </div>
 
@@ -76,68 +36,15 @@
             <div class="card card-block">
                 <h4 class="card-title">Contact Details</h4>
                 <div class="card-text">
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.email) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.email) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.telephone) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.telephone) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.mobile) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.mobile) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.addr1) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.addr1) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.addr2) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.addr2) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.addr3) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.addr3) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.town) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.town) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.county) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.county) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-4 col-form-label">{{ form_label(nameForm.postcode) }}</label>
-                        <div class="col-8">
-                            {{ form_widget(nameForm.postcode) }}
-                        </div>
-                    </div>
+                    {{ form_row(nameForm.email)}}
+                    {{ form_row(nameForm.telephone)}}
+                    {{ form_row(nameForm.mobile)}}
+                    {{ form_row(nameForm.addr1)}}
+                    {{ form_row(nameForm.addr2)}}
+                    {{ form_row(nameForm.addr3)}}
+                    {{ form_row(nameForm.town)}}
+                    {{ form_row(nameForm.county)}}
+                    {{ form_row(nameForm.postcode)}}
                 </div>
             </div>
         </div>

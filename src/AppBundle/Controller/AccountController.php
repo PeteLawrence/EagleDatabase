@@ -483,7 +483,7 @@ class AccountController extends Controller
         return $this->createFormBuilder($user)
             ->setAction($this->generateUrl('account_edit'))
             ->setMethod('POST')
-            ->add('forename', TextType::class, [ 'attr' => ['placeholder' => 'Forename(s)'] ])
+            ->add('forename', TextType::class, [ 'attr' => ['placeholder' => 'Forename(s)']])
             ->add('surname', TextType::class, [ 'attr' => ['placeholder' => 'Surname'] ])
             ->add('email', EmailType::class, [ 'attr' => ['placeholder' => 'Email Address'] ])
             ->add('gender', ChoiceType::class, [ 'choices' => [ 'Female' => 'F', 'Male' => 'M'] ])

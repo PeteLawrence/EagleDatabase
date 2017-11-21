@@ -40,6 +40,7 @@ twig:
     form_themes:
         # Bootstrap:
         - bootstrap_3_layout.html.twig
+        - Form/overrides.html.twig
     globals:
         site_name: '%site.name%'
         site_email: '%site.email%'

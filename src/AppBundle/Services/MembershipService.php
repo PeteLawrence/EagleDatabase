@@ -96,11 +96,11 @@ class MembershipService
                 CheckboxType::class,
                 [
                     'label' => sprintf(
-                        '£%s - %s (%s)',
+                        '£%s - %s',
                         number_format($extra->getValue(), 2),
-                        $extra->getMembershipExtra()->getName(),
-                        $extra->getMembershipExtra()->getDescription()
+                        $extra->getMembershipExtra()->getName()
                     ),
+                    'help' => $extra->getMembershipExtra()->getDescription(),
                     'required' => false
                 ]
             );
