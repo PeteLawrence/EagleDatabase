@@ -1,0 +1,33 @@
+{% use "bootstrap_3_layout.html.twig" %}
+
+{% block form_row -%}
+    <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {% if help_text is defined %}
+            <small class="form-text text-muted">{{ help_text }}</small>
+        {% endif %}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+
+
+{% block checkbox_row -%}
+    <div class="form-group{% if not valid %} has-error{% endif %}">
+        {{- form_widget(form) -}}
+        {% if help_text is defined %}
+            <small class="form-text text-muted">{{ help_text }}</small>
+        {% endif %}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock checkbox_row %}
+
+
+{% block form_label %}
+    {{ parent() }}
+
+    {% if required %}
+        <span class="required" title="This field is required">*</span>
+    {% endif %}
+{% endblock %}

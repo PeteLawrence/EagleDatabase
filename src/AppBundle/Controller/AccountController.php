@@ -487,7 +487,7 @@ class AccountController extends Controller
             ->add('surname', TextType::class, [ 'attr' => ['placeholder' => 'Surname'] ])
             ->add('email', EmailType::class, [ 'attr' => ['placeholder' => 'Email Address'] ])
             ->add('gender', ChoiceType::class, [ 'choices' => [ 'Female' => 'F', 'Male' => 'M'] ])
-            ->add('bcMembershipNumber', TextType::class, [ 'attr' => ['placeholder' => 'BC Membership Number'], 'label' => 'BC Membership Number', 'required' => false ])
+            ->add('bcMembershipNumber', TextType::class, [ 'attr' => ['placeholder' => 'British Canoeing Membership Number'], 'label' => 'British Canoeing Membership Number', 'required' => false ])
             ->add('dob', BirthdayType::class, [ 'widget' => 'choice', 'label' => 'D.o.B', 'format' => 'd MMMM y', 'years' => range(1910, date('Y')) ])
             ->add('addr1', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 1'] ])
             ->add('addr2', TextType::class, [ 'attr' => ['placeholder' => 'Address Line 2'], 'required' => false ])

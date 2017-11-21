@@ -12,6 +12,8 @@
 
     <h2>Renew</h2>
 
+    <h3>Your Details</h3>
+
     <p>Please confirm that the details below are correct.  If any details are wrong you can correct them on your <a href="{{ path('account_edit')}}">profile</a> before continuing.</p>
 
 
@@ -50,10 +52,20 @@
 
         <dt>Next Of Kin</dt>
         <dd>{{ app.user.nextOfKinName }} - {{ app.user.nextOfKinRelation }} - {{ app.user.nextOfKinContactDetails }}</dd>
+    </dl>
 
+    <h3>Your Membership</h3>
+
+    <dl>
         <dt>Membership Type</dt>
         <dd>
-            {{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }} <em>(To change this please contact the secretary on enrolment night)</em>
+            {{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }}
+            <br /><em>To change this please contact the secretary on enrolment night</em>
+        </dd>
+
+        <dt>Membership Period</dt>
+        <dd>
+            {{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.fromDate|date('jS F Y') }} - {{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('jS F Y') }}</em>
         </dd>
     </dl>
 
