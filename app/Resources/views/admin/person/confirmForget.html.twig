@@ -1,0 +1,24 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Forget {{ person.name }}{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_index')}}">People</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_edit', { id: person.id })}}">People</a>
+        <span class="breadcrumb-item active">Forget</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Forget {{ person.name}}</h1>
+
+    <p>Are you sure that you want {{ person.name }} to be forgotten?</p>
+
+    {{ form_start(form) }}
+        <input type="submit" class="btn btn-danger" value="Confirm" />
+    {{ form_end(form) }}
+
+{% endblock %}

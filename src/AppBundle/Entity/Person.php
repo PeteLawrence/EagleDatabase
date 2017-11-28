@@ -166,6 +166,21 @@ class Person implements AdvancedUserInterface, \Serializable
     private $lastLoginDateTime;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $forgotten;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $forgottenDateTime;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $doNotContact;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activity", mappedBy="organiser")
      */
     private $activity2;
@@ -1366,4 +1381,76 @@ class Person implements AdvancedUserInterface, \Serializable
         return $this->group;
     }
 
+
+    /**
+     * Set forgotten
+     *
+     * @param boolean $forgotten
+     *
+     * @return Person
+     */
+    public function setForgotten($forgotten)
+    {
+        $this->forgotten = $forgotten;
+
+        return $this;
+    }
+
+    /**
+     * Get forgotten
+     *
+     * @return boolean
+     */
+    public function getForgotten()
+    {
+        return $this->forgotten;
+    }
+
+    /**
+     * Set forgottenDateTime
+     *
+     * @param \DateTime $forgottenDateTime
+     *
+     * @return Person
+     */
+    public function setForgottenDateTime($forgottenDateTime)
+    {
+        $this->forgottenDateTime = $forgottenDateTime;
+
+        return $this;
+    }
+
+    /**
+     * Get forgottenDateTime
+     *
+     * @return \DateTime
+     */
+    public function getForgottenDateTime()
+    {
+        return $this->forgottenDateTime;
+    }
+
+    /**
+     * Set doNotContact
+     *
+     * @param boolean $doNotContact
+     *
+     * @return Person
+     */
+    public function setDoNotContact($doNotContact)
+    {
+        $this->doNotContact = $doNotContact;
+
+        return $this;
+    }
+
+    /**
+     * Get doNotContact
+     *
+     * @return boolean
+     */
+    public function getDoNotContact()
+    {
+        return $this->doNotContact;
+    }
 }

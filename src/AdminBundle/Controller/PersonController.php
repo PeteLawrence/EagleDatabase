@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use AppBundle\Services\PersonReportService;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use AppBundle\Services\PersonService;
 
 /**
  * Person controller.
@@ -203,6 +204,62 @@ class PersonController extends Controller
 
 
     /**
+     * Forgets a Person entity.
+     *
+     * @Route("/{id}/forget", name="admin_person_forget_confirm")
+     * @Method("GET")
+     */
+    public function confirmForgetAction(Request $request, Person $person, PersonService $personService)
+    {
+        $form = $this->createForgetForm($person);
+
+
+        return $this->render('admin/person/confirmForget.html.twig', array(
+            'person' => $person,
+            'form' => $form->createView()
+        ));
+    }
+
+
+    /**
+     * Forgets a Person entity.
+     *
+     * @Route("/{id}/forget", name="admin_person_forget_confirmed")
+     * @Method("DELETE")
+     */
+    public function confirmedForgetAction(Request $request, Person $person, PersonService $personService)
+    {
+        $form = $this->createForgetForm($person);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $personService->forgetPerson($person);
+        }
+
+        return $this->redirectToRoute('admin_person_index');
+    }
+
+
+    /**
+     * Forgets a Person entity.
+     *
+     * @Route("/{id}/forget", name="admin_person_forget")
+     * @Method("DELETE")
+     */
+    public function forgetAction(Request $request, Person $person, PersonService $personService)
+    {
+        $form = $this->createDeleteForm($person);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $personService->forgetPerson($person);
+        }
+
+        return $this->redirectToRoute('admin_person_index');
+    }
+
+
+    /**
      * Displays a form to edit an existing Person entity.
      *
      * @Route("/{id}/stats", name="admin_person_stats")
@@ -231,6 +288,23 @@ class PersonController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_person_delete', array('id' => $person->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
+
+
+    /**
+     * Creates a form to forget a Person entity.
+     *
+     * @param Person $person The Person entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createForgetForm(Person $person)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('admin_person_forget', array('id' => $person->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

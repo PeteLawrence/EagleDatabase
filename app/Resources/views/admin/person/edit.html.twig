@@ -305,7 +305,15 @@
         <div class="tab-pane" id="actions" role="tabpanel">
             <h2>Actions</h2>
 
-            <a href="{{ path('homepage', { _switch_user: person.id }) }}" class="btn btn-warning btn-sm"><i class="fa fa-snapchat-ghost"></i> Impersonate</a>
+            <p>
+                <a href="{{ path('homepage', { _switch_user: person.id }) }}" class="btn btn-warning btn-sm"><i class="fa fa-snapchat-ghost"></i> Impersonate</a>
+                Switch to this user
+            </p>
+
+            <p>
+                <a href="{{ path('admin_person_forget_confirm', { id: person.id }) }}" class="btn btn-danger btn-sm"><i class="fa fa-lock"></i> Forget</a>
+                Forget about this user
+            </p>
         </div>
     </div>
 
