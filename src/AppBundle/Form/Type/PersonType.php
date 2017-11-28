@@ -39,6 +39,7 @@ class PersonType extends AbstractType
             ->add('notes', TextareaType::class, [ 'required' => false ] )
             ->add('admin', CheckboxType::class, [ 'required' => false ] )
             ->add('isactive', CheckboxType::class, [ 'label' => 'Active', 'required' => false ])
+            ->add('doNotContact', CheckboxType::class, [ 'label' => 'Do Not Contact', 'required' => false ])
         ;
     }
 

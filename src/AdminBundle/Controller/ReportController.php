@@ -41,19 +41,16 @@ class ReportController extends Controller
         $form = $this->buildMembershipTypeForm();
         $form->handleRequest($request);
 
-        $regularEmailsString = '';
-        $btEmailsString = '';
+        $emailsString = '';
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $regularEmailsString = $reportService->buildRegularEmailsList($data['membershipType']);
-            $btEmailsString = $reportService->buildBtEmailsList($data['membershipType']);
+            $emailsString = $reportService->buildEmailsList($data['membershipType']);
         }
 
         return $this->render('admin/report/emaillist.html.twig', [
             'form' => $form->createView(),
-            'regularEmailsString' => $regularEmailsString,
-            'btEmailsString' => $btEmailsString
+            'emailsString' => $emailsString,
         ]);
     }
 

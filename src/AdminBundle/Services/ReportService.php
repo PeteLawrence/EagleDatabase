@@ -55,36 +55,19 @@ class ReportService
     }
 
 
-    public function buildRegularEmailsList($type)
+    public function buildEmailsList($type)
     {
         $people = $this->em->getRepository('AppBundle:Person')->findMembersByType($type);
         $emails = [];
 
         foreach ($people as $person) {
-            $email = $person->getEmail();
-
-            if (strpos($email, '@btinternet') == false) {
-                $emails[] = $email;
+            //Skip if they've been marked as Do Not Contact
+            if ($person->getDoNotContact()) {
+                continue;
             }
-        }
 
-        $emails = array_unique($emails);
-        $emailsString = implode('; ', $emails);
+            $emails[] = $person->getEmail();
 
-        return $emailsString;
-    }
-
-    public function buildBtEmailsList($type)
-    {
-        $people = $this->em->getRepository('AppBundle:Person')->findMembersByType($type);
-        $emails = [];
-
-        foreach ($people as $person) {
-            $email = $person->getEmail();
-
-            if (strpos($email, '@btinternet')) {
-                $emails[] = $email;
-            }
         }
 
         $emails = array_unique($emails);
