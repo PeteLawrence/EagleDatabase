@@ -87,4 +87,19 @@ class PersonRepository extends EntityRepository
     }
 
 
+    public function findMembersNotEnrolledSince($date)
+    {
+        $q1 = $this->createQueryBuilder('p1')
+            ->select('p1.id')
+            ->innerJoin('p1.memberRegistration', 'mr')
+            ->where('mr.registrationDateTime > ?1');
+
+        $q2 = $this->createQueryBuilder('p2');
+        $q2->where($q2->expr()->notIn('p2.id', $q1->getDQL()))
+            ->setParameter(1, $date);
+
+        return $q2->getQuery()->getResult();
+    }
+
+
 }

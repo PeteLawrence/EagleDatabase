@@ -1453,4 +1453,22 @@ class Person implements AdvancedUserInterface, \Serializable
     {
         return $this->doNotContact;
     }
+
+
+    public function getMostRecentRegistration()
+    {
+        if (!$this->memberRegistration) {
+            return null;
+        }
+
+        $mostRecentRegistration = null;
+
+        foreach ($this->memberRegistration as $memberRegistration) {
+            if ($mostRecentRegistration == null || $memberRegistration->getRegistrationDateTime() > $mostRecentRegistration->getRegistrationDateTime()) {
+                $mostRecentRegistration = $memberRegistration;
+            }
+        }
+
+        return $mostRecentRegistration;
+    }
 }
