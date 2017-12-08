@@ -33,7 +33,6 @@ class ForgetOldMembersCommand extends ContainerAwareCommand
             $date = ($expiredPerson->getMostRecentRegistration() ? $expiredPerson->getMostRecentRegistration()->getRegistrationDateTime()->format('jS F Y') : 'Never');
             $expiredPersonsRows[] = [ $expiredPerson->getId(), $expiredPerson->getName(), $date];
         }
-        dump($expiredPersonsRows[0]);
 
         //Display table
         $table = new Table($output);
