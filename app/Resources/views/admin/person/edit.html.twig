@@ -48,88 +48,72 @@
             <h2>Details</h2>
             {{ form_start(edit_form) }}
                 <div class="row">
-                    <div class="col-md-3"><strong>Membership Number</strong></div>
+                    <div class="col-md-3">Membership Number</div>
                     <div class="col-md-2">{{ person.id }}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-1 text-md-right"><strong>{{ form_label(edit_form.forename) }}</strong></div>
-                    <div class="col-md-2">{{ form_widget(edit_form.forename) }}</div>
+                    <div class="col-md-3">{{ form_row(edit_form.forename) }}</div>
 
-                    <div class="col-md-1 text-md-right"><strong>{{ form_label(edit_form.surname) }}</strong></div>
-                    <div class="col-md-2">{{ form_widget(edit_form.surname) }}</div>
+                    <div class="col-md-3">{{ form_row(edit_form.surname) }}</div>
 
-                    <div class="col-md-1 text-md-right"><strong>{{ form_label(edit_form.gender) }}</strong></div>
-                    <div class="col-md-2">{{ form_widget(edit_form.gender) }}</div>
+                    <div class="col-md-4">{{ form_row(edit_form.gender) }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-1 text-md-right"><strong>Address</strong></div>
-                    <div class="col-md-3">{{ form_widget(edit_form.addr1) }}</div>
-                    <div class="col-md-1 offset-md-2"><strong>{{ form_label(edit_form.dob) }}</strong></div>
-                    <div class="col-md-3">{{  form_widget(edit_form.dob) }}</div>
+                    <div class="col-md-3">{{ form_row(edit_form.addr1) }}</div>
+                    <div class="col-md-4 offset-md-3">{{ form_row(edit_form.dob) }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3 offset-md-1">{{ form_widget(edit_form.addr2) }}</div>
+                    <div class="col-md-3">{{ form_row(edit_form.addr2) }}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 offset-md-1">{{ form_widget(edit_form.addr3) }}</div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3 offset-md-1">{{ form_widget(edit_form.town) }}</div>
-                    <div class="col-md-1 offset-md-2"><strong>{{ form_label(edit_form.email) }}</strong></div>
-                    <div class="col-md-3">{{  form_widget(edit_form.email) }}</div>
+                    <div class="col-md-3">{{ form_row(edit_form.addr3) }}</div>
+                    <div class="col-md-4 offset-md-3">{{ form_row(edit_form.bcMembershipNumber) }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3 offset-md-1">{{ form_widget(edit_form.county) }}</div>
-                    <div class="col-md-1 offset-md-2"><strong>{{ form_label(edit_form.telephone) }}</strong></div>
-                    <div class="col-md-3">{{  form_widget(edit_form.telephone) }}</div>
+                    <div class="col-md-3">{{ form_row(edit_form.town) }}</div>
+                    <div class="col-md-4 offset-md-3">{{  form_row(edit_form.email) }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-1"><strong>{{ form_label(edit_form.postcode) }}</strong></div>
-                    <div class="col-md-3">{{ form_widget(edit_form.postcode) }}</div>
-                    <div class="col-md-1 offset-md-2"><strong>{{ form_label(edit_form.mobile) }}</strong></div>
-                    <div class="col-md-3">{{  form_widget(edit_form.mobile) }}</div>
+                    <div class="col-md-3">{{ form_row(edit_form.county) }}</div>
+                    <div class="col-md-4 offset-md-3">{{ form_row(edit_form.telephone) }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-1"><strong>BC #</strong></div>
-                    <div class="col-md-3">{{ form_widget(edit_form.bcMembershipNumber) }}</div>
+                    <div class="col-md-4">{{ form_row(edit_form.postcode) }}</div>
+                    <div class="col-md-4 offset-md-2">{{ form_row(edit_form.mobile) }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-1"><strong>{{ form_label(edit_form.notes) }}</strong></div>
-                    <div class="col-md-9">{{ form_widget(edit_form.notes) }}</div>
+                    <div class="col-md-4">{{ form_row(edit_form.bcMembershipNumber) }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10">{{ form_row(edit_form.notes) }}</div>
                 </div>
 
                 {{ form_widget(edit_form) }}
                 <input type="submit" value="Save" class="btn btn-primary" />
             {{ form_end(edit_form) }}
 
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete" class="btn btn-danger">
-            {{ form_end(delete_form) }}
         </div>
 
         <div class="tab-pane" id="nextofkin" role="tabpanel">
             <h2>Next of Kin</h2>
             {{ form_start(nextofkin_form) }}
             <div class="row">
-                <div class="col-md-4 text-md-right"><strong>{{ form_label(nextofkin_form.nextOfKinName) }}</strong></div>
-                <div class="col-md-8">{{ form_widget(nextofkin_form.nextOfKinName) }}</div>
+                <div class="col-md-12">{{ form_row(nextofkin_form.nextOfKinName) }}</div>
             </div>
 
             <div class="row">
-                <div class="col-md-4 text-md-right"><strong>{{ form_label(nextofkin_form.nextOfKinRelation) }}</strong></div>
-                <div class="col-md-8">{{ form_widget(nextofkin_form.nextOfKinRelation) }}</div>
+                <div class="col-md-12">{{ form_row(nextofkin_form.nextOfKinRelation) }}</div>
             </div>
 
             <div class="row">
-                <div class="col-md-4 text-md-right"><strong>{{ form_label(nextofkin_form.nextOfKinContactDetails) }}</strong></div>
-                <div class="col-md-8">{{ form_widget(nextofkin_form.nextOfKinContactDetails) }}</div>
+                <div class="col-md-12">{{ form_row(nextofkin_form.nextOfKinContactDetails) }}</div>
             </div>
 
             <input type="submit" value="Save" class="btn btn-primary" />
@@ -313,6 +297,12 @@
             <p>
                 <a href="{{ path('admin_person_forget_confirm', { id: person.id }) }}" class="btn btn-danger btn-sm"><i class="fa fa-lock"></i> Forget</a>
                 Forget about this user
+            </p>
+
+            <p>
+                {{ form_start(delete_form) }}
+                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                {{ form_end(delete_form) }}
             </p>
         </div>
     </div>
