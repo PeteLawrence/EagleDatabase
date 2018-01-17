@@ -63,6 +63,12 @@ class MembershipService
     public function getNextMembershipTypePeriod($person)
     {
         $currentMemberRegistration = $person->getCurrentMemberRegistration();
+
+        // Handle members without an active membership
+        if (!$currentMemberRegistration) {
+            return null;
+        }
+
         $currentMembershipType = $currentMemberRegistration->getMembershipTypePeriod()->getMembershipType();
 
         $membershipTypePeriods = $this->em->getRepository('AppBundle:MembershipTypePeriod')->findAll();

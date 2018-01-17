@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\MemberQualification;
+use AppBundle\Entity\MemberRegistration;
 use AppBundle\Form\Type\PersonType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -181,6 +182,34 @@ class PersonController extends Controller
     }
 
 
+    /**
+     * Deletes a Person entity.
+     *
+     * @Route("/{id}/memberregistration/{id2}/delete", name="admin_person_registration_delete")
+     * @ParamConverter("memberRegistration", class="AppBundle:MemberRegistration", options={"id" = "id2"})
+     */
+    public function deleteMembershipRegistrationAction(Request $request, Person $person, MemberRegistration $memberRegistration)
+    {
+        $form = $this->createDeleteMembershipRegistrationForm($memberRegistration);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Persist changes
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($memberRegistration);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_person_edit', [ 'id' => $person->getId()]);
+        }
+
+        return $this->render('admin/person/deleteMemberRegistration.html.twig', array(
+            'person' => $person,
+            'memberRegistration' => $memberRegistration,
+            'form' => $form->createView()
+        ));
+    }
+
+
 
     /**
      * Deletes a Person entity.
@@ -292,6 +321,27 @@ class PersonController extends Controller
             ->getForm()
         ;
     }
+
+
+    /**
+     * Creates a form to delete a MemberRegistration entity.
+     *
+     * @param MemberRegistration $memberRegistration The MemberRegistration entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteMembershipRegistrationForm(MemberRegistration $memberRegistration)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('admin_person_registration_delete', [
+                'id' => $memberRegistration->getPerson()->getId(),
+                'id2' => $memberRegistration->getId()
+            ]))
+            ->setMethod('DELETE')
+            ->getForm();
+
+    }
+
 
 
     /**

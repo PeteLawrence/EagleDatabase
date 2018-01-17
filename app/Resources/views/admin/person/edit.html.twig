@@ -25,10 +25,10 @@
             <a class="nav-link" href="#groups" data-toggle="tab" role="tab">Groups</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#activityhistory" data-toggle="tab" role="tab">Activity History</a>
+            <a class="nav-link" href="#activityhistory" data-toggle="tab" role="tab">Activities</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#history" data-toggle="tab" role="tab">Member History</a>
+            <a class="nav-link" href="#history" data-toggle="tab" role="tab">Membership</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#charges" data-toggle="tab" role="tab">
@@ -183,6 +183,7 @@
                             {% endif %}
                         </td>
                         <td>
+                            <a href="{{ path('admin_person_registration_delete', { id: person.id, id2: registration.id } ) }}"><i class="fa fa-trash"></i></a>
                             <a href="{{ path('admin_memberregistration_edit', { id: registration.id, next: path('admin_person_edit', {id: person.id})})}}"><i class="fa fa-pencil"></i></a>
                             {% if not registration.memberRegistrationCharge.paid %}
                                 <a href="{{ path('admin_membercharge_show', { personId: person.id, id: registration.memberRegistrationCharge.id})}}" title="View Charge">
