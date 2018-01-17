@@ -31,7 +31,6 @@ security:
                 secret: '%secret%'
                 lifetime: 31536000
             switch_user: { role: ROLE_ADMIN }
-            logout_on_user_change: true
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
