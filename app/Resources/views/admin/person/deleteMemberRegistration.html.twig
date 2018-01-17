@@ -1,0 +1,25 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_index')}}">People</a>
+        <a class="breadcrumb-item" href="{{ path('admin_person_show', { id: person.id }) }}">{{ person.name }}</a>
+        <span class="breadcrumb-item active">Delete Membership</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Delete</h1>
+
+    <p>
+        Are you sure you want to delete this membership?
+    </p>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-danger" value="Delete" />
+    {{ form_end(form) }}
+
+{% endblock %}
