@@ -1,14 +1,14 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse hidden-print">
-
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#topNavBar" aria-controls="topNavBar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-toggleable-md navbar-dark bg-dark hidden-print navbar-expand-lg" style="background-color: #000;">
 
     <a class="navbar-brand" href="{{ path('homepage') }}">{{ site_name }}</a>
 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar" aria-controls="topNavBar" aria-expanded="false" aria-label="Toggle menu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
     <div class="collapse navbar-collapse" id="topNavBar">
 
-        <ul class="nav navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('centre') }}">Eagle Canoe Centre</a>
             </li>
