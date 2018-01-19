@@ -166,7 +166,8 @@ class MembershipService
     {
         return $this->formFactory->createBuilder()
             ->setMethod('POST')
-            ->add('confirm', CheckboxType::class, [ 'label' => 'I confirm that the above details are correct'])
+            ->add('confirm1', CheckboxType::class, [ 'label' => 'I confirm that these details are correct'])
+            ->add('confirm2', CheckboxType::class, [ 'label' => 'I agree to abide by the club code of conduct'])
             ->getForm();
     }
 
