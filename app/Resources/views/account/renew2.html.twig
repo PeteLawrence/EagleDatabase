@@ -1,6 +1,6 @@
 {% extends 'adminbase.html.twig' %}
 
-{% block title %}Renew{% endblock %}
+{% block title %}Renew - Insurance{% endblock %}
 
 {% block body %}
     <nav class="breadcrumb">
@@ -10,33 +10,32 @@
         <span class="breadcrumb-item active">Renew</span>
     </nav>
 
-    <h2>Renew - Extras</h2>
+    <h2>Renew - Insurance</h2>
 
-    <dl>
-        <dt>Type</dt>
-        <dd>{{ mtp.membershipType.type }}</dd>
+    {% if app.user.bcMembershipNumber %}
+        <p>
+            As an active British Canoeing member you are already insured.
+        </p>
+        <div class="alert alert-warning" role="alert">
+            If you no longer have an active British Canoeing membership, pleae remove your membership number from <a href="{{ path('account_edit')}}" class="alert-link">your profile</a> before restarting the renewal process.
+        </div>
+    {% else %}
+        <p>
+            You do not appear to be a British Canoeing member, so will need to pay for insurance as part of your renewal.  For full details about the insurance provided by British Canoeing please <a href="https://www.britishcanoeing.org.uk/membership/club-membership/" target="_blank">see here</a>.
+        </p>
+        <div class="alert alert-warning" role="alert">
+            If you have an active British Canoeing membership, please add your membership number to <a href="{{ path('account_edit')}}">your profile</a> before restarting the renewal process, to avoid paying for insurance again.
+        </div>
 
-        <dt>Period</dt>
-        <dd>{{ mtp.membershipPeriod.fromDate|date('jS F Y') }} - {{ mtp.membershipPeriod.toDate|date('jS F Y') }}</dd>
+    {% endif %}
 
-        <dt>Price</dt>
-        <dd>£{{ mtp.price}}</dd>
 
-        <dt>Extras</dt>
-        <dd>
+    {{ form_start(form) }}
+        {% for child in form.children %}
+            {{ form_row(child) }}
+        {% endfor %}
 
-            {% if form.children|length == 1 %}
-                <p>No extras can be added, simply click 'Next' to continue</p>
-            {% endif %}
-
-            {{ form_start(form) }}
-                {% for child in form.children %}
-                    {{ form_row(child) }}
-                {% endfor %}
-
-                <input type="submit" value="Next" class="btn btn-primary" />
-            {{ form_end(form) }}
-        </dd>
-    </dl>
-
+        <input type="submit" value="Next" class="btn btn-primary" />
+    {{ form_end(form) }}
+    
 {% endblock %}

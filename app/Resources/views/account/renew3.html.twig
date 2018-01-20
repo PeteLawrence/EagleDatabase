@@ -1,6 +1,6 @@
 {% extends 'adminbase.html.twig' %}
 
-{% block title %}Renew{% endblock %}
+{% block title %}Renew - Confirm{% endblock %}
 
 {% block body %}
     <nav class="breadcrumb">
@@ -34,13 +34,39 @@
         </tr>
     </table>
 
-    <button id="paynow" class="btn btn-primary" value="Pay Now" />Pay Now</button>
+    <h2>Payment Options</h2>
+    <div class="card-deck mb-2">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Pay Online</h3>
+                <p>
+                    You can avoid having to wait around on enroment night by choosing to pay for your membership online with a credit or debit card.
+                </p>
+            </div>
+            <div class="card-footer text-right">
+                <button id="paynow" class="btn btn-primary" value="Pay Online Now" />Pay Online Now</button>
+                {{ form(form, {'attr': {'id': 'payNowForm'}}) }}
+            </div>
+        </div>
 
-    {{ form(form, {'attr': {'id': 'payNowForm'}}) }}
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Pay At The Club</h3>
+                <p>
+                    Alternatively you can choose to pay at the club, using either cash, cheque or card.
+                </p>
+            </div>
+            <div class="card-footer text-right">
+                {{ form_start(payLaterForm) }}
+                    <input type="submit" class="btn btn-primary" value="Pay At Club" />
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 
-    {{ form_start(payLaterForm) }}
-        <input type="submit" class="btn btn-warning" value="Pay Later" />
-    {{ form_end(form) }}
+    <p class="text-muted">
+        Card payments are taken using <a href="https://stripe.com/gb" target="_blank">Stripe</a> - one of the leading online payment processors.  Eagle Canoe Club will never see your card details.
+    </p>
 
 
     <script src="https://checkout.stripe.com/checkout.js"></script>

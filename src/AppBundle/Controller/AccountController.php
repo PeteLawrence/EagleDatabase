@@ -220,6 +220,15 @@ class AccountController extends Controller
      */
     public function membershipRenewAction(Request $request, MembershipService $membershipService)
     {
+
+        // Check the member is over 18
+        $now = new \DateTime();
+        $age = $this->getUser()->getDob()->diff($now);
+        if ($age->y < 18) {
+            return $this->redirectToRoute('account_membership_renew_error', [ 'errorCode' => 'UNDER18' ]);
+        }
+
+
         //Get available membership options
         $form = $membershipService->buildConfirmForm();
 
@@ -256,7 +265,7 @@ class AccountController extends Controller
                 'error',
                 'Unable to complete your renewal.  Please contact the club secretary.'
             );
-            return $this->redirectToRoute('account_overview');
+            return $this->redirectToRoute('account_membership_renew_error');
         }
 
         $request->getSession()->set('renew_mtp', $mtp->getId());
@@ -378,9 +387,7 @@ class AccountController extends Controller
 
             $membershipService->clearSessionEntries($session);
 
-            $this->addFlash('notice', 'Your renewal has been successful');
-
-            return $this->redirectToRoute('account_overview');
+            return $this->redirectToRoute('account_membership_renew_complete');
         }
 
     }
@@ -402,7 +409,7 @@ class AccountController extends Controller
 
         $em->persist($memberRegistration);
 
-        //Create a MemberRegistrationCharge and mark as paid
+        //Create a MemberRegistrationCharge and mark as needing paying
         $now = new \DateTime();
         $dueDate = clone $now;
         $dueDate->add(new \DateInterval('P7D'));
@@ -421,9 +428,37 @@ class AccountController extends Controller
 
         $membershipService->clearSessionEntries($session);
 
-        $this->addFlash('notice', 'Your renewal has been successful.  Please bring along your payment to the next club night.');
 
-        return $this->redirectToRoute('account_overview');
+        return $this->redirectToRoute('account_membership_renew_complete');
+    }
+
+
+    /**
+     * @Route("/membership/renew/complete", name="account_membership_renew_complete")
+     */
+    public function membershipRenewCompleteAction(Request $request, MembershipService $membershipService)
+    {
+        $latestMemberRegistration = $this->getUser()->getMostRecentRegistration();
+
+
+        return $this->render(
+            'account/renewComplete.html.twig', [
+                'registration' => $latestMemberRegistration
+            ]
+        );
+    }
+
+
+    /**
+     * @Route("/membership/renew/error", name="account_membership_renew_error")
+     */
+    public function membershipErrorAction(Request $request)
+    {
+        return $this->render(
+            'account/renewError.html.twig', [
+                'errorCode' => $request->query->get('errorCode')
+            ]
+        );
     }
 
 

@@ -1,0 +1,37 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Renew - Complete{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <a class="breadcrumb-item" href="{{ path('account_membership') }}">Membership</a>
+        <span class="breadcrumb-item active">Renew</span>
+    </nav>
+
+    <h2>Renew - Complete</h2>
+
+    <div class="alert alert-success">
+        Congratulations, you have been re-enrolled!
+    </div>
+
+
+    {% if registration.memberRegistrationCharge.paid %}
+        <p>
+            Thanks for paying online.  You simply need to turn up to the club and go paddling!
+        </p>
+    {% else %}
+        <p>
+            You have chosen to pay at the club.
+        </p>
+        <p>
+            Please bring your payment of &pound;{{ registration.memberRegistrationCharge.amount|number_format(2) }} to the next enrollment night.  We accept cash, cheque and card payments.
+        </p>
+    {% endif %}
+
+
+
+
+
+{% endblock %}

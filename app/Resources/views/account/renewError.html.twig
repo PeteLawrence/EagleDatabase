@@ -1,0 +1,32 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Renew - Error{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <a class="breadcrumb-item" href="{{ path('account_membership') }}">Membership</a>
+        <span class="breadcrumb-item active">Renew</span>
+    </nav>
+
+    <h2>Renew - Error</h2>
+
+    <div class="alert alert-danger">
+        Sorry, there was a problem with your renewal.
+    </div>
+
+    {% if errorCode == 'UNDER18' %}
+        <p>
+            Unfortunately we can't enrol under 18s online as we need to get consent from either a parent of guardian.
+        </p>
+    {% endif %}
+
+    <p>
+        Please complete the 'Application For Membership' form that can be found on the <a href="{{ path('docsanddownloads')}}"> Documents and Downloads</a> page, and bring it along to the next enrollment night.
+    </p>
+
+    <p>
+        In the meantime you may wish to have a look at the <a href="{{ path('activity_index') }}">programme</a> to see what is coming up this year.
+    </p>
+{% endblock %}
