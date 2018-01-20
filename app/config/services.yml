@@ -48,3 +48,6 @@ services:
     AppBundle\Form\Extension\HelpTextExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    AppBundle\Service\MembershipService:
+        arguments: ['%site.email%']

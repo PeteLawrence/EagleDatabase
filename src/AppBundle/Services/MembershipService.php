@@ -124,6 +124,8 @@ class MembershipService
         $memberRegistration->setRegistrationDateTime(new \DateTime());
         $memberRegistration->setPerson($member);
 
+        dump($membershipTypePeriodExtraIds);
+
         foreach ($membershipTypePeriodExtraIds as $extraId) {
             $extra = $this->em->getRepository('AppBundle:MembershipTypePeriodExtra')->findOneById($extraId);
             $membershipRegistrationExtra = new \AppBundle\Entity\MemberRegistrationExtra;
@@ -211,4 +213,5 @@ class MembershipService
 
         return false;
     }
+
 }

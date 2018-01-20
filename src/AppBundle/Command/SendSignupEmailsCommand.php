@@ -37,11 +37,11 @@ class SendSignupEmailsCommand extends ContainerAwareCommand
                 $logger->info('Found activity commencing today ' . $activity->getName());
 
                 //Build the email
-                $message = \Swift_Message::newInstance()
+                $message = new \Swift_Message('Email')
                     ->setSubject(sprintf('Sign-in form for %s', $activity->getName()))
                     ->setFrom($this->getContainer()->getParameter('site.email'))
                     ->setTo($this->getContainer()->getParameter('site.signInEmail'))
-                ->setBody(
+                    ->setBody(
                         $templating->render(
                             'emails/signInForm.html.twig',
                             array('activity' => $activity)

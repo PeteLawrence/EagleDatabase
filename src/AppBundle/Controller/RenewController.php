@@ -102,7 +102,7 @@ class RenewController extends Controller
                     return $this->redirectToRoute('account_membership_renew_error', [ 'errorCode' => 'NOSINURANCEEXTRA' ]);
                 }
 
-                $extras[] = $insuranceMembershipTypePeriodExtra;
+                $extras[] = $insuranceMembershipTypePeriodExtra->getId();
             }
 
             $session->set('renew_extras', $extras);
@@ -242,10 +242,12 @@ class RenewController extends Controller
         $memberRegistrationCharge->setPerson($memberRegistration->getPerson());
         $em->persist($memberRegistrationCharge);
 
+        $memberRegistration->setMemberRegistrationCharge($memberRegistrationCharge);
+
         $em->flush();
 
         $membershipService->clearSessionEntries($session);
-
+        $this->sendRenewSuccessEmails($this->getUser(), $memberRegistration);
 
         return $this->redirectToRoute('account_membership_renew_complete');
     }
@@ -296,5 +298,29 @@ class RenewController extends Controller
             ->setMethod('POST')
             ->setAction($this->generateUrl('account_membership_renew_paylater'))
             ->getForm();
+    }
+
+
+    private function sendRenewSuccessEmails($member, $memberRegistration)
+    {
+        //Send a confirmation email to the member
+        $message = new \Swift_Message('Renewal Email');
+        $message
+            ->setSubject(sprintf('You have successfully re-enrolled'))
+            ->setFrom($this->getParameter('site.email'))
+            ->setTo($member->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'emails/renewSuccessEmailMember.html.twig',
+                    [
+                        'person' => $member,
+                        'memberRegistration' => $memberRegistration
+                    ]
+                ),
+                'text/html'
+            );
+
+        $mailer = $this->get('mailer');
+        $mailer->send($message);
     }
 }
