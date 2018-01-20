@@ -24,25 +24,27 @@
     <div class="col-lg-4">
         <div class="card">
             <h4 class="card-header">Upcoming Events</h4>
-            <dl class="mt-3 mb-0 ml-2">
-            {% for activity in upcomingActivities %}
-                <dt>
-                    {{ activity.activityStart|date('d')}}<sup>{{ activity.activityStart|date('S')}}</sup> {{ activity.activityStart|date('F')}}
-                </dt>
-                <dd>
-                    <a href="{{ url('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
-                    {% if app.user %}
-                        {% if activity.attending(app.user) %}
-                            <span class="badge badge-success">Attending</span>
-                        {% elseif activity.shortlisted(app.user)  %}
-                            <span class="badge badge-info">Shortlisted</span>
+            <div class="card-body pb-1">
+                <dl>
+                {% for activity in upcomingActivities %}
+                    <dt>
+                        {{ activity.activityStart|date('d')}}<sup>{{ activity.activityStart|date('S')}}</sup> {{ activity.activityStart|date('F')}}
+                    </dt>
+                    <dd>
+                        <a href="{{ url('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
+                        {% if app.user %}
+                            {% if activity.attending(app.user) %}
+                                <span class="badge badge-success">Attending</span>
+                            {% elseif activity.shortlisted(app.user)  %}
+                                <span class="badge badge-info">Shortlisted</span>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                </dd>
+                    </dd>
 
-            {% endfor %}
-            </dl>
-            <div class="card-footer text-muted text-right">
+                {% endfor %}
+                </dl>
+            </div>
+            <div class="card-footer text-right">
                 <a href="{{ url('activity_index') }}" class="btn btn-primary btn-sm">View More</a>
             </div>
         </div>

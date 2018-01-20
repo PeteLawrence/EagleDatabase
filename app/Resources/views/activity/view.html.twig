@@ -25,7 +25,7 @@
     <div class="col-sm-8">
         <div class="card mb-2">
             <h4 class="card-header">Summary</h4>
-            <div class="card-block">
+            <div class="card-body">
                 <ul>
                     <li><strong>Start</strong> {{ activity.activityStart|date('jS F Y H:i')}}</li>
                     <li><strong>End</strong> {{ activity.activityEnd|date('jS F Y H:i')}}</li>
@@ -46,7 +46,7 @@
 
         <div class="card mb-2">
             <h4 class="card-header">Description</h4>
-            <div class="card-block">
+            <div class="card-body">
                 {{ activity.description|markdown }}
             </div>
         </div>
@@ -54,7 +54,7 @@
         {% if app.user == activity.organiser or is_granted('ROLE_ADMIN') %}
             <div class="card mb-2">
                 <h4 class="card-header">Organiser Tools</h4>
-                <div class="card-block">
+                <div class="card-body">
                     <a href="{{ path('activity_messages', { 'id': activity.id }) }}" class="btn btn-sm btn-info"><i class="fa fa-envelope"></i> Messages</a>
                     <a href="{{ path('activity_participants', { 'id': activity.id }) }}" class="btn btn-sm btn-info"><i class="fa fa-users"></i> Participants</a>
                     <a href="{{ path('activity_stats', { 'id': activity.id }) }}" class="btn btn-sm btn-info"><i class="fa fa-pie-chart"></i> Statistics</a>
@@ -69,7 +69,7 @@
 
         <div class="card mb-2">
             <h4 class="card-header">Actions</h4>
-            <div class="card-block">
+            <div class="card-body p-2">
                 {% if is_granted('ROLE_USER') %}
                     <div class="my-2">
                         {% if app.user.attending(activity) %}
