@@ -34,8 +34,8 @@
         </tbody>
     </table>
 
-    {% if not app.user.currentMemberRegistration %}
-        {#}<a href="{{ path('account_membership_renew') }}" class="btn btn-primary">Renew</a>#}
+    {% if canRenew %}
+        <a href="{{ path('account_membership_renew') }}" class="btn btn-primary">Renew</a>
     {% endif %}
 
 {% endblock %}

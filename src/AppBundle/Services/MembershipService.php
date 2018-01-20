@@ -90,7 +90,7 @@ class MembershipService
             ->setMethod('POST');
 
         //Loop over each of the extras available given $membershipTypePeriod
-        foreach ($membershipTypePeriod->getMembershipTypePeriodExtra() as $extra) {
+        /*foreach ($membershipTypePeriod->getMembershipTypePeriodExtra() as $extra) {
 
             // Don't include the extra if its admin only
             if (!$includeAdminExtras && $extra->getMembershipExtra()->getAdminSelectableOnly()) {
@@ -110,7 +110,7 @@ class MembershipService
                     'required' => false
                 ]
             );
-        }
+        }*/
 
         return $fb->getForm();
     }

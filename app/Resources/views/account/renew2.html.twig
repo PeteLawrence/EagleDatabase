@@ -17,7 +17,7 @@
             As an active British Canoeing member you are already insured.
         </p>
         <div class="alert alert-warning" role="alert">
-            If you no longer have an active British Canoeing membership, pleae remove your membership number from <a href="{{ path('account_edit')}}" class="alert-link">your profile</a> before restarting the renewal process.
+            If you no longer have an active British Canoeing membership, please remove your membership number from <a href="{{ path('account_edit')}}" class="alert-link">your profile</a> before restarting the renewal process.
         </div>
     {% else %}
         <p>
@@ -29,13 +29,14 @@
 
     {% endif %}
 
+    <div class="text-right">
+        {{ form_start(form) }}
+            {% for child in form.children %}
+                {{ form_row(child) }}
+            {% endfor %}
 
-    {{ form_start(form) }}
-        {% for child in form.children %}
-            {{ form_row(child) }}
-        {% endfor %}
+            <input type="submit" value="Next" class="btn btn-primary" />
+        {{ form_end(form) }}
+    </div>
 
-        <input type="submit" value="Next" class="btn btn-primary" />
-    {{ form_end(form) }}
-    
 {% endblock %}

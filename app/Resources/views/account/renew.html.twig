@@ -83,15 +83,22 @@
                     <h3 class="card-title">Your Membership</h3>
 
                     <dl>
-                        <dt>Membership Type</dt>
+                        <dt>Type</dt>
                         <dd>
                             {{ app.user.currentMemberRegistration.membershipTypePeriod.membershipType.type }}
-                            <br /><em>To change this please contact the secretary on enrolment night</em>
+                            <br /><small class="text-muted">To change this please contact the secretary on enrolment night</small>
                         </dd>
 
-                        <dt>Membership Period</dt>
+                        <dt>Period</dt>
                         <dd>
-                            {{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.fromDate|date('jS F Y') }} - {{ app.user.currentMemberRegistration.membershipTypePeriod.membershipPeriod.toDate|date('jS F Y') }}</em>
+                            {{ nextMembershipTypePeriod.membershipPeriod.fromDate|date('jS F Y') }} - {{ nextMembershipTypePeriod.membershipPeriod.toDate|date('jS F Y') }}</em>
+                        </dd>
+
+                        <dt>Price</dt>
+                        <dd>
+                            &pound;{{ nextMembershipTypePeriod.price|number_format(2) }}
+                            <br />
+                            <small class="text-muted">This may increase if you require insurance</small>
                         </dd>
                     </dl>
                 </div>
@@ -111,5 +118,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
