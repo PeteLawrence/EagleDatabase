@@ -1,0 +1,25 @@
+<p>
+    Hi {{ person.forename }},
+</p>
+
+<p>
+    Thanks for renewing as a {{ memberRegistration.membershipTypePeriod.membershipType.type }}.
+</p>
+
+{% if memberRegistration.memberRegistrationCharge.paid %}
+    <p>
+        This is confirmation that you have paid &pound;{{ memberRegistration.total }}.
+    </p>
+{% else %}
+    <p>
+        You have chosen to pay at the club.  Please bring your payment of &pound;{{ memberRegistration.total }} to the next enrolment night.  You can pay by cash, cheque or card.
+    </p>
+{% endif %}
+
+<p>
+    We look forward to seeing you soon!
+</p>
+
+<p>
+    Eagle Canoe Club
+</p>

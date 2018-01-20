@@ -139,7 +139,8 @@ class ActivityController extends Controller
             $em->flush();
 
             //Send an email to the organiser
-            $message = \Swift_Message::newInstance()
+            $message = new \Swift_Message('Email');
+            $message
                 ->setSubject(sprintf('%s has contacted you about %s', $message->getPerson()->getName(), $activity->getName()))
                 ->setFrom($this->getParameter('site.email'))
                 ->setTo($activity->getOrganiser()->getEmail())
@@ -252,7 +253,8 @@ class ActivityController extends Controller
             $em->flush();
 
             //Send an email to the organiser
-            $message = \Swift_Message::newInstance()
+            $message = new Swift_Message('Email');
+            $message
                 ->setSubject(sprintf('%s has signed up to %s', $participant->getPerson()->getName(), $activity->getName()))
                 ->setFrom($this->getParameter('site.email'))
                 ->setTo($activity->getOrganiser()->getEmail())
@@ -300,7 +302,8 @@ class ActivityController extends Controller
             $em->flush();
 
             //Send an email to the organiser
-            $message = \Swift_Message::newInstance()
+            $message = new \Swift_Message('Email');
+            $message
                 ->setSubject(sprintf('%s will no longer be attending %s', $participant->getPerson()->getName(), $activity->getName()))
                 ->setFrom($this->getParameter('site.email'))
                 ->setTo($activity->getOrganiser()->getEmail())
