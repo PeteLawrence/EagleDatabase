@@ -253,7 +253,7 @@ class ActivityController extends Controller
             $em->flush();
 
             //Send an email to the organiser
-            $message = new Swift_Message('Email');
+            $message = new \Swift_Message('Email');
             $message
                 ->setSubject(sprintf('%s has signed up to %s', $participant->getPerson()->getName(), $activity->getName()))
                 ->setFrom($this->getParameter('site.email'))
