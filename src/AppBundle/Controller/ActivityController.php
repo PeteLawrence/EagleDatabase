@@ -199,6 +199,11 @@ class ActivityController extends Controller
         $em = $this->get('doctrine')->getManager();
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
+        // Redirect non logged in users to the login page
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('login');
+        }
+
         $participant = $activity->getParticipantForPerson($user);
         if ($participant) {
             return $this->render(
@@ -209,8 +214,6 @@ class ActivityController extends Controller
                 ]
             );
         }
-
-
 
         $signupForm = $this->buildSignupForm($activity);
         $signupForm->handleRequest($request);
