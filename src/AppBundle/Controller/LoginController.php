@@ -68,7 +68,8 @@ class LoginController extends Controller
 
                 $em->flush();
 
-                $message = \Swift_Message::newInstance()
+                $message = new \Swift_Message('Email');
+                $message
                     ->setSubject(sprintf('%s Password Reset', $this->getParameter('site.name')))
                     ->setFrom($this->getParameter('site.email'))
                     ->setTo($person->getEmail())
