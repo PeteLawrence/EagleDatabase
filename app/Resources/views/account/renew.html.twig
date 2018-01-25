@@ -13,14 +13,14 @@
     <h2>Renew</h2>
 
     <div class="alert alert-info" role="alert">
-        <strong>Please Read</strong> Please confirm that the details below are correct.  If any details are wrong you can correct them on your profile before continuing.
+        Please confirm that the details below are correct.  If any details are wrong you can correct them on your profile before continuing.
     </div>
 
 
 
     <div class="row">
         <div class="col-7">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-body pb-0">
                     <h3 class="card-title">Your Details</h3>
 
@@ -57,7 +57,7 @@
                             </address>
                         </dd>
 
-                        <dt>British Canoeing Membership</dt>
+                        <dt>British Canoeing Member?</dt>
                         <dd>
                             {% if (app.user.bcMembershipNumber) %}
                                 Yes - {{ app.user.bcMembershipNumber }}
@@ -68,6 +68,16 @@
 
                         <dt>Next Of Kin</dt>
                         <dd>{{ app.user.nextOfKinName }} - {{ app.user.nextOfKinRelation }} - {{ app.user.nextOfKinContactDetails }}</dd>
+
+                        <dt>Disabled?</dt>
+                        <dd>
+                            {% if app.user.disability %}
+                                Yes
+                            {% else %}
+
+                                No
+                            {% endif %}
+                        </dd>
                     </dl>
 
                     <p class="text-right">
@@ -75,9 +85,7 @@
                     </p>
                 </div>
             </div>
-        </div>
 
-        <div class="col-5">
             <div class="card">
                 <div class="card-body pb-0">
                     <h3 class="card-title">Your Membership</h3>
@@ -103,13 +111,32 @@
                     </dl>
                 </div>
             </div>
+        </div>
 
-            <div class="card mt-4">
+        <div class="col-5">
+
+            <div class="card mb-3">
+                <div class="card-body pb-0">
+                    <h3 class="card-title">Membership Conditions</h3>
+                    <ul class="pl-3">
+                        <li>I am able to swim a minimum of 25 metres fully clothed.</li>
+                        <li>I have read and understood rules of the club and I agree to be bound by them.</li>
+                        <li>I have also read the club’s Child and Vulnerable Adult Protection Policy and have signed the disclosure (if an adult member) and the Code of Conduct.</li>
+                        <li>The details given on this form are correct to the best of my knowledge and I will keep the club informed immediately of any changes.</li>
+                        <li>I accept that information given on this form will be kept on computer and used for club purposes, eg trip planning; anonymised grant monitoring; and that my details will not be passed to any third party without my consent.</li>
+                        <li>I understand that my details will be retained for 1 year following termination of my membership, following which all personal data except my name will be deleted.</li>
+                        <li>I do not object to photography / filming taking place during club activities for use on the Club’s web site and publicity.</li>
+                        <li>I understand that my liability is limited to £1 in the event of the Norwich Eagle Canoe Club Limited being wound up.</li>
+                        <li>I accept that all communication from the club can come to me by electronic means.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
                 <div class="card-body pb-0">
                     <h3 class="card-title">Renew</h3>
                     {{ form_start(form) }}
-                                {{ form_widget(form.confirm1) }}
-                                {{ form_widget(form.confirm2) }}
+                        {{ form_widget(form.confirm) }}
                         <p class="text-right">
                             <input type="submit" value="Next" class="btn btn-primary" />
                         </p>

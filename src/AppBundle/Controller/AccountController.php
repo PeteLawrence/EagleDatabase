@@ -267,6 +267,7 @@ class AccountController extends Controller
             ->add('postcode', TextType::class, [ 'attr' => ['placeholder' => 'Postcode'] ])
             ->add('telephone', TextType::class, [ 'attr' => ['placeholder' => 'Phone Number'], 'required' => false ])
             ->add('mobile', TextType::class, [ 'attr' => ['placeholder' => 'Mobile Number'], 'required' => false ])
+            ->add('disability', CheckboxType::class, [ 'attr' => ['placeholder' => 'Disabled'], 'required' => false, 'help' => 'Do you consider yourself as having a disability?' ])
             ->add('nextOfKinName', TextType::class, [ 'attr' => ['placeholder' => 'Name'], 'label' => 'Name' ])
             ->add('nextOfKinRelation', TextType::class, [ 'attr' => ['placeholder' => 'Relation'], 'label' => 'Relation' ])
             ->add('nextOfKinContactDetails', TextareaType::class, [ 'attr' => ['placeholder' => 'Contact Details', 'rows' => 3], 'label' => 'Contact Details' ])

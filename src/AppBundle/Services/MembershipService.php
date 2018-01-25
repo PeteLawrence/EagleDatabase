@@ -124,8 +124,6 @@ class MembershipService
         $memberRegistration->setRegistrationDateTime(new \DateTime());
         $memberRegistration->setPerson($member);
 
-        dump($membershipTypePeriodExtraIds);
-
         foreach ($membershipTypePeriodExtraIds as $extraId) {
             $extra = $this->em->getRepository('AppBundle:MembershipTypePeriodExtra')->findOneById($extraId);
             $membershipRegistrationExtra = new \AppBundle\Entity\MemberRegistrationExtra;
@@ -168,8 +166,7 @@ class MembershipService
     {
         return $this->formFactory->createBuilder()
             ->setMethod('POST')
-            ->add('confirm1', CheckboxType::class, [ 'label' => 'I confirm that these details are correct'])
-            ->add('confirm2', CheckboxType::class, [ 'label' => 'I agree to abide by the club code of conduct'])
+            ->add('confirm', CheckboxType::class, [ 'label' => 'I confirm that I have read the Membership Conditions and agree to them'])
             ->getForm();
     }
 

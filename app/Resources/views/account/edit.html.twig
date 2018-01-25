@@ -14,7 +14,7 @@
     {{ form_start(nameForm) }}
     <div class="card-deck-wrapper">
         <div class="card-deck">
-            <div class="card card-block">
+            <div class="card card-body">
                 <h4 class="card-title">You</h4>
                 <div class="card-text">
                     {{ form_row(nameForm.forename)}}
@@ -23,6 +23,8 @@
                     {{ form_row(nameForm.dob)}}
                     {{ form_row(nameForm.bcMembershipNumber) }}
                 </div>
+
+                {{ form_row(nameForm.disability) }}
 
                 <div class="card-text">
                     <h4 class="card-title">Next of Kin</h4>
@@ -33,7 +35,7 @@
             </div>
 
 
-            <div class="card card-block">
+            <div class="card card-body">
                 <h4 class="card-title">Contact Details</h4>
                 <div class="card-text">
                     {{ form_row(nameForm.email)}}
