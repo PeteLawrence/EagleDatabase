@@ -200,7 +200,7 @@ class ActivityController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
         // Redirect non logged in users to the login page
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('login');
         }
 
