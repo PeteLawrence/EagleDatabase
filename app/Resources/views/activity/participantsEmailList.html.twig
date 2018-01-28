@@ -13,6 +13,10 @@
 
     <h2>Email List</h2>
 
+    <div class="alert alert-warning">
+        When emailing please ensure that you add the addresses to the BCC field.
+    </div>
+
     {% for participant in activity.participant %}
         {{ participant.person.email }};
     {% endfor %}
