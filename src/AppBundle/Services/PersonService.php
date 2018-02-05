@@ -18,8 +18,8 @@ class PersonService
 
     public function forgetPerson($person)
     {
-        $person->setForename('Expired');
-        $person->setSurname('Member');
+        //$person->setForename('Expired');
+        //$person->setSurname('Member');
         $person->setEmail('expired@eaglecanoeclub.co.uk');
         $person->setPassword('EXPIRED');
         $person->setGender(null);
