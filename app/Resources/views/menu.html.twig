@@ -1,14 +1,16 @@
-<nav class="navbar navbar-toggleable-md navbar-dark bg-dark hidden-print navbar-expand-lg" style="background-color: #000;">
+<nav class="navbar navbar-toggleable-md navbar-light bg-white hidden-print navbar-expand-lg pl-0">
 
-    <a class="navbar-brand" href="{{ path('homepage') }}">{{ site_name }}</a>
+    <a class="navbar-brand mt-1 mb-3 p-0 pr-3" href="{{ path('homepage') }}">
+        <img src="/images/logo.png" title="Eagle Canoe Club" alt="Eagle Canoe Club logo" style="height: 4em;"/>
+    </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar" aria-controls="topNavBar" aria-expanded="false" aria-label="Toggle menu">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="topNavBar">
+    <div class="collapse navbar-collapse mr-auto inline-block" id="topNavBar">
 
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <ul class="navbar-nav mr-auto mt-5">
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('centre') }}">Eagle Canoe Centre</a>
             </li>
@@ -29,7 +31,7 @@
             </li>
         </ul>
 
-        <ul class="nav navbar-toggleable-md navbar-nav mr-0">
+        <ul class="nav navbar-toggleable-md navbar-nav mr-0 mt-5">
             {% if app.user %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item">
