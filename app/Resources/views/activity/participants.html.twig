@@ -13,7 +13,6 @@
     <h2>Participants</h2>
     <h3>Total: {{ activity.participant|length }}</h3>
 
-    {{ dump(dateDiff("now", activity.activityEnd)) }}
     {% if dateDiff("now", activity.activityStart).invert and dateDiff("now", activity.activityStart).days > 7 %}
         <div class="alert alert-warning">
             Participant list is no longer available</a>
