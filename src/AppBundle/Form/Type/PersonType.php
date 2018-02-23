@@ -7,10 +7,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use AppBundle\Form\Type\RoleType;
 
 class PersonType extends AbstractType
 {
@@ -39,6 +41,10 @@ class PersonType extends AbstractType
             ->add('disability', CheckboxType::class, ['help' => 'Does the person consider that they have a disability?', 'required' => false])
             ->add('doNotContact', CheckboxType::class, [ 'label' => 'Do Not Contact', 'required' => false, 'help' => 'Do not contact this person' ])
             ->add('admin', CheckboxType::class, [ 'required' => false ] )
+            ->add('role', CollectionType::class, [
+                'entry_type' => RoleType::class,
+                'entry_options' => array('label' => false)
+            ])
         ;
     }
 

@@ -232,9 +232,9 @@ class AccountController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('notice', 'Your changes were saved!');
+            $this->addFlash('notice', 'Your changes to your profile have been saved!');
 
-            return $this->redirectToRoute('account_edit');
+            return $this->redirectToRoute('account_overview');
         }
 
         return $this->render(

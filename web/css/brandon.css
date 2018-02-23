@@ -1,0 +1,47 @@
+﻿/**
+ * @license
+ * MyFonts Webfont Build ID 3203703, 2016-04-13T12:08:24-0400
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: BrandonTextWeb-Bold by HVD Fonts
+ * URL: http://www.myfonts.com/fonts/hvdfonts/brandon-text/bold/
+ *
+ * Webfont: BrandonTextWeb-Regular by HVD Fonts
+ * URL: http://www.myfonts.com/fonts/hvdfonts/brandon-text/regular/
+ *
+ * Webfont: BrandonTextWeb-Medium by HVD Fonts
+ * URL: http://www.myfonts.com/fonts/hvdfonts/brandon-text/medium/
+ *
+ *
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=3203703
+ * Licensed pageviews: 10,000
+ * Webfonts copyright: Copyright (c) 2015 by Hannes von Doehren. All rights reserved.
+ *
+ * © 2016 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+
+@font-face {font-family: 'BrandonTextWeb-Bold';src: url('../fonts/30E277_0_0.eot');src: url('../fonts/30E277_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/30E277_0_0.woff2') format('woff2'),url('../fonts/30E277_0_0.woff') format('woff'),url('../fonts/30E277_0_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'BrandonTextWeb-Regular';src: url('../fonts/30E277_1_0.eot');src: url('../fonts/30E277_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/30E277_1_0.woff2') format('woff2'),url('../fonts/30E277_1_0.woff') format('woff'),url('../fonts/30E277_1_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'BrandonTextWeb-Medium';src: url('../fonts/30E277_2_0.eot');src: url('../fonts/30E277_2_0.eot?#iefix') format('embedded-opentype'),url('../fonts/30E277_2_0.woff2') format('woff2'),url('../fonts/30E277_2_0.woff') format('woff'),url('../fonts/30E277_2_0.ttf') format('truetype');}
+
+@import url("//hello.myfonts.net/count/30e277");
+
+#topNavBar .nav-link, h1 {
+    font-family: 'BrandonTextWeb-Regular';
+}
+
+#topNavBar .nav-link {
+    font-size: 1.25em;
+}

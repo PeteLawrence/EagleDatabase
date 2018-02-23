@@ -194,6 +194,7 @@ class Person implements AdvancedUserInterface, \Serializable
      */
     private $charge;
 
+
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Group", inversedBy="person")
      * @ORM\JoinTable(
@@ -203,6 +204,11 @@ class Person implements AdvancedUserInterface, \Serializable
      * )
      */
     private $group;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role", mappedBy="person")
+     */
+    private $role;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Participant", mappedBy="person")
@@ -1454,7 +1460,7 @@ class Person implements AdvancedUserInterface, \Serializable
     }
 
 
-    public function getMostRecentRegistration()
+    public function getMostRecentRegistration($excludeCurrent = false)
     {
         if (!$this->memberRegistration) {
             return null;
@@ -1464,10 +1470,52 @@ class Person implements AdvancedUserInterface, \Serializable
 
         foreach ($this->memberRegistration as $memberRegistration) {
             if ($mostRecentRegistration == null || $memberRegistration->getRegistrationDateTime() > $mostRecentRegistration->getRegistrationDateTime()) {
+
+                if ($excludeCurrent) {
+                    $now = new \DateTime();
+                    if ($memberRegistration->getMembershipTypePeriod()->getMembershipPeriod()->getToDate() > $now) {
+                        continue;
+                    }
+                }
+
                 $mostRecentRegistration = $memberRegistration;
             }
         }
 
         return $mostRecentRegistration;
+    }
+
+    /**
+     * Add role
+     *
+     * @param \AppBundle\Entity\Role $role
+     *
+     * @return Person
+     */
+    public function addRole(\AppBundle\Entity\Role $role)
+    {
+        $this->role[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role
+     *
+     * @param \AppBundle\Entity\Role $role
+     */
+    public function removeRole(\AppBundle\Entity\Role $role)
+    {
+        $this->role->removeElement($role);
+    }
+
+    /**
+     * Get role
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }

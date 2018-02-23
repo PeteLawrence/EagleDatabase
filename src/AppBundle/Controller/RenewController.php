@@ -87,6 +87,7 @@ class RenewController extends Controller
 
                 $extras[] = substr($field, 6);
             }*/
+            $extras = [];
             // Add on insurance extra if they are not an active BC member
             if ($this->getUser()->getBcMembershipNumber() == '') {
                 //Look up the relevant Insurance MembershipExtra
@@ -99,7 +100,7 @@ class RenewController extends Controller
                 ]);
 
                 if (!$insuranceMembershipTypePeriodExtra) {
-                    return $this->redirectToRoute('account_membership_renew_error', [ 'errorCode' => 'NOSINURANCEEXTRA' ]);
+                    return $this->redirectToRoute('account_membership_renew_error', [ 'errorCode' => 'NOINSURANCEEXTRA' ]);
                 }
 
                 $extras[] = $insuranceMembershipTypePeriodExtra->getId();

@@ -62,7 +62,7 @@ class MembershipService
      */
     public function getNextMembershipTypePeriod($person)
     {
-        $currentMemberRegistration = $person->getCurrentMemberRegistration();
+        $currentMemberRegistration = $person->getMostRecentRegistration();
 
         // Handle members without an active membership
         if (!$currentMemberRegistration) {
@@ -174,10 +174,12 @@ class MembershipService
     public function canPersonRenew($person)
     {
         //Get current membership type
-        $currentMembershipType = $person->getCurrentMemberRegistration();
+        /*$now = new \DateTime();
+        $endOfLastSeason = new \DateTime(sprintf('%s-01-30', $now->format('Y')));
+        $currentMembershipType = $person->getMostRecentRegistration(true); //TODO: Assumes season always ends at the end of March
         if (!$currentMembershipType) { //not currently a member, so cannot renew
             return false;
-        }
+        }*/
 
         //Is there an active MembershipTypePeriod given $currentMembershipType?
         $nextMembershipTypePeriod = $this->getNextMembershipTypePeriod($person);

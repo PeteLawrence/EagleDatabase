@@ -50,11 +50,14 @@
                             <strong>Membership Number: {{ app.user.id }}</strong>
                         </p>
                         <p class="card-text">
-                            Your membership has expired.
+                            Your membership expired on the {{ app.user.mostRecentRegistration.membershipTypePeriod.membershipPeriod.toDate|date('jS F Y') }}
                         </p>
                     </div>
                     <div class="card-footer">
                         <a href="{{ path('account_membership')}}" class="btn btn-primary" role="button">Membership History</a>
+                        {% if canRenew %}
+                            <a href="{{ path('account_membership_renew') }}" class="btn btn-primary">Renew</a>
+                        {% endif %}
                     </div>
                 </div>
             {% endif %}
