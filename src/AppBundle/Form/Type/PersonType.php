@@ -41,10 +41,10 @@ class PersonType extends AbstractType
             ->add('disability', CheckboxType::class, ['help' => 'Does the person consider that they have a disability?', 'required' => false])
             ->add('doNotContact', CheckboxType::class, [ 'label' => 'Do Not Contact', 'required' => false, 'help' => 'Do not contact this person' ])
             ->add('admin', CheckboxType::class, [ 'required' => false ] )
-            ->add('role', CollectionType::class, [
+            /*->add('role', CollectionType::class, [
                 'entry_type' => RoleType::class,
                 'entry_options' => array('label' => false)
-            ])
+            ])*/
         ;
     }
 
