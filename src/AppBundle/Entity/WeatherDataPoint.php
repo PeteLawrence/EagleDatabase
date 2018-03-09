@@ -25,12 +25,12 @@ class WeatherDataPoint
     private $icon;
 
     /**
-     * @ORM\Column(type="decimal", length=8, nullable=true, precision=4)
+     * @ORM\Column(type="decimal", length=8, nullable=true, scale=4)
      */
     private $precipitationIntensity;
 
     /**
-     * @ORM\Column(type="decimal", length=8, nullable=true, precision=4)
+     * @ORM\Column(type="decimal", length=8, nullable=true, scale=4)
      */
     private $precipitationProbability;
 
@@ -40,7 +40,7 @@ class WeatherDataPoint
     private $precipitationType;
 
     /**
-     * @ORM\Column(type="decimal", length=8, nullable=true, precision=4)
+     * @ORM\Column(type="decimal", length=8, nullable=true, scale=4)
      */
     private $temperature;
 
