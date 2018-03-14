@@ -38,7 +38,7 @@ class RenewController extends Controller
         if (!$mtp) {
             return $this->redirectToRoute('account_membership_renew_error', [ 'errorCode' => 'NOMTP' ]);
         }
-        $request->getSession()->set('renew_mtp', $mtp->getId());
+        $session->set('renew_mtp', $mtp->getId());
 
 
         //Get available membership options
@@ -46,10 +46,18 @@ class RenewController extends Controller
 
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $data = $form->getData();
 
-            return $this->redirectToRoute('account_membership_renew2');
+            if ($data['confirm']) {
+                return $this->redirectToRoute('account_membership_renew2');
+            }
+
+            // Terms were not accepted
+            $session->getFlashBag()->add('warning', 'You must accept the Membership Conditions in order to proceed');
+
         }
 
         return $this->render(
