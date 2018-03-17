@@ -41,4 +41,16 @@ class ChargeRepository extends EntityRepository
 
         return $query;
     }
+
+
+    public function findPaymentsBetween($fromDate, $toDate)
+    {
+        $query = $this->createQueryBuilder('c')
+                ->where('c.paiddatetime >= ?1')
+                ->andWhere('c.paiddatetime < ?2')
+                ->setParameter(1, $fromDate)
+                ->setParameter(2, $toDate);
+
+        return $query->getQuery()->getResult();
+    }
 }
