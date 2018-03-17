@@ -208,6 +208,7 @@ class RenewController extends Controller
             $memberRegistrationCharge->setCreateddatetime(new \DateTime());
             $memberRegistrationCharge->setMemberRegistration($memberRegistration);
             $memberRegistrationCharge->setPerson($memberRegistration->getPerson());
+            $memberRegistrationCharge->setPaymentType($em->getRepository('AppBundle:PaymentType')->findOneByType('Stripe'));
             $em->persist($memberRegistrationCharge);
 
             $em->flush();
