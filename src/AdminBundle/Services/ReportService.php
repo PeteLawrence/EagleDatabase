@@ -1058,4 +1058,40 @@ class ReportService
 
         return $type;
     }
+
+
+    public function getMembershipComparisonData($date1, $date2)
+    {
+        $members1 = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date1);
+        $members2 = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date2);
+
+        $data = [];
+        // First parse
+        foreach ($members1 as $member) {
+            $data[$member->getId()] = [
+                'person' => $member,
+                'date1' => true,
+                'date2' => false
+            ];
+        }
+
+        foreach ($members2 as $member) {
+            if (isset($data[$member->getId()])) {
+                $data[$member->getId()]['date2'] = true;
+            } else {
+                $data[$member->getId()] = [
+                    'person' => $member,
+                    'date1' => false,
+                    'date2' => true
+                ];
+            }
+        }
+
+        usort($data, function($a, $b) {
+            return $a['person']->getName() > $b['person']->getName();
+        });
+
+        return $data;
+
+    }
 }

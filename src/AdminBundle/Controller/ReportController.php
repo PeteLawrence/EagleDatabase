@@ -10,6 +10,7 @@ use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AdminBundle\Services\ReportService;
 
 /**
@@ -240,6 +241,51 @@ class ReportController extends Controller
             ));
         }
     }
+
+
+    /**
+     * Displays a comparison of membership between 2 dates
+     *
+     * @Route("/membershipcomparison", name="admin_report_membershipcomparison")
+     * @Method({"GET", "POST"})
+     */
+    public function membershipComparisonAction(Request $request, ReportService $reportService)
+    {
+        $em = $this->get('doctrine')->getManager();
+
+        $form = $this->buildMembershipComparisonForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $reportService->getMembershipComparisonData($form->getData()['date1'], $form->getData()['date2']);
+
+            return $this->render('admin/report/membershipcomparison.html.twig', array(
+                'form' => $form->createView(),
+                'data' => $data,
+                'date1' => $form->getData()['date1'],
+                'date2' => $form->getData()['date2']
+            ));
+        }
+
+
+        return $this->render('admin/report/membershipcomparison.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+
+    private function buildMembershipComparisonForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('POST')
+            ->add('date1', DateType::class, ['widget' => 'single_text', 'data' => new \DateTime('first day of january'), 'format' => 'dd-MM-yyyy'])
+            ->add('date2', DateType::class, ['widget' => 'single_text', 'data' => new \DateTime('tomorrow'), 'format' => 'dd-MM-yyyy'])
+            ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']])
+            ->getForm()
+        ;
+    }
+
+
 
     /**
      * Lists all Activity entities.

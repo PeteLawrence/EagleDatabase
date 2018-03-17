@@ -1,0 +1,62 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Reports: Membership Comparison{% endblock %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_report_index')}}">Reports</a>
+        <span class="breadcrumb-item active">Membership Comparison</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Membership Comparison</h1>
+
+    {{ form(form, { attr: { class: 'form-inline mb-3'}}) }}
+
+
+    {% if data is defined %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>{{ date1|date('jS M Y') }}</th>
+                    <th>{{ date2|date('jS M Y') }}</th>
+                </tr>
+            </thead>
+            {% for record in data %}
+                <tr>
+                    <td>
+                        <a href="{{ url('admin_person_edit', { id: record.person.id }) }}">{{ record.person.name }}</a>
+                    </td>
+                    <td>
+                        {% if record.date1 %}
+                            <i class="fa fa-check text-success"></i>
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if record.date2 %}
+                            <i class="fa fa-check text-success"></i>
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+</script>
+{% endblock %}
