@@ -78,7 +78,7 @@ class MemberQualificationRepository extends EntityRepository
             ->where('mq.qualification = ?1')
             ->setParameter(1, $qualification);
 
-        if (!$includeSuperseded) {
+        if ($includeSuperseded) {
             $q->andWhere('mq.superseded != ?2')
               ->setParameter(2, false);
         }
