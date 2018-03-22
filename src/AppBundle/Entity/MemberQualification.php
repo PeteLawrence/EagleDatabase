@@ -7,7 +7,7 @@ use AppBundle\Validator\Constraints as AppAssert;
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\MemberQualificationRepository")
  * @AppAssert\MemberQualificationConstraint
- * 
+ *
  */
 class MemberQualification
 {
@@ -249,7 +249,7 @@ class MemberQualification
         $now = new \DateTime();
 
         $d = clone $this->validTo;
-        $limit = $d->sub(new \DateInterval('P3M'));
+        $limit = $d->sub(new \DateInterval('P6M'));
 
         return ($limit < $now  && $this->validTo > $now);
     }
