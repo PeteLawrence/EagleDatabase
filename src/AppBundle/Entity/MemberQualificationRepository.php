@@ -17,7 +17,7 @@ class MemberQualificationRepository extends EntityRepository
     {
         $now = new \DateTime();
         $limit = clone $now;
-        $limit->sub(new \DateInterval('P3M'));
+        $limit->add(new \DateInterval('P6M'));
 
         $q = $this->createQueryBuilder('mq')
             ->where('mq.validTo < ?1')
