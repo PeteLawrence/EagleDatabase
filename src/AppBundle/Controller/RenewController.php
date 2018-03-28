@@ -82,7 +82,7 @@ class RenewController extends Controller
         $mtp = $em->getRepository('AppBundle:MembershipTypePeriod')->findOneById($session->get('renew_mtp'));
 
         //Get available membership options
-        $form = $membershipService->buildMembershipExtrasForm($mtp, false);
+        $form = $this->buildRenewInsuranceForm();
 
 
         if ($request->getMethod() == 'POST') {
@@ -130,6 +130,13 @@ class RenewController extends Controller
         );
     }
 
+
+    private function buildRenewInsuranceForm()
+    {
+        return $this->createFormBuilder()
+            ->setMethod('POST')
+            ->getForm();
+    }
 
     /**
      * @Route("/summary", name="account_membership_renew3")
