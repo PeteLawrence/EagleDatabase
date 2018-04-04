@@ -574,7 +574,7 @@ class ReportService
     }
 
 
-    public function getActiveMembers($date)
+    public function getActiveMembers($date = null)
     {
         if ($date == null) {
             $date = new \DateTime();
