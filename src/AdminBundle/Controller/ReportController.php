@@ -228,7 +228,7 @@ class ReportController extends Controller
 
             return $this->render('admin/report/membership.html.twig', array(
                 'form' => $form->createView(),
-                'memberCount' => sizeof($reportService->getActiveMembers()),
+                'memberCount' => sizeof($reportService->getActiveMembers($data['date'])),
                 'genderChart' => $reportService->buildGenderChart($data['date']),
                 'ageChart' => $reportService->buildAgeChart($data['date'], str_getcsv($data['ageRanges'])),
                 'returningChart' => $reportService->buildReturningChart($data['date']),

@@ -574,11 +574,13 @@ class ReportService
     }
 
 
-    public function getActiveMembers()
+    public function getActiveMembers($date)
     {
-        $now = new \DateTime();
+        if ($date == null) {
+            $date = new \DateTime();
+        }
 
-        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($now);
+        $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate($date);
 
         return $members;
     }
