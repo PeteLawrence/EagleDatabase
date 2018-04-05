@@ -55,9 +55,9 @@ class ReportService
     }
 
 
-    public function buildEmailsList($type)
+    public function buildEmailsList($type, $date)
     {
-        $people = $this->em->getRepository('AppBundle:Person')->findMembersByType($type);
+        $people = $this->em->getRepository('AppBundle:Person')->findMembersByType($type, $date);
         $emails = [];
 
         foreach ($people as $person) {
