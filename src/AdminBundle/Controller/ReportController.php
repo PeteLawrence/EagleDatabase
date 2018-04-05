@@ -39,14 +39,14 @@ class ReportController extends Controller
      */
     public function emaillistAction(Request $request, ReportService $reportService)
     {
-        $form = $this->buildMembershipTypeForm();
+        $form = $this->buildEmailListForm();
         $form->handleRequest($request);
 
         $emailsString = '';
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $emailsString = $reportService->buildEmailsList($data['membershipType']);
+            $emailsString = $reportService->buildEmailsList($data['membershipType'], $data['date']);
         }
 
         return $this->render('admin/report/emaillist.html.twig', [
@@ -57,7 +57,7 @@ class ReportController extends Controller
 
 
 
-    private function buildMembershipTypeForm()
+    private function buildEmailListForm()
     {
         return $this->createFormBuilder()
             ->setMethod('POST')
@@ -67,6 +67,11 @@ class ReportController extends Controller
                 'multiple' => true,
                 'placeholder' => 'All',
                 'required' => false
+            ])
+            ->add('date', DateType::class, [
+                'widget' => 'single_text',
+                'data' => new \DateTime('today'),
+                'format' => 'dd-MM-yyyy'
             ])
             ->getForm()
         ;
