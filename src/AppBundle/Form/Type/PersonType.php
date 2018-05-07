@@ -37,10 +37,10 @@ class PersonType extends AbstractType
             ->add('telephone', TextType::class, [ 'required' => false ])
             ->add('mobile', TextType::class, [ 'required' => false ])
             ->add('bcMembershipNumber', TextType::class, [ 'attr' => ['placeholder' => 'BC Membership Number'], 'required' => false, 'label' => 'British Canoeing Membership Number' ])
-            ->add('notes', TextareaType::class, [ 'required' => false ] )
+            ->add('notes', TextareaType::class, [ 'required' => false ])
             ->add('disability', CheckboxType::class, ['help' => 'Does the person consider that they have a disability?', 'required' => false])
             ->add('doNotContact', CheckboxType::class, [ 'label' => 'Do Not Contact', 'required' => false, 'help' => 'Do not contact this person' ])
-            ->add('admin', CheckboxType::class, [ 'required' => false ] )
+            ->add('admin', CheckboxType::class, [ 'required' => false ])
             /*->add('role', CollectionType::class, [
                 'entry_type' => RoleType::class,
                 'entry_options' => array('label' => false)

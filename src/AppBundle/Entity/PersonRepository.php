@@ -39,7 +39,6 @@ class PersonRepository extends EntityRepository
         return $this->queryMembersByType($type, $date)
             ->getQuery()
             ->getResult();
-
     }
 
 
@@ -100,6 +99,4 @@ class PersonRepository extends EntityRepository
 
         return $q2->getQuery()->getResult();
     }
-
-
 }

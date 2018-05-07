@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -8,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 class MemberRegistrationCharge extends \AppBundle\Entity\Charge
 {
     /**
-     * 
+     *
      * @ORM\JoinColumn(name="member_registration_id", referencedColumnName="id", unique=true, onDelete="CASCADE")
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\MemberRegistration", inversedBy="memberRegistrationCharge")
      */

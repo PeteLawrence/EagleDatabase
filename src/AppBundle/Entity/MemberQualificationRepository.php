@@ -61,7 +61,6 @@ class MemberQualificationRepository extends EntityRepository
      */
     public function finddQualificationsRequiringVerification()
     {
-
         $q = $this->createQueryBuilder('mq')
             ->innerJoin('mq.qualification', 'q')
             ->where('mq.verifiedBy IS NULL')
@@ -85,5 +84,4 @@ class MemberQualificationRepository extends EntityRepository
 
         return $q->getQuery()->getResult();
     }
-
 }

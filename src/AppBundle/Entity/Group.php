@@ -1,11 +1,12 @@
 <?php
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="`group`")
- * 
+ *
  *
  */
 class Group
@@ -108,5 +109,4 @@ class Group
     {
         return $this->name;
     }
-
 }

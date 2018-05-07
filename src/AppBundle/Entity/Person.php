@@ -1470,7 +1470,6 @@ class Person implements AdvancedUserInterface, \Serializable
 
         foreach ($this->memberRegistration as $memberRegistration) {
             if ($mostRecentRegistration == null || $memberRegistration->getRegistrationDateTime() > $mostRecentRegistration->getRegistrationDateTime()) {
-
                 if ($excludeCurrent) {
                     $now = new \DateTime();
                     if ($memberRegistration->getMembershipTypePeriod()->getMembershipPeriod()->getToDate() > $now) {

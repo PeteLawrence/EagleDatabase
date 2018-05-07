@@ -45,6 +45,4 @@ class ApiController extends Controller
         // Return the list of activities as a JSON string
         return new JsonResponse($response);
     }
-
-
 }

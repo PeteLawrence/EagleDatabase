@@ -645,7 +645,9 @@ class ActivityController extends Controller
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($activity) {
                     return $er->queryMembersAtDate(new \DateTime());
                 },
-                'choice_label' => function (\AppBundle\Entity\Person $a) { return $a->getForename() . ' ' . $a->getSurname(); },
+                'choice_label' => function (\AppBundle\Entity\Person $a) {
+                    return $a->getForename() . ' ' . $a->getSurname();
+                },
                 'label' => 'Participant',
                 'placeholder' => ''
             ])
@@ -688,6 +690,4 @@ class ActivityController extends Controller
             ->getForm()
         ;
     }
-
-
 }

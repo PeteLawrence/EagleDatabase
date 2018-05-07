@@ -5,8 +5,8 @@ namespace AppBundle\EventListener;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-class LoginListener {
-
+class LoginListener
+{
     private $em;
 
     public function __construct(\Doctrine\ORM\EntityManagerInterface $em)
@@ -23,5 +23,4 @@ class LoginListener {
         //FLush changes to DB
         $this->em->flush();
     }
-
 }

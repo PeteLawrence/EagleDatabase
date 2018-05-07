@@ -48,7 +48,6 @@ class RenewController extends Controller
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $data = $form->getData();
 
             if ($data['confirm']) {
@@ -57,7 +56,6 @@ class RenewController extends Controller
 
             // Terms were not accepted
             $session->getFlashBag()->add('warning', 'You must accept the Membership Conditions in order to proceed');
-
         }
 
         return $this->render(
@@ -73,7 +71,7 @@ class RenewController extends Controller
     /**
      * @Route("/insurance", name="account_membership_renew2")
      */
-    public function membershipRenew2Action(Request $request,  MembershipService $membershipService)
+    public function membershipRenew2Action(Request $request, MembershipService $membershipService)
     {
         $em = $this->get('doctrine')->getManager();
         $session = $request->getSession();
@@ -141,7 +139,7 @@ class RenewController extends Controller
     /**
      * @Route("/summary", name="account_membership_renew3")
      */
-    public function membershipRenew3Action(Request $request,  MembershipService $membershipService)
+    public function membershipRenew3Action(Request $request, MembershipService $membershipService)
     {
         $session = $request->getSession();
 
@@ -168,7 +166,7 @@ class RenewController extends Controller
     /**
      * @Route("/paynow", name="account_membership_renew_paynow")
      */
-    public function membershipRenewPayNowAction(Request $request,  MembershipService $membershipService)
+    public function membershipRenewPayNowAction(Request $request, MembershipService $membershipService)
     {
         $em = $this->get('doctrine')->getManager();
         $session = $request->getSession();
@@ -183,7 +181,7 @@ class RenewController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Configure Stripe
-             \Stripe\Stripe::setApiKey($this->getParameter('stripe.secret_key'));
+            \Stripe\Stripe::setApiKey($this->getParameter('stripe.secret_key'));
 
             // Get the credit card details submitted by the form
             $data = $form->getData();
@@ -224,14 +222,13 @@ class RenewController extends Controller
 
             return $this->redirectToRoute('account_membership_renew_complete');
         }
-
     }
 
 
     /**
      * @Route("/paylater", name="account_membership_renew_paylater")
      */
-    public function membershipRenewPayLaterAction(Request $request,  MembershipService $membershipService)
+    public function membershipRenewPayLaterAction(Request $request, MembershipService $membershipService)
     {
         $em = $this->get('doctrine')->getManager();
         $session = $request->getSession();
@@ -279,7 +276,8 @@ class RenewController extends Controller
 
 
         return $this->render(
-            'account/renewComplete.html.twig', [
+            'account/renewComplete.html.twig',
+            [
                 'registration' => $latestMemberRegistration
             ]
         );
@@ -292,7 +290,8 @@ class RenewController extends Controller
     public function membershipErrorAction(Request $request)
     {
         return $this->render(
-            'account/renewError.html.twig', [
+            'account/renewError.html.twig',
+            [
                 'errorCode' => $request->query->get('errorCode')
             ]
         );

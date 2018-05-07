@@ -46,5 +46,4 @@ class PersonReportService
 
         return $timeline;
     }
-
 }

@@ -18,7 +18,9 @@ class ParticipantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname(); }, ])
+            ->add('person', EntityType::class, ['class' => 'AppBundle:Person', 'choice_label' => function (Person $a) {
+                return $a->getForename() . ' ' . $a->getSurname();
+            }, ])
             ->add('participantStatus', EntityType::class, ['class' => 'AppBundle:ParticipantStatus', 'choice_label' => 'status', 'label' => 'Status'])
             ->add('notes', TextareaType::class, [ 'attr' => ['rows' => '5'], 'required' => false ])
             //->add('activity', EntityType::class, ['class' => 'AppBundle:Activity', 'choice_label' => 'name'])

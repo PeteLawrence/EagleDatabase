@@ -53,5 +53,4 @@ class CashReceivedController extends Controller
             ->getForm()
         ;
     }
-
 }

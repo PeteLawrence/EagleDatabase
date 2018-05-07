@@ -22,7 +22,7 @@ class ManagedActivityMembershipTypeType extends AbstractType
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $er) {
                     return $er->createQueryBuilder('a')
                         ->orderBy('a.activityStart', 'ASC');
-                    }
+                }
             ])
             ->add('membershipType', EntityType::class, ['class' => 'AppBundle:MembershipType', 'choice_label' => 'type' ])
             ->add('price', MoneyType::class, ['currency' => 'GBP'])

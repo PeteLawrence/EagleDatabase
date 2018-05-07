@@ -20,7 +20,10 @@ class AttributeType extends AbstractType
             ->add('code', TextType::class)
             ->add('name', TextType::class)
             ->add('description', TextType::class)
-            ->add('type', ChoiceType::class, array(
+            ->add(
+                'type',
+                ChoiceType::class,
+                array(
                 'choices'  => array(
                     'Boolean' => 'Boolean',
                     'Number' => 'Number',

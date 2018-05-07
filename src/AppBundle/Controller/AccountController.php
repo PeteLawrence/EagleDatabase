@@ -38,7 +38,8 @@ class AccountController extends Controller
         $nextMtp = $membershipService->getNextMembershipTypePeriod($this->getUser());
 
         // replace this example code with whatever you need
-        return $this->render('account/overview.html.twig',
+        return $this->render(
+            'account/overview.html.twig',
             [
                 'upcomingActivities' => $upcomingActivities,
                 'canRenew' => $membershipService->canPersonRenew($this->getUser())
@@ -118,7 +119,7 @@ class AccountController extends Controller
         }
 
         // replace this example code with whatever you need
-        return $this->render('account/qualificationsNew.html.twig',[
+        return $this->render('account/qualificationsNew.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -152,7 +153,7 @@ class AccountController extends Controller
         }
 
         // replace this example code with whatever you need
-        return $this->render('account/qualificationsEdit.html.twig',[
+        return $this->render('account/qualificationsEdit.html.twig', [
             'form' => $form->createView(),
             'memberQualification' => $memberQualification
         ]);
@@ -184,7 +185,7 @@ class AccountController extends Controller
         }
 
         // replace this example code with whatever you need
-        return $this->render('account/qualificationsDelete.html.twig',[
+        return $this->render('account/qualificationsDelete.html.twig', [
             'deleteForm' => $deleteForm->createView(),
             'memberQualification' => $memberQualification
         ]);

@@ -67,7 +67,6 @@ class ReportService
             }
 
             $emails[] = $person->getEmail();
-
         }
 
         $emails = array_unique($emails);
@@ -236,13 +235,11 @@ class ReportService
             }
 
             foreach ($activity->getParticipant() as $p) {
-
                 if ($p->getPerson() && $p->getPerson()->getCurrentMemberRegistration()) {
                     $type = $p->getPerson()->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
                     $pos = array_search($type, $headers);
                     $row[$pos]++;
                 }
-
             }
             $counts[] = $row;
         }
@@ -271,7 +268,6 @@ class ReportService
         $counts = [];
         foreach ($activities as $activity) {
             foreach ($activity->getParticipant() as $p) {
-
                 if ($p->getPerson() && $p->getPerson()->getCurrentMemberRegistration()) {
                     $type = $p->getPerson()->getCurrentMemberRegistration()->getMembershipTypePeriod()->getMembershipType()->getType();
                     if (isset($counts[$type])) {
@@ -377,7 +373,7 @@ class ReportService
         //Fetch current members
         $members = $this->em->getRepository('AppBundle:Person')->findMembersAtDate(new \DateTime());
 
-        $groups = range(1,10);
+        $groups = range(1, 10);
         $grouper = new \AppBundle\Util\Grouper($groups);
 
         foreach ($members as $member) {
@@ -524,7 +520,7 @@ class ReportService
         }
 
         $data = [['Location', 'Name'] ];
-        foreach($grouper->getGroups() as $group) {
+        foreach ($grouper->getGroups() as $group) {
             $data[] = [ $group['name'] . ', UK', sprintf('%s: %s', $group['name'], $group['count']) ];
         }
 
@@ -891,7 +887,6 @@ class ReportService
                     $data['coaches'][$member->getGender()]++;
                 }
             }
-
         }
 
         foreach ($activities as $activity) {
@@ -1032,11 +1027,11 @@ class ReportService
 
         if ($age < 14) {
             return 'group1';
-        } else if ($age < 19) {
+        } elseif ($age < 19) {
             return 'group2';
-        } else if ($age < 26) {
+        } elseif ($age < 26) {
             return 'group3';
-        } else if ($age < 46) {
+        } elseif ($age < 46) {
             return 'group4';
         } else {
             return 'group5';
@@ -1052,7 +1047,7 @@ class ReportService
 
         if ($age > 25) {
             $type = 'adults';
-        } else if ($age > 13) {
+        } elseif ($age > 13) {
             $type = 'youth';
         } else {
             $type = 'kids';
@@ -1089,11 +1084,10 @@ class ReportService
             }
         }
 
-        usort($data, function($a, $b) {
+        usort($data, function ($a, $b) {
             return $a['person']->getName() > $b['person']->getName();
         });
 
         return $data;
-
     }
 }

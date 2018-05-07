@@ -63,7 +63,9 @@ class ReportController extends Controller
             ->setMethod('POST')
             ->add('membershipType', EntityType::class, [
                 'class' => 'AppBundle:MembershipType',
-                'choice_label' => function (\AppBundle\Entity\MembershipType $at) { return $at->getType(); },
+                'choice_label' => function (\AppBundle\Entity\MembershipType $at) {
+                    return $at->getType();
+                },
                 'multiple' => true,
                 'placeholder' => 'All',
                 'required' => false
@@ -197,7 +199,6 @@ class ReportController extends Controller
             'usedOnlineSignupPieChart' => $reportService->buildUsedOnlineSignUpPieChart(),
             'onlineSignupCountChart' => $reportService->buildOnlineSignupCountChart()
         ));
-
     }
 
 
@@ -213,7 +214,6 @@ class ReportController extends Controller
             'memberMap' => $reportService->buildMemberMap(),
             'google_maps_key' => $this->getParameter('site.google_maps_key')
         ));
-
     }
 
 
@@ -355,7 +355,6 @@ class ReportController extends Controller
         return $this->render('admin/report/grants.html.twig', array(
             'form' => $form->createView()
         ));
-
     }
 
 
@@ -365,7 +364,9 @@ class ReportController extends Controller
             ->setMethod('POST')
             ->add('membershipPeriod', EntityType::class, [
                 'class' => 'AppBundle:MembershipPeriod',
-                'choice_label' => function (\AppBundle\Entity\MembershipPeriod $mp) { return $mp->getName(); },
+                'choice_label' => function (\AppBundle\Entity\MembershipPeriod $mp) {
+                    return $mp->getName();
+                },
                 'placeholder' => '',
                 'required' => true
             ])
@@ -389,7 +390,6 @@ class ReportController extends Controller
         return $this->render('admin/report/participationgrid.html.twig', array(
             'timeline' => $timeline
         ));
-
     }
 
 
@@ -461,21 +461,21 @@ class ReportController extends Controller
     }
 
 
-        /**
-         * Lists Qualifications Awaiting Verification
-         *
-         * @Route("/qualificationsrequiringverification", name="admin_report_qualificationsrequiringverification")
-         * @Method({"GET", "POST"})
-         */
-        public function qualificationsRequiringVerificationAction(Request $request)
-        {
-            $em = $this->get('doctrine')->getManager();
-            $qualifications = $em->getRepository('AppBundle:MemberQualification')->finddQualificationsRequiringVerification();
+    /**
+     * Lists Qualifications Awaiting Verification
+     *
+     * @Route("/qualificationsrequiringverification", name="admin_report_qualificationsrequiringverification")
+     * @Method({"GET", "POST"})
+     */
+    public function qualificationsRequiringVerificationAction(Request $request)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $qualifications = $em->getRepository('AppBundle:MemberQualification')->finddQualificationsRequiringVerification();
 
-            return $this->render('admin/report/qualificationsRequiringVerification.html.twig', array(
+        return $this->render('admin/report/qualificationsRequiringVerification.html.twig', array(
                 'qualifications' => $qualifications
             ));
-        }
+    }
 
 
     /**
@@ -513,7 +513,9 @@ class ReportController extends Controller
             ])
             ->add('activityType', EntityType::class, [
                 'class' => 'AppBundle:ActivityType',
-                'choice_label' => function (\AppBundle\Entity\ActivityType $at) { return $at->getType(); },
+                'choice_label' => function (\AppBundle\Entity\ActivityType $at) {
+                    return $at->getType();
+                },
                 'placeholder' => 'All',
                 'required' => false
             ])
@@ -528,7 +530,9 @@ class ReportController extends Controller
             ->setMethod('POST')
             ->add('qualification', EntityType::class, [
                 'class' => 'AppBundle:Qualification',
-                'choice_label' => function (\AppBundle\Entity\Qualification $q) { return $q->getName(); },
+                'choice_label' => function (\AppBundle\Entity\Qualification $q) {
+                    return $q->getName();
+                },
                 'placeholder' => '',
                 'required' => false
             ])

@@ -15,5 +15,4 @@ class MemberQualificationConstraint extends Constraint
     {
         return self::CLASS_CONSTRAINT;
     }
-
 }

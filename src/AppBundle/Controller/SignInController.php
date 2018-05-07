@@ -88,7 +88,9 @@ class SignInController extends Controller
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $er) {
                     return $er->queryMembersAtDate(new \DateTime());
                 },
-                'choice_label' => function (Person $a) { return $a->getForename() . ' ' . $a->getSurname() . ' (' . $a->getId() . ')'; },
+                'choice_label' => function (Person $a) {
+                    return $a->getForename() . ' ' . $a->getSurname() . ' (' . $a->getId() . ')';
+                },
                 'label' => 'Select your name from the list below',
                 'placeholder' => '',
                 'attr' => [

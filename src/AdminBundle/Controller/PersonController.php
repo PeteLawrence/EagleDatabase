@@ -152,7 +152,6 @@ class PersonController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
             $memberQualification->setVerifiedBy($currentUser);
@@ -170,7 +169,6 @@ class PersonController extends Controller
             'memberQualification' => $memberQualification,
             'form' => $form->createView()
         ));
-
     }
 
     private function buildVerifyQualificationForm()
@@ -339,7 +337,6 @@ class PersonController extends Controller
             ]))
             ->setMethod('DELETE')
             ->getForm();
-
     }
 
 
@@ -385,10 +382,9 @@ class PersonController extends Controller
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $er) {
                     return $er->createQueryBuilder('a')
                         ->orderBy('a.name', 'ASC');
-                    }
+                }
             ])
             ->getForm()
         ;
     }
-
 }

@@ -38,7 +38,8 @@ class MembershipService
     {
         return $this->formFactory->createBuilder()
             ->setMethod('POST')
-            ->add('membershipTypePeriod',
+            ->add(
+                'membershipTypePeriod',
                 EntityType::class,
                 [
                     'class' => \AppBundle\Entity\MembershipTypePeriod::class,
@@ -52,7 +53,8 @@ class MembershipService
                             $mtp->getPrice()
                         );
                     }
-                ])
+                ]
+            )
             ->getForm();
     }
 
@@ -212,5 +214,4 @@ class MembershipService
 
         return false;
     }
-
 }

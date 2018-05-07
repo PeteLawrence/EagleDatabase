@@ -52,27 +52,27 @@ class ChargeController extends Controller
     }
 
 
-        /**
-         * Lists all Activity entities.
-         *
-         * @Route("/overdue", name="admin_charge_overdue")
-         * @Method("GET")
-         */
-        public function chargesOverdueAction()
-        {
-            $em = $this->getDoctrine()->getManager();
+    /**
+     * Lists all Activity entities.
+     *
+     * @Route("/overdue", name="admin_charge_overdue")
+     * @Method("GET")
+     */
+    public function chargesOverdueAction()
+    {
+        $em = $this->getDoctrine()->getManager();
 
-            $charges = $em->getRepository('AppBundle:Charge')->findOverduePayments();
+        $charges = $em->getRepository('AppBundle:Charge')->findOverduePayments();
 
-            //Total the charges due
-            $totalOverdue = 0;
-            foreach ($charges as $charge) {
-                $totalOverdue += $charge->getAmount();
-            }
+        //Total the charges due
+        $totalOverdue = 0;
+        foreach ($charges as $charge) {
+            $totalOverdue += $charge->getAmount();
+        }
 
-            return $this->render('admin/charge/overdue.html.twig', [
+        return $this->render('admin/charge/overdue.html.twig', [
                 'charges' => $charges,
                 'totalOverdue' => $totalOverdue
             ]);
-        }
+    }
 }

@@ -33,6 +33,4 @@ class PaymentTypeType extends AbstractType
     {
         return 'appbundle_paymenttype';
     }
-
-
 }

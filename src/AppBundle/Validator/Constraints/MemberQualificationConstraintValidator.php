@@ -10,7 +10,6 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class MemberQualificationConstraintValidator extends ConstraintValidator
 {
-
     public function validate($memberQualification, Constraint $constraint)
     {
         if ($memberQualification->getQualification()->getExpiryDateRequired() && $memberQualification->getValidTo() == null) {
@@ -18,7 +17,5 @@ class MemberQualificationConstraintValidator extends ConstraintValidator
                 ->atPath('validTo')
                 ->addViolation();
         }
-
-
     }
 }

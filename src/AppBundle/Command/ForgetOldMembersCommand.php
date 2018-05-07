@@ -52,6 +52,5 @@ class ForgetOldMembersCommand extends ContainerAwareCommand
                 $personService->forgetPerson($expiredPerson);
             }
         }
-
     }
 }
