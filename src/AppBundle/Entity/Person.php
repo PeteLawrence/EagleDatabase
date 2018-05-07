@@ -1017,7 +1017,7 @@ class Person implements AdvancedUserInterface, \Serializable
      */
     public function getIsActive()
     {
-        return $this->isActive;
+        return true;
     }
 
 
