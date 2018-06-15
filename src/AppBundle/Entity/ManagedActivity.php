@@ -337,4 +337,22 @@ class ManagedActivity extends \AppBundle\Entity\Activity
     {
         return $this->defaultParticipantStatus;
     }
+
+    public function getParticipantsByStatus($status)
+    {
+        $participants = [];
+
+        foreach ($this->participant as $p) {
+            if ($p->getParticipantStatus()->getStatus() == $status) {
+                $participants[] = $p;
+            }
+        }
+
+        return $participants;
+    }
+
+    public function getAttendingParticipants()
+    {
+        return $this->getParticipantsByStatus('Attending');
+    }
 }

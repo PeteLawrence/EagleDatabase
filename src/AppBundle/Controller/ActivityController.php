@@ -301,7 +301,9 @@ class ActivityController extends Controller
         $cancelForm->handleRequest($request);
 
         if ($cancelForm->isSubmitted() && $cancelForm->isValid()) {
-            $em->remove($participant);
+            // Update the status in the database
+            $cancelledStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Cancelled');
+            $participant->setParticipantStatus($cancelledStatus);
             $em->flush();
 
             //Send an email to the organiser

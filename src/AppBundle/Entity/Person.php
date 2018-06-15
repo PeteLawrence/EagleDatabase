@@ -1056,6 +1056,17 @@ class Person implements AdvancedUserInterface, \Serializable
         return false;
     }
 
+    public function isCancelled($activity)
+    {
+        foreach ($this->participant as $participant) {
+            if ($participant->getManagedActivity() == $activity && $participant->getParticipantStatus()->getStatus() == 'Cancelled') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     public function getParticipantForActivity($activity)
     {

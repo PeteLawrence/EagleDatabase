@@ -84,6 +84,8 @@
                                 <i class="fa fa-pencil float-left"></i>
                                 Edit
                             </a>
+                        {% elseif app.user.cancelled(activity) %}
+                            You cancelled
                         {% else %}
                             {% if activity.allowOnlineSignup %}
                                 {% if activity.acceptingSignups %}

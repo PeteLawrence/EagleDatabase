@@ -17,7 +17,18 @@
         When emailing please ensure that you add the addresses to the BCC field.
     </div>
 
-    {% for participant in activity.participant %}
+    <h3>Attending</h3>
+    {% for participant in activity.participantsByStatus('Attending') %}
+        {{ participant.person.email }};
+    {% endfor %}
+
+    <h3>Shortlist</h3>
+    {% for participant in activity.participantsByStatus('Shortlist') %}
+        {{ participant.person.email }};
+    {% endfor %}
+
+    <h3>Cancelled</h3>
+    {% for participant in activity.participantsByStatus('Cancelled') %}
         {{ participant.person.email }};
     {% endfor %}
 
