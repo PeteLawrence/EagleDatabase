@@ -28,8 +28,7 @@
         "cmen/google-charts-bundle": "^2.1",
         "stripe/stripe-php": "^5",
         "knplabs/knp-markdown-bundle": "^1.5",
-        "symfony/process": "^3.3",
-        "ambta/doctrine-encrypt-bundle": "^2.5"
+        "symfony/process": "^3.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

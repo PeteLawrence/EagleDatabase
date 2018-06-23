@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Ambta\DoctrineEncryptBundle\Configuration\Encrypted;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PersonRepository")
@@ -22,21 +21,18 @@ class Person implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank()
-     * @Encrypted
      */
     private $forename;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank()
-     * @Encrypted
      */
     private $surname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Email()
-     * @Encrypted
      */
     private $email;
 
@@ -62,7 +58,6 @@ class Person implements AdvancedUserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=1, nullable=true)
-     * @Encrypted
      */
     private $gender;
 
@@ -73,49 +68,41 @@ class Person implements AdvancedUserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Encrypted
      */
     private $addr1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Encrypted
      */
     private $addr2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Encrypted
      */
     private $addr3;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Encrypted
      */
     private $town;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Encrypted
      */
     private $county;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Encrypted
      */
     private $postcode;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Encrypted
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Encrypted
      */
     private $mobile;
 
@@ -126,7 +113,6 @@ class Person implements AdvancedUserInterface, \Serializable
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Encrypted
      */
     private $notes;
 
@@ -137,25 +123,21 @@ class Person implements AdvancedUserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Encrypted
      */
     private $nextOfKinName;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Encrypted
      */
     private $nextOfKinRelation;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Encrypted
      */
     private $nextOfKinContactDetails;
 
     /**
      * @ORM\Column(type="string", length=8, nullable=true)
-     * @Encrypted
      */
     private $bcMembershipNumber;
 
