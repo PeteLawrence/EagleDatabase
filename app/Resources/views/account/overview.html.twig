@@ -50,7 +50,11 @@
                             <strong>Membership Number: {{ app.user.id }}</strong>
                         </p>
                         <p class="card-text">
+                        {% if app.user.mostRecentRegistration %}
                             Your membership expired on the {{ app.user.mostRecentRegistration.membershipTypePeriod.membershipPeriod.toDate|date('jS F Y') }}
+                        {% else %}
+                            No previous membership found
+                        {% endif %}
                         </p>
                     </div>
                     <div class="card-footer">
