@@ -1520,7 +1520,8 @@ class Person implements AdvancedUserInterface, \Serializable
 
         foreach ($this->getMemberQualification() as $memberQualification) {
             if ($memberQualification->getValidFrom() < $now) {
-                if ($memberQualification->getQualification()->getQualificationCategory()->getCategory() == $category) {
+                if ($memberQualification->getQualification()->getQualificationCategory()
+                    && $memberQualification->getQualification()->getQualificationCategory()->getCategory() == $category) {
                     return $memberQualification;
                 }
             }
