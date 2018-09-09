@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Expiry Required</th>
                 <th>Verification Required</th>
                 <th>Actions</th>
@@ -16,6 +17,11 @@
         {% for qualification in qualifications %}
             <tr>
                 <td>{{ qualification.name }}</td>
+                <td>
+                    {% if qualification.qualificationCategory %}
+                        {{ qualification.qualificationCategory.category }}
+                    {% endif %}
+                </td>
                 <td>
                     {% if qualification.expiryDateRequired %}
                         <i class="fa fa-check text-success"></i>

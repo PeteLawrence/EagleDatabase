@@ -1,0 +1,104 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_coachdevelopment_index')}}">Coach Development</a>
+        <span class="breadcrumb-item active">Qualification Categories</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Coach Development - Coaches</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Coach</th>
+                <th>First Aid</th>
+                <th>CPD</th>
+                <th>DBS</th>
+                <th>Safeguarding</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for coach in coaches %}
+                <tr>
+                    <td>{{ coach.name }}</td>
+                    <td>
+                        {% set q = coach.getQualificationByCategory('Coach') %}
+                        {% if q %}
+                            {{ q.qualification.name }}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set q = coach.getQualificationByCategory('First Aid') %}
+                        {% if q %}
+                            {% if q.validTo %}
+                                {% if q.validTo > "now" %}
+                                    <i class="fa fa-check text-success"></i>
+                                {% else %}
+                                    <i class="fa fa-exclamation text-warning"></i>
+                                {% endif %}
+                                {{ q.validTo|date('d/m/Y') }}
+                            {% endif %}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set q = coach.getQualificationByCategory('CPD') %}
+                        {% if q %}
+                            {% if q.validTo %}
+                                {% if q.validTo > "now" %}
+                                    <i class="fa fa-check text-success"></i>
+                                {% else %}
+                                    <i class="fa fa-exclamation text-warning"></i>
+                                {% endif %}
+                                {{ q.validTo|date('d/m/Y') }}
+                            {% endif %}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set q = coach.getQualificationByCategory('DBS') %}
+                        {% if q %}
+                            {% if q.validTo %}
+                                {% if q.validTo > "now" %}
+                                    <i class="fa fa-check text-success"></i>
+                                {% else %}
+                                    <i class="fa fa-exclamation text-warning"></i>
+                                {% endif %}
+                                {{ q.validTo|date('d/m/Y') }}
+                            {% endif %}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set q = coach.getQualificationByCategory('Safeguarding') %}
+                        {% if q %}
+                            {% if q.validTo %}
+                                {% if q.validTo > "now" %}
+                                    <i class="fa fa-check text-success"></i>
+                                {% else %}
+                                    <i class="fa fa-exclamation text-warning"></i>
+                                {% endif %}
+                                {{ q.validTo|date('d/m/Y') }}
+                            {% endif %}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

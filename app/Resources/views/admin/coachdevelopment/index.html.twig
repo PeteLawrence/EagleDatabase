@@ -1,0 +1,18 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <span class="breadcrumb-item active">Coach Development</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Coach Development</h1>
+
+    <ul>
+        <li><a href="{{ path('admin_coachdevelopment_coaches') }}">Coaches Qualifications</a></li>
+    </ul>
+
+{% endblock %}

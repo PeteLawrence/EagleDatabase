@@ -34,6 +34,13 @@ class Qualification
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\MemberQualification", mappedBy="qualification")
      */
     private $memberQualification;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\QualificationCategory", inversedBy="qualification")
+     * @ORM\JoinColumn(name="qualification_category_id", referencedColumnName="id")
+     */
+    private $qualificationCategory;
+
     /**
      * Constructor
      */
@@ -162,5 +169,29 @@ class Qualification
     public function getExpiryDateRequired()
     {
         return $this->expiryDateRequired;
+    }
+
+    /**
+     * Set qualificationCategory.
+     *
+     * @param \AppBundle\Entity\QualificationCategory|null $qualificationCategory
+     *
+     * @return Qualification
+     */
+    public function setQualificationCategory(\AppBundle\Entity\QualificationCategory $qualificationCategory = null)
+    {
+        $this->qualificationCategory = $qualificationCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get qualificationCategory.
+     *
+     * @return \AppBundle\Entity\QualificationCategory|null
+     */
+    public function getQualificationCategory()
+    {
+        return $this->qualificationCategory;
     }
 }

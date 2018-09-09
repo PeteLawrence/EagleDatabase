@@ -1,0 +1,35 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <span class="breadcrumb-item active">Qualification Categories</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Qualification Categories</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for qualificationCategory in qualificationCategories %}
+            <tr>
+                <td>{{ qualificationCategory.category }}</td>
+                <td>
+                    <a href="{{ path('admin_qualificationcategory_show', { 'id': qualificationCategory.id }) }}" class="btn btn-sm"><i class="fa fa-search"></i></a>
+                    <a href="{{ path('admin_qualificationcategory_edit', { 'id': qualificationCategory.id }) }}" class="btn btn-sm"><i class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_qualificationcategory_new') }}" class="btn btn-primary">Create a new Qualification Category</a>
+{% endblock %}

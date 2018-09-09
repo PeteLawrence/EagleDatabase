@@ -1510,4 +1510,20 @@ class Person implements AdvancedUserInterface, \Serializable
     {
         return $this->role;
     }
+
+
+
+
+    public function getQualificationByCategory($category)
+    {
+        $now = new \DateTime();
+
+        foreach ($this->getMemberQualification() as $memberQualification) {
+            if ($memberQualification->getValidFrom() < $now) {
+                if ($memberQualification->getQualification()->getQualificationCategory()->getCategory() == $category) {
+                    return $memberQualification;
+                }
+            }
+        }
+    }
 }
