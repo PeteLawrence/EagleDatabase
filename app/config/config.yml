@@ -77,3 +77,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     encryption: "%mailer_encryption%"
+
+# Manually set this to remove deprecation notices
+sensio_framework_extra:
+    router:
+        annotations: false

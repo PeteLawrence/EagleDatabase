@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\MemberRegistration;
 use AppBundle\Entity\MemberRegistrationCharge;
 use AppBundle\Entity\Charge;
@@ -21,8 +20,7 @@ class MemberChargeController extends Controller
     /**
      * Creates a new MemberCharge entity.
      *
-     * @Route("/new", name="admin_membercharge_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_membercharge_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request, $personId)
     {
@@ -55,8 +53,7 @@ class MemberChargeController extends Controller
     /**
      * Finds and displays a Charge entity.
      *
-     * @Route("/{id}", name="admin_membercharge_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_membercharge_show", methods={"GET"})
      */
     public function showAction(Charge $charge)
     {
@@ -69,8 +66,7 @@ class MemberChargeController extends Controller
     /**
      * Displays a form to edit a Charge
      *
-     * @Route("/{id}/edit", name="admin_membercharge_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_membercharge_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, Charge $charge)
     {
@@ -95,8 +91,7 @@ class MemberChargeController extends Controller
     /**
      * Displays a form to approve a Charge
      *
-     * @Route("/{id}/approve", name="admin_membercharge_approve")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/approve", name="admin_membercharge_approve", methods={"GET", "POST"})
      */
     public function approveAction(Request $request, Charge $charge)
     {
@@ -124,8 +119,7 @@ class MemberChargeController extends Controller
     /**
      * Deletes a MemberRegistration entity.
      *
-     * @Route("/{id}", name="admin_memberregistration_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_memberregistration_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, MemberRegistration $memberRegistration)
     {

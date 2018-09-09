@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\MembershipTypePeriod;
 
 /**
@@ -18,8 +17,7 @@ class MembershipTypePeriodController extends Controller
     /**
      * Lists all MembershipTypePeriod entities.
      *
-     * @Route("/", name="admin_membershiptypeperiod_index")
-     * @Method("GET")
+     * @Route("/", name="admin_membershiptypeperiod_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -35,8 +33,7 @@ class MembershipTypePeriodController extends Controller
     /**
      * Creates a new MembershipTypePeriod entity.
      *
-     * @Route("/new", name="admin_membershiptypeperiod_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_membershiptypeperiod_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -61,8 +58,7 @@ class MembershipTypePeriodController extends Controller
     /**
      * Finds and displays a MembershipTypePeriod entity.
      *
-     * @Route("/{id}", name="admin_membershiptypeperiod_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_membershiptypeperiod_show", methods={"GET"})
      */
     public function showAction(MembershipTypePeriod $membershipTypePeriod)
     {
@@ -77,8 +73,7 @@ class MembershipTypePeriodController extends Controller
     /**
      * Displays a form to edit an existing MembershipTypePeriod entity.
      *
-     * @Route("/{id}/edit", name="admin_membershiptypeperiod_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_membershiptypeperiod_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, MembershipTypePeriod $membershipTypePeriod)
     {
@@ -104,8 +99,7 @@ class MembershipTypePeriodController extends Controller
     /**
      * Deletes a MembershipTypePeriod entity.
      *
-     * @Route("/{id}", name="admin_membershiptypeperiod_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_membershiptypeperiod_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, MembershipTypePeriod $membershipTypePeriod)
     {

@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\MemberRegistration;
 use AppBundle\Entity\MemberRegistrationCharge;
 
@@ -19,8 +18,7 @@ class MemberRegistrationController extends Controller
     /**
      * Lists all MemberRegistration entities.
      *
-     * @Route("/", name="admin_memberregistration_index")
-     * @Method("GET")
+     * @Route("/", name="admin_memberregistration_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -36,8 +34,7 @@ class MemberRegistrationController extends Controller
     /**
      * Creates a new MemberRegistration entity.
      *
-     * @Route("/new", name="admin_memberregistration_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_memberregistration_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -77,8 +74,7 @@ class MemberRegistrationController extends Controller
     /**
      * Finds and displays a MemberRegistration entity.
      *
-     * @Route("/{id}", name="admin_memberregistration_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_memberregistration_show", methods={"GET"})
      */
     public function showAction(MemberRegistration $memberRegistration)
     {
@@ -93,8 +89,7 @@ class MemberRegistrationController extends Controller
     /**
      * Displays a form to edit an existing MemberRegistration entity.
      *
-     * @Route("/{id}/edit", name="admin_memberregistration_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_memberregistration_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, MemberRegistration $memberRegistration)
     {
@@ -120,8 +115,7 @@ class MemberRegistrationController extends Controller
     /**
      * Deletes a MemberRegistration entity.
      *
-     * @Route("/{id}", name="admin_memberregistration_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_memberregistration_delete"), methods={"DELETE"}
      */
     public function deleteAction(Request $request, MemberRegistration $memberRegistration)
     {

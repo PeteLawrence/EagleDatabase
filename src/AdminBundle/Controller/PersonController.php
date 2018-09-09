@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\MemberQualification;
@@ -27,8 +26,7 @@ class PersonController extends Controller
     /**
      * Lists all Person entities.
      *
-     * @Route("/", name="admin_person_index")
-     * @Method("GET")
+     * @Route("/", name="admin_person_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -44,8 +42,7 @@ class PersonController extends Controller
     /**
      * Creates a new Person entity.
      *
-     * @Route("/new", name="admin_person_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_person_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -70,8 +67,7 @@ class PersonController extends Controller
     /**
      * Finds and displays a Person entity.
      *
-     * @Route("/{id}", name="admin_person_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_person_show", methods={"GET"})
      */
     public function showAction(Person $person)
     {
@@ -86,8 +82,7 @@ class PersonController extends Controller
     /**
      * Displays a form to edit an existing Person entity.
      *
-     * @Route("/{id}/edit", name="admin_person_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_person_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, Person $person)
     {
@@ -212,8 +207,7 @@ class PersonController extends Controller
     /**
      * Deletes a Person entity.
      *
-     * @Route("/{id}", name="admin_person_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_person_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, Person $person)
     {
@@ -233,8 +227,7 @@ class PersonController extends Controller
     /**
      * Forgets a Person entity.
      *
-     * @Route("/{id}/forget", name="admin_person_forget_confirm")
-     * @Method("GET")
+     * @Route("/{id}/forget", name="admin_person_forget_confirm", methods={"GET"})
      */
     public function confirmForgetAction(Request $request, Person $person, PersonService $personService)
     {
@@ -251,8 +244,7 @@ class PersonController extends Controller
     /**
      * Forgets a Person entity.
      *
-     * @Route("/{id}/forget", name="admin_person_forget_confirmed")
-     * @Method("DELETE")
+     * @Route("/{id}/forget", name="admin_person_forget_confirmed", methods={"DELETE"})
      */
     public function confirmedForgetAction(Request $request, Person $person, PersonService $personService)
     {
@@ -270,8 +262,7 @@ class PersonController extends Controller
     /**
      * Forgets a Person entity.
      *
-     * @Route("/{id}/forget", name="admin_person_forget")
-     * @Method("DELETE")
+     * @Route("/{id}/forget", name="admin_person_forget", methods={"DELETE"})
      */
     public function forgetAction(Request $request, Person $person, PersonService $personService)
     {
@@ -289,8 +280,7 @@ class PersonController extends Controller
     /**
      * Displays a form to edit an existing Person entity.
      *
-     * @Route("/{id}/stats", name="admin_person_stats")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/stats", name="admin_person_stats", methods={"GET", "POST"})
      */
     public function statsAction(Request $request, Person $person, PersonReportService $personReportService)
     {

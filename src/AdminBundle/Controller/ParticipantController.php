@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Participant;
 
 /**
@@ -18,8 +17,7 @@ class ParticipantController extends Controller
     /**
      * Lists all Participant entities.
      *
-     * @Route("/", name="admin_participant_index")
-     * @Method("GET")
+     * @Route("/", name="admin_participant_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -35,8 +33,7 @@ class ParticipantController extends Controller
     /**
      * Creates a new Participant entity.
      *
-     * @Route("/new", name="admin_participant_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_participant_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -61,8 +58,7 @@ class ParticipantController extends Controller
     /**
      * Finds and displays a Participant entity.
      *
-     * @Route("/{id}", name="admin_participant_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_participant_show", methods={"GET"})
      */
     public function showAction(Participant $participant)
     {
@@ -77,8 +73,7 @@ class ParticipantController extends Controller
     /**
      * Displays a form to edit an existing Participant entity.
      *
-     * @Route("/{id}/edit", name="admin_participant_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_participant_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, Participant $participant)
     {
@@ -104,8 +99,7 @@ class ParticipantController extends Controller
     /**
      * Deletes a Participant entity.
      *
-     * @Route("/{id}", name="admin_participant_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_participant_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, Participant $participant)
     {

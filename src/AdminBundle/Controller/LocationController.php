@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Location;
 use AppBundle\Form\Type\LocationType;
 
@@ -19,8 +18,7 @@ class LocationController extends Controller
     /**
      * Lists all Location entities.
      *
-     * @Route("/", name="admin_location_index")
-     * @Method("GET")
+     * @Route("/", name="admin_location_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -36,8 +34,7 @@ class LocationController extends Controller
     /**
      * Creates a new Location entity.
      *
-     * @Route("/new", name="admin_location_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_location_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -62,8 +59,7 @@ class LocationController extends Controller
     /**
      * Finds and displays a Location entity.
      *
-     * @Route("/{id}", name="admin_location_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_location_show", methods={"GET"})
      */
     public function showAction(Location $location)
     {
@@ -78,8 +74,7 @@ class LocationController extends Controller
     /**
      * Displays a form to edit an existing Location entity.
      *
-     * @Route("/{id}/edit", name="admin_location_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_location_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, Location $location)
     {
@@ -105,8 +100,7 @@ class LocationController extends Controller
     /**
      * Deletes a Location entity.
      *
-     * @Route("/{id}", name="admin_location_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_location_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, Location $location)
     {

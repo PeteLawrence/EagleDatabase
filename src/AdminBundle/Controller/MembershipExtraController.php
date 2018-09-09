@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use AppBundle\Entity\MembershipExtra;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,8 +17,7 @@ class MembershipExtraController extends Controller
     /**
      * Lists all membershipExtra entities.
      *
-     * @Route("/", name="admin_membershipextra_index")
-     * @Method("GET")
+     * @Route("/", name="admin_membershipextra_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -35,8 +33,7 @@ class MembershipExtraController extends Controller
     /**
      * Creates a new membershipExtra entity.
      *
-     * @Route("/new", name="admin_membershipextra_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_membershipextra_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -61,8 +58,7 @@ class MembershipExtraController extends Controller
     /**
      * Finds and displays a membershipExtra entity.
      *
-     * @Route("/{id}", name="admin_membershipextra_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_membershipextra_show", methods={"GET"})
      */
     public function showAction(MembershipExtra $membershipExtra)
     {
@@ -77,8 +73,7 @@ class MembershipExtraController extends Controller
     /**
      * Displays a form to edit an existing membershipExtra entity.
      *
-     * @Route("/{id}/edit", name="admin_membershipextra_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_membershipextra_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, MembershipExtra $membershipExtra)
     {
@@ -102,8 +97,7 @@ class MembershipExtraController extends Controller
     /**
      * Deletes a membershipExtra entity.
      *
-     * @Route("/{id}", name="admin_membershipextra_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_membershipextra_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, MembershipExtra $membershipExtra)
     {

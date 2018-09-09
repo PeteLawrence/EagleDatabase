@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Activity;
 use AppBundle\Entity\Participant;
 
@@ -19,8 +18,7 @@ class ActivityParticipantController extends Controller
     /**
      * Gets a list of Activity participants.
      *
-     * @Route("/", name="activity_participant_list")
-     * @Method("GET")
+     * @Route("/", name="activity_participant_list", methods={"GET"})
      */
     public function indexAction(Request $request, Activity $activity)
     {
@@ -33,8 +31,7 @@ class ActivityParticipantController extends Controller
     /**
      * Creates a new Activity entity.
      *
-     * @Route("/new", name="activity_participant_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="activity_participant_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request, Activity $activity)
     {
@@ -64,8 +61,7 @@ class ActivityParticipantController extends Controller
     /**
      * Finds and displays a Activity entity.
      *
-     * @Route("/{pid}", name="activity_partcipant_show")
-     * @Method("GET")
+     * @Route("/{pid}", name="activity_partcipant_show", methods={"GET"})
      */
     public function showAction(Request $request, $pid)
     {
@@ -83,8 +79,7 @@ class ActivityParticipantController extends Controller
     /**
      * Displays a form to edit an existing Activity entity.
      *
-     * @Route("/{pid}/edit", name="activity_participant_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{pid}/edit", name="activity_participant_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, $pid)
     {
@@ -114,8 +109,7 @@ class ActivityParticipantController extends Controller
     /**
      * Gets a list of Activity participants.
      *
-     * @Route("/{pid}/delete", name="activity_participant_delete")
-     * @Method({"GET", "DELETE"})
+     * @Route("/{pid}/delete", name="activity_participant_delete", methods={"GET", "DELETE"})
      */
     public function deleteAction(Request $request, $pid)
     {

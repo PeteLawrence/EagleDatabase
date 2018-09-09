@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use AppBundle\Entity\PaymentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,8 +17,7 @@ class PaymentTypeController extends Controller
     /**
      * Lists all paymentType entities.
      *
-     * @Route("/", name="admin_paymenttype_index")
-     * @Method("GET")
+     * @Route("/", name="admin_paymenttype_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -35,8 +33,7 @@ class PaymentTypeController extends Controller
     /**
      * Creates a new paymentType entity.
      *
-     * @Route("/new", name="admin_paymenttype_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_paymenttype_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -61,8 +58,7 @@ class PaymentTypeController extends Controller
     /**
      * Displays a form to edit an existing paymentType entity.
      *
-     * @Route("/{id}/edit", name="admin_paymenttype_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_paymenttype_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, PaymentType $paymentType)
     {
@@ -86,8 +82,7 @@ class PaymentTypeController extends Controller
     /**
      * Deletes a paymentType entity.
      *
-     * @Route("/{id}", name="admin_paymenttype_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_paymenttype_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, PaymentType $paymentType)
     {

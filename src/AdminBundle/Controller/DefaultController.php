@@ -3,8 +3,7 @@
 namespace AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Default controller.
@@ -16,8 +15,7 @@ class DefaultController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/", name="admin_index")
-     * @Method("GET")
+     * @Route("/", name="admin_index", methods={"GET"})
      */
     public function indexAction()
     {

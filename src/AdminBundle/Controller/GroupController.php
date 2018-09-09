@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use AppBundle\Entity\Group;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Services\GroupService;
 
@@ -19,8 +18,7 @@ class GroupController extends Controller
     /**
      * Lists all group entities.
      *
-     * @Route("/", name="admin_group_index")
-     * @Method("GET")
+     * @Route("/", name="admin_group_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -36,8 +34,7 @@ class GroupController extends Controller
     /**
      * Creates a new group entity.
      *
-     * @Route("/new", name="admin_group_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_group_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -62,8 +59,7 @@ class GroupController extends Controller
     /**
      * Finds and displays a group entity.
      *
-     * @Route("/{id}", name="admin_group_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_group_show", methods={"GET"})
      */
     public function showAction(Group $group)
     {
@@ -79,8 +75,7 @@ class GroupController extends Controller
     /**
      * Creates an email list for people in the group
      *
-     * @Route("/{id}/emaillist", name="admin_group_emaillist")
-     * @Method("GET")
+     * @Route("/{id}/emaillist", name="admin_group_emaillist", methods={"GET"})
      */
     public function emailListAction(Group $group, GroupService $groupService)
     {
@@ -97,8 +92,7 @@ class GroupController extends Controller
     /**
      * Displays a form to edit an existing group entity.
      *
-     * @Route("/{id}/edit", name="admin_group_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_group_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, Group $group)
     {
@@ -122,8 +116,7 @@ class GroupController extends Controller
     /**
      * Deletes a group entity.
      *
-     * @Route("/{id}", name="admin_group_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_group_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, Group $group)
     {

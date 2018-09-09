@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 
@@ -19,8 +18,7 @@ class ChargeController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/", name="admin_charge_index")
-     * @Method("GET")
+     * @Route("/", name="admin_charge_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -30,8 +28,7 @@ class ChargeController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/due", name="admin_charge_due")
-     * @Method("GET")
+     * @Route("/due", name="admin_charge_due", methods={"GET"})
      */
     public function chargesDueAction()
     {
@@ -55,8 +52,7 @@ class ChargeController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/overdue", name="admin_charge_overdue")
-     * @Method("GET")
+     * @Route("/overdue", name="admin_charge_overdue", methods={"GET"})
      */
     public function chargesOverdueAction()
     {

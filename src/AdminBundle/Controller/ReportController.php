@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ColumnChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -23,8 +22,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/", name="admin_report_index")
-     * @Method("GET")
+     * @Route("/", name="admin_report_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -34,8 +32,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/emaillist", name="admin_report_emaillist")
-     * @Method({"GET", "POST"})
+     * @Route("/emaillist", name="admin_report_emaillist", methods={"GET", "POST"})
      */
     public function emaillistAction(Request $request, ReportService $reportService)
     {
@@ -83,8 +80,7 @@ class ReportController extends Controller
     /**
      * Lists Active Members
      *
-     * @Route("/activemembers", name="admin_report_activemembers")
-     * @Method("GET")
+     * @Route("/activemembers", name="admin_report_activemembers", methods={"GET"})
      */
     public function activeMembersAction(ReportService $reportService)
     {
@@ -96,8 +92,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/attendance", name="admin_report_attendance")
-     * @Method("GET")
+     * @Route("/attendance", name="admin_report_attendance", methods={"GET"})
      */
     public function attendanceAction(ReportService $reportService)
     {
@@ -112,8 +107,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/attendancedetail", name="admin_report_attendancedetail")
-     * @Method({"GET", "POST"})
+     * @Route("/attendancedetail", name="admin_report_attendancedetail", methods={"GET", "POST"})
      */
     public function attendanceDetailAction(Request $request, ReportService $reportService)
     {
@@ -145,8 +139,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/attendanceleague", name="admin_report_attendanceleague")
-     * @Method({"GET", "POST"})
+     * @Route("/attendanceleague", name="admin_report_attendanceleague"), methods={"GET", "POST"}
      */
     public function attendanceLeagueAction(Request $request, ReportService $reportService)
     {
@@ -173,8 +166,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/bcaffiliation", name="admin_report_bcaffiliation")
-     * @Method({"GET", "POST"})
+     * @Route("/bcaffiliation", name="admin_report_bcaffiliation", methods={"GET", "POST"})
      */
     public function bcAffiliationAction(Request $request, ReportService $reportService)
     {
@@ -189,8 +181,7 @@ class ReportController extends Controller
     /**
      * Database Engagement Report
      *
-     * @Route("/databaseengagement", name="admin_report_databaseengagement")
-     * @Method({"GET", "POST"})
+     * @Route("/databaseengagement", name="admin_report_databaseengagement", methods={"GET", "POST"})
      */
     public function databaseEngagementAction(Request $request, ReportService $reportService)
     {
@@ -205,8 +196,7 @@ class ReportController extends Controller
     /**
      * Displays a map of members addresses
      *
-     * @Route("/membermap", name="admin_report_membermap")
-     * @Method({"GET", "POST"})
+     * @Route("/membermap", name="admin_report_membermap", methods={"GET", "POST"})
      */
     public function memberMapAction(Request $request, ReportService $reportService)
     {
@@ -220,8 +210,7 @@ class ReportController extends Controller
     /**
      * Displays a membership overview page
      *
-     * @Route("/membership", name="admin_report_membership")
-     * @Method({"GET", "POST"})
+     * @Route("/membership", name="admin_report_membership", methods={"GET", "POST"})
      */
     public function membershipAction(Request $request, ReportService $reportService)
     {
@@ -251,8 +240,7 @@ class ReportController extends Controller
     /**
      * Displays a comparison of membership between 2 dates
      *
-     * @Route("/membershipcomparison", name="admin_report_membershipcomparison")
-     * @Method({"GET", "POST"})
+     * @Route("/membershipcomparison", name="admin_report_membershipcomparison", methods={"GET", "POST"})
      */
     public function membershipComparisonAction(Request $request, ReportService $reportService)
     {
@@ -295,8 +283,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/nextofkin", name="admin_report_nextofkin")
-     * @Method("GET")
+     * @Route("/nextofkin", name="admin_report_nextofkin", methods={"GET"})
      */
     public function nextOfKinAction()
     {
@@ -313,8 +300,7 @@ class ReportController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/enrolment", name="admin_report_enrolment")
-     * @Method("GET")
+     * @Route("/enrolment", name="admin_report_enrolment", methods={"GET"})
      */
     public function enrolmentAction(ReportService $reportService)
     {
@@ -329,8 +315,7 @@ class ReportController extends Controller
     /**
      * Displays figures required for the grant bodies
      *
-     * @Route("/grants", name="admin_report_grants")
-     * @Method({"GET", "POST"})
+     * @Route("/grants", name="admin_report_grants", methods={"GET", "POST"})
      */
     public function grantsAction(Request $request, ReportService $reportService)
     {
@@ -379,8 +364,7 @@ class ReportController extends Controller
     /**
      * Displays figures required for the grant bodies
      *
-     * @Route("/participationgrid", name="admin_report_participationgrid")
-     * @Method({"GET", "POST"})
+     * @Route("/participationgrid", name="admin_report_participationgrid", methods={"GET", "POST"})
      */
     public function participationGridAction(Request $request, ReportService $reportService)
     {
@@ -399,8 +383,7 @@ class ReportController extends Controller
     /**
      * Lists Qualifications
      *
-     * @Route("/qualifications", name="admin_report_qualifications")
-     * @Method({"GET", "POST"})
+     * @Route("/qualifications", name="admin_report_qualifications", methods={"GET", "POST"})
      */
     public function qualificationsAction(Request $request)
     {
@@ -430,8 +413,7 @@ class ReportController extends Controller
     /**
      * Lists Expiring Qualifications
      *
-     * @Route("/expiringqualifications", name="admin_report_expiringqualifications")
-     * @Method({"GET", "POST"})
+     * @Route("/expiringqualifications", name="admin_report_expiringqualifications", methods={"GET", "POST"})
      */
     public function expiringQualificationsAction(Request $request)
     {
@@ -447,8 +429,7 @@ class ReportController extends Controller
     /**
      * Lists Expired Qualifications
      *
-     * @Route("/expiredqualifications", name="admin_report_expiredqualifications")
-     * @Method({"GET", "POST"})
+     * @Route("/expiredqualifications", name="admin_report_expiredqualifications", methods={"GET", "POST"})
      */
     public function expiredQualificationsAction(Request $request)
     {
@@ -464,8 +445,7 @@ class ReportController extends Controller
     /**
      * Lists Qualifications Awaiting Verification
      *
-     * @Route("/qualificationsrequiringverification", name="admin_report_qualificationsrequiringverification")
-     * @Method({"GET", "POST"})
+     * @Route("/qualificationsrequiringverification", name="admin_report_qualificationsrequiringverification", methods={"GET", "POST"})
      */
     public function qualificationsRequiringVerificationAction(Request $request)
     {
@@ -481,8 +461,7 @@ class ReportController extends Controller
     /**
      * Lists youth members
      *
-     * @Route("/youth", name="admin_report_youth")
-     * @Method("GET")
+     * @Route("/youth", name="admin_report_youth", methods={"GET"})
      */
     public function youthAction()
     {

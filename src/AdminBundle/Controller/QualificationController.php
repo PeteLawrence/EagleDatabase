@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Qualification;
 
 /**
@@ -18,8 +17,7 @@ class QualificationController extends Controller
     /**
      * Lists all Qualification entities.
      *
-     * @Route("/", name="admin_qualification_index")
-     * @Method("GET")
+     * @Route("/", name="admin_qualification_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -35,8 +33,7 @@ class QualificationController extends Controller
     /**
      * Creates a new Qualification entity.
      *
-     * @Route("/new", name="admin_qualification_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_qualification_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -61,8 +58,7 @@ class QualificationController extends Controller
     /**
      * Finds and displays a Qualification entity.
      *
-     * @Route("/{id}", name="admin_qualification_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_qualification_show", methods={"GET"})
      */
     public function showAction(Qualification $qualification)
     {
@@ -77,8 +73,7 @@ class QualificationController extends Controller
     /**
      * Displays a form to edit an existing Qualification entity.
      *
-     * @Route("/{id}/edit", name="admin_qualification_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_qualification_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, Qualification $qualification)
     {
@@ -104,8 +99,7 @@ class QualificationController extends Controller
     /**
      * Deletes a Qualification entity.
      *
-     * @Route("/{id}", name="admin_qualification_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_qualification_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, Qualification $qualification)
     {

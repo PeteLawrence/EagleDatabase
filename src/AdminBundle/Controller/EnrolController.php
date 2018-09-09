@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Activity;
 use AppBundle\Entity\ManagedActivity;
 use AppBundle\Entity\UnmanagedActivity;
@@ -21,8 +20,7 @@ class EnrolController extends Controller
     /**
      * Enrol Step 1
      *
-     * @Route("/", name="admin_enrol")
-     * @Method({"GET", "POST"})
+     * @Route("/", name="admin_enrol", methods={"GET", "POST"})
      */
     public function enrolAction(Request $request, MembershipService $membershipService)
     {
@@ -56,8 +54,7 @@ class EnrolController extends Controller
     /**
      * Enrol Step 2
      *
-     * @Route("/2", name="admin_enrol_2")
-     * @Method({"GET", "POST"})
+     * @Route("/2", name="admin_enrol_2", methods={"GET", "POST"})
      */
     public function enrol2Action(Request $request, MembershipService $membershipService)
     {
@@ -93,8 +90,7 @@ class EnrolController extends Controller
     /**
      * Enrol Step 3
      *
-     * @Route("/3", name="admin_enrol_3")
-     * @Method({"GET", "POST"})
+     * @Route("/3", name="admin_enrol_3", methods={"GET", "POST"})
      */
     public function enrol3Action(Request $request, MembershipService $membershipService)
     {

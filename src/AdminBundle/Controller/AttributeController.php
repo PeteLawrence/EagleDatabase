@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Attribute;
 
 /**
@@ -18,8 +17,7 @@ class AttributeController extends Controller
     /**
      * Lists all Attribute entities.
      *
-     * @Route("/", name="admin_attribute_index")
-     * @Method("GET")
+     * @Route("/", name="admin_attribute_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -36,8 +34,7 @@ class AttributeController extends Controller
     /**
      * Creates a new Attribute entity.
      *
-     * @Route("/new", name="admin_attribute_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_attribute_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -64,8 +61,7 @@ class AttributeController extends Controller
     /**
      * Displays a form to edit an existing Attribute entity.
      *
-     * @Route("/{id}/edit", name="admin_attribute_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_attribute_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, Attribute $attribute)
     {
@@ -92,8 +88,7 @@ class AttributeController extends Controller
     /**
      * Deletes a ActivityType entity.
      *
-     * @Route("/{id}", name="admin_attribute_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_attribute_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, Attribute $attribute)
     {

@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Activity;
 use AppBundle\Entity\ManagedActivity;
 use AppBundle\Entity\UnmanagedActivity;
@@ -20,8 +19,7 @@ class ActivityController extends Controller
     /**
      * Lists all Activity entities.
      *
-     * @Route("/", name="admin_activity_index")
-     * @Method("GET")
+     * @Route("/", name="admin_activity_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -37,8 +35,7 @@ class ActivityController extends Controller
     /**
      * Creates a new Activity entity.
      *
-     * @Route("/new", name="admin_activity_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_activity_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -77,8 +74,7 @@ class ActivityController extends Controller
     /**
      * Finds and displays a Activity entity.
      *
-     * @Route("/{id}", name="admin_activity_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_activity_show", methods={"GET"})
      */
     public function showAction(Activity $activity)
     {
@@ -93,8 +89,7 @@ class ActivityController extends Controller
     /**
      * Displays a form to edit an existing Activity entity.
      *
-     * @Route("/{id}/edit", name="admin_activity_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_activity_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, Activity $activity)
     {
@@ -125,8 +120,7 @@ class ActivityController extends Controller
     /**
      * Deletes a Activity entity.
      *
-     * @Route("/{id}", name="admin_activity_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_activity_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, Activity $activity)
     {

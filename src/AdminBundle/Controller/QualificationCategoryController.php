@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use AppBundle\Entity\QualificationCategory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Qualificationcategory controller.
@@ -17,8 +16,7 @@ class QualificationCategoryController extends Controller
     /**
      * Lists all qualificationCategory entities.
      *
-     * @Route("/", name="admin_qualificationcategory_index")
-     * @Method("GET")
+     * @Route("/", name="admin_qualificationcategory_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -34,8 +32,7 @@ class QualificationCategoryController extends Controller
     /**
      * Creates a new qualificationCategory entity.
      *
-     * @Route("/new", name="admin_qualificationcategory_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_qualificationcategory_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -60,8 +57,7 @@ class QualificationCategoryController extends Controller
     /**
      * Finds and displays a qualificationCategory entity.
      *
-     * @Route("/{id}", name="admin_qualificationcategory_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_qualificationcategory_show", methods={"GET"})
      */
     public function showAction(QualificationCategory $qualificationCategory)
     {
@@ -76,8 +72,7 @@ class QualificationCategoryController extends Controller
     /**
      * Displays a form to edit an existing qualificationCategory entity.
      *
-     * @Route("/{id}/edit", name="admin_qualificationcategory_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_qualificationcategory_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, QualificationCategory $qualificationCategory)
     {
@@ -101,8 +96,7 @@ class QualificationCategoryController extends Controller
     /**
      * Deletes a qualificationCategory entity.
      *
-     * @Route("/{id}", name="admin_qualificationcategory_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_qualificationcategory_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, QualificationCategory $qualificationCategory)
     {

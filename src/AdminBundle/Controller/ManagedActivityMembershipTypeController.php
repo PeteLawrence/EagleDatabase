@@ -5,9 +5,8 @@ namespace AdminBundle\Controller;
 use AppBundle\Entity\ManagedActivityMembershipType;
 use AppBundle\Entity\ManagedActivity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -20,8 +19,7 @@ class ManagedActivityMembershipTypeController extends Controller
     /**
      * Lists all managedActivityMembershipType entities.
      *
-     * @Route("/{id}/membershiptype", name="admin_managedactivitymembershiptype_index")
-     * @Method("GET")
+     * @Route("/{id}/membershiptype", name="admin_managedactivitymembershiptype_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -37,8 +35,7 @@ class ManagedActivityMembershipTypeController extends Controller
     /**
      * Creates a new managedActivityMembershipType entity.
      *
-     * @Route("/{id}/membershiptype/new", name="admin_managedactivitymembershiptype_new")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/membershiptype/new", name="admin_managedactivitymembershiptype_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request, ManagedActivity $managedActivity)
     {
@@ -67,8 +64,7 @@ class ManagedActivityMembershipTypeController extends Controller
     /**
      * Finds and displays a managedActivityMembershipType entity.
      *
-     * @Route("/{managedActivityId}/membershiptype/{id}", name="admin_managedactivitymembershiptype_show")
-     * @Method("GET")
+     * @Route("/{managedActivityId}/membershiptype/{id}", name="admin_managedactivitymembershiptype_show", methods={"GET"})
      */
     public function showAction(ManagedActivityMembershipType $managedActivityMembershipType)
     {
@@ -83,8 +79,7 @@ class ManagedActivityMembershipTypeController extends Controller
     /**
      * Displays a form to edit an existing managedActivityMembershipType entity.
      *
-     * @Route("/{managedActivityId}/membershiptype/{id}/edit", name="admin_managedactivitymembershiptype_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{managedActivityId}/membershiptype/{id}/edit", name="admin_managedactivitymembershiptype_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, ManagedActivityMembershipType $managedActivityMembershipType, $managedActivityId)
     {
@@ -108,8 +103,7 @@ class ManagedActivityMembershipTypeController extends Controller
     /**
      * Deletes a managedActivityMembershipType entity.
      *
-     * @Route("/{managedActivityId}/membershiptype/{id}/delete", name="admin_managedactivitymembershiptype_delete")
-     * @Method("DELETE")
+     * @Route("/{managedActivityId}/membershiptype/{id}/delete", name="admin_managedactivitymembershiptype_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, ManagedActivityMembershipType $managedActivityMembershipType, $managedActivityId)
     {

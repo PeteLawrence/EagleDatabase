@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\MembershipType;
 
 /**
@@ -18,8 +17,7 @@ class MembershipTypeController extends Controller
     /**
      * Lists all MembershipType entities.
      *
-     * @Route("/", name="admin_membershiptype_index")
-     * @Method("GET")
+     * @Route("/", name="admin_membershiptype_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -35,8 +33,7 @@ class MembershipTypeController extends Controller
     /**
      * Creates a new MembershipType entity.
      *
-     * @Route("/new", name="admin_membershiptype_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_membershiptype_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -61,8 +58,7 @@ class MembershipTypeController extends Controller
     /**
      * Finds and displays a MembershipType entity.
      *
-     * @Route("/{id}", name="admin_membershiptype_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_membershiptype_show", methods={"GET"})
      */
     public function showAction(MembershipType $membershipType)
     {
@@ -77,8 +73,7 @@ class MembershipTypeController extends Controller
     /**
      * Displays a form to edit an existing MembershipType entity.
      *
-     * @Route("/{id}/edit", name="admin_membershiptype_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_membershiptype_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, MembershipType $membershipType)
     {
@@ -104,8 +99,7 @@ class MembershipTypeController extends Controller
     /**
      * Deletes a MembershipType entity.
      *
-     * @Route("/{id}", name="admin_membershiptype_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_membershiptype_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, MembershipType $membershipType)
     {

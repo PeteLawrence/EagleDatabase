@@ -4,8 +4,8 @@ namespace AdminBundle\Controller;
 
 use AppBundle\Entity\MembershipTypePeriodExtra;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,8 +18,7 @@ class MembershipTypePeriodExtraController extends Controller
     /**
      * Lists all membershipTypePeriodExtra entities.
      *
-     * @Route("/", name="admin_membershiptypeperiodextra_index")
-     * @Method("GET")
+     * @Route("/", name="admin_membershiptypeperiodextra_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -35,8 +34,7 @@ class MembershipTypePeriodExtraController extends Controller
     /**
      * Creates a new membershipTypePeriodExtra entity.
      *
-     * @Route("/new", name="admin_membershiptypeperiodextra_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_membershiptypeperiodextra_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -61,8 +59,7 @@ class MembershipTypePeriodExtraController extends Controller
     /**
      * Finds and displays a membershipTypePeriodExtra entity.
      *
-     * @Route("/{id}", name="admin_membershiptypeperiodextra_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_membershiptypeperiodextra_show", methods={"GET"})
      */
     public function showAction(MembershipTypePeriodExtra $membershipTypePeriodExtra)
     {
@@ -77,8 +74,7 @@ class MembershipTypePeriodExtraController extends Controller
     /**
      * Displays a form to edit an existing membershipTypePeriodExtra entity.
      *
-     * @Route("/{id}/edit", name="admin_membershiptypeperiodextra_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_membershiptypeperiodextra_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, MembershipTypePeriodExtra $membershipTypePeriodExtra)
     {
@@ -102,8 +98,7 @@ class MembershipTypePeriodExtraController extends Controller
     /**
      * Deletes a membershipTypePeriodExtra entity.
      *
-     * @Route("/{id}", name="admin_membershiptypeperiodextra_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_membershiptypeperiodextra_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, MembershipTypePeriodExtra $membershipTypePeriodExtra)
     {

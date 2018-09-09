@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\MemberQualification;
 
 /**
@@ -18,8 +17,7 @@ class MemberQualificationController extends Controller
     /**
      * Lists all MemberQualification entities.
      *
-     * @Route("/", name="admin_memberqualification_index")
-     * @Method("GET")
+     * @Route("/", name="admin_memberqualification_index", methods={"GET"})
      */
     public function indexAction(Request $request, $personId)
     {
@@ -37,8 +35,7 @@ class MemberQualificationController extends Controller
     /**
      * Creates a new MemberQualification entity.
      *
-     * @Route("/new", name="admin_memberqualification_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_memberqualification_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request, $personId)
     {
@@ -67,8 +64,7 @@ class MemberQualificationController extends Controller
     /**
      * Displays a form to edit an existing MemberQualification entity.
      *
-     * @Route("/{id}/edit", name="admin_memberqualification_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_memberqualification_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, MemberQualification $memberQualification)
     {
@@ -94,8 +90,7 @@ class MemberQualificationController extends Controller
     /**
      * Deletes a MemberQualification entity.
      *
-     * @Route("/{id}", name="admin_memberqualification_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_memberqualification_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, MemberQualification $memberQualification)
     {

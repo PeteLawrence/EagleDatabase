@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Services\PersonService;
 
 /**
@@ -18,8 +17,7 @@ class CoachDevelopmentController extends Controller
     /**
      * Coach Development Index
      *
-     * @Route("/", name="admin_coachdevelopment_index")
-     * @Method("GET")
+     * @Route("/", name="admin_coachdevelopment_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -30,8 +28,7 @@ class CoachDevelopmentController extends Controller
     /**
      * Coaches Qualifications Grid
      *
-     * @Route("/coaches", name="admin_coachdevelopment_coaches")
-     * @Method("GET")
+     * @Route("/coaches", name="admin_coachdevelopment_coaches", methods={"GET"})
      */
     public function coachesAction(PersonService $personService)
     {
@@ -48,8 +45,7 @@ class CoachDevelopmentController extends Controller
     /**
      * Lifeguards Qualifications Grid
      *
-     * @Route("/lifeguards", name="admin_coachdevelopment_lifeguards")
-     * @Method("GET")
+     * @Route("/lifeguards", name="admin_coachdevelopment_lifeguards", methods={"GET"})
      */
     public function lifeguardsAction(PersonService $personService)
     {
@@ -66,8 +62,7 @@ class CoachDevelopmentController extends Controller
     /**
      * CAAs Qualifications Grid
      *
-     * @Route("/caas", name="admin_coachdevelopment_caas")
-     * @Method("GET")
+     * @Route("/caas", name="admin_coachdevelopment_caas", methods={"GET"})
      */
     public function caasAction(PersonService $personService)
     {

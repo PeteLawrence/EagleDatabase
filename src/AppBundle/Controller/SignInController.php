@@ -2,8 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -16,8 +15,7 @@ class SignInController extends Controller
     /**
      * Displays a sign-in page
      *
-     * @Route("/signin/{id}", name="signin_show")
-     * @Method({"GET", "POST"})
+     * @Route("/signin/{id}", name="signin_show", methods={"GET", "POST"})
      */
     public function signinAction(Request $request, Activity $activity)
     {

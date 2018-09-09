@@ -4,8 +4,7 @@ namespace AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\ParticipantStatus;
 
 /**
@@ -18,8 +17,7 @@ class ParticipantStatusController extends Controller
     /**
      * Lists all ParticipantStatus entities.
      *
-     * @Route("/", name="admin_participantstatus_index")
-     * @Method("GET")
+     * @Route("/", name="admin_participantstatus_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -35,8 +33,7 @@ class ParticipantStatusController extends Controller
     /**
      * Creates a new ParticipantStatus entity.
      *
-     * @Route("/new", name="admin_participantstatus_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_participantstatus_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -61,8 +58,7 @@ class ParticipantStatusController extends Controller
     /**
      * Finds and displays a ParticipantStatus entity.
      *
-     * @Route("/{id}", name="admin_participantstatus_show")
-     * @Method("GET")
+     * @Route("/{id}", name="admin_participantstatus_show", methods={"GET"})
      */
     public function showAction(ParticipantStatus $participantStatus)
     {
@@ -77,8 +73,7 @@ class ParticipantStatusController extends Controller
     /**
      * Displays a form to edit an existing ParticipantStatus entity.
      *
-     * @Route("/{id}/edit", name="admin_participantstatus_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_participantstatus_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, ParticipantStatus $participantStatus)
     {
@@ -104,8 +99,7 @@ class ParticipantStatusController extends Controller
     /**
      * Deletes a ParticipantStatus entity.
      *
-     * @Route("/{id}", name="admin_participantstatus_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="admin_participantstatus_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, ParticipantStatus $participantStatus)
     {
