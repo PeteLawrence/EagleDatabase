@@ -1,0 +1,81 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_coachdevelopment_index')}}">Coach Development</a>
+        <span class="breadcrumb-item active">Lifeguards</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Coach Development - Lifeguards</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Lifeguard</th>
+                <th>First Aid</th>
+                <th>DBS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lifeguard in lifeguards %}
+                <tr>
+                    <td>
+                        <a href="{{ path('admin_person_edit', { id: lifeguard.id }) }}">{{ lifeguard.name }}</a>
+                    </td>
+                    <td>
+                        {% set q = lifeguard.getQualificationByCategory('Lifeguard') %}
+                        {% if q %}
+                            {% if q.validTo %}
+                                {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
+                                    <i class="fa fa-check text-success"></i>
+                                {% else %}
+                                    <i class="fa fa-exclamation text-warning"></i>
+                                {% endif %}
+                                {{ q.validTo|date('d/m/Y') }}
+                            {% endif %}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set q = lifeguard.getQualificationByCategory('First Aid') %}
+                        {% if q %}
+                            {% if q.validTo %}
+                                {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
+                                    <i class="fa fa-check text-success"></i>
+                                {% else %}
+                                    <i class="fa fa-exclamation text-warning"></i>
+                                {% endif %}
+                                {{ q.validTo|date('d/m/Y') }}
+                            {% endif %}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set q = lifeguard.getQualificationByCategory('DBS') %}
+                        {% if q %}
+                            {% if q.validTo %}
+                                {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
+                                    <i class="fa fa-check text-success"></i>
+                                {% else %}
+                                    <i class="fa fa-exclamation text-warning"></i>
+                                {% endif %}
+                                {{ q.validTo|date('d/m/Y') }}
+                            {% endif %}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('admin_index')}}">Admin</a>
+        <a class="breadcrumb-item" href="{{ path('admin_coachdevelopment_index')}}">Coach Development</a>
+        <span class="breadcrumb-item active">Club Activity Assistants</span>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <h1>Coach Development - Club Activity Assistants</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>First Aid</th>
+                <th>DBS</th>
+                <th>Safeguarding</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for caa in caas %}
+                <tr>
+                    <td>
+                        <a href="{{ path('admin_person_edit', { id: caa.id }) }}">{{ caa.name }}</a>
+                    </td>
+                    <td>
+                        {% set q = caa.getQualificationByCategory('First Aid') %}
+                        {% if q %}
+                            {% if q.validTo %}
+                                {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
+                                    <i class="fa fa-check text-success"></i>
+                                {% else %}
+                                    <i class="fa fa-exclamation text-warning"></i>
+                                {% endif %}
+                                {{ q.validTo|date('d/m/Y') }}
+                            {% endif %}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set q = caa.getQualificationByCategory('DBS') %}
+                        {% if q %}
+                            {% if q.validTo %}
+                                {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
+                                    <i class="fa fa-check text-success"></i>
+                                {% else %}
+                                    <i class="fa fa-exclamation text-warning"></i>
+                                {% endif %}
+                                {{ q.validTo|date('d/m/Y') }}
+                            {% endif %}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set q = caa.getQualificationByCategory('Safeguarding') %}
+                        {% if q %}
+                            {% if q.validTo %}
+                                {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
+                                    <i class="fa fa-check text-success"></i>
+                                {% else %}
+                                    <i class="fa fa-exclamation text-warning"></i>
+                                {% endif %}
+                                {{ q.validTo|date('d/m/Y') }}
+                            {% endif %}
+                        {% else %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
