@@ -27,7 +27,9 @@
         <tbody>
             {% for coach in coaches %}
                 <tr>
-                    <td>{{ coach.name }}</td>
+                    <td>
+                        <a href="{{ path('admin_person_edit', { id: coach.id }) }}">{{ coach.name }}</a>
+                    </td>
                     <td>
                         {% set q = coach.getQualificationByCategory('Coach') %}
                         {% if q %}
