@@ -99,4 +99,24 @@ class PersonRepository extends EntityRepository
 
         return $q2->getQuery()->getResult();
     }
+
+
+    public function findMembersWithQualification($qualification)
+    {
+        $now = new \DateTime();
+
+        $query = $this->createQueryBuilder('p')
+            ->innerJoin('p.memberRegistration', 'mr')
+            ->innerJoin('mr.membershipTypePeriod', 'mtp')
+            ->innerJoin('mtp.membershipPeriod', 'mp')
+            ->innerJoin('p.memberQualification', 'mq')
+            ->where('?1 BETWEEN mp.fromDate AND mp.toDate')
+            ->andWhere('mr.registrationDateTime <= ?1')
+            ->andWhere('mq.qualification = ?2')
+            ->setParameter(1, $now)
+            ->setParameter(2, $qualification)
+        ;
+
+        return $query->getQuery()->getResult();
+    }
 }

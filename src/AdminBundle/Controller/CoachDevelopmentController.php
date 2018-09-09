@@ -43,4 +43,40 @@ class CoachDevelopmentController extends Controller
             'coaches' => $coaches
         ]);
     }
+
+
+    /**
+     * Lifeguards Qualifications Grid
+     *
+     * @Route("/lifeguards", name="admin_coachdevelopment_lifeguards")
+     * @Method("GET")
+     */
+    public function lifeguardsAction(PersonService $personService)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $lifeguard = $em->getRepository('AppBundle:Qualification')->findOneByName('Pool Endorsement Lifeguard');
+        $lifeguards = $em->getRepository('AppBundle:Person')->findMembersWithQualification($lifeguard);
+
+        return $this->render('admin/coachdevelopment/lifeguards.html.twig', [
+            'lifeguards' => $lifeguards
+        ]);
+    }
+
+
+    /**
+     * CAAs Qualifications Grid
+     *
+     * @Route("/caas", name="admin_coachdevelopment_caas")
+     * @Method("GET")
+     */
+    public function caasAction(PersonService $personService)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $caa = $em->getRepository('AppBundle:Qualification')->findOneByName('Club Activity Assistant');
+        $caas = $em->getRepository('AppBundle:Person')->findMembersWithQualification($caa);
+
+        return $this->render('admin/coachdevelopment/caas.html.twig', [
+            'caas' => $caas
+        ]);
+    }
 }
