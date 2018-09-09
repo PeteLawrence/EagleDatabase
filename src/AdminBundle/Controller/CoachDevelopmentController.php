@@ -36,8 +36,8 @@ class CoachDevelopmentController extends Controller
     public function coachesAction(PersonService $personService)
     {
         $em = $this->get('doctrine')->getManager();
-        $coachCategory = $em->getRepository('AppBundle:QualificationCategory')->findOneByCategory('Coach');
-        $coaches = $em->getRepository('AppBundle:Person')->findMembersByType($coachCategory);
+        $coachType = $em->getRepository('AppBundle:MembershipType')->findOneByType('Coach');
+        $coaches = $em->getRepository('AppBundle:Person')->findMembersByType($coachType);
 
         return $this->render('admin/coachdevelopment/coaches.html.twig', [
             'coaches' => $coaches
