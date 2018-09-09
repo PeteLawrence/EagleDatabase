@@ -40,7 +40,7 @@
                         {% set q = coach.getQualificationByCategory('First Aid') %}
                         {% if q %}
                             {% if q.validTo %}
-                                {% if q.validTo > "now" %}
+                                {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
                                     <i class="fa fa-check text-success"></i>
                                 {% else %}
                                     <i class="fa fa-exclamation text-warning"></i>
@@ -55,7 +55,7 @@
                         {% set q = coach.getQualificationByCategory('CPD') %}
                         {% if q %}
                             {% if q.validTo %}
-                                {% if q.validTo > "now" %}
+                                {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
                                     <i class="fa fa-check text-success"></i>
                                 {% else %}
                                     <i class="fa fa-exclamation text-warning"></i>
@@ -70,7 +70,7 @@
                         {% set q = coach.getQualificationByCategory('DBS') %}
                         {% if q %}
                             {% if q.validTo %}
-                                {% if q.validTo > "now" %}
+                                {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
                                     <i class="fa fa-check text-success"></i>
                                 {% else %}
                                     <i class="fa fa-exclamation text-warning"></i>
@@ -85,7 +85,7 @@
                         {% set q = coach.getQualificationByCategory('Safeguarding') %}
                         {% if q %}
                             {% if q.validTo %}
-                                {% if q.validTo > "now" %}
+                                {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
                                     <i class="fa fa-check text-success"></i>
                                 {% else %}
                                     <i class="fa fa-exclamation text-warning"></i>
