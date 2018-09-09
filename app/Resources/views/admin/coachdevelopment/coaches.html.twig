@@ -35,7 +35,7 @@
                         {% if q %}
                             {{ q.qualification.name }}
                         {% else %}
-                            <i class="fa fa-times text-danger"></i>
+                            <i class="fa fa-fw fa-times text-danger"></i>
                         {% endif %}
                     </td>
                     <td>
@@ -43,14 +43,14 @@
                         {% if q %}
                             {% if q.validTo %}
                                 {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
-                                    <i class="fa fa-check text-success"></i>
+                                    <i class="fa fa-fw fa-check text-success"></i>
                                 {% else %}
-                                    <i class="fa fa-exclamation text-warning"></i>
+                                    <i class="fa fa-fw fa-exclamation text-warning"></i>
                                 {% endif %}
                                 {{ q.validTo|date('d/m/Y') }}
                             {% endif %}
                         {% else %}
-                            <i class="fa fa-times text-danger"></i>
+                            <i class="fa fa-fw fa-times text-danger"></i>
                         {% endif %}
                     </td>
                     <td>
@@ -58,14 +58,14 @@
                         {% if q %}
                             {% if q.validTo %}
                                 {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
-                                    <i class="fa fa-check text-success"></i>
+                                    <i class="fa fa-fw fa-check text-success"></i>
                                 {% else %}
-                                    <i class="fa fa-exclamation text-warning"></i>
+                                    <i class="fa fa-fw fa-exclamation text-warning"></i>
                                 {% endif %}
                                 {{ q.validTo|date('d/m/Y') }}
                             {% endif %}
                         {% else %}
-                            <i class="fa fa-times text-danger"></i>
+                            <i class="fa fa-fw fa-times text-danger"></i>
                         {% endif %}
                     </td>
                     <td>
@@ -73,14 +73,14 @@
                         {% if q %}
                             {% if q.validTo %}
                                 {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
-                                    <i class="fa fa-check text-success"></i>
+                                    <i class="fa fa-fw fa-check text-success"></i>
                                 {% else %}
-                                    <i class="fa fa-exclamation text-warning"></i>
+                                    <i class="fa fa-fw fa-exclamation text-warning"></i>
                                 {% endif %}
                                 {{ q.validTo|date('d/m/Y') }}
                             {% endif %}
                         {% else %}
-                            <i class="fa fa-times text-danger"></i>
+                            <i class="fa fa-fw fa-times text-danger"></i>
                         {% endif %}
                     </td>
                     <td>
@@ -88,14 +88,14 @@
                         {% if q %}
                             {% if q.validTo %}
                                 {% if q.validTo|date('Y-m-d') > "now"|date('Y-m-d') %}
-                                    <i class="fa fa-check text-success"></i>
+                                    <i class="fa fa-fw fa-check text-success"></i>
                                 {% else %}
-                                    <i class="fa fa-exclamation text-warning"></i>
+                                    <i class="fa fa-fw fa-exclamation text-warning"></i>
                                 {% endif %}
                                 {{ q.validTo|date('d/m/Y') }}
                             {% endif %}
                         {% else %}
-                            <i class="fa fa-times text-danger"></i>
+                            <i class="fa fa-fw fa-times text-danger"></i>
                         {% endif %}
                     </td>
                 </tr>
