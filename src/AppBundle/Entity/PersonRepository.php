@@ -119,4 +119,16 @@ class PersonRepository extends EntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+
+
+    public function queryAdmins()
+    {
+        $q = $this->createQueryBuilder('p')
+            ->where('p.admin = ?1')
+            ->orderBy('p.forename')
+            ->addOrderBy('p.surname')
+            ->setParameter(1, true);
+        return $q;
+    }
 }

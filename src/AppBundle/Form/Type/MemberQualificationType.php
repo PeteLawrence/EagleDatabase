@@ -61,7 +61,10 @@ class MemberQualificationType extends AbstractType
             ->add('verifiedBy', EntityType::class, [
                 'class' => 'AppBundle:Person',
                 'choice_label' => 'name',
-                'required' => false
+                'required' => false,
+                'query_builder' => function (\AppBundle\Entity\PersonRepository $er) {
+                    return $er->queryAdmins();
+                }
             ])
             ->add('verifiedDateTime', DateType::class, [
                 'html5' => true,
