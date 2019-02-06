@@ -69,6 +69,14 @@
                         {% endif %}
                     </td>
                     <td>
+                        {% set q = coach.getQualificationByCategory('PPA e-Learning') %}
+                        {% if q %}
+                            <i class="fa fa-fw fa-check text-success"></i>
+                        {% else %}
+                            <i class="fa fa-fw fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>
                         {% set q = coach.getQualificationByCategory('DBS') %}
                         {% if q %}
                             {% if q.validTo %}
