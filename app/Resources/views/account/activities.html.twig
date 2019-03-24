@@ -9,8 +9,18 @@
         <span class="breadcrumb-item active">Activities</span>
     </nav>
 
-    <h2>Activity History</h2>
+    <h2>Activities</h2>
 
+
+    {% if activitiesOrganising|length > 0 %}
+        <div class="mb-3">
+            <h3>Organising</h3>
+            <p>Click the below button to see details of activities you are organising.</p>
+            <a href="{{ path('account_activities_organising') }}" class="btn btn-primary">Organising</a>
+        </div>
+    {% endif %}
+
+    <h3>Participating</h3>
     <table class="table">
         <thead>
             <tr>

@@ -1,0 +1,65 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Activities: Organising{% endblock %}
+
+{% block body %}
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <a class="breadcrumb-item" href="{{ path('account_overview') }}">Account</a>
+        <a class="breadcrumb-item" href="{{ path('account_activities') }}">Activities</a>
+        <span class="breadcrumb-item active">Organising</span>
+    </nav>
+
+    <h2>Activities: Organising</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Activity</th>
+                <th>Date</th>
+                <th>Participants</th>
+                <th>Description</th>
+                <th>Online Signup</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for activity in activitiesOrganising %}
+                <tr>
+                    <td>{{ activity.name}}</td>
+                    <td>{{ activity.activityStart|date('d M Y H:i') }} &rarr; {{ activity.activityEnd|date('d M Y H:i') }}</td>
+                    <td>
+                        {{ activity.getAttendingParticipants|length }} / {{ activity.spaces }}
+                    </td>
+                    <td>
+                        {% if activity.description|length < 2 %}
+                            <i class="fa fa-times text-danger"></i> (not set)
+                        {% elseif activity.description|length < 100 %}
+                            <i class="fa fa-exclamation text-warning"></i> (too short)
+                        {% else %}
+                            <i class="fa fa-check text-success"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if activity.allowOnlineSignup and activity.spaces and activity.isAttending(app.user) %}
+                            <i class="fa fa-check text-success"></i>
+                        {% else %}
+                            {% if not activity.allowOnlineSignup %}
+                                <i class="fa fa-times text-danger"></i>
+                            {% elseif not activity.spaces %}
+                                <i class="fa fa-exclamation text-warning"></i> (# of spaces not set)
+                            {% elseif not activity.isAttending(app.user) %}
+                                <i class="fa fa-exclamation text-warning"></i> (not attending)
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('activity_edit', { id: activity.id })}}"><i class="fa fa-pencil"></i></a>
+                        <a href="{{ path('activity_view', { id: activity.id })}}"><i class="fa fa-eye"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -55,13 +55,29 @@ class AccountController extends Controller
     {
         $em = $this->get('doctrine')->getManager();
         $participations = $em->getRepository('AppBundle:Participant')->findByPersonOrdered($this->getUser());
+        $activitiesOrganising = $em->getRepository('AppBundle:ManagedActivity')->findUpcomingActivitiesForOrganiser($this->getUser());
 
         // replace this example code with whatever you need
         return $this->render('account/activities.html.twig', [
-            'participations' => $participations
+            'participations' => $participations,
+            'activitiesOrganising' => $activitiesOrganising
         ]);
     }
 
+
+    /**
+     * @Route("/activities/organising", name="account_activities_organising")
+     */
+    public function activitiesOrganisingAction(Request $request)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $activitiesOrganising = $em->getRepository('AppBundle:ManagedActivity')->findUpcomingActivitiesForOrganiser($this->getUser());
+
+        // replace this example code with whatever you need
+        return $this->render('account/activitiesOrganising.html.twig', [
+            'activitiesOrganising' => $activitiesOrganising
+        ]);
+    }
 
     /**
      * @Route("/membership", name="account_membership")
