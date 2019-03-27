@@ -32,7 +32,7 @@
                         <td>{{ payment.paiddatetime|date('j M Y H:i:s') }}</td>
                         <td><a href="{{ url('admin_person_edit', { id: payment.person.id } ) }}">{{ payment.person.name }}</a>
                         <td>{{ payment.description }}</td>
-                        <td>{{ payment.paymenttype.type }}</td>
+                        <td>{{ payment.paymentType.type }}</td>
                         <td>&pound;{{ payment.amount|number_format(2) }}</td>
                         <td>
                             <a href="{{ url('admin_membercharge_show', { personId: payment.person.id, id: payment.id })}}">
