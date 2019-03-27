@@ -48,8 +48,10 @@ class ChargeRepository extends EntityRepository
         $query = $this->createQueryBuilder('c')
                 ->where('c.paiddatetime >= ?1')
                 ->andWhere('c.paiddatetime < ?2')
+                ->andWhere('c.paid = ?3')
                 ->setParameter(1, $fromDate)
-                ->setParameter(2, $toDate);
+                ->setParameter(2, $toDate)
+                ->setParameter(3, true);
 
         return $query->getQuery()->getResult();
     }
