@@ -13,7 +13,7 @@
     <h2>Participants</h2>
     <h3>Attending: {{ activity.participantsByStatus('Attending')|length }}, Shortlist: {{ activity.participantsByStatus('Shortlist')|length }}, Cancelled: {{ activity.participantsByStatus('Cancelled')|length }}</h3>
 
-    {% if dateDiff("now", activity.activityStart).invert and dateDiff("now", activity.activityStart).days > 7 %}
+    {% if (dateDiff("now", activity.activityStart).invert and dateDiff("now", activity.activityStart).days > 7) and not app.user.admin %}
         <div class="alert alert-warning">
             Participant list is no longer available</a>
         </div>
