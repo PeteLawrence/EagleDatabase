@@ -194,7 +194,7 @@ class ReportService
             foreach ($activity->getParticipant() as $p) {
                 //Get the date at which the member joined
                 $joinedDate = $p->getPerson()->getJoinedDate();
-                $joinedDate = new \DateTime('2017-01-01');
+
                 //Calculate the number of years they've been a member for
                 $length = $joinedDate->diff($activity->getActivityStart())->y;
 
@@ -207,8 +207,9 @@ class ReportService
             /*foreach ($grouper->getGroups() as $group) {
                 $data[] = [ $group['name'], $group['count']];
             }*/
+            $data[] = [$activity->getActivityStart(), $activity->getName(), $groups[0]['count'], $groups[1]['count'], $groups[2]['count'], $groups[3]['count']];
         }
-        $data[] = [$activity->getActivityStart(), $activity->getName(), $groups[0]['count'], $groups[1]['count'], $groups[2]['count'], $groups[3]['count']];
+
 
 
         $chart = new ColumnChart();
