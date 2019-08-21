@@ -189,7 +189,7 @@ class ReportService
     {
         $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
         $grouper = new \AppBundle\Util\Grouper([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-
+        $data = [['Name', ['role' => 'tooltip'], '0-1', '1-2', '2-3', '3-4']];
         foreach ($activities as $activity) {
             foreach ($activity->getParticipant() as $p) {
                 //Get the date at which the member joined
@@ -201,7 +201,7 @@ class ReportService
                 //Add to grouper
                 $grouper->addItem($length);
 
-                $data = [['Name', ['role' => 'tooltip'], '0-1', '1-2', '2-3', '3-4']];
+
                 $groups = $grouper->getGroups();
                 /*foreach ($grouper->getGroups() as $group) {
                     $data[] = [ $group['name'], $group['count']];
