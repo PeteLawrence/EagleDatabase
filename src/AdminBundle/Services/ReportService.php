@@ -209,7 +209,6 @@ class ReportService
             }*/
         }
         $data[] = [$activity->getActivityStart(), $activity->getName(), $groups[0]['count'], $groups[1]['count'], $groups[2]['count'], $groups[3]['count']];
-        dump($data);
 
 
         $chart = new ColumnChart();
