@@ -203,12 +203,13 @@ class ReportService
                 $grouper->addItem($length);
 
 
-                $groups = $grouper->getGroups();
+
                 /*foreach ($grouper->getGroups() as $group) {
                     $data[] = [ $group['name'], $group['count']];
                 }*/
-                $data[] = [$activity->getActivityStart(), $activity->getName(), $groups[0]['count'], $groups[1]['count'], $groups[2]['count'], $groups[3]['count']];
             }
+            $groups = $grouper->getGroups();
+            $data[] = [$activity->getActivityStart(), $activity->getName(), $groups[0]['count'], $groups[1]['count'], $groups[2]['count'], $groups[3]['count']];
 
 
         }
