@@ -134,6 +134,7 @@ class ReportService
 
             $counts[] = [$activity->getActivityStart(), $activity->getName(), $males, $females];
         }
+        //dump($counts);
 
         $chart = new ColumnChart();
         $chart->getOptions()->setTitle('Attendance by Gender');
@@ -179,6 +180,46 @@ class ReportService
         $chart = new PieChart();
         $chart->getOptions()->setTitle('Attendance by Gender');
         $chart->getOptions()->setHeight('300');
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+    public function buildAttendanceByLengthChart($from, $to, $activityType)
+    {
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
+        $grouper = new \AppBundle\Util\Grouper([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+        foreach ($activities as $activity) {
+            foreach ($activity->getParticipant() as $p) {
+                //Get the date at which the member joined
+                $joinedDate = $p->getPerson()->getJoinedDate();
+                $joinedDate = new \DateTime('2017-01-01');
+                //Calculate the number of years they've been a member for
+                $length = $joinedDate->diff($activity->getActivityStart())->y;
+
+                //Add to grouper
+                $grouper->addItem($length);
+            }
+
+            $data = [['Name', ['role' => 'tooltip'], '0-1', '1-2', '2-3', '3-4']];
+            $groups = $grouper->getGroups();
+            /*foreach ($grouper->getGroups() as $group) {
+                $data[] = [ $group['name'], $group['count']];
+            }*/
+        }
+        $data[] = [$activity->getActivityStart(), $activity->getName(), $groups[0]['count'], $groups[1]['count'], $groups[2]['count'], $groups[3]['count']];
+        dump($data);
+
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Attendance by Length');
+        $chart->getOptions()->setIsStacked(true);
+        $chart->getOptions()->setHeight('300');
+        $chart->getOptions()->getBar()->setGroupWidth('90%');
+        $chart->getOptions()->getExplorer()->setAxis('horizontal');
+        $chart->getOptions()->getExplorer()->setKeepInBounds(true);
+        $chart->getOptions()->getExplorer()->setMaxZoomIn(0.2);
         $chart->getData()->setArrayToDataTable($data);
 
         return $chart;

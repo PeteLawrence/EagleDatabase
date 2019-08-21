@@ -34,6 +34,7 @@ class Grouper
                 }
             }
         }
+
     }
 
     public function getGroups()
