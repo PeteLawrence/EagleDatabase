@@ -200,14 +200,16 @@ class ReportService
 
                 //Add to grouper
                 $grouper->addItem($length);
+
+                $data = [['Name', ['role' => 'tooltip'], '0-1', '1-2', '2-3', '3-4']];
+                $groups = $grouper->getGroups();
+                /*foreach ($grouper->getGroups() as $group) {
+                    $data[] = [ $group['name'], $group['count']];
+                }*/
+                $data[] = [$activity->getActivityStart(), $activity->getName(), $groups[0]['count'], $groups[1]['count'], $groups[2]['count'], $groups[3]['count']];
             }
 
-            $data = [['Name', ['role' => 'tooltip'], '0-1', '1-2', '2-3', '3-4']];
-            $groups = $grouper->getGroups();
-            /*foreach ($grouper->getGroups() as $group) {
-                $data[] = [ $group['name'], $group['count']];
-            }*/
-            $data[] = [$activity->getActivityStart(), $activity->getName(), $groups[0]['count'], $groups[1]['count'], $groups[2]['count'], $groups[3]['count']];
+
         }
 
 
