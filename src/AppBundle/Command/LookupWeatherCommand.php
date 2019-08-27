@@ -51,7 +51,7 @@ class LookupWeatherCommand extends ContainerAwareCommand
                 $weather->setIcon($forecast->icon);
                 $weather->setPrecipitationIntensity($forecast->precipIntensity);
                 $weather->setPrecipitationProbability($forecast->precipProbability);
-                $weather->setPrecipitationType($forecast->precipType);
+                @$weather->setPrecipitationType($forecast->precipType);
                 $weather->setTemperature($forecast->temperature);
                 $weather->setWindSpeed($forecast->windSpeed);
                 $weather->setWindBearing($forecast->windBearing);

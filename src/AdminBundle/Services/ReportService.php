@@ -1135,4 +1135,40 @@ class ReportService
 
         return $data;
     }
+
+
+    public function buildTemperatureChart($from, $to, $activityType)
+    {
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
+
+        $data = [[ 'Activity', 'Min', 'Max']];
+        foreach ($activities as $activity) {
+            $weatherDataPoints = $activity->getWeatherDataPoints();
+            $max = -99;
+            $min = 99;
+
+            foreach ($weatherDataPoints as $dp) {
+                if ($dp->getTemperature() > $max) {
+                    $max = $dp->getTemperature();
+                }
+
+                if ($dp->getTemperature() < $min) {
+                    $min = $dp->getTemperature();
+                }
+            }
+
+            if ($max != -99) {
+                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1) ];
+            }
+        }
+        dump($data);
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Temperature');
+        $chart->getOptions()->setHeight('300');
+        $chart->getOptions()->setIsStacked(false);
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
 }
