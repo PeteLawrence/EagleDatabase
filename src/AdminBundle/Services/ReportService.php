@@ -1163,8 +1163,146 @@ class ReportService
         }
 
         $chart = new ColumnChart();
-        $chart->getOptions()->setTitle('Temperature');
-        $chart->getOptions()->setHeight('300');
+        $chart->getOptions()->setTitle('Temperature (C)');
+        $chart->getOptions()->setHeight('150');
+        $chart->getOptions()->setIsStacked(false);
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+    public function buildPrecipitationChart($from, $to, $activityType)
+    {
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
+
+        $data = [[ 'Activity', 'Min', 'Max']];
+        foreach ($activities as $activity) {
+            $weatherDataPoints = $activity->getWeatherDataPoints();
+            $max = -99;
+            $min = 99;
+
+            foreach ($weatherDataPoints as $dp) {
+                if ($dp->getPrecipitationIntensity() > $max) {
+                    $max = $dp->getPrecipitationIntensity();
+                }
+
+                if ($dp->getPrecipitationIntensity() < $min) {
+                    $min = $dp->getPrecipitationIntensity();
+                }
+            }
+
+            if ($max != -99) {
+                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1) ];
+            }
+        }
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Precipitation (mm/h)');
+        $chart->getOptions()->setHeight('150');
+        $chart->getOptions()->setIsStacked(false);
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+
+    public function buildWindChart($from, $to, $activityType)
+    {
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
+
+        $data = [[ 'Activity', 'Min', 'Max']];
+        foreach ($activities as $activity) {
+            $weatherDataPoints = $activity->getWeatherDataPoints();
+            $max = -99;
+            $min = 99;
+
+            foreach ($weatherDataPoints as $dp) {
+                if ($dp->getWindSpeed() > $max) {
+                    $max = $dp->getWindSpeed();
+                }
+
+                if ($dp->getWindSpeed() < $min) {
+                    $min = $dp->getWindSpeed();
+                }
+            }
+
+            if ($max != -99) {
+                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1) ];
+            }
+        }
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Wind Speed (km/h)');
+        $chart->getOptions()->setHeight('150');
+        $chart->getOptions()->setIsStacked(false);
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+
+    public function buildVisibilityChart($from, $to, $activityType)
+    {
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
+
+        $data = [[ 'Activity', 'Min', 'Max']];
+        foreach ($activities as $activity) {
+            $weatherDataPoints = $activity->getWeatherDataPoints();
+            $max = -99;
+            $min = 99;
+
+            foreach ($weatherDataPoints as $dp) {
+                if ($dp->getVisibility() > $max) {
+                    $max = $dp->getVisibility();
+                }
+
+                if ($dp->getVisibility() < $min) {
+                    $min = $dp->getVisibility();
+                }
+            }
+
+            if ($max != -99) {
+                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1) ];
+            }
+        }
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Visibility (km)');
+        $chart->getOptions()->setHeight('150');
+        $chart->getOptions()->setIsStacked(false);
+        $chart->getData()->setArrayToDataTable($data);
+
+        return $chart;
+    }
+
+    public function buildCloudCoverChart($from, $to, $activityType)
+    {
+        $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
+
+        $data = [[ 'Activity', 'Min', 'Max']];
+        foreach ($activities as $activity) {
+            $weatherDataPoints = $activity->getWeatherDataPoints();
+            $max = -99;
+            $min = 99;
+
+            foreach ($weatherDataPoints as $dp) {
+                if ($dp->getCloudCover() > $max) {
+                    $max = $dp->getCloudCover();
+                }
+
+                if ($dp->getVisibility() < $min) {
+                    $min = $dp->getCloudCover();
+                }
+            }
+
+            if ($max != -99) {
+                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 2) * 100, (double)number_format($max, 2) * 100 ];
+            }
+        }
+
+        $chart = new ColumnChart();
+        $chart->getOptions()->setTitle('Cloud Cover (%)');
+        $chart->getOptions()->setHeight('150');
         $chart->getOptions()->setIsStacked(false);
         $chart->getData()->setArrayToDataTable($data);
 

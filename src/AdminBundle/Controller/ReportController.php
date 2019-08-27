@@ -127,6 +127,10 @@ class ReportController extends Controller
                 'attendanceByTypePieChart' => $reportService->buildAttendanceByTypePieChart($data['fromDate'], $data['toDate'], $data['activityType']),
                 'attendanceBySignupMethodPieChart' => $reportService->buildAttendanceBySignupMethodPieChart($data['fromDate'], $data['toDate'], $data['activityType']),
                 'temperatureChart' => $reportService->buildTemperatureChart($data['fromDate'], $data['toDate'], $data['activityType']),
+                'precipitationChart' => $reportService->buildPrecipitationChart($data['fromDate'], $data['toDate'], $data['activityType']),
+                'windChart' => $reportService->buildWindChart($data['fromDate'], $data['toDate'], $data['activityType']),
+                'visibilityChart' => $reportService->buildVisibilityChart($data['fromDate'], $data['toDate'], $data['activityType']),
+                'cloudCoverChart' => $reportService->buildCloudCoverChart($data['fromDate'], $data['toDate'], $data['activityType']),
                 'form' => $form->createView()
             ));
         }
