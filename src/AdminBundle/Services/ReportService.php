@@ -1141,11 +1141,12 @@ class ReportService
     {
         $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
 
-        $data = [[ 'Activity', 'Min', 'Max']];
+        $data = [[ 'Activity', 'Min', 'Max', 'Average']];
         foreach ($activities as $activity) {
             $weatherDataPoints = $activity->getWeatherDataPoints();
             $max = -99;
             $min = 99;
+            $sum = 0;
 
             foreach ($weatherDataPoints as $dp) {
                 if ($dp->getTemperature() > $max) {
@@ -1155,10 +1156,12 @@ class ReportService
                 if ($dp->getTemperature() < $min) {
                     $min = $dp->getTemperature();
                 }
+
+                $sum += $dp->getTemperature();
             }
 
             if ($max != -99) {
-                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1) ];
+                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1), $sum/sizeof($weatherDataPoints) ];
             }
         }
 
@@ -1175,11 +1178,12 @@ class ReportService
     {
         $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
 
-        $data = [[ 'Activity', 'Min', 'Max']];
+        $data = [[ 'Activity', 'Min', 'Max', 'Average']];
         foreach ($activities as $activity) {
             $weatherDataPoints = $activity->getWeatherDataPoints();
             $max = -99;
             $min = 99;
+            $sum = 0;
 
             foreach ($weatherDataPoints as $dp) {
                 if ($dp->getPrecipitationIntensity() > $max) {
@@ -1189,10 +1193,12 @@ class ReportService
                 if ($dp->getPrecipitationIntensity() < $min) {
                     $min = $dp->getPrecipitationIntensity();
                 }
+
+                $sum += $dp->getPrecipitationIntensity();
             }
 
             if ($max != -99) {
-                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1) ];
+                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1), $sum / sizeof($weatherDataPoints) ];
             }
         }
 
@@ -1210,11 +1216,12 @@ class ReportService
     {
         $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
 
-        $data = [[ 'Activity', 'Min', 'Max']];
+        $data = [[ 'Activity', 'Min', 'Max', 'Average']];
         foreach ($activities as $activity) {
             $weatherDataPoints = $activity->getWeatherDataPoints();
             $max = -99;
             $min = 99;
+            $sum = 0;
 
             foreach ($weatherDataPoints as $dp) {
                 if ($dp->getWindSpeed() > $max) {
@@ -1224,10 +1231,12 @@ class ReportService
                 if ($dp->getWindSpeed() < $min) {
                     $min = $dp->getWindSpeed();
                 }
+
+                $sum += $dp->getWindSpeed();
             }
 
             if ($max != -99) {
-                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1) ];
+                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1), $sum/sizeof($weatherDataPoints) ];
             }
         }
 
@@ -1245,11 +1254,12 @@ class ReportService
     {
         $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
 
-        $data = [[ 'Activity', 'Min', 'Max']];
+        $data = [[ 'Activity', 'Min', 'Max', 'Average']];
         foreach ($activities as $activity) {
             $weatherDataPoints = $activity->getWeatherDataPoints();
             $max = -99;
             $min = 99;
+            $sum = 0;
 
             foreach ($weatherDataPoints as $dp) {
                 if ($dp->getVisibility() > $max) {
@@ -1259,10 +1269,12 @@ class ReportService
                 if ($dp->getVisibility() < $min) {
                     $min = $dp->getVisibility();
                 }
+
+                $sum += $dp->getVisibility();
             }
 
             if ($max != -99) {
-                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1) ];
+                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1), $sum/sizeof($weatherDataPoints) ];
             }
         }
 
@@ -1279,11 +1291,12 @@ class ReportService
     {
         $activities = $this->em->getRepository('AppBundle:ManagedActivity')->findActivitiesBetweenDates($from, $to, $activityType);
 
-        $data = [[ 'Activity', 'Min', 'Max']];
+        $data = [[ 'Activity', 'Min', 'Max', 'Average' ]];
         foreach ($activities as $activity) {
             $weatherDataPoints = $activity->getWeatherDataPoints();
             $max = -99;
             $min = 99;
+            $sum = 0;
 
             foreach ($weatherDataPoints as $dp) {
                 if ($dp->getCloudCover() > $max) {
@@ -1293,10 +1306,12 @@ class ReportService
                 if ($dp->getVisibility() < $min) {
                     $min = $dp->getCloudCover();
                 }
+
+                $sum += $dp->getCloudCover();
             }
 
             if ($max != -99) {
-                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 2) * 100, (double)number_format($max, 2) * 100 ];
+                $data[] = [ $activity->getActivityStart(), (double)number_format($min, 2) * 100, (double)number_format($max, 2) * 100, $sum/sizeof($weatherDataPoints) * 100 ];
             }
         }
 
