@@ -1161,7 +1161,6 @@ class ReportService
                 $data[] = [ $activity->getActivityStart(), (double)number_format($min, 1), (double)number_format($max, 1) ];
             }
         }
-        dump($data);
 
         $chart = new ColumnChart();
         $chart->getOptions()->setTitle('Temperature');
