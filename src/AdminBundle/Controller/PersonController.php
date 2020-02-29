@@ -253,6 +253,9 @@ class PersonController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $personService->forgetPerson($person);
+
+            //Display confirmation flash message
+            $this->addFlash('notice', 'This person has now been forgotten.  If they ever wish to rejoin they can quote the following ID to resume their account: ' . $person->getId());
         }
 
         return $this->redirectToRoute('admin_person_index');

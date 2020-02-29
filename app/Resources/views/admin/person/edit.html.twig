@@ -14,15 +14,24 @@
 {% block body %}
     <h1>Person edit</h1>
 
+    {% if person.admin %}
+        <div class="alert alert-warning">
+            This user is an admin
+        </div>
+    {% endif %}
+
+    {% if person.forgotten %}
+        <div class="alert alert-warning">
+            This user was forgotten about on the {{ person.forgottenDateTime|date('jS F Y') }}.
+        </div>
+    {% endif %}
+
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" href="#details" data-toggle="tab" role="tab">Details</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#nextofkin" data-toggle="tab" role="tab">Next of Kin</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#groups" data-toggle="tab" role="tab">Groups</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#activityhistory" data-toggle="tab" role="tab">Activities</a>
@@ -104,19 +113,6 @@
             <input type="submit" value="Save" class="btn btn-primary" />
 
             {{ form_end(nextofkin_form) }}
-        </div>
-
-        <div class="tab-pane" id="groups" role="tabpanel">
-            <h2>Groups</h2>
-            {#}{{ form_start(groups_form) }}
-            <div class="row">
-                <div class="col-md-12">{{ form_widget(groups_form.group) }}</div>
-            </div>
-
-            <input type="submit" value="Save" class="btn btn-primary" />
-
-            {{ form_end(groups_form) }}
-            #}
         </div>
 
         <div class="tab-pane" id="activityhistory" role="tabpanel">
