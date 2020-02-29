@@ -424,7 +424,7 @@ class ActivityController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $attendingStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('attending');
+            $attendingStatus = $em->getRepository('AppBundle:ParticipantStatus')->findOneByStatus('Attending');
             $participant = new \AppBundle\Entity\Participant();
             $participant->setSignupMethod('manual');
             $participant->setSignupDateTime(new \DateTime());
@@ -639,23 +639,46 @@ class ActivityController extends Controller
 
     private function buildAddParticipantForm($activity)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('activity_participants_add', array('id' => $activity->getId())))
-            ->setMethod('POST')
-            ->add('person', EntityType::class, [
-                'class' => 'AppBundle:Person',
-                'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($activity) {
-                    return $er->queryMembersAtDate(new \DateTime());
-                },
-                'choice_label' => function (\AppBundle\Entity\Person $a) {
-                    return $a->getForename() . ' ' . $a->getSurname();
-                },
-                'label' => 'Participant',
-                'placeholder' => ''
-            ])
-            ->add('notes', TextAreaType::class, [ 'required' => false ])
-            ->getForm()
-        ;
+
+
+        if ($activity->getActivityType()->getType() == 'Taster Session') {
+            return $this->createFormBuilder()
+                ->setAction($this->generateUrl('activity_participants_add', array('id' => $activity->getId())))
+                ->setMethod('POST')
+                ->add('person', EntityType::class, [
+                    'class' => 'AppBundle:Person',
+                    'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($activity) {
+                        return $er->queryAll();
+                    },
+                    'choice_label' => function (\AppBundle\Entity\Person $a) {
+                        return $a->getForename() . ' ' . $a->getSurname();
+                    },
+                    'label' => 'Participant',
+                    'placeholder' => ''
+                ])
+                ->add('notes', TextAreaType::class, [ 'required' => false ])
+                ->getForm()
+            ;
+        } else {
+            $qf = [  ];
+            return $this->createFormBuilder()
+                ->setAction($this->generateUrl('activity_participants_add', array('id' => $activity->getId())))
+                ->setMethod('POST')
+                ->add('person', EntityType::class, [
+                    'class' => 'AppBundle:Person',
+                    'query_builder' => function (\Doctrine\ORM\EntityRepository $er) use ($activity) {
+                        return $er->queryMembersAtDate(new \DateTime());
+                    },
+                    'choice_label' => function (\AppBundle\Entity\Person $a) {
+                        return $a->getForename() . ' ' . $a->getSurname();
+                    },
+                    'label' => 'Participant',
+                    'placeholder' => ''
+                ])
+                ->add('notes', TextAreaType::class, [ 'required' => false ])
+                ->getForm()
+            ;
+        }
     }
 
 

@@ -6,6 +6,17 @@ use Doctrine\ORM\EntityRepository;
 
 class PersonRepository extends EntityRepository
 {
+
+    public function queryAll()
+    {
+        $query = $this->createQueryBuilder('p')
+        ->orderBy('p.forename')
+        ->addOrderBy('p.surname');
+
+        return $query;
+    }
+
+
     public function findMembersAtDate($date)
     {
         return $this->queryMembersAtDate($date)
