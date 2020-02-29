@@ -35,7 +35,7 @@
                 <dl>
                 {% for activity in upcomingActivities %}
                     <dt>
-                        {{ activity.activityStart|date('d')}}<sup>{{ activity.activityStart|date('S')}}</sup> {{ activity.activityStart|date('F')}}
+                        {{ activity.activityStart|date('j')}}<sup>{{ activity.activityStart|date('S')}}</sup> {{ activity.activityStart|date('F')}}
                     </dt>
                     <dd>
                         <a href="{{ url('activity_view', { id: activity.id }) }}">{{ activity.name }}</a>
