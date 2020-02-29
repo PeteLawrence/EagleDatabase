@@ -17,13 +17,22 @@
             As an active British Canoeing member you are already insured.
         </p>
         <div class="alert alert-warning" role="alert">
+            <h4>No longer a British Canoeing Member?</h4>
             If you no longer have an active British Canoeing membership, please remove your membership number from <a href="{{ path('account_edit')}}" class="alert-link">your profile</a> before restarting the renewal process.
         </div>
     {% else %}
         <p>
             You do not appear to be a British Canoeing member, so will need to pay for insurance as part of your renewal.  For full details about the insurance provided by British Canoeing please <a href="https://www.britishcanoeing.org.uk/membership/club-membership/" target="_blank">see here</a>.
         </p>
+
         <div class="alert alert-warning" role="alert">
+            <h4>Data Protection Notice</h4>
+            By continuing you agree to Eagle Canoe Club passing on your name and contact details to British Canoeing for the purpose of providing you with insurance cover.
+        </div>
+
+
+        <div class="alert alert-warning" role="alert">
+            <h4>British Canoeing Member?</h4>
             If you have an active British Canoeing membership, please add your membership number to <a href="{{ path('account_edit')}}">your profile</a> before restarting the renewal process, to avoid paying for insurance again.
         </div>
 
