@@ -3,9 +3,10 @@
 // src/AppBundle/Twig/AppExtension.php
 namespace AppBundle\Twig;
 
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class DateDiffExtension extends \Twig_Extension
+class DateDiffExtension extends AbstractExtension
 {
     public function getFunctions()
     {
