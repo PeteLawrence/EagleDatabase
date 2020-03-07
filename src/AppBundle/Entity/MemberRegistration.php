@@ -56,6 +56,7 @@ class MemberRegistration
     {
         $now = new \DateTime();
         $this->year = $now->format('Y');
+        //$this->memberRegistrationExtra = [];
     }
 
     /**
