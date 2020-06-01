@@ -29,9 +29,9 @@ class RenewController extends Controller
         // Check that the member is over 18
         $now = new \DateTime();
         $age = $this->getUser()->getDob()->diff($now);
-        if ($age->y < 18) {
+        /*if ($age->y < 18) {
             return $this->redirectToRoute('account_membership_renew_error', [ 'errorCode' => 'UNDER18' ]);
-        }
+        }*/
 
         // Get the next available MembershipTypePeriod, and save to the session
         $mtp = $membershipService->getNextMembershipTypePeriod($this->getUser());
