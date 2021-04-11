@@ -78,7 +78,7 @@ class ActivityController extends Controller
         //Only allow the organiser access to this page
         if (
             $activity->getOrganiser() != $this->getUser() &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -115,7 +115,7 @@ class ActivityController extends Controller
     public function contactAction(Request $request, Activity $activity)
     {
         //Only allow the organiser access to this page
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')) {
             throw $this->createAccessDeniedException();
         }
 
@@ -177,7 +177,7 @@ class ActivityController extends Controller
         //Only allow the organiser access to this page
         if (
             $activity->getOrganiser() != $this->getUser() &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -390,7 +390,7 @@ class ActivityController extends Controller
         //Only allow the organiser access to this page
         if (
             $activity->getOrganiser() != $this->getUser() &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -412,7 +412,7 @@ class ActivityController extends Controller
         //Only allow the organiser access to this page
         if (
             $activity->getOrganiser() != $this->getUser() &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -460,7 +460,7 @@ class ActivityController extends Controller
         //Only allow the organiser access to this page
         if (
             $activity->getOrganiser() != $this->getUser() &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -501,7 +501,7 @@ class ActivityController extends Controller
         //Only allow the organiser access to this page
         if (
             $activity->getOrganiser() != $this->getUser() &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -558,7 +558,7 @@ class ActivityController extends Controller
         //Only allow the organiser access to this page
         if (
             $activity->getOrganiser() != $this->getUser() &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -580,7 +580,7 @@ class ActivityController extends Controller
         //Only allow the organiser access to this page
         if (
             $activity->getOrganiser() != $this->getUser() &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -602,7 +602,7 @@ class ActivityController extends Controller
         //Only allow the organiser access to this page
         if (
             $activity->getOrganiser() != $this->getUser() &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }

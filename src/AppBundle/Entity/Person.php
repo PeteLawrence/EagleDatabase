@@ -57,6 +57,11 @@ class Person implements AdvancedUserInterface, \Serializable
     private $admin;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $superadmin;
+
+    /**
      * @ORM\Column(type="string", length=1, nullable=true)
      */
     private $gender;
@@ -354,6 +359,31 @@ class Person implements AdvancedUserInterface, \Serializable
     public function getAdmin()
     {
         return $this->admin;
+    }
+
+
+    /**
+     * Set superadmin
+     *
+     * @param boolean $superadmin
+     *
+     * @return Person
+     */
+    public function setSuperadmin($superadmin)
+    {
+        $this->superadmin = $superadmin;
+
+        return $this;
+    }
+
+    /**
+     * Get superadmin
+     *
+     * @return boolean
+     */
+    public function getSuperadmin()
+    {
+        return $this->superadmin;
     }
 
     /**
@@ -689,7 +719,9 @@ class Person implements AdvancedUserInterface, \Serializable
      */
     public function getRoles()
     {
-        if ($this->admin) {
+        if ($this->superadmin) {
+            return array('ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_USER');
+        } else if ($this->admin) {
             return array('ROLE_ADMIN', 'ROLE_USER');
         } else {
             return array('ROLE_USER');

@@ -34,5 +34,7 @@ security:
             logout_on_user_change: true
 
     access_control:
+        - { path: ^/admin/activity, roles: ROLE_SUPERADMIN }
+        - { path: ^/admin/report, roles: ROLE_SUPERADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/account, roles: IS_AUTHENTICATED_FULLY }

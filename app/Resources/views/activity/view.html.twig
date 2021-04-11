@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        {% if app.user == activity.organiser or is_granted('ROLE_ADMIN') %}
+        {% if app.user == activity.organiser or is_granted('ROLE_SUPERADMIN') %}
             <div class="card mb-2">
                 <h4 class="card-header">Organiser Tools</h4>
                 <div class="card-body">
