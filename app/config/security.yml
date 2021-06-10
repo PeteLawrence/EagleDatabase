@@ -30,7 +30,7 @@ security:
             remember_me:
                 secret: '%secret%'
                 lifetime: 31536000
-            switch_user: { role: ROLE_ADMIN }
+            switch_user: { role: ROLE_SUPERADMIN }
             logout_on_user_change: true
 
     access_control:
